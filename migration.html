@@ -8,80 +8,194 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
-        .site-header { background: #8c1d1d; color: #fff; padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
         .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 1rem; font-size: 0.9rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
-        
+
         .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.6rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
+        .stat-item { background: #fff; border: 1px solid #ebdcd0; border-radius: 6px; padding: 0.8rem 0.5rem; text-align: center; }
+        .stat-num { font-size: 1.25rem; font-weight: bold; color: #8c1d1d; line-height: 1.2; }
+        .stat-label { font-size: 0.78rem; color: #666; margin-top: 0.3rem; }
+
+        .route-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.4rem; border-radius: 6px; margin: 1.2rem 0; border-top: 3px solid #8c1d1d; }
+        .route-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+        .route-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; }
+        .route-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; color: #fff; }
+        .badge-yellow { background: #b26a00; }
+        .badge-red { background: #8c1d1d; }
+        .badge-blue { background: #1565c0; }
+        .badge-purple { background: #6a1b9a; }
+
+        .route-meta { font-size: 0.88rem; color: #666; margin: 0.4rem 0 0.6rem; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
+        .route-desc { font-size: 0.92rem; color: #444; line-height: 1.8; }
         
-        .route-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; margin: 1rem 0; }
-        .route-title { font-size: 1.1rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.4rem; }
-        
+        .spot-highlight { background: #fffdf9; border: 1px dashed #c49a45; padding: 0.8rem 1rem; border-radius: 4px; margin-top: 0.8rem; font-size: 0.88rem; color: #6b4d1b; line-height: 1.7; }
+        .spot-highlight strong { color: #8c1d1d; }
+
         /* 寻根表单卡片 */
-        .form-card { background: #fdf6ec; border: 1px solid #faecd8; padding: 1.5rem; border-radius: 6px; margin-top: 1.5rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; font-weight: bold; color: #6b4d1b; margin-bottom: 0.3rem; font-size: 0.95rem; }
-        .form-control { width: 100%; padding: 0.6rem; border: 1px solid #dcd3cb; border-radius: 4px; font-size: 0.95rem; }
+        .form-card { background: #faf5ee; border: 1px solid #e0cfbf; padding: 1.8rem; border-radius: 8px; margin-top: 1.5rem; }
+        .form-group { margin-bottom: 1rem; display: flex; flex-direction: column; }
+        .form-group label { font-weight: bold; color: #6b4d1b; margin-bottom: 0.3rem; font-size: 0.9rem; }
+        .form-control { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #d4c4b4; border-radius: 4px; font-size: 0.9rem; background: #fff; font-family: inherit; }
+        .form-control:focus { outline: none; border-color: #8c1d1d; box-shadow: 0 0 5px rgba(140,29,29,0.2); }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
         
-        .btn-submit { background: #8c1d1d; color: #fff; border: none; padding: 0.6rem 1.5rem; border-radius: 4px; font-size: 1rem; cursor: pointer; }
-        .btn-submit:hover { background: #701414; }
+        .btn-submit { background: #8c1d1d; color: #fff; border: none; padding: 0.7rem 1.8rem; border-radius: 4px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .btn-submit:hover { background: #a62424; }
         
-        .result-box { display: none; margin-top: 1.5rem; background: #fff; border: 2px dashed #8c1d1d; padding: 1.2rem; border-radius: 6px; }
-        .copy-hint { font-size: 0.85rem; color: #666; margin-top: 0.5rem; }
+        .result-box { display: none; margin-top: 1.5rem; background: #fff; border: 1px solid #dcd3cb; padding: 1.2rem; border-radius: 6px; }
+        .result-text { font-family: "KaiTi", "STKaiti", serif; font-size: 1rem; line-height: 1.9; color: #333; white-space: pre-wrap; background: #fdfaf6; padding: 1rem; border: 1px dashed #c8b7a6; border-radius: 4px; }
+        .btn-copy { background: #2e7d32; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-size: 0.88rem; cursor: pointer; margin-top: 0.8rem; font-weight: bold; }
+        .btn-copy:hover { background: #256628; }
+
+        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 0.9rem 1.1rem; margin: 1rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.7; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
-        @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+        
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <nav class="nav-menu">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
                 <a href="index.html">首页</a>
                 <a href="lineage.html">世系字辈</a>
-                <a href="branches.html">分房支派</a>
-                <a href="history.html">王府传承</a>
-                <a href="migration.html" style="color:#fff; font-weight:bold;">迁徙寻根</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="calendar.html">纪年换算</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="villages.html">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
                 <a href="classics.html">典籍著述</a>
-                <a href="figures/index.html">历代人物</a>
-                <a href="documents.html">谱牒古迹</a>
-                <a href="rules.html">祖训家规</a>
+                <a href="branches.html">分房支派</a>
+                <a href="migration.html" style="color:#fff; font-weight:bold;">迁徙寻根</a>
+                <a href="genealogy-guide.html">修谱指南</a>
+                <a href="search.html">🔍 搜索</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <h1>周藩迁徙流布考与寻根台</h1>
-        <p style="margin-top: 1rem;">明代周藩开封府历二百余年，至明末宗室人口达数万之众。崇祯十五年黄河决水灌城与明清更迭之际，周藩子孙分流四方，隐于闾巷，历经数百年繁衍，今已遍布四海。</p>
+        <div class="intro-box">
+            明初周定王朱橚就藩开封，历经二百六十余年繁衍，明末宗室人口达数万之众。崇祯十五年（1642年）李自成大水灌汴与明清鼎革之际，周王府大宗与十四郡王房派子孙分流四方，隐姓埋名于乡野闾巷。后裔虽播迁异地数百年，仍世代严守太祖御赐字辈与五行相生家规。
+        </div>
 
-        <h2>🗺️ 历史主要流布区域</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-num">4 大主干</div>
+                <div class="stat-label">历史迁徙主干路线</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">1642 年</div>
+                <div class="stat-label">开封大水避难分流</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">14 房系</div>
+                <div class="stat-label">郡王寻根支派脉络</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">二十字</div>
+                <div class="stat-label">御赐字派对宗铁证</div>
+            </div>
+        </div>
+
+        <h2>🗺️ 历史主要迁徙与流布区域考</h2>
         
+        <!-- 路线一：豫北黄河故道 -->
         <div class="route-card">
-            <div class="route-title">1. 中原腹地与黄河两岸（留豫支系）</div>
-            <p><strong>分布：</strong> 开封、通许、杞县、封丘、延津、新乡、禹州、商丘（归德府）、周口（淮阳/太康）、南阳（镇平/内乡）、洛阳等地。<br>
-            <strong>历史沿革：</strong> 多数郡王分房原受封于豫东、豫南各州县。明变后多数宗室就地隐匿改业，或迁入临近乡村耕读传家，是周藩血脉留存最集中的区域。</p>
+            <div class="route-header">
+                <span class="route-title">1. 豫北黄河故道与滩区北渡避水线（留豫黄河支系）</span>
+                <span class="route-badge badge-yellow">十一房封丘王 / 十四房胙城王 / 五房新乡王</span>
+            </div>
+            <div class="route-meta">核心区域：封丘、延津、新乡、获嘉、原阳、卫辉、辉县、长垣</div>
+            <div class="route-desc">
+                崇祯十五年黄河决口淹没汴京王城后，大量王府宗室、随侍文武及封丘房、胙城房子孙抢渡黄河，沿黄河古大堤与故道北岸散居自保，在此垦荒筑寨。
+            </div>
+            <div class="spot-highlight">
+                <strong>📍 典型村落与流布节点：</strong><br>
+                开封王城 ➔ 抢渡黄河 ➔ <strong>封丘县李庄乡（李庄镇）常东村朱氏（封丘康懿王房世居）</strong> ➔ 延津胙城故地朱营（胙城庄简王房） ➔ 获嘉朱厂 ➔ 新乡、辉县及长垣各朱庄。
+            </div>
         </div>
 
+        <!-- 路线二：豫东与徐淮鲁南 -->
         <div class="route-card">
-            <div class="route-title">2. 皖北、苏北与鲁南支系</div>
-            <p><strong>分布：</strong> 安徽亳州、宿州、凤阳（皇陵祖籍地）、江苏徐州、山东菏泽、曹县等。<br>
-            <strong>历史沿革：</strong> 沿古黄河及运河水道东迁、南迁，多与当地朱氏或同乡宗族合谱相聚。</p>
+            <div class="route-header">
+                <span class="route-title">2. 豫东近畿、皖北、苏北与鲁西南支系</span>
+                <span class="route-badge badge-red">大宗祥符房 / 六房宁陵王 / 十房遂平王 / 七房杞县王</span>
+            </div>
+            <div class="route-meta">核心区域：杞县、通许、商丘（归德府）、安徽宿州（萧县）、亳州（涡阳）、江苏徐州（丰县）、山东菏泽（曹县）</div>
+            <div class="route-desc">
+                宗室沿贾鲁河、惠济河东下，经杞县、睢州、宁陵王府故地，逐步深入豫东与皖北淮河流域，部分支派继续向东北迁入鲁西南与苏北丰沛一带，合族立祠。
+            </div>
+            <div class="spot-highlight">
+                <strong>📍 典型村落与流布节点：</strong><br>
+                开封祥符 ➔ 杞县高阳朱寨 ➔ 商丘宁陵朱家楼 ➔ 虞城王府庄 ➔ 安徽宿州萧县大朱村 ➔ 亳州涡阳朱大庄 ➔ 山东曹县朱家楼 ➔ 江苏徐州丰县朱阁村。
+            </div>
         </div>
 
+        <!-- 路线三：宛洛与禹州守陵 -->
         <div class="route-card">
-            <div class="route-title">3. 西南边陲（滇、黔、蜀）支系</div>
-            <p><strong>分布：</strong> 云南大理、保山、昆明，贵州及四川各地。<br>
-            <strong>历史沿革：</strong> 源于永乐年间二房汝南王朱有爋随迁大理，以及明末随南明政权入滇黔的周藩随扈宗亲。</p>
+            <div class="route-header">
+                <span class="route-title">3. 禹州祖陵奉祀、宛洛豫西与伏牛山麓支系</span>
+                <span class="route-badge badge-blue">大宗守陵户 / 三房顺阳王 / 九房镇平王 / 十二房鲁山王</span>
+            </div>
+            <div class="route-meta">核心区域：禹州（钧州）、长葛、驻马店（遂平/西平）、平顶山（鲁山/郏县）、南阳（镇平/内乡/淅川）、洛阳</div>
+            <div class="route-desc">
+                以禹州无风山周定王陵地下玄宫为祭祀枢纽，护陵宗支在此长居；另有顺阳王、镇平王、鲁山王之后裔开府宛洛，世居伏牛山麓及宛盆地。
+            </div>
+            <div class="spot-highlight">
+                <strong>📍 典型村落与流布节点：</strong><br>
+                开封周府 ➔ 禹州无梁镇大周亭村/周山村（定王陵） ➔ 驻马店遂平朱湖 ➔ 平顶山鲁山朱洼 ➔ 南阳镇平朱家营 ➔ 淅川顺阳岗。
+            </div>
+        </div>
+
+        <!-- 路线四：西南边陲 -->
+        <div class="route-card">
+            <div class="route-header">
+                <span class="route-title">4. 西南边陲（滇、黔、蜀）谪戍与随扈支系</span>
+                <span class="route-badge badge-purple">二房·汝南王朱有爋房</span>
+            </div>
+            <div class="route-meta">核心区域：云南大理（喜洲/邓川）、保山（隆阳）、昆明、楚雄及贵州、四川各地</div>
+            <div class="route-desc">
+                源于永乐年间二房汝南王朱有爋被谪居大理府，随行宗室开基滇西，世代流传周藩祖训家风，为西南规模最大的明代宗室支系。
+            </div>
+            <div class="spot-highlight">
+                <strong>📍 典型村落与流布节点：</strong><br>
+                开封汝南王府 ➔ 湖广辰溪 ➔ 贵州贵阳 ➔ 云南大理喜洲/邓川朱氏村 ➔ 云南保山隆阳朱家村。
+            </div>
         </div>
 
         <h2>🔍 宗亲寻根与线索登记</h2>
-        <p style="color: #666; font-size: 0.95rem;">如果你是周藩后裔或持有相关朱氏家谱，可在下方填写你的支系线索，系统将自动为你生成规范的【寻根卡片】，便于宗亲交流认祖。</p>
+        <p style="color: #666; font-size: 0.95rem;">如果你是周藩后裔或持有相关朱氏家谱，可在下方填写你的支系线索，系统将自动为您生成规范的【寻根档案卡片】，便于宗亲交流认祖与谱牒对接。</p>
 
         <div class="form-card">
             <div class="form-row">
@@ -91,34 +205,42 @@
                 </div>
                 <div class="form-group">
                     <label>现居住地 / 祖居地：</label>
-                    <input type="text" id="contactLocation" class="form-control" placeholder="例：河南商丘 / 安徽亳州">
+                    <input type="text" id="contactLocation" class="form-control" placeholder="例：河南省新乡市封丘县李庄乡常东村 / 河南商丘" value="河南省新乡市封丘县李庄乡常东村">
                 </div>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label>已知字辈派语（若知道）：</label>
-                    <input type="text" id="contactGenerations" class="form-control" placeholder="例：有子同安睦 / 绍伦敷惠润...">
+                    <input type="text" id="contactGenerations" class="form-control" placeholder="例：高镇裕光，坚纯端介 / 有子同安睦...">
                 </div>
                 <div class="form-group">
-                    <label>堂号 / 支系（若有）：</label>
-                    <input type="text" id="contactHall" class="form-control" placeholder="例：有本堂 / 祥符房 / 永宁房">
+                    <label>堂号 / 疑属分房（若有）：</label>
+                    <input type="text" id="contactHall" class="form-control" placeholder="例：有本堂 / 十一房封丘王 / 祥符房">
                 </div>
             </div>
 
             <div class="form-group">
                 <label>家族传承简述与寻根线索：</label>
-                <textarea id="contactNotes" class="form-control" rows="3" placeholder="简述手头家谱记载、先祖名讳、迁徙传闻等信息..."></textarea>
+                <textarea id="contactNotes" class="form-control" rows="3" placeholder="简述手头家谱记载、先祖名讳、黄河大水迁徙传闻、老茔地名等信息..."></textarea>
             </div>
 
-            <button class="btn-submit" onclick="generateClue()">生成寻根登记卡</button>
+            <button class="btn-submit" onclick="generateClue()">生成寻根登记卡 ➔</button>
 
             <div id="resultBox" class="result-box">
-                <h3 style="color:#8c1d1d; margin-bottom:0.5rem;">📜 我的周藩宗亲寻根卡</h3>
-                <div id="clueContent" style="background:#faf8f5; padding:1rem; border-radius:4px; font-size:0.95rem; line-height:1.8;"></div>
-                <p class="copy-hint">💡 提示：点击下方按钮可直接复制文本，用于微信群、宗亲会或邮件联络。</p>
-                <button class="btn-submit" style="margin-top:0.8rem; background:#444;" onclick="copyClue()">一键复制寻根卡</button>
+                <h3 style="color:#8c1d1d; margin-bottom:0.5rem;">📜 我的周藩宗亲寻根档案卡</h3>
+                <div id="clueContent" class="result-text"></div>
+                <p class="copy-hint" style="font-size:0.85rem; color:#666; margin-top:0.6rem;">💡 提示：点击下方绿色按钮可一键复制文本，直接发送至微信群、修谱委员会或邮件交流。</p>
+                <button class="btn-copy" onclick="copyClue()">📋 一键复制寻根卡</button>
             </div>
+        </div>
+
+        <h2>📖 周藩寻根认祖“金石四核”对证指引</h2>
+        <div class="quote-box">
+            <p><strong>一、核太祖字辈：</strong>明太祖御赐周藩二十字派为“高镇裕光，坚纯端介，思本常存，宗支延寿，世德修明”，如家传字派相符，即为周王大宗确证；</p>
+            <p><strong>二、核偏旁五行：</strong>周藩世系第三字严格依“木、火、土、金、水”相生定偏旁（如橚 ➔ 有 ➔ 子 ➔ 同 ➔ 安 ➔ 睦……循环）；</p>
+            <p><strong>三、核黄河避水记忆：</strong>豫北（封丘常东村、延津等）与豫东各支，谱序中多有崇祯十五年“大水灌城”、“北渡避难”等口传历史；</p>
+            <p><strong>四、核祖茔地名：</strong>如谱载“始祖自汴梁迁来”、“祖茔在钧州（禹州）三峰山/大周亭”，多为定王陵奉祀或王府近支宗裔。</p>
         </div>
     </main>
 
@@ -127,31 +249,40 @@
     </footer>
 
     <script>
-        function generateClue() {
-            const name = document.getElementById('contactName').value || '未填';
-            const loc = document.getElementById('contactLocation').value || '未填';
-            const gen = document.getElementById('contactGenerations').value || '未填';
-            const hall = document.getElementById('contactHall').value || '未填';
-            const notes = document.getElementById('contactNotes').value || '暂无详细描述';
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
 
-            const cardText = `【大明周藩朱氏宗亲寻根档案】\n` +
-                             `• 宗亲称呼：${name}\n` +
-                             `• 祖居/现居地：${loc}\n` +
-                             `• 所传字辈：${gen}\n` +
-                             `• 支脉/堂号：${hall}\n` +
-                             `• 寻根线索：${notes}\n` +
-                             `• 寻根源流：大明太祖第五子周定王朱橚后裔`;
+        function generateClue() {
+            const name = document.getElementById('contactName').value.trim() || '未填';
+            const loc = document.getElementById('contactLocation').value.trim() || '未填';
+            const gen = document.getElementById('contactGenerations').value.trim() || '未填';
+            const hall = document.getElementById('contactHall').value.trim() || '未填';
+            const notes = document.getElementById('contactNotes').value.trim() || '暂无详细描述';
+
+            const cardText = 
+`【大明周藩朱氏宗亲寻根档案】
+--------------------------------------------------
+• 宗亲称呼：${name}
+• 祖居/现居地：${loc}
+• 所传字辈：${gen}
+• 支脉/堂号：${hall}
+• 寻根线索：${notes}
+• 寻根源流：大明太祖第五子周定王朱橚后裔
+--------------------------------------------------
+来源：大明周藩纪事 · 寻根谱牒台 (https://jackqed.github.io/zhusu/)`;
 
             document.getElementById('clueContent').innerText = cardText;
             document.getElementById('resultBox').style.display = 'block';
+            document.getElementById('resultBox').scrollIntoView({ behavior: 'smooth' });
         }
 
         function copyClue() {
             const text = document.getElementById('clueContent').innerText;
             navigator.clipboard.writeText(text).then(() => {
-                alert('寻根卡内容已复制到剪贴板！');
+                alert('寻根卡内容已复制成功！您可以直接粘贴发送至微信群或宗亲会。');
             }).catch(err => {
-                alert('复制失败，请手动长按选取复制。');
+                alert('复制失败，请手动长按选取文本进行复制。');
             });
         }
     </script>
