@@ -18,18 +18,31 @@
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
 
         .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.6rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
+        .stat-item { background: #fff; border: 1px solid #ebdcd0; border-radius: 6px; padding: 0.8rem 0.5rem; text-align: center; }
+        .stat-num { font-size: 1.25rem; font-weight: bold; color: #8c1d1d; line-height: 1.2; }
+        .stat-label { font-size: 0.78rem; color: #666; margin-top: 0.3rem; }
+
+        .estate-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.88rem; }
+        .estate-table th, .estate-table td { border: 1px solid #e2dcd5; padding: 0.65rem 0.8rem; text-align: left; }
+        .estate-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
+        .estate-table tr:nth-child(even) { background: #faf8f5; }
         
-        .estate-table { width: 100%; border-collapse: collapse; margin-top: 1rem; font-size: 0.9rem; }
-        .estate-table th, .estate-table td { border: 1px solid #e2dcd5; padding: 0.7rem 0.8rem; text-align: left; }
-        .estate-table th { background: #f4efe9; color: #8c1d1d; }
-        
-        .tag-status { display: inline-block; padding: 2px 6px; font-size: 0.75rem; border-radius: 3px; }
+        .tag-status { display: inline-block; padding: 2px 7px; font-size: 0.75rem; border-radius: 3px; font-weight: normal; }
         .tag-main { background: #8c1d1d; color: #fff; }
-        .tag-sub { background: #795548; color: #fff; }
+        .tag-sub { background: #2e7d32; color: #fff; }
+        .tag-gray { background: #616161; color: #fff; }
+        .tag-blue { background: #1565c0; color: #fff; }
+
+        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 0.9rem 1.1rem; margin: 1rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.7; }
+        
+        .feature-card { background: #fdfbf7; border: 1px solid #e8dfd8; border-radius: 6px; padding: 1.2rem; margin: 1.2rem 0; border-top: 3px solid #8c1d1d; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
@@ -40,6 +53,7 @@
             .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
             .container { padding: 1.2rem; }
             .table-wrap { overflow-x: auto; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -53,15 +67,17 @@
                 <a href="lineage.html">世系字辈</a>
                 <a href="tree.html">家谱树</a>
                 <a href="naming.html">命名助手</a>
+                <a href="calendar.html">纪年换算</a>
                 <a href="hall.html">堂号楹联</a>
                 <a href="chronology.html">王府年表</a>
                 <a href="ancestors.html">昭穆神位</a>
                 <a href="estates.html" style="color:#fff; font-weight:bold;">郡王封地</a>
-                <a href="branches.html">分房支派</a>
-                <a href="history.html">王府传承</a>
-                <a href="institution.html">宗室典制</a>
-                <a href="migration.html">迁徙寻根</a>
-                <a href="memorial.html">云端祭奠</a>
+                <a href="villages.html">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
+                <a href="genealogy-guide.html">修谱指南</a>
                 <a href="search.html">🔍 搜索</a>
             </nav>
         </div>
@@ -70,123 +86,163 @@
     <main class="container">
         <h1>周藩十四郡王分封与沿革考</h1>
         <div class="intro-box">
-            始祖周定王朱橚共育有十四子。除长子朱有炖承袭亲王爵、四子朱有爝继袭周王大宗外，其余诸子皆分封郡王，开支散叶于中原及西南各地。
+            始祖周定王朱橚共育有十五子（宣德元年出土圹志确载：<strong>“子十五人，十五早卒”</strong>）。除长子朱有燉袭亲王爵、四子朱有爝继袭周王大宗外，其余诸子皆依明制册封郡王。诸王分府于开封及河南各府县，宗支繁衍二百六十余年，构成了大明宗藩中体系最完备、后裔分布最广阔的十四大分房宗系。
         </div>
 
-        <h2>🗺️ 十四房郡王封国与承袭总表</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-num">15 位</div>
+                <div class="stat-label">定王皇子总数</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">14 房</div>
+                <div class="stat-label">受封大宗郡王</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">2 房</div>
+                <div class="stat-label">大宗亲王承嗣</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-num">中原 / 西南</div>
+                <div class="stat-label">主要播迁流布区</div>
+            </div>
+        </div>
+
+        <h2>🗺️ 十四房郡王受封沿革与后裔播迁总表</h2>
         <div class="table-wrap">
             <table class="estate-table">
                 <thead>
                     <tr>
                         <th>房次 / 王号</th>
-                        <th>受封始祖</th>
+                        <th>始封祖</th>
                         <th>受封年份</th>
-                        <th>初封 / 治所地</th>
-                        <th>传承状态与后裔流布</th>
+                        <th>封地治所</th>
+                        <th>承袭状态与流布沿革</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>长房 · 宪王</strong></td>
-                        <td>朱有炖</td>
+                        <td>朱有燉</td>
                         <td>永乐三年 (1405) 袭亲王</td>
-                        <td>开封府大内</td>
-                        <td><span class="tag-status tag-main">无嗣</span> 宣德三年薨，弟朱有爝继袭。</td>
+                        <td>开封府周王府大内</td>
+                        <td><span class="tag-status tag-main">亲王无嗣</span> 宣德三年薨，谥曰宪。弟祥符王朱有爝继袭周亲王爵。</td>
                     </tr>
                     <tr>
                         <td><strong>二房 · 汝南王</strong></td>
                         <td>朱有爋</td>
                         <td>建文四年 (1402)</td>
-                        <td>汝南县 / 后迁云南大理</td>
-                        <td><span class="tag-status tag-sub">传衍</span> 永乐中谪居大理，后裔散处滇豫两省。</td>
+                        <td>汝南县 / 谪迁云南大理</td>
+                        <td><span class="tag-status tag-sub">传衍</span> 永乐中谪居云南大理，后嗣分处于云南保山、大理及中原故里。</td>
                     </tr>
                     <tr>
                         <td><strong>三房 · 顺阳王</strong></td>
-                        <td>朱有烜</td>
-                        <td>永乐元年 (1403)</td>
-                        <td>顺阳（今河南淅川）</td>
-                        <td><span class="tag-status tag-main">无嗣</span> 永乐十三年薨，国除。</td>
+                        <td>朱有爌</td>
+                        <td>永乐二年 (1404)</td>
+                        <td>南阳府顺阳县（今淅川）</td>
+                        <td><span class="tag-status tag-sub">传衍三代</span> 传袭至顺阳恭简王朱子峹，后嗣留居南阳及开封祥符。</td>
                     </tr>
                     <tr>
                         <td><strong>四房 · 祥符王</strong></td>
                         <td>朱有爝</td>
                         <td>永乐元年 (1403)</td>
-                        <td>祥符县（开封大宗）</td>
-                        <td><span class="tag-status tag-main">继袭周王</span> 周简王，历代周王之大宗直系源头。</td>
+                        <td>开封府祥符县（继袭大宗）</td>
+                        <td><span class="tag-status tag-main">周简王·大宗源头</span> 宣德四年承嗣周王大统，后世历代周王皆出自简王一脉。</td>
                     </tr>
                     <tr>
-                        <td><strong>五房 · 新安王</strong></td>
-                        <td>朱有熹</td>
+                        <td><strong>五房 · 新乡王</strong></td>
+                        <td>朱有𤊟</td>
                         <td>永乐元年 (1403)</td>
-                        <td>新安县（洛阳新安）</td>
-                        <td><span class="tag-status tag-sub">传衍</span> 后裔居开封、洛阳及豫西各邑。</td>
+                        <td>卫辉府新乡县（今新乡）</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 府邸设于卫辉新乡，后裔广泛聚居于新乡、获嘉、卫辉及焦作。</td>
                     </tr>
                     <tr>
-                        <td><strong>六房 · 永宁王</strong></td>
-                        <td>朱有灮</td>
+                        <td><strong>六房 · 宁陵王</strong></td>
+                        <td>朱有爤</td>
                         <td>永乐元年 (1403)</td>
-                        <td>永宁县（今河南洛宁）</td>
-                        <td><span class="tag-status tag-sub">世袭七代</span> 传袭至明末，宗支繁盛，留豫甚众。</td>
+                        <td>归德府宁陵县（今商丘宁陵）</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 治所宁陵，后裔主要散处于商丘、宁陵、民权及皖北宿州一带。</td>
                     </tr>
                     <tr>
-                        <td><strong>七房 · 汝阳王</strong></td>
-                        <td>朱有煽</td>
-                        <td>永乐四年 (1406)</td>
-                        <td>汝阳县（今汝南/商水一带）</td>
-                        <td><span class="tag-status tag-sub">世袭多代</span> 宗系明晰，后裔主要散处豫东淮河流域。</td>
+                        <td><strong>七房 · 杞县王</strong></td>
+                        <td>朱有炌</td>
+                        <td>永乐元年 (1403)</td>
+                        <td>开封府杞县</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 府邸邻近开封大本营，后裔繁衍于杞县、通许、兰考及开封郊区。</td>
                     </tr>
                     <tr>
-                        <td><strong>八房 · 镇平王</strong></td>
-                        <td>朱有爌</td>
-                        <td>永乐四年 (1406)</td>
-                        <td>镇平县（河南南阳镇平）</td>
-                        <td><span class="tag-status tag-sub">世袭传衍</span> 开府宛南，后代播迁于南阳、皖北等地。</td>
+                        <td><strong>八房 · 信阳王</strong></td>
+                        <td>朱有燖</td>
+                        <td>永乐二年 (1404)</td>
+                        <td>汝宁府信阳州（今信阳）</td>
+                        <td><span class="tag-status tag-gray">无嗣国除</span> 永乐十八年薨，无嗣国除，支派部分余荫归并大宗。</td>
                     </tr>
                     <tr>
-                        <td><strong>九房 · 宜阳王</strong></td>
-                        <td>朱有炥</td>
-                        <td>永乐九年 (1411)</td>
-                        <td>宜阳县（河南洛阳宜阳）</td>
-                        <td><span class="tag-status tag-sub">世袭六代</span> 传至万历年间，子孙多留居洛阳。</td>
+                        <td><strong>九房 · 镇平王</strong></td>
+                        <td>朱有爌(㫤)</td>
+                        <td>永乐二年 (1404)</td>
+                        <td>南阳府镇平县</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 开府宛北，世袭多代，后裔广泛分布于南阳镇平、内乡及邓州。</td>
                     </tr>
                     <tr>
                         <td><strong>十房 · 遂平王</strong></td>
-                        <td>朱有颎</td>
-                        <td>永乐九年 (1411)</td>
-                        <td>遂平县（河南驻马店遂平）</td>
-                        <td><span class="tag-status tag-sub">世袭传衍</span> 后裔分布于驻马店、周口及皖北宿州。</td>
+                        <td>朱有熡</td>
+                        <td>永乐十年 (1412)</td>
+                        <td>汝宁府遂平县（今驻马店）</td>
+                        <td><span class="tag-status tag-sub">世袭七代</span> 传袭至明末，子孙留居遂平、西平、汝南及安徽阜阳一带。</td>
                     </tr>
                     <tr>
                         <td><strong>十一房 · 封丘王</strong></td>
-                        <td>朱有煴</td>
-                        <td>永乐九年 (1411)</td>
-                        <td>封丘县（河南新乡封丘）</td>
-                        <td><span class="tag-status tag-sub">世袭传衍</span> 开府黄河北岸，后裔聚居于封丘、长垣、新乡。</td>
+                        <td>朱有𤓂</td>
+                        <td>永乐十年 (1412)</td>
+                        <td>开封府封丘县（今新乡封丘）</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 府治黄河北岸，宗支繁盛，后代聚居于封丘、长垣、延津诸邑。</td>
                     </tr>
                     <tr>
-                        <td><strong>十二房 · 罗山王</strong></td>
-                        <td>朱有熼</td>
-                        <td>永乐九年 (1411)</td>
-                        <td>罗山县（河南信阳罗山）</td>
-                        <td><span class="tag-status tag-sub">世袭传衍</span> 支脉分布于豫南信阳、罗山及湖北北缘。</td>
+                        <td><strong>十二房 · 鲁山王</strong></td>
+                        <td>朱有灦</td>
+                        <td>永乐十年 (1412)</td>
+                        <td>汝州鲁山县（今平顶山鲁山）</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 封国地处伏牛山东麓，后裔分布于鲁山、平顶山、郏县及禹州。</td>
                     </tr>
                     <tr>
-                        <td><strong>十三房 · 内乡王</strong></td>
-                        <td>朱有焵</td>
-                        <td>永乐九年 (1411)</td>
-                        <td>内乡县（河南南阳内乡）</td>
-                        <td><span class="tag-status tag-sub">世袭传衍</span> 治所宛西，传袭至崇祯末年。</td>
+                        <td><strong>十三房 · 邺王</strong></td>
+                        <td>朱有爚</td>
+                        <td>永乐十年 (1412)</td>
+                        <td>彰德府安阳（古邺城故地）</td>
+                        <td><span class="tag-status tag-gray">无嗣国除</span> 宣德年间早薨无嗣，国除，随侍人员留居相州故地。</td>
                     </tr>
                     <tr>
                         <td><strong>十四房 · 胙城王</strong></td>
                         <td>朱有燆</td>
-                        <td>永乐九年 (1411)</td>
-                        <td>胙城县（今河南延津胙城）</td>
-                        <td><span class="tag-status tag-sub">世袭传衍</span> 封地近黄河，后人多分布于延津、原阳一带。</td>
+                        <td>永乐十年 (1412)</td>
+                        <td>卫辉府胙城县（今延津胙城）</td>
+                        <td><span class="tag-status tag-sub">世袭传衍</span> 治所胙城，明末清初后裔播迁于延津、卫辉、原阳及山东曹州。</td>
                     </tr>
                 </tbody>
             </table>
         </div>
+
+        <h2>🏛️ 明代开封城内“郡王府邸群”空间考</h2>
+        <div class="feature-card">
+            <p style="font-size:0.95rem; color:#444;">
+                按明代制度，初封郡王多留居开封府城内设立<strong>“城内郡王邸”</strong>，形成环绕周王府紫禁城的宗室坊巷格局：
+            </p>
+            <ul style="margin: 0.8rem 0 0.8rem 1.2rem; font-size: 0.92rem; color: #444; line-height: 1.8;">
+                <li><strong>祥符王府：</strong>位于周王府东南，今开封双龙巷与学院门一带；</li>
+                <li><strong>永宁王府 / 顺阳王府：</strong>分布于开封城西南（2018年开封城摞城考古于此出土“昭代贤宗”匾额）；</li>
+                <li><strong>新乡王府 / 封丘王府：</strong>设于开封北门里与后宰门周边，临近萧墙北垣；</li>
+                <li><strong>宗正司与良医所：</strong>设于周王府东华门外，统辖管理十四房郡王宗室日常名籍与谱系。</li>
+            </ul>
+        </div>
+
+        <h2>📖 周藩后裔分房寻根三辨法则</h2>
+        <div class="quote-box">
+            <p><strong>一、辨字辈中字：</strong>明太祖御赐周藩二十字辈为<strong>“高镇裕光，坚纯端介，思本常存，宗支延寿，世德修明”</strong>。谱中字辈次序是确认周藩宗亲的首要铁证。</p>
+            <p><strong>二、辨末字五行：</strong>周藩世系第二字依<strong>“木火土金水”</strong>相生定偏旁。如三世（有字辈）皆为“火”字旁（爝、𤊟、炌等），四世（子字辈）皆为“土”字旁（垕、墧、埛等），五世（同字辈）皆为“金”字旁（䥸、釪、鑅等）。</p>
+            <p><strong>三、辨明末迁徙始祖地：</strong>崇祯十五年（1642年）水灌开封后，十四房后裔多自开封避难外迁，谱书所载“原籍汴梁祥符”、“始祖自卫辉迁来”、“自南阳迁来”等记载，即为对应祥符房、新乡房、镇平房之核心寻根线索。</p>
+        </div>
+
     </main>
 
     <footer class="site-footer">
