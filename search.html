@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全站检索与宗谱索引 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.84rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+        
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        
+        .search-box-wrap { background: #fdf6ec; border: 1px solid #faecd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; }
+        .search-input-group { display: flex; gap: 0.5rem; }
+        .search-input { flex: 1; padding: 0.7rem 1rem; font-size: 1rem; border: 1px solid #dcd3cb; border-radius: 4px; outline: none; }
+        .search-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.7rem 1.5rem; font-size: 1rem; border-radius: 4px; cursor: pointer; }
+        .search-btn:hover { background: #701414; }
+        
+        .hot-keywords { margin-top: 0.8rem; font-size: 0.88rem; color: #888; }
+        .hot-keywords span { color: #8c1d1d; cursor: pointer; margin-right: 0.6rem; text-decoration: underline; }
+        
+        .results-container { margin-top: 1.5rem; }
+        .result-item { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; margin-bottom: 1rem; }
+        .result-title { font-size: 1.15rem; font-weight: bold; }
+        .result-title a { color: #8c1d1d; text-decoration: none; }
+        .result-title a:hover { text-decoration: underline; }
+        .result-snippet { color: #555; font-size: 0.9rem; margin-top: 0.4rem; }
+        .result-category { display: inline-block; background: #efe5dc; color: #6b4d1b; font-size: 0.75rem; padding: 2px 6px; border-radius: 3px; margin-left: 0.5rem; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <nav class="nav-menu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="branches.html">分房支派</a>
+                <a href="history.html">王府传承</a>
+                <a href="institution.html">宗室典制</a>
+                <a href="migration.html">迁徙寻根</a>
+                <a href="memorial.html">云端祭奠</a>
+                <a href="classics.html">典籍著述</a>
+                <a href="search.html" style="color:#fff; font-weight:bold;">🔍 全站搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>全站智能检索与索引</h1>
+        <p style="margin-top: 1rem;">输入先祖名讳、字辈、分房封地、典籍或典制名目，实时检索全站宗族资料库。</p>
+
+        <div class="search-box-wrap">
+            <div class="search-input-group">
+                <input type="text" id="searchInput" class="search-input" placeholder="输入关键词（如：朱橚、救荒本草、字辈、镇国将军、封丘...）" onkeyup="handleKey(event)">
+                <button class="search-btn" onclick="executeSearch()">搜索</button>
+            </div>
+            <div class="hot-keywords">
+                常用热词：
+                <span onclick="quickSearch('朱橚')">朱橚</span>
+                <span onclick="quickSearch('救荒本草')">救荒本草</span>
+                <span onclick="quickSearch('二十字辈')">二十字辈</span>
+                <span onclick="quickSearch('朱有炖')">朱有炖</span>
+                <span onclick="quickSearch('开封府')">开封府</span>
+                <span onclick="quickSearch('镇国将军')">镇国将军</span>
+                <span onclick="quickSearch('寻根')">寻根</span>
+            </div>
+        </div>
+
+        <div id="resultsCount" style="font-size: 0.95rem; color: #666; margin-bottom: 1rem;"></div>
+        <div class="results-container" id="resultsArea"></div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        const siteIndex = [
+            {
+                title: "明太祖御赐周王府二十字辈与五行相生命名法",
+                url: "lineage.html",
+                category: "世系规制",
+                keywords: "字辈 五行 有子同安睦 勤朝在肃恭 绍伦敷惠润 昭恪广登庸 昭格广登荣 命名 派字 偏旁",
+                desc: "收录明太祖钦定周藩20字辈诗，提供在线姓名五行偏旁速查小工具。"
+            },
+            {
+                title: "始祖 周定王朱橚 生平大传与功业",
+                url: "figures/zhu-su.html",
+                category: "先祖传记",
+                keywords: "朱橚 周定王 吴王 始祖 明太祖第五子 汴京 救荒本草 普济方 开封",
+                desc: "记录朱橚就藩开封府、精研医理本草与宗室治家之生平伟业。"
+            },
+            {
+                title: "周定王诸子十四大郡王分房名录",
+                url: "branches.html",
+                category: "分房支派",
+                keywords: "分房 郡王 朱有炖 朱有爋 朱有爝 祥符 永宁 汝阳 镇平 宜阳 遂平 封丘 罗山 内乡 胙城 新安",
+                desc: "详细梳理周王府十四大郡王支系房头起源与各房传衍地域。"
+            },
+            {
+                title: "周王世系承袭谱系树与大事记时间线",
+                url: "history.html",
+                category: "王府传承",
+                keywords: "大事记 时间线 世系树 周宪王 周简王 朱恭枵 开封保卫战 崇祯 永乐 洪武",
+                desc: "梳理周藩十一世亲王传承树状图及两百余年大事年表。"
+            },
+            {
+                title: "周藩学术典籍：《救荒本草》与《普济方》",
+                url: "classics.html",
+                category: "典籍著述",
+                keywords: "救荒本草 普济方 保生余录 袖珍方 植物学 中医学 方剂 医学 科学",
+                desc: "详析周定王主编之中国古代医学方剂巨著与世界食用植物学经典。"
+            },
+            {
+                title: "明代宗室八等封爵品阶与礼制百科",
+                url: "institution.html",
+                category: "宗室典制",
+                keywords: "封爵 爵位 镇国将军 辅国将军 奉国将军 镇国中尉 辅国中尉 奉国中尉 郡主 岁禄",
+                desc: "考证《皇明祖训》宗室男嗣降等承袭、岁禄俸粮与宗女封号制度。"
+            },
+            {
+                title: "周藩明清迁徙流布考与宗亲寻根登记台",
+                url: "migration.html",
+                category: "迁徙寻根",
+                keywords: "迁徙 寻根 流布 河南 开封 商丘 周口 宿州 亳州 徐州 大理 四川 认祖",
+                desc: "周藩后裔迁徙路线考证，支持在线生成宗亲寻根卡片与信息复制。"
+            },
+            {
+                title: "周藩宗祠云祭奠享堂与宗亲留言板",
+                url: "memorial.html",
+                category: "宗祠祭奠",
+                keywords: "祭奠 敬香 献花 敬酒 宗祠 追思 留言 神位 慎终追远",
+                desc: "在线敬香祭祖、抒发追思感怀与族亲互动空间。"
+            },
+            {
+                title: "周藩古迹遗存与谱牒影印文献",
+                url: "documents.html",
+                category: "谱牒古迹",
+                keywords: "龙亭 周王府遗址 禹州 周王陵 皇明祖训 家谱 谱牒 照片 影印",
+                desc: "收录开封明周王府紫禁城基址、禹州明周藩地下玄宫与古文献考据。"
+            },
+            {
+                title: "周藩家规六条与立身治家祖训",
+                url: "rules.html",
+                category: "祖训家规",
+                keywords: "家训 家规 祖训 尊祖敬宗 敦睦 耕读 治家 孝悌 规箴",
+                desc: "承袭皇明宗室清正家风，收录周藩立身、敦睦宗亲与修明谱牒规箴。"
+            }
+        ];
+
+        function handleKey(e) {
+            if (e.key === 'Enter') executeSearch();
+        }
+
+        function quickSearch(kw) {
+            document.getElementById('searchInput').value = kw;
+            executeSearch();
+        }
+
+        function executeSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsArea = document.getElementById('resultsArea');
+            const countDiv = document.getElementById('resultsCount');
+
+            if (!query) {
+                resultsArea.innerHTML = '';
+                countDiv.innerText = '请输入关键词进行检索。';
+                return;
+            }
+
+            const matched = siteIndex.filter(item => {
+                return item.title.toLowerCase().includes(query) ||
+                       item.keywords.toLowerCase().includes(query) ||
+                       item.desc.toLowerCase().includes(query) ||
+                       item.category.toLowerCase().includes(query);
+            });
+
+            countDiv.innerHTML = `共找到 <strong>${matched.length}</strong> 条与“<span style="color:#8c1d1d;">${query}</span>”相关的宗族资料：`;
+
+            if (matched.length === 0) {
+                resultsArea.innerHTML = '<div style="color:#888; padding:2rem; text-align:center;">未找到匹配记录，可尝试使用字辈单字、先祖名讳或核心地名重试。</div>';
+                return;
+            }
+
+            resultsArea.innerHTML = matched.map(item => `
+                <div class="result-item">
+                    <div class="result-title">
+                        <a href="${item.url}">${item.title}</a>
+                        <span class="result-category">${item.category}</span>
+                    </div>
+                    <div class="result-snippet">${item.desc}</div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
