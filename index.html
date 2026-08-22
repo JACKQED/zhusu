@@ -9,15 +9,15 @@
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .header-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1rem; }
         .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
         
-        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
-        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem 0.6rem; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; font-size: 0.82rem; padding: 0.15rem 0.3rem; border-radius: 3px; }
+        .nav-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
-        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .container { max-width: 1080px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .hero { text-align: center; padding: 2rem 1rem; border-bottom: 2px solid #8c1d1d; margin-bottom: 1.5rem; }
         .hero h1 { font-size: 2.2rem; color: #8c1d1d; letter-spacing: 3px; margin-bottom: 0.8rem; }
         .hero p { color: #666; font-size: 1.05rem; }
@@ -38,9 +38,9 @@
 
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
             .nav-menu.show { display: flex; }
-            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .nav-menu a { margin: 0.3rem 0; padding: 0.5rem 1.5rem; width: 100%; font-size: 0.9rem; }
             .container { padding: 1.2rem; }
             .action-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
@@ -57,6 +57,7 @@
                 <a href="lineage.html">世系字辈</a>
                 <a href="tree.html">家谱树</a>
                 <a href="naming.html">命名助手</a>
+                <a href="calendar.html">纪年换算</a>
                 <a href="hall.html">堂号楹联</a>
                 <a href="chronology.html">王府年表</a>
                 <a href="ancestors.html">昭穆神位</a>
@@ -103,6 +104,14 @@
                     <p>太祖-周定王-十四大分房脉络图，支持点击直观查阅各房生平。</p>
                 </div>
                 <a href="tree.html">打开数字谱系树 →</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>📅 纪年换算</h3>
+                    <p>明代十七朝年号、岁次干支与公元纪年双向即时速查换算器。</p>
+                </div>
+                <a href="calendar.html">使用纪年工具 →</a>
             </div>
 
             <div class="card">
