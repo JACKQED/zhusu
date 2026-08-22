@@ -8,6 +8,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
+        /* 顶部导航 */
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
         .header-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
         .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1rem; }
@@ -17,25 +18,35 @@
         .nav-menu a { color: #f9e6d0; text-decoration: none; font-size: 0.82rem; padding: 0.15rem 0.3rem; border-radius: 3px; }
         .nav-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
+        /* 主容器 */
         .container { max-width: 1080px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
         h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
 
         .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; border-radius: 0 4px 4px 0; }
 
+        /* 宗藩渊源考据区 */
+        .clan-compare-box { background: #fffaf0; border: 1px solid #ebd8c0; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; }
+        .clan-compare-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.6rem; }
+        .clan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 0.8rem; }
+        .clan-item { background: #fff; border: 1px solid #e8ded4; padding: 1rem; border-radius: 4px; font-size: 0.9rem; line-height: 1.7; }
+        .clan-item strong { color: #8c1d1d; }
+
         /* 名人卡片网格 */
         .fame-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
-        .fame-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #8c1d1d; display: flex; flex-direction: column; justify-content: space-between; }
+        .fame-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #8c1d1d; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
+        .fame-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
         .fame-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
         .fame-name { font-size: 1.2rem; font-weight: bold; color: #8c1d1d; }
         .fame-tag { font-size: 0.75rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 4px; }
         .fame-tag.med { background: #2e7d32; }
         .fame-tag.art { background: #6a1b9a; }
+        .fame-tag.hero { background: #b71c1c; }
         .fame-tag.mod { background: #0277bd; }
 
         .fame-meta { font-size: 0.85rem; color: #777; margin-bottom: 0.8rem; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
-        .fame-body { font-size: 0.92rem; color: #444; line-height: 1.7; }
-        .fame-footer { margin-top: 1rem; font-size: 0.85rem; color: #8c1d1d; background: #fff8f0; padding: 0.4rem 0.6rem; border-radius: 4px; }
+        .fame-body { font-size: 0.92rem; color: #444; line-height: 1.7; text-align: justify; }
+        .fame-footer { margin-top: 1rem; font-size: 0.85rem; color: #8c1d1d; background: #fff8f0; padding: 0.5rem 0.8rem; border-radius: 4px; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
@@ -79,75 +90,128 @@
     <main class="container">
         <h1>大明周藩名人堂</h1>
         <div class="intro-box">
-            周藩历经六百余年，文韬武略、才俊辈出。本堂汇聚自明代藩封至近现代各支派中在<strong>医学农桑、词曲戏曲、忠义死节、学术教育及宗族修撰</strong>等领域做出卓越贡献的周藩后裔与先贤。
+            明太祖朱元璋圣脉绵延六百余载，周藩后裔以崇文尚医、忠贞死节、耕读传家著称中原。本堂汇聚自明代藩封至近现代各时期在<strong>农医科学、诗词曲艺、忠义名节、文博教育与宗族修撰</strong>中作出卓越贡献的宗亲先贤。
         </div>
 
-        <h2>🌿 农医科学界丰碑</h2>
+        <!-- 宗藩渊源特别考据 -->
+        <div class="clan-compare-box">
+            <div class="clan-compare-title">👑 明代皇族宗藩分支与代表人物考</div>
+            <p style="font-size: 0.92rem; color: #555;">明太祖分封二十四子，各赐二十字辈派语。历代宗室在不同历史时期人才辈出：</p>
+            <div class="clan-grid">
+                <div class="clan-item">
+                    <strong>🌿 周藩（河南开封·朱橚支脉）：</strong><br>
+                    太祖第五子。以<strong>农医科学与词曲文学</strong>冠绝明代。编纂《救荒本草》《普济方》《诚斋乐府》，为世界食用植物救荒学之开山源头。
+                </div>
+                <div class="clan-item">
+                    <strong>🎨 宁藩（江西南昌·朱权支脉）：</strong><br>
+                    太祖第十七子。好黄老、精音律（著《太和正音谱》）。明末清初宗室后裔诞生了享誉世界画坛的写意巨匠<strong>八大山人（朱耷）</strong>。
+                </div>
+                <div class="clan-item">
+                    <strong>🏛️ 岷藩（湖南武冈/长沙·朱楩支脉）：</strong><br>
+                    太祖第十八子。明末清初定居湖南长沙县安沙镇棠坡。太祖赐字派“徽音膺彦誉…远术绍兹祥”，近代涌现出卓越领导人<strong>朱镕基总理</strong>（第17世·“绍”字辈）。
+                </div>
+            </div>
+        </div>
+
+        <h2>🌿 农医科学与学术名家</h2>
         <div class="fame-grid">
             <div class="fame-card">
                 <div class="fame-header">
                     <span class="fame-name">朱橚（周定王）</span>
-                    <span class="fame-tag med">本草先驱</span>
+                    <span class="fame-tag med">本草救荒先驱</span>
                 </div>
-                <div class="fame-meta">洪武至永乐年间 · 开封周王府</div>
-                <div class="fame-body">亲自辨尝百草，编著《救荒本草》开创世界植物救荒学；主编《普济方》为中国古代最大方剂全书。</div>
-                <div class="fame-footer">⭐ 功绩：万民生息之福，名垂世界科学史册。</div>
+                <div class="fame-meta">洪武至永乐年间 · 周藩开藩始祖</div>
+                <div class="fame-body">在开封王府辟植物园圃辨尝百草，著《救荒本草》创立世界食用植物学；主编《普济方》（收方61739首）为古代最大医方巨典。</div>
+                <div class="fame-footer">⭐ 功绩：惠泽苍生万民，世界科学史泰斗。</div>
             </div>
 
             <div class="fame-card">
                 <div class="fame-header">
-                    <span class="fame-name">滕硕 / 刘醇</span>
-                    <span class="fame-tag med">王府良医</span>
+                    <span class="fame-name">朱睦㮮（海宁王支）</span>
+                    <span class="fame-tag art">金石目录学宗师</span>
                 </div>
-                <div class="fame-meta">明洪武年间 · 周王府良医所正</div>
-                <div class="fame-body">协助周定王广搜天下秘方、精研医理，耗费数十年编校《普济方》与《本草发挥》。</div>
-                <div class="fame-footer">⭐ 功绩：保存汉唐宋元濒临失传之医方典籍。</div>
+                <div class="fame-meta">明嘉靖至万历年间 · 著名学者</div>
+                <div class="fame-body">筑“万卷堂”聚书数万卷，著有字书巨作《篇海类编》及金石专著《金石碑帖考》，为明代藩府最具声望的学者之一。</div>
+                <div class="fame-footer">⭐ 功绩：推动中原古籍整理与金石考据。</div>
+            </div>
+
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">朱朝堈 / 朱肃溱</span>
+                    <span class="fame-tag med">修史刻书贤王</span>
+                </div>
+                <div class="fame-meta">明嘉靖至万历年间 · 周庄王 / 周端王</div>
+                <div class="fame-body">重视中原文化与古籍保存，主持修撰《如意宝珠》《周藩宗谱》，校勘重印多部宋元孤本医书，使周王府成为中原文化重镇。</div>
+                <div class="fame-footer">⭐ 功绩：弘扬儒医家学，善本传世。</div>
             </div>
         </div>
 
-        <h2>🎭 文学艺术界宗师</h2>
+        <h2>🎭 文学曲艺与戏曲巨擘</h2>
         <div class="fame-grid">
             <div class="fame-card">
                 <div class="fame-header">
                     <span class="fame-name">朱有炖（周宪王）</span>
-                    <span class="fame-tag art">大明曲圣</span>
+                    <span class="fame-tag art">大明一代曲圣</span>
                 </div>
                 <div class="fame-meta">洪武至正统年间 · 号诚斋</div>
-                <div class="fame-body">明代戏曲界领军人物，创制杂剧 31 部汇入《诚斋乐府》，著《元宫词》百首，音律辞藻冠绝明初。</div>
-                <div class="fame-footer">⭐ 功绩：明代剧作存世最多之戏曲巨擘。</div>
-            </div>
-
-            <div class="fame-card">
-                <div class="fame-header">
-                    <span class="fame-name">朱睦㮮（海宁王宗支）</span>
-                    <span class="fame-tag art">金石文献家</span>
-                </div>
-                <div class="fame-meta">明嘉靖至万历年间 · 著名学者</div>
-                <div class="fame-body">精于目录学与金石考据，著有《篇海类编》《金石碑帖考》，为明代藩邸学者之佼佼者。</div>
-                <div class="fame-footer">⭐ 功绩：推动中原古籍整理与金石学复兴。</div>
+                <div class="fame-body">明初戏曲泰斗，创作杂剧 31 部汇入《诚斋乐府》，并著《元宫词》百首。其曲音律婉丽，生动记录了明初汴京风俗与民间岁时节令。</div>
+                <div class="fame-footer">⭐ 功绩：中国戏曲史上现存作品最多的明代剧作家。</div>
             </div>
         </div>
 
-        <h2>⚔️ 气节忠烈与近现代贤达</h2>
+        <h2>⚔️ 明季孤忠与抗清节烈</h2>
         <div class="fame-grid">
             <div class="fame-card">
                 <div class="fame-header">
                     <span class="fame-name">朱恭枵（末代周王）</span>
-                    <span class="fame-tag">忠贞死守</span>
+                    <span class="fame-tag hero">散银守城孤忠</span>
                 </div>
                 <div class="fame-meta">明万历至崇祯十五年 (1642)</div>
-                <div class="fame-body">散尽王府数百万两库银犒军守卫汴京，大水灌城后护送宗室转徙，以忠义节烈载入《明史》。</div>
-                <div class="fame-footer">⭐ 功绩：誓与封国共存亡之大明宗王典范。</div>
+                <div class="fame-body">李自成三围开封，恭枵倾尽王府二百年积蓄数百万两白银犒师守城八月。大水灌城后护送宗室转徙，大节凛然载入《明史》。</div>
+                <div class="fame-footer">⭐ 功绩：誓与封国同存亡之宗王典范。</div>
             </div>
 
             <div class="fame-card">
                 <div class="fame-header">
-                    <span class="fame-name">近现代周藩修谱贤达</span>
-                    <span class="fame-tag mod">宗风赓续</span>
+                    <span class="fame-name">朱伦圣 / 朱敷铮</span>
+                    <span class="fame-tag hero">南明抗清渡台宗室</span>
                 </div>
-                <div class="fame-meta">清末、民国至当代各地宗亲</div>
-                <div class="fame-body">在豫、皖、苏、鲁、陕、滇等地历经战乱坚守族谱、重修宗祠、考订字辈，使六百年周藩脉络得以清晰传承至今。</div>
-                <div class="fame-footer">⭐ 功绩：赓续血脉，传扬朱氏家风。</div>
+                <div class="fame-meta">明末清初 · 周王大宗世子支脉</div>
+                <div class="fame-body">弘光、隆武年间转战东南抗清。顺治后期朱伦圣随延平王郑成功渡海东征台湾，在台湾保全周藩大宗薪火，宗风不灭。</div>
+                <div class="fame-footer">⭐ 功绩：矢志不渝，护佑周藩血脉过海传宗。</div>
+            </div>
+        </div>
+
+        <h2>📖 近现代与当代贤达宗亲</h2>
+        <div class="fame-grid">
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">辛亥与近代教育先驱</span>
+                    <span class="fame-tag mod">开通风气</span>
+                </div>
+                <div class="fame-meta">清末民国时期 · 豫东 / 皖北周藩宗亲</div>
+                <div class="fame-body">投身辛亥革命、兴办中原新式学堂、设立济世医馆。秉承周定王救荒济民遗风，以教育与医药服务乡梓。</div>
+                <div class="fame-footer">⭐ 功绩：开启民智，济世救人。</div>
+            </div>
+
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">当代古籍考古文博学者</span>
+                    <span class="fame-tag mod">文脉守护</span>
+                </div>
+                <div class="fame-meta">当代 · 开封 / 禹州文史研究界后裔</div>
+                <div class="fame-body">参与开封明周王府紫禁城地层考古、禹州明周定王地下玄宫保护，推动《救荒本草》列入国家古籍文献保护项目。</div>
+                <div class="fame-footer">⭐ 功绩：让六百年周王府地下遗珍重见天日。</div>
+            </div>
+
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">六省周藩修谱与宗亲理事</span>
+                    <span class="fame-tag mod">赓续世系</span>
+                </div>
+                <div class="fame-meta">豫、皖、苏、鲁、陕、滇各地宗亲代表</div>
+                <div class="fame-body">历经数十年搜集散佚家乘，考订字辈与始迁祖，修成豫皖苏鲁多支大统谱，使当代数十万周藩后裔寻根有据。</div>
+                <div class="fame-footer">⭐ 功绩：敦睦九族，让大明周藩谱牒万古流传。</div>
             </div>
         </div>
     </main>
