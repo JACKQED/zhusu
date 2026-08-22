@@ -3,42 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>明代年号干支与公历换算器 - 大明周藩纪事</title>
+    <title>明代年号干支与公历双向速查换算器 - 大明周藩纪事</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
+        /* 顶部导航 */
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .header-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1rem; }
         .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
         
-        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
-        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem 0.6rem; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; font-size: 0.82rem; padding: 0.15rem 0.3rem; border-radius: 3px; }
+        .nav-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
-        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+        /* 主容器 */
+        .container { max-width: 1080px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; border-radius: 0 4px 4px 0; }
 
-        .calc-box { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; }
-        .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
-        .calc-select, .calc-input { padding: 0.5rem 0.8rem; font-size: 1rem; border: 1px solid #dcd3cb; border-radius: 4px; background: #fff; }
-        .calc-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-size: 1rem; cursor: pointer; }
-        .calc-btn:hover { background: #701414; }
+        /* 快捷标签 */
+        .preset-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+        .preset-label { font-size: 0.85rem; color: #777; font-weight: bold; }
+        .preset-btn { background: #f5efe6; border: 1px solid #dcd3cb; padding: 0.25rem 0.7rem; border-radius: 15px; font-size: 0.82rem; cursor: pointer; color: #8c1d1d; transition: all 0.2s; }
+        .preset-btn:hover { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
 
-        .res-display { display: none; background: #fff8f0; border-left: 4px solid #8c1d1d; padding: 1rem; margin-top: 1rem; font-size: 1.05rem; color: #8c1d1d; }
+        /* 选项卡面板 */
+        .tab-bar { display: flex; border-bottom: 2px solid #8c1d1d; margin-top: 1.5rem; gap: 0.5rem; }
+        .tab-btn { padding: 0.6rem 1.2rem; background: #f4efe9; border: 1px solid #dcd3cb; border-bottom: none; border-radius: 6px 6px 0 0; font-size: 0.95rem; font-weight: bold; color: #666; cursor: pointer; }
+        .tab-btn.active { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
+        
+        .calc-panel { display: none; background: #fdfbf7; border: 1px solid #e8dfd8; border-top: none; padding: 1.8rem; border-radius: 0 0 6px 6px; }
+        .calc-panel.active { display: block; }
+
+        /* 表单控件 */
+        .form-row { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; margin: 1rem 0; }
+        .calc-select, .calc-input { padding: 0.55rem 0.8rem; font-size: 1rem; border: 1px solid #c8bdb4; border-radius: 4px; background: #fff; color: #333; outline: none; }
+        .calc-select:focus, .calc-input:focus { border-color: #8c1d1d; box-shadow: 0 0 0 2px rgba(140,29,29,0.15); }
+        .calc-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.55rem 1.4rem; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: background 0.2s; }
+        .calc-btn:hover { background: #6f1212; }
+
+        /* 结果展示卡片 */
+        .res-display { display: none; background: #fff8f0; border: 1px solid #f0dec8; border-left: 5px solid #8c1d1d; padding: 1.2rem; margin-top: 1.2rem; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+        .res-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.6rem; }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-top: 0.6rem; }
+        .res-item { background: #fff; padding: 0.6rem 0.8rem; border-radius: 4px; border: 1px solid #ebdcd0; font-size: 0.9rem; }
+        .res-item strong { color: #8c1d1d; }
+        .res-context { margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed #dfd0c0; font-size: 0.9rem; color: #554; }
+
+        /* 对照表格 */
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; }
+        .era-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+        .era-table th, .era-table td { border: 1px solid #e2dcd5; padding: 0.65rem 0.8rem; text-align: left; }
+        .era-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
+        .era-table tr:nth-child(even) { background: #faf6f0; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
             .nav-menu.show { display: flex; }
-            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .nav-menu a { margin: 0.3rem 0; padding: 0.5rem 1.5rem; width: 100%; font-size: 0.9rem; }
             .container { padding: 1.2rem; }
+            .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -49,6 +80,7 @@
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html">首页</a>
+                <a href="figures/index.html">历代人物</a>
                 <a href="lineage.html">世系字辈</a>
                 <a href="tree.html">家谱树</a>
                 <a href="naming.html">命名助手</a>
@@ -71,37 +103,109 @@
     <main class="container">
         <h1>明代年号干支与公历速查换算器</h1>
         <div class="intro-box">
-            族人在考订古旧谱牒、墓志铭、神道碑时，常遇“洪武八年乙卯”、“万历四十三年乙卯”等干支年号。本工具可快速完成公历与明代纪年之间的互查。
+            族人在考订古旧家谱、墓志圹志、碑铭契约时，常遇“洪武八年乙卯”、“永乐四年丙戌”、“崇祯十五年壬午”等纪年。本工具支持<strong>年号、公历、六十干支全向互查</strong>，并自动关联大明周藩历代亲王世次与大事。
         </div>
 
-        <div class="calc-box">
-            <h2>📜 年号转公历查询</h2>
+        <!-- 快捷历史节点 -->
+        <div class="preset-bar">
+            <span class="preset-label">📌 快捷考据：</span>
+            <button class="preset-btn" onclick="quickCheck(1381)">洪武十四年 (定王就藩开封)</button>
+            <button class="preset-btn" onclick="quickCheck(1406)">永乐四年 (救荒本草初刻)</button>
+            <button class="preset-btn" onclick="quickCheck(1425)">洪熙元年 (定王薨葬禹州)</button>
+            <button class="preset-btn" onclick="quickCheck(1428)">宣德三年 (宪王薨/简王袭)</button>
+            <button class="preset-btn" onclick="quickCheck(1642)">崇祯十五年 (开封水患宗室转徙)</button>
+        </div>
+
+        <!-- 选项卡按钮 -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchTab('tab1', this)">📜 年号 ➔ 公历干支</button>
+            <button class="tab-btn" onclick="switchTab('tab2', this)">🌍 公历 ➔ 明朝纪年</button>
+            <button class="tab-btn" onclick="switchTab('tab3', this)">🔄 六十干支速查</button>
+        </div>
+
+        <!-- 模式一：年号转公历 -->
+        <div id="tab1" class="calc-panel active">
             <div class="form-row">
-                <select id="eraSelect" class="calc-select">
-                    <option value="1368,31,洪武">洪武 (明太祖 1368-1398)</option>
-                    <option value="1399,4,建文">建文 (明惠宗 1399-1402)</option>
-                    <option value="1403,22,永乐">永乐 (明成祖 1403-1424)</option>
-                    <option value="1425,1,洪熙">洪熙 (明仁宗 1425)</option>
-                    <option value="1426,10,宣德">宣德 (明宣宗 1426-1435)</option>
-                    <option value="1436,14,正统">正统 (明英宗 1436-1449)</option>
-                    <option value="1450,7,景泰">景泰 (明代宗 1450-1456)</option>
-                    <option value="1457,8,天顺">天顺 (明英宗 1457-1464)</option>
-                    <option value="1465,23,成化">成化 (明宪宗 1465-1487)</option>
-                    <option value="1488,18,弘治">弘治 (明孝宗 1488-1505)</option>
-                    <option value="1506,16,正德">正德 (明武宗 1506-1521)</option>
-                    <option value="1522,45,嘉靖">嘉靖 (明世宗 1522-1566)</option>
-                    <option value="1567,6,隆庆">隆庆 (明穆宗 1567-1572)</option>
-                    <option value="1573,48,万历">万历 (明神宗 1573-1620)</option>
-                    <option value="1620,1,泰昌">泰昌 (明光宗 1620)</option>
-                    <option value="1621,7,天启">天启 (明熹宗 1621-1627)</option>
-                    <option value="1628,17,崇祯">崇祯 (明思宗 1628-1644)</option>
+                <select id="eraSelect" class="calc-select" onchange="updateMaxYear()">
+                    <option value="1368,31,洪武,明太祖朱元璋">洪武 (明太祖 1368-1398)</option>
+                    <option value="1399,4,建文,明惠宗朱允炆">建文 (明惠宗 1399-1402)</option>
+                    <option value="1403,22,永乐,明成祖朱棣">永乐 (明成祖 1403-1424)</option>
+                    <option value="1425,1,洪熙,明仁宗朱高炽">洪熙 (明仁宗 1425)</option>
+                    <option value="1426,10,宣德,明宣宗朱瞻基">宣德 (明宣宗 1426-1435)</option>
+                    <option value="1436,14,正统,明英宗朱祁镇">正统 (明英宗 1436-1449)</option>
+                    <option value="1450,7,景泰,明代宗朱祁钰">景泰 (明代宗 1450-1456)</option>
+                    <option value="1457,8,天顺,明英宗朱祁镇">天顺 (明英宗 1457-1464)</option>
+                    <option value="1465,23,成化,明宪宗朱见深">成化 (明宪宗 1465-1487)</option>
+                    <option value="1488,18,弘治,明孝宗朱祐樘">弘治 (明孝宗 1488-1505)</option>
+                    <option value="1506,16,正德,明武宗朱厚照">正德 (明武宗 1506-1521)</option>
+                    <option value="1522,45,嘉靖,明世宗朱厚熜">嘉靖 (明世宗 1522-1566)</option>
+                    <option value="1567,6,隆庆,明穆宗朱载坖">隆庆 (明穆宗 1567-1572)</option>
+                    <option value="1573,48,万历,明神宗朱翊钧">万历 (明神宗 1573-1620)</option>
+                    <option value="1620,1,泰昌,明光宗朱常洛">泰昌 (明光宗 1620)</option>
+                    <option value="1621,7,天启,明熹宗朱由校">天启 (明熹宗 1621-1627)</option>
+                    <option value="1628,17,崇祯,明思宗朱由检">崇祯 (明思宗 1628-1644)</option>
                 </select>
                 <span>第</span>
-                <input type="number" id="eraYear" class="calc-input" value="1" min="1" max="50" style="width: 80px;">
+                <input type="number" id="eraYear" class="calc-input" value="1" min="1" max="31" style="width: 85px;">
                 <span>年</span>
                 <button class="calc-btn" onclick="calcEraToAD()">查询公历与干支</button>
             </div>
             <div id="eraResult" class="res-display"></div>
+        </div>
+
+        <!-- 模式二：公历转明朝年号 -->
+        <div id="tab2" class="calc-panel">
+            <div class="form-row">
+                <span>输入公历年份：公元</span>
+                <input type="number" id="adInput" class="calc-input" value="1406" min="1368" max="1644" style="width: 110px;">
+                <span>年 (范围：1368 - 1644)</span>
+                <button class="calc-btn" onclick="calcADToEra()">换算大明年号</button>
+            </div>
+            <div id="adResult" class="res-display"></div>
+        </div>
+
+        <!-- 模式三：六十干支速查 -->
+        <div id="tab3" class="calc-panel">
+            <div class="form-row">
+                <span>选择岁次干支：</span>
+                <select id="ganzhiSelect" class="calc-select"></select>
+                <button class="calc-btn" onclick="calcGanzhiList()">查询明代所有对应年份</button>
+            </div>
+            <div id="ganzhiResult" class="res-display"></div>
+        </div>
+
+        <h2>📖 大明十七朝与周藩亲王世系纪年总表</h2>
+        <div class="table-wrap">
+            <table class="era-table">
+                <thead>
+                    <tr>
+                        <th>皇帝庙号</th>
+                        <th>年号</th>
+                        <th>在位年数</th>
+                        <th>公历起止</th>
+                        <th>周藩对应在位亲王</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>明太祖</td><td><strong>洪武</strong></td><td>31年</td><td>1368 — 1398</td><td>周定王 朱橚 (洪武十四年就藩汴京)</td></tr>
+                    <tr><td>明惠宗</td><td><strong>建文</strong></td><td>4年</td><td>1399 — 1402</td><td>周定王 朱橚 (建文初谪迁，成祖复藩)</td></tr>
+                    <tr><td>明成祖</td><td><strong>永乐</strong></td><td>22年</td><td>1403 — 1424</td><td>周定王 朱橚 (编纂《救荒本草》《普济方》)</td></tr>
+                    <tr><td>明仁宗</td><td><strong>洪熙</strong></td><td>1年</td><td>1425</td><td>周宪王 朱有炖 (定王薨葬禹州三峰山)</td></tr>
+                    <tr><td>明宣宗</td><td><strong>宣德</strong></td><td>10年</td><td>1426 — 1435</td><td>周宪王 朱有炖 ➔ 周简王 朱有爝 (宣德三年袭)</td></tr>
+                    <tr><td>明英宗</td><td><strong>正统</strong></td><td>14年</td><td>1436 — 1449</td><td>周简王 朱有爝</td></tr>
+                    <tr><td>明代宗</td><td><strong>景泰</strong></td><td>7年</td><td>1450 — 1456</td><td>周简王 朱有爝 ➔ 周靖王 朱子垕 (景泰三年袭)</td></tr>
+                    <tr><td>明英宗</td><td><strong>天顺</strong></td><td>8年</td><td>1457 — 1464</td><td>周靖王 朱子垕 ➔ 周懿王 朱子圮 (天顺元年袭)</td></tr>
+                    <tr><td>明宪宗</td><td><strong>成化</strong></td><td>23年</td><td>1465 — 1487</td><td>周惠王 朱同䥝 (成化二十三年袭)</td></tr>
+                    <tr><td>明孝宗</td><td><strong>弘治</strong></td><td>18年</td><td>1488 — 1505</td><td>周惠王 朱同䥝 ➔ 周悼王 朱安㴦 (追封)</td></tr>
+                    <tr><td>明武宗</td><td><strong>正德</strong></td><td>16年</td><td>1506 — 1521</td><td>周恭王 朱睦㰂 (正德三年袭)</td></tr>
+                    <tr><td>明世宗</td><td><strong>嘉靖</strong></td><td>45年</td><td>1522 — 1566</td><td>周恭王 朱睦㰂 ➔ 周康王 朱勤炽 (嘉靖三十五年袭)</td></tr>
+                    <tr><td>明穆宗</td><td><strong>隆庆</strong></td><td>6年</td><td>1567 — 1572</td><td>周庄王 朱朝堈 (隆庆四年袭)</td></tr>
+                    <tr><td>明神宗</td><td><strong>万历</strong></td><td>48年</td><td>1573 — 1620</td><td>周端王 朱在铤 ➔ 周敬王 朱肃溱 ➔ 周恭王 朱恭枵</td></tr>
+                    <tr><td>明光宗</td><td><strong>泰昌</strong></td><td>1年</td><td>1620</td><td>周敬王 朱肃溱 / 朱恭枵</td></tr>
+                    <tr><td>明熹宗</td><td><strong>天启</strong></td><td>7年</td><td>1621 — 1627</td><td>周王 朱恭枵</td></tr>
+                    <tr><td>明思宗</td><td><strong>崇祯</strong></td><td>17年</td><td>1628 — 1644</td><td>周王 朱恭枵 (崇祯十五年开封大水，宗室散迁)</td></tr>
+                </tbody>
+            </table>
         </div>
     </main>
 
@@ -114,34 +218,206 @@
         const zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
         const shengxiao = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
 
-        function getGanzhi(year) {
-            const g = (year - 4) % 10;
-            const z = (year - 4) % 12;
-            return gan[g] + zhi[z] + "（" + shengxiao[z] + "年）";
+        const eras = [
+            { name: "洪武", emperor: "明太祖朱元璋", start: 1368, end: 1398, max: 31 },
+            { name: "建文", emperor: "明惠宗朱允炆", start: 1399, end: 1402, max: 4 },
+            { name: "永乐", emperor: "明成祖朱棣", start: 1403, end: 1424, max: 22 },
+            { name: "洪熙", emperor: "明仁宗朱高炽", start: 1425, end: 1425, max: 1 },
+            { name: "宣德", emperor: "明宣宗朱瞻基", start: 1426, end: 1435, max: 10 },
+            { name: "正统", emperor: "明英宗朱祁镇", start: 1436, end: 1449, max: 14 },
+            { name: "景泰", emperor: "明代宗朱祁钰", start: 1450, end: 1456, max: 7 },
+            { name: "天顺", emperor: "明英宗朱祁镇", start: 1457, end: 1464, max: 8 },
+            { name: "成化", emperor: "明宪宗朱见深", start: 1465, end: 1487, max: 23 },
+            { name: "弘治", emperor: "明孝宗朱祐樘", start: 1488, end: 1505, max: 18 },
+            { name: "正德", emperor: "明武宗朱厚照", start: 1506, end: 1521, max: 16 },
+            { name: "嘉靖", emperor: "明世宗朱厚熜", start: 1522, end: 1566, max: 45 },
+            { name: "隆庆", emperor: "明穆宗朱载坖", start: 1567, end: 1572, max: 6 },
+            { name: "万历", emperor: "明神宗朱翊钧", start: 1573, end: 1620, max: 48 },
+            { name: "泰昌", emperor: "明光宗朱常洛", start: 1620, end: 1620, max: 1 },
+            { name: "天启", emperor: "明熹宗朱由校", start: 1621, end: 1627, max: 7 },
+            { name: "崇祯", emperor: "明思宗朱由检", start: 1628, end: 1644, max: 17 }
+        ];
+
+        // 初始化60干支下拉列表
+        function initGanzhiOptions() {
+            const sel = document.getElementById('ganzhiSelect');
+            for (let i = 0; i < 60; i++) {
+                const g = gan[i % 10];
+                const z = zhi[i % 12];
+                const opt = document.createElement('option');
+                opt.value = g + z;
+                opt.textContent = `${g}${z}（${shengxiao[i % 12]}年）`;
+                sel.appendChild(opt);
+            }
         }
 
+        function getGanzhi(year) {
+            let offset = (year - 4) % 60;
+            if (offset < 0) offset += 60;
+            const g = (year - 4) % 10;
+            const z = (year - 4) % 12;
+            const gIdx = g < 0 ? g + 10 : g;
+            const zIdx = z < 0 ? z + 12 : z;
+            return gan[gIdx] + zhi[zIdx] + "（" + shengxiao[zIdx] + "年）";
+        }
+
+        function getZhouKing(year) {
+            if (year < 1381) return "周定王朱橚受封吴王/周王，尚未就藩汴京";
+            if (year <= 1425) return "始祖 · 周定王 朱橚（开封主政，创良医所、撰《救荒本草》）";
+            if (year <= 1439) return "第二代 · 周宪王 朱有炖（号诚斋，一代曲圣）";
+            if (year <= 1452) return "第三代 · 周简王 朱有爝（周王大宗直系之源）";
+            if (year <= 1456) return "第四代 · 周靖王 朱子垕（禹州靖王陵玄宫）";
+            if (year <= 1485) return "第五代 · 周懿王 朱子圮";
+            if (year <= 1498) return "第六代 · 周惠王 朱同䥝";
+            if (year <= 1502) return "第七代 · 周悼王 朱安㴦（追封）";
+            if (year <= 1538) return "第八代 · 周恭王 朱睦㰂";
+            if (year <= 1568) return "第九代 · 周康王 朱勤炽";
+            if (year <= 1583) return "第十代 · 周庄王 朱朝堈";
+            if (year <= 1586) return "第十一代 · 周敬王 朱在铤";
+            if (year <= 1613) return "第十二代 · 周端王 朱肃溱";
+            return "第十三代 · 周王 朱恭枵（崇祯十五年坚守汴梁，水决后宗室迁播各邑）";
+        }
+
+        function updateMaxYear() {
+            const raw = document.getElementById('eraSelect').value.split(',');
+            const maxYear = parseInt(raw[1]);
+            const input = document.getElementById('eraYear');
+            input.max = maxYear;
+            if (parseInt(input.value) > maxYear) input.value = maxYear;
+        }
+
+        // 模式1：年号查公历
         function calcEraToAD() {
             const raw = document.getElementById('eraSelect').value.split(',');
             const startYear = parseInt(raw[0]);
             const maxYear = parseInt(raw[1]);
             const eraName = raw[2];
+            const emperor = raw[3];
             const yearNum = parseInt(document.getElementById('eraYear').value);
 
-            if (yearNum < 1 || yearNum > maxYear) {
-                alert(`【${eraName}】年号最多为 ${maxYear} 年，请重新输入！`);
+            if (isNaN(yearNum) || yearNum < 1 || yearNum > maxYear) {
+                alert(`【${eraName}】年号在位 ${maxYear} 年，请输入 1 ~ ${maxYear} 之间的年份！`);
                 return;
             }
 
             const adYear = startYear + yearNum - 1;
             const gz = getGanzhi(adYear);
+            const king = getZhouKing(adYear);
+            const eraText = yearNum === 1 ? `${eraName}元年` : `${eraName}${yearNum}年`;
+
             const res = document.getElementById('eraResult');
-            res.innerHTML = `<strong>查询结果：</strong><br>明朝【${eraName}${yearNum === 1 ? '元' : yearNum}年】 对应 <strong>公元 ${adYear} 年</strong><br>岁次干支：<strong>${gz}</strong>`;
+            res.innerHTML = `
+                <div class="res-title">考据结果：大明【${eraText}】</div>
+                <div class="res-grid">
+                    <div class="res-item"><strong>公历年份：</strong>公元 <strong>${adYear}</strong> 年</div>
+                    <div class="res-item"><strong>岁次干支：</strong><strong>${gz}</strong></div>
+                    <div class="res-item"><strong>大明君主：</strong>${emperor}</div>
+                    <div class="res-item"><strong>周藩在位亲王：</strong>${king.split('（')[0]}</div>
+                </div>
+                <div class="res-context">📌 <strong>周藩历史背景：</strong>${king}</div>
+            `;
             res.style.display = 'block';
+        }
+
+        // 模式2：公历查年号
+        function calcADToEra() {
+            const ad = parseInt(document.getElementById('adInput').value);
+            if (isNaN(ad) || ad < 1368 || ad > 1644) {
+                alert("请输入大明王朝时期的公元年份（1368 年 至 1644 年）！");
+                return;
+            }
+
+            let matchEra = [];
+            eras.forEach(e => {
+                if (ad >= e.start && ad <= e.end) {
+                    const y = ad - e.start + 1;
+                    matchEra.push(`【${e.name}${y === 1 ? '元' : y}年】(${e.emperor})`);
+                }
+            });
+
+            const gz = getGanzhi(ad);
+            const king = getZhouKing(ad);
+
+            const res = document.getElementById('adResult');
+            res.innerHTML = `
+                <div class="res-title">考据结果：公元 ${ad} 年</div>
+                <div class="res-grid">
+                    <div class="res-item"><strong>大明年号：</strong><strong>${matchEra.join(" / ")}</strong></div>
+                    <div class="res-item"><strong>岁次干支：</strong><strong>${gz}</strong></div>
+                    <div class="res-item"><strong>周藩纪年：</strong>${king.split('（')[0]}</div>
+                </div>
+                <div class="res-context">📌 <strong>周藩宗风纪实：</strong>${king}</div>
+            `;
+            res.style.display = 'block';
+        }
+
+        // 模式3：干支查明代年份
+        function calcGanzhiList() {
+            const targetGZ = document.getElementById('ganzhiSelect').value;
+            let list = [];
+
+            for (let y = 1368; y <= 1644; y++) {
+                const gz = getGanzhi(y).split('（')[0];
+                if (gz === targetGZ) {
+                    eras.forEach(e => {
+                        if (y >= e.start && y <= e.end) {
+                            const diff = y - e.start + 1;
+                            list.push({
+                                ad: y,
+                                era: `${e.name}${diff === 1 ? '元' : diff}年`,
+                                emperor: e.emperor,
+                                king: getZhouKing(y)
+                            });
+                        }
+                    });
+                }
+            }
+
+            const res = document.getElementById('ganzhiResult');
+            let rowsHtml = list.map(item => `
+                <tr>
+                    <td><strong>公元 ${item.ad} 年</strong></td>
+                    <td><strong style="color:#8c1d1d;">${item.era}</strong></td>
+                    <td>${item.emperor}</td>
+                    <td>${item.king}</td>
+                </tr>
+            `).join('');
+
+            res.innerHTML = `
+                <div class="res-title">岁次【${targetGZ}】在明代共出现 ${list.length} 次：</div>
+                <div class="table-wrap">
+                    <table class="era-table" style="background:#fff;">
+                        <thead><tr><th>公历</th><th>明代年号</th><th>当朝皇帝</th><th>周藩世系背景</th></tr></thead>
+                        <tbody>${rowsHtml}</tbody>
+                    </table>
+                </div>
+            `;
+            res.style.display = 'block';
+        }
+
+        // 快捷查
+        function quickCheck(adYear) {
+            switchTab('tab2', document.querySelectorAll('.tab-btn')[1]);
+            document.getElementById('adInput').value = adYear;
+            calcADToEra();
+        }
+
+        // 选项卡切换
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.calc-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
         }
 
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
+
+        window.onload = function() {
+            initGanzhiOptions();
+            calcEraToAD(); // 默认执行一次
+        };
     </script>
 </body>
 </html>
