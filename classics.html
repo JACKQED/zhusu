@@ -3,61 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩典籍与著述 - 大明周藩纪事</title>
+    <title>周藩传世典籍著述考 - 大明周藩纪事</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
-        .site-header { background: #8c1d1d; color: #fff; padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
-        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
-        .container { max-width: 900px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        .book-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-left: 4px solid #8c1d1d; }
-        .book-title { font-size: 1.25rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.4rem; }
-        .tag { display: inline-block; background: #8c1d1d; color: #fff; font-size: 0.75rem; padding: 2px 8px; border-radius: 3px; margin-right: 5px; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+
+        .book-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.2rem 0; border-top: 3px solid #8c1d1d; }
+        .book-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .book-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; }
+        .book-tag { font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; background: #8c1d1d; color: #fff; }
+        .book-tag.tag-med { background: #2e7d32; }
+        .book-tag.tag-art { background: #6a1b9a; }
+        .book-tag.tag-print { background: #b26a00; }
+
+        .book-meta { font-size: 0.88rem; color: #777; margin: 0.4rem 0 0.8rem 0; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
+        .book-desc { font-size: 0.95rem; color: #444; line-height: 1.8; }
+        .book-impact { margin-top: 0.6rem; font-size: 0.9rem; color: #8c1d1d; background: #fff8f0; padding: 0.5rem 0.8rem; border-radius: 4px; }
+
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <nav class="nav-menu">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
                 <a href="index.html">首页</a>
                 <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="poetry.html">诗文戏曲</a>
                 <a href="classics.html" style="color:#fff; font-weight:bold;">典籍著述</a>
-                <a href="figures/index.html">历代人物</a>
+                <a href="genealogy-guide.html">修谱指南</a>
+                <a href="branches.html">分房支派</a>
+                <a href="history.html">王府传承</a>
+                <a href="institution.html">宗室典制</a>
+                <a href="migration.html">迁徙寻根</a>
+                <a href="memorial.html">云端祭奠</a>
+                <a href="search.html">🔍 搜索</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
-        <h1>周藩典籍与科学著述</h1>
-        <p style="margin-top: 1rem;">周藩一脉好学博古，崇尚实学。始祖周定王朱橚在开封就藩期间，设圃试验植物，广收天下名方，留下了泽被后世的科学巨著。</p>
+        <h1>大明周藩传世典籍著述考</h1>
+        <div class="intro-box">
+            明代周藩开府汴京，崇尚文治与科学。始祖周定王朱橚广罗医士名儒，创设开封王府园圃与良医所，二代周宪王朱有炖兼善词曲，使周王府成为明代早期中原最大的学术与刊刻中心。
+        </div>
+
+        <h2>🌿 医学与食用植物学巨著</h2>
 
         <div class="book-card">
-            <div class="book-title">《救荒本草》</div>
-            <div><span class="tag">植物学</span><span class="tag">救荒农学</span></div>
-            <p style="margin-top: 0.8rem;">
-                <strong>主编：</strong> 周定王 朱橚（1406年）<br>
-                <strong>价值：</strong> 载录植物414种（新增276种），附精准工细木刻图，详载食用与炮制法，开世界食用植物学之先河。
-            </p>
+            <div class="book-header">
+                <span class="book-title">《救荒本草》（全二卷）</span>
+                <span class="book-tag tag-med">植物科学经典</span>
+            </div>
+            <div class="book-meta">著者：明太祖第五子 周定王朱橚 编纂 · 刊刻年代：明永乐四年 (1406)</div>
+            <div class="book-desc">
+                始祖朱橚在开封王府辟地开园，移栽野生植物，亲自观察并品尝其性状口感，绘图记录。全书共收载可供救荒食用的野生植物 <strong>414 种</strong>，其中新发现增补者达 276 种。每种植物皆附有精准木刻版画、性味、采摘及烹煮解毒加工之法。
+            </div>
+            <div class="book-impact">
+                ⭐ <strong>世界影响：</strong>被李时珍《本草纲目》大量引用，后流传至日本、欧洲，被国际科学史界公认为人类历史上第一部专门研究野生可食用植物的划时代专著。
+            </div>
         </div>
 
         <div class="book-card">
-            <div class="book-title">《普济方》</div>
-            <div><span class="tag">中医学</span><span class="tag">古代最大方剂书</span></div>
-            <p style="margin-top: 0.8rem;">
-                <strong>主编：</strong> 周定王 朱橚等编纂（1406年）<br>
-                <strong>价值：</strong> 全书168卷，载方61,739首，附图239幅，涵盖内外妇儿各科，是中国古代收方最多之医方巨著。
-            </p>
+            <div class="book-header">
+                <span class="book-title">《普济方》（全一百六十八卷）</span>
+                <span class="book-tag tag-med">皇皇医学巨典</span>
+            </div>
+            <div class="book-meta">主编：周定王朱橚、滕硕、刘醇等 · 编成年代：明洪武三十一年 (1398)</div>
+            <div class="book-desc">
+                周定王召集天下名医于开封周王府编纂而成，全书共载医方 <strong>61,739 首</strong>，附图 239 幅，涵盖内、外、妇、儿、针灸、本草各科，卷帙浩繁，是中国古代现存<strong>篇幅最大、收方最多的医学方剂大百科全书</strong>。
+            </div>
+            <div class="book-impact">
+                ⭐ <strong>学术地位：</strong>清代乾隆年间修《四库全书》特予收录，保存了大量自汉唐至宋元间已失传的珍贵古医方。
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《袖珍方》（全四卷）</span>
+                <span class="book-tag tag-med">应急实用医典</span>
+            </div>
+            <div class="book-meta">著者：周定王朱橚 辑 · 刊刻年代：明洪武年间</div>
+            <div class="book-desc">
+                定王朱橚有感于《普济方》篇幅浩大不易携带，为便于民间百姓与军旅行役应急自救，特择其精要简易、疗效确切者 3,000 余方汇编为此书。书名“袖珍”，意在可置于袖中随时取用。
+            </div>
+            <div class="book-impact">
+                ⭐ <strong>流传情况：</strong>明清时期多次翻刻，是明代普及最广的民间急救常备医书之一。
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《保生余录》（全三卷）</span>
+                <span class="book-tag tag-med">养生摄生名著</span>
+            </div>
+            <div class="book-meta">著者：周定王朱橚 辑 · 刊刻年代：明初周藩刻本</div>
+            <div class="book-desc">
+                专论日常调摄、饮食宜忌、四时养生及老年保健之法。强调“防病于未然”、“药食同源”，收录了大量食疗药膳方与简易导引法。
+            </div>
+        </div>
+
+        <h2>🎭 戏曲、诗词与风俗文献</h2>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《诚斋乐府》（杂剧三十一种·散曲套数）</span>
+                <span class="book-tag tag-art">明初戏曲巅峰</span>
+            </div>
+            <div class="book-meta">著者：第二代周王 周宪王朱有炖（号诚斋） · 刊刻年代：明宣德年间</div>
+            <div class="book-desc">
+                朱有炖一生嗜好音律曲艺，撰有杂剧 31 种，如《义勇辞金》《香囊记》《神仙会》《伏虎禅》等。其作品讲求音律谐婉、语言通俗自然，记录了明代初期汴梁市井民间风物与节庆民俗。
+            </div>
+            <div class="book-impact">
+                ⭐ <strong>戏曲史地位：</strong>中国戏曲史上留存剧本最多、版本最早、体制最完整的明代剧作家代表作。
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《元宫词》（全百首）</span>
+                <span class="book-tag tag-art">宫廷民俗史诗</span>
+            </div>
+            <div class="book-meta">著者：周宪王朱有炖 撰 · 著成年代：明初</div>
+            <div class="book-desc">
+                以百首绝句形式生动描摹元代大都皇宫内廷之礼仪、岁时节令、宴乐风俗与服饰器具，考订精核，极具历史学与民俗学史料价值。
+            </div>
+        </div>
+
+        <h2>📖 周王府精修精刻善本书目</h2>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《幼幼新书》（周王府重刻本·全四十卷）</span>
+                <span class="book-tag tag-print">周藩善本</span>
+            </div>
+            <div class="book-meta">主持：周定王府良医所 · 刊刻年代：明初开封周王府刻本</div>
+            <div class="book-desc">
+                宋代庄绰所辑儿科巨著。周王府见民间儿科医籍残缺，遂以王府所藏宋版精加校勘覆刻，使这部中医儿科学鼻祖级典籍得以完整传世至今。
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《东坡先生诗集》（周藩汴梁精刻本）</span>
+                <span class="book-tag tag-print">明初藩刻典范</span>
+            </div>
+            <div class="book-meta">主持：开封周王府 · 刊刻年代：明永乐至宣德年间</div>
+            <div class="book-desc">
+                周王府重视中原文化典籍传承，以宋代善本重刻苏轼诗集。字画端严、墨色莹润、校勘精准，后世藏书家称之为“明代藩府刻本之白眉”。
+            </div>
         </div>
     </main>
 
     <footer class="site-footer">
         <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
     </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+    </script>
 </body>
 </html>
