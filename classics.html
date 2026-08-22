@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩传世典籍著述考 - 大明周藩纪事</title>
+    <title>周藩传世典籍与学术著述全考 - 大明周藩纪事</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
@@ -26,14 +26,18 @@
         .book-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.2rem 0; border-top: 3px solid #8c1d1d; }
         .book-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
         .book-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; }
-        .book-tag { font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; background: #8c1d1d; color: #fff; }
-        .book-tag.tag-med { background: #2e7d32; }
-        .book-tag.tag-art { background: #6a1b9a; }
-        .book-tag.tag-print { background: #b26a00; }
+        .book-tag { font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; color: #fff; }
+        .tag-med { background: #2e7d32; }
+        .tag-art { background: #6a1b9a; }
+        .tag-print { background: #b26a00; }
 
         .book-meta { font-size: 0.88rem; color: #777; margin: 0.4rem 0 0.8rem 0; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
         .book-desc { font-size: 0.95rem; color: #444; line-height: 1.8; }
-        .book-impact { margin-top: 0.6rem; font-size: 0.9rem; color: #8c1d1d; background: #fff8f0; padding: 0.5rem 0.8rem; border-radius: 4px; }
+        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 0.8rem 1rem; margin: 0.8rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; }
+        
+        .comp-table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; font-size: 0.88rem; }
+        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.6rem 0.8rem; text-align: left; }
+        .comp-table th { background: #f4efe9; color: #8c1d1d; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
@@ -43,6 +47,7 @@
             .nav-menu.show { display: flex; }
             .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
             .container { padding: 1.2rem; }
+            .table-wrap { overflow-x: auto; }
         }
     </style>
 </head>
@@ -75,114 +80,133 @@
     </header>
 
     <main class="container">
-        <h1>大明周藩传世典籍著述考</h1>
+        <h1>大明周藩传世典籍与学术著述全考</h1>
         <div class="intro-box">
-            明代周藩开府汴京，崇尚文治与科学。始祖周定王朱橚广罗医士名儒，创设开封王府园圃与良医所，二代周宪王朱有炖兼善词曲，使周王府成为明代早期中原最大的学术与刊刻中心。
+            明代周藩以仁孝好学、崇文尚医著称于世。始祖周定王朱橚在开封建“王府药圃”与“良医所”，开创救荒本草学与方剂集大成之先河；历代嗣王兼善诗词、曲艺与善本刊刻，形成了璀璨的周藩文献谱系。
         </div>
 
-        <h2>🌿 医学与食用植物学巨著</h2>
+        <h2>🌿 始祖朱橚农医科学巨著</h2>
 
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《救荒本草》（全二卷）</span>
-                <span class="book-tag tag-med">植物科学经典</span>
+                <span class="book-title">《救荒本草》（全二卷·四百一十四种）</span>
+                <span class="book-tag tag-med">世界食用植物学奠基作</span>
             </div>
-            <div class="book-meta">著者：明太祖第五子 周定王朱橚 编纂 · 刊刻年代：明永乐四年 (1406)</div>
+            <div class="book-meta">编纂：周定王朱橚 · 绘图校核：周王府群儒 · 刊行：明永乐四年 (1406)</div>
             <div class="book-desc">
-                始祖朱橚在开封王府辟地开园，移栽野生植物，亲自观察并品尝其性状口感，绘图记录。全书共收载可供救荒食用的野生植物 <strong>414 种</strong>，其中新发现增补者达 276 种。每种植物皆附有精准木刻版画、性味、采摘及烹煮解毒加工之法。
+                朱橚设圃于开封王府，广纳中原、嵩山、太行之野生草木，亲验其苗叶花实，辨识可食部位与去毒加工之法。全书分为<strong>草部（245种）、木部（80种）、米谷部（20种）、果部（23种）、菜部（46种）</strong>。每种植物皆附写实木刻插图，图文并茂，首创以“救荒度饥”为目的之植物分类体系。
             </div>
-            <div class="book-impact">
-                ⭐ <strong>世界影响：</strong>被李时珍《本草纲目》大量引用，后流传至日本、欧洲，被国际科学史界公认为人类历史上第一部专门研究野生可食用植物的划时代专著。
-            </div>
-        </div>
-
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《普济方》（全一百六十八卷）</span>
-                <span class="book-tag tag-med">皇皇医学巨典</span>
-            </div>
-            <div class="book-meta">主编：周定王朱橚、滕硕、刘醇等 · 编成年代：明洪武三十一年 (1398)</div>
-            <div class="book-desc">
-                周定王召集天下名医于开封周王府编纂而成，全书共载医方 <strong>61,739 首</strong>，附图 239 幅，涵盖内、外、妇、儿、针灸、本草各科，卷帙浩繁，是中国古代现存<strong>篇幅最大、收方最多的医学方剂大百科全书</strong>。
-            </div>
-            <div class="book-impact">
-                ⭐ <strong>学术地位：</strong>清代乾隆年间修《四库全书》特予收录，保存了大量自汉唐至宋元间已失传的珍贵古医方。
+            <div class="quote-box">
+                “古人以农桑为本，医药为先……予因采摘草木之可食者，种植于圃，绘图析理，以备岁饥之用。” ——《救荒本草·序》
             </div>
         </div>
 
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《袖珍方》（全四卷）</span>
-                <span class="book-tag tag-med">应急实用医典</span>
+                <span class="book-title">《普济方》（全一百六十八卷·六万一千七百三十九方）</span>
+                <span class="book-tag tag-med">中医古籍收方之冠</span>
             </div>
-            <div class="book-meta">著者：周定王朱橚 辑 · 刊刻年代：明洪武年间</div>
+            <div class="book-meta">主编：周定王朱橚、滕硕、刘醇 · 成书：明洪武三十一年 (1398)</div>
             <div class="book-desc">
-                定王朱橚有感于《普济方》篇幅浩大不易携带，为便于民间百姓与军旅行役应急自救，特择其精要简易、疗效确切者 3,000 余方汇编为此书。书名“袖珍”，意在可置于袖中随时取用。
+                周王府广收天下医书秘籍，上溯《黄帝内经》《伤寒论》，下逮金元四大家，历时十余年编纂而成。涵盖医论、脏腑、伤寒、妇科、儿科、针灸、痈疽等全科，完整保存了大量宋元以前已佚失的医方典籍。
             </div>
-            <div class="book-impact">
-                ⭐ <strong>流传情况：</strong>明清时期多次翻刻，是明代普及最广的民间急救常备医书之一。
+            <div class="table-wrap">
+                <table class="comp-table">
+                    <tr>
+                        <th>著作名称</th>
+                        <th>主编时代</th>
+                        <th>收录医方数</th>
+                        <th>历史地位</th>
+                    </tr>
+                    <tr>
+                        <td><strong>《太平圣惠方》</strong></td>
+                        <td>北宋 (992)</td>
+                        <td>16,834 首</td>
+                        <td>宋代官修巨著</td>
+                    </tr>
+                    <tr>
+                        <td><strong>《圣济总录》</strong></td>
+                        <td>北宋 (1117)</td>
+                        <td>近 20,000 首</td>
+                        <td>宋徽宗敕修</td>
+                    </tr>
+                    <tr>
+                        <td><strong>周藩《普济方》</strong></td>
+                        <td>明初 (1398)</td>
+                        <td><strong>61,739 首</strong></td>
+                        <td><strong>中国古代第一大方剂百科全书</strong></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="book-card">
+            <div class="book-header">
+                <span class="book-title">《袖珍方》（全四卷·三千余方）</span>
+                <span class="book-tag tag-med">战地民生急救指南</span>
+            </div>
+            <div class="book-meta">编撰：周定王朱橚 · 刊刻：明洪武三十年</div>
+            <div class="book-desc">
+                系定王从《普济方》中提炼而出的便携急救手册。专选药材易得、炮制简便、见效迅捷之方，供随军行伍及偏远乡村无医之地应急治病，明清两代多次翻刻流传。
             </div>
         </div>
 
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《保生余录》（全三卷）</span>
-                <span class="book-tag tag-med">养生摄生名著</span>
+                <span class="book-tag tag-med">道家养生与食疗</span>
             </div>
-            <div class="book-meta">著者：周定王朱橚 辑 · 刊刻年代：明初周藩刻本</div>
+            <div class="book-meta">辑录：周定王朱橚 · 刊刻：明初王府刻本</div>
             <div class="book-desc">
-                专论日常调摄、饮食宜忌、四时养生及老年保健之法。强调“防病于未然”、“药食同源”，收录了大量食疗药膳方与简易导引法。
+                总结四时调摄、起居禁忌、食疗药膳、老人保元等养生法则，倡导治未病与顺应自然的摄生思想。
             </div>
         </div>
 
-        <h2>🎭 戏曲、诗词与风俗文献</h2>
+        <h2>🎭 宪王朱有炖戏曲与文学名著</h2>
 
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《诚斋乐府》（杂剧三十一种·散曲套数）</span>
-                <span class="book-tag tag-art">明初戏曲巅峰</span>
+                <span class="book-title">《诚斋乐府》（杂剧三十一种·散曲八卷）</span>
+                <span class="book-tag tag-art">大明戏曲鼎峰</span>
             </div>
-            <div class="book-meta">著者：第二代周王 周宪王朱有炖（号诚斋） · 刊刻年代：明宣德年间</div>
+            <div class="book-meta">著者：周宪王朱有炖（号诚斋） · 刊刻：明初周府藩刻本</div>
             <div class="book-desc">
-                朱有炖一生嗜好音律曲艺，撰有杂剧 31 种，如《义勇辞金》《香囊记》《神仙会》《伏虎禅》等。其作品讲求音律谐婉、语言通俗自然，记录了明代初期汴梁市井民间风物与节庆民俗。
-            </div>
-            <div class="book-impact">
-                ⭐ <strong>戏曲史地位：</strong>中国戏曲史上留存剧本最多、版本最早、体制最完整的明代剧作家代表作。
+                存世代表作包括《义勇辞金》《关云长千里独行》《黑旋风仗义疏财》《牡丹仙》《香囊记》等。宪王精通音律，作品兼具北曲豪劲与南曲婉丽，开创了明代宫廷王府演剧与市民市井曲艺交融的新范式。
             </div>
         </div>
 
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《元宫词》（全百首）</span>
-                <span class="book-tag tag-art">宫廷民俗史诗</span>
+                <span class="book-title">《元宫词》（全一百首）</span>
+                <span class="book-tag tag-art">元大都风物诗史</span>
             </div>
-            <div class="book-meta">著者：周宪王朱有炖 撰 · 著成年代：明初</div>
+            <div class="book-meta">著者：周宪王朱有炖 · 著成年：明永乐年间</div>
             <div class="book-desc">
-                以百首绝句形式生动描摹元代大都皇宫内廷之礼仪、岁时节令、宴乐风俗与服饰器具，考订精核，极具历史学与民俗学史料价值。
+                以百首七言绝句生动记载元代大都大内宫殿格局、岁时庆典、宫廷饮食、服饰仪仗，是研究蒙元民俗与北方风土不可多得的珍贵诗史。
             </div>
         </div>
 
-        <h2>📖 周王府精修精刻善本书目</h2>
+        <h2>📖 周王府重刻与校勘珍本善本</h2>
 
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《幼幼新书》（周王府重刻本·全四十卷）</span>
-                <span class="book-tag tag-print">周藩善本</span>
+                <span class="book-title">《幼幼新书》（全四十卷）</span>
+                <span class="book-tag tag-print">周藩校勘古籍</span>
             </div>
-            <div class="book-meta">主持：周定王府良医所 · 刊刻年代：明初开封周王府刻本</div>
+            <div class="book-meta">主持校刻：周定王府良医所 · 刊刻：明洪武年间</div>
             <div class="book-desc">
-                宋代庄绰所辑儿科巨著。周王府见民间儿科医籍残缺，遂以王府所藏宋版精加校勘覆刻，使这部中医儿科学鼻祖级典籍得以完整传世至今。
+                重刊宋代庄绰儿科经典。开封王府以宋版为底本，广校诸家，使这部收罗千首儿科古方、图谱的医学巨典免于湮灭。
             </div>
         </div>
 
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《东坡先生诗集》（周藩汴梁精刻本）</span>
-                <span class="book-tag tag-print">明初藩刻典范</span>
+                <span class="book-title">《本草发挥》（全四卷）</span>
+                <span class="book-tag tag-print">金元医理名著</span>
             </div>
-            <div class="book-meta">主持：开封周王府 · 刊刻年代：明永乐至宣德年间</div>
+            <div class="book-meta">校勘：周王府名医所 · 刊行：明代藩刻本</div>
             <div class="book-desc">
-                周王府重视中原文化典籍传承，以宋代善本重刻苏轼诗集。字画端严、墨色莹润、校勘精准，后世藏书家称之为“明代藩府刻本之白眉”。
+                元代徐彦纯辑录张元素、李杲、朱震亨等金元诸家本草药性理论。周藩精刻本校勘精准，为明代中原医家研习脏腑辨证之必读书目。
             </div>
         </div>
     </main>
