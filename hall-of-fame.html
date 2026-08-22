@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大明周藩名人堂 - 历代英贤与近现代名录</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1rem; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem 0.6rem; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; font-size: 0.82rem; padding: 0.15rem 0.3rem; border-radius: 3px; }
+        .nav-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
+
+        .container { max-width: 1080px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; border-radius: 0 4px 4px 0; }
+
+        /* 名人卡片网格 */
+        .fame-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .fame-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; border-top: 4px solid #8c1d1d; display: flex; flex-direction: column; justify-content: space-between; }
+        .fame-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem; }
+        .fame-name { font-size: 1.2rem; font-weight: bold; color: #8c1d1d; }
+        .fame-tag { font-size: 0.75rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 4px; }
+        .fame-tag.med { background: #2e7d32; }
+        .fame-tag.art { background: #6a1b9a; }
+        .fame-tag.mod { background: #0277bd; }
+
+        .fame-meta { font-size: 0.85rem; color: #777; margin-bottom: 0.8rem; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
+        .fame-body { font-size: 0.92rem; color: #444; line-height: 1.7; }
+        .fame-footer { margin-top: 1rem; font-size: 0.85rem; color: #8c1d1d; background: #fff8f0; padding: 0.4rem 0.6rem; border-radius: 4px; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.3rem 0; padding: 0.5rem 1.5rem; width: 100%; font-size: 0.9rem; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="figures/index.html">历代人物</a>
+                <a href="hall-of-fame.html" style="color:#fff; font-weight:bold;">周藩名人堂</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="calendar.html">纪年换算</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="villages.html">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
+                <a href="genealogy-guide.html">修谱指南</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>大明周藩名人堂</h1>
+        <div class="intro-box">
+            周藩历经六百余年，文韬武略、才俊辈出。本堂汇聚自明代藩封至近现代各支派中在<strong>医学农桑、词曲戏曲、忠义死节、学术教育及宗族修撰</strong>等领域做出卓越贡献的周藩后裔与先贤。
+        </div>
+
+        <h2>🌿 农医科学界丰碑</h2>
+        <div class="fame-grid">
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">朱橚（周定王）</span>
+                    <span class="fame-tag med">本草先驱</span>
+                </div>
+                <div class="fame-meta">洪武至永乐年间 · 开封周王府</div>
+                <div class="fame-body">亲自辨尝百草，编著《救荒本草》开创世界植物救荒学；主编《普济方》为中国古代最大方剂全书。</div>
+                <div class="fame-footer">⭐ 功绩：万民生息之福，名垂世界科学史册。</div>
+            </div>
+
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">滕硕 / 刘醇</span>
+                    <span class="fame-tag med">王府良医</span>
+                </div>
+                <div class="fame-meta">明洪武年间 · 周王府良医所正</div>
+                <div class="fame-body">协助周定王广搜天下秘方、精研医理，耗费数十年编校《普济方》与《本草发挥》。</div>
+                <div class="fame-footer">⭐ 功绩：保存汉唐宋元濒临失传之医方典籍。</div>
+            </div>
+        </div>
+
+        <h2>🎭 文学艺术界宗师</h2>
+        <div class="fame-grid">
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">朱有炖（周宪王）</span>
+                    <span class="fame-tag art">大明曲圣</span>
+                </div>
+                <div class="fame-meta">洪武至正统年间 · 号诚斋</div>
+                <div class="fame-body">明代戏曲界领军人物，创制杂剧 31 部汇入《诚斋乐府》，著《元宫词》百首，音律辞藻冠绝明初。</div>
+                <div class="fame-footer">⭐ 功绩：明代剧作存世最多之戏曲巨擘。</div>
+            </div>
+
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">朱睦㮮（海宁王宗支）</span>
+                    <span class="fame-tag art">金石文献家</span>
+                </div>
+                <div class="fame-meta">明嘉靖至万历年间 · 著名学者</div>
+                <div class="fame-body">精于目录学与金石考据，著有《篇海类编》《金石碑帖考》，为明代藩邸学者之佼佼者。</div>
+                <div class="fame-footer">⭐ 功绩：推动中原古籍整理与金石学复兴。</div>
+            </div>
+        </div>
+
+        <h2>⚔️ 气节忠烈与近现代贤达</h2>
+        <div class="fame-grid">
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">朱恭枵（末代周王）</span>
+                    <span class="fame-tag">忠贞死守</span>
+                </div>
+                <div class="fame-meta">明万历至崇祯十五年 (1642)</div>
+                <div class="fame-body">散尽王府数百万两库银犒军守卫汴京，大水灌城后护送宗室转徙，以忠义节烈载入《明史》。</div>
+                <div class="fame-footer">⭐ 功绩：誓与封国共存亡之大明宗王典范。</div>
+            </div>
+
+            <div class="fame-card">
+                <div class="fame-header">
+                    <span class="fame-name">近现代周藩修谱贤达</span>
+                    <span class="fame-tag mod">宗风赓续</span>
+                </div>
+                <div class="fame-meta">清末、民国至当代各地宗亲</div>
+                <div class="fame-body">在豫、皖、苏、鲁、陕、滇等地历经战乱坚守族谱、重修宗祠、考订字辈，使六百年周藩脉络得以清晰传承至今。</div>
+                <div class="fame-footer">⭐ 功绩：赓续血脉，传扬朱氏家风。</div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
