@@ -3,45 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩历代先祖与杰出人物 - 大明周藩纪事</title>
+    <title>周藩历代先祖与杰出人物纪传 - 大明周藩纪事</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
+        /* 顶部导航 */
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .header-inner { max-width: 1080px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1rem; }
         .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
         
-        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
-        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; gap: 0.3rem 0.6rem; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; font-size: 0.82rem; padding: 0.15rem 0.3rem; border-radius: 3px; }
+        .nav-menu a:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
-        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+        /* 主容器 */
+        .container { max-width: 1080px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; border-radius: 0 4px 4px 0; }
 
-        .figure-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-top: 3px solid #8c1d1d; display: flex; gap: 1.5rem; align-items: flex-start; }
+        /* 名人堂横幅 */
+        .fame-banner { background: linear-gradient(135deg, #8c1d1d 0%, #5a1010 100%); color: #f9e6d0; padding: 1.2rem 1.5rem; border-radius: 6px; margin: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 3px 10px rgba(140,29,29,0.2); }
+        .fame-banner h3 { color: #fff; font-size: 1.2rem; margin-bottom: 0.3rem; }
+        .fame-banner p { font-size: 0.9rem; color: #f0dec8; }
+        .fame-banner a { background: #f9e6d0; color: #8c1d1d; padding: 0.5rem 1.2rem; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s; }
+        .fame-banner a:hover { background: #fff; }
+
+        /* 分类筛选 */
+        .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+        .filter-btn { background: #fcf9f5; border: 1px solid #dcd3cb; padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; color: #555; transition: all 0.2s; }
+        .filter-btn.active, .filter-btn:hover { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
+
+        /* 人物卡片 */
+        .figure-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.6rem; border-radius: 6px; margin: 1.5rem 0; border-top: 3px solid #8c1d1d; display: flex; gap: 1.8rem; align-items: flex-start; }
         .figure-img-wrap { flex-shrink: 0; text-align: center; width: 220px; }
-        .figure-img-wrap img { width: 100%; height: auto; border-radius: 6px; border: 2px solid #8c1d1d; box-shadow: 0 4px 10px rgba(0,0,0,0.12); }
-        .figure-img-title { font-size: 0.8rem; color: #8c1d1d; font-weight: bold; margin-top: 0.4rem; }
+        .figure-img-wrap img { width: 100%; height: auto; border-radius: 6px; border: 2px solid #8c1d1d; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+        .figure-img-title { font-size: 0.82rem; color: #8c1d1d; font-weight: bold; margin-top: 0.5rem; }
         
         .figure-info { flex: 1; }
-        .figure-name { font-size: 1.3rem; color: #8c1d1d; font-weight: bold; }
-        .figure-badge { display: inline-block; background: #8c1d1d; color: #fff; font-size: 0.78rem; padding: 1px 8px; border-radius: 4px; margin-left: 0.5rem; }
+        .figure-name { font-size: 1.35rem; color: #8c1d1d; font-weight: bold; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .figure-badge { display: inline-block; background: #8c1d1d; color: #fff; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: normal; }
+        .figure-badge.badge-art { background: #6a1b9a; }
+        .figure-badge.badge-hero { background: #b71c1c; }
+        .figure-badge.badge-doc { background: #2e7d32; }
+
         .figure-meta { font-size: 0.88rem; color: #777; margin: 0.4rem 0 0.8rem; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
-        .figure-desc { font-size: 0.95rem; color: #444; line-height: 1.8; }
-        .figure-achieve { background: #fff8f0; border-left: 3px solid #8c1d1d; padding: 0.6rem 0.8rem; margin-top: 0.8rem; font-size: 0.9rem; color: #554; }
+        .figure-desc { font-size: 0.95rem; color: #444; line-height: 1.8; text-align: justify; }
+        .figure-achieve { background: #fff8f0; border-left: 3px solid #8c1d1d; padding: 0.7rem 0.9rem; margin-top: 0.9rem; font-size: 0.9rem; color: #554; border-radius: 0 4px 4px 0; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
             .nav-menu.show { display: flex; }
-            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .nav-menu a { margin: 0.3rem 0; padding: 0.5rem 1.5rem; width: 100%; font-size: 0.9rem; }
             .container { padding: 1.2rem; }
             .figure-card { flex-direction: column; align-items: center; }
             .figure-img-wrap { width: 180px; margin-bottom: 1rem; }
@@ -55,6 +74,8 @@
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="../index.html">首页</a>
+                <a href="index.html" style="color:#fff; font-weight:bold;">历代人物</a>
+                <a href="../hall-of-fame.html">周藩名人堂</a>
                 <a href="../lineage.html">世系字辈</a>
                 <a href="../tree.html">家谱树</a>
                 <a href="../naming.html">命名助手</a>
@@ -68,7 +89,6 @@
                 <a href="../epigraphy.html">碑刻圹志</a>
                 <a href="../poetry.html">诗文戏曲</a>
                 <a href="../classics.html">典籍著述</a>
-                <a href="index.html" style="color:#fff; font-weight:bold;">历代人物</a>
                 <a href="../genealogy-guide.html">修谱指南</a>
                 <a href="../search.html">🔍 搜索</a>
             </nav>
@@ -76,80 +96,132 @@
     </header>
 
     <main class="container">
-        <h1>周藩列祖列宗与杰出人物志</h1>
+        <h1>周藩列祖列宗与历代先贤纪传</h1>
         <div class="intro-box">
-            大明周藩源自太祖高皇帝圣脉，始祖周定王朱橚开藩汴梁，历代先贤以仁孝、仁医、词曲、文治与节烈垂范后世。
+            大明周藩源自太祖高皇帝圣脉，始祖周定王朱橚开藩汴梁。周藩历代先贤以崇文重道、仁医济世、词曲冠绝中原著称，明末清初更有宗室忠臣誓死殉国。本传系统辑录周王府开派列祖与历代宗支巨擘之生平行状。
         </div>
 
-        <h2>👑 皇祖与开派始祖</h2>
-
-        <!-- 明太祖画像 -->
-        <div class="figure-card">
-            <div class="figure-img-wrap">
-                <img src="../taizu.JPG" alt="明太祖朱元璋正容御像">
-                <div class="figure-img-title">大明太祖高皇帝御容（正容）</div>
+        <!-- 名人堂入口横幅 -->
+        <div class="fame-banner">
+            <div>
+                <h3>🏛️ 周藩名人堂（跨朝代英贤名录）</h3>
+                <p>收录明清至近现代在农医科学、曲艺文学、抗清死节及宗谱守护等领域的杰出宗亲。</p>
             </div>
-            <div class="figure-info">
-                <div class="figure-name">太祖高皇帝 · 朱元璋 <span class="figure-badge">大明开国之君</span></div>
-                <div class="figure-meta">生卒：1328 — 1398 · 年号：洪武 · 陵寝：南京明孝陵</div>
-                <div class="figure-desc">
-                    大明王朝开国皇帝。推翻蒙元统治，恢复中华礼乐。太祖分封诸皇子屏藩天下，亲赐周王支派二十字字辈派语（“有子同安睦，勤朝在肃恭……”），并钦定五行相生偏旁命家法，为周藩百代法统之源。
-                </div>
-                <div class="figure-achieve">
-                    📜 <strong>功德：</strong>开创大明宏业，立《皇明祖训》，定二十字辈宗法，垂范千秋。
-                </div>
-            </div>
+            <a href="../hall-of-fame.html">进入周藩名人堂 ➔</a>
         </div>
 
-        <!-- 始祖周定王 -->
-        <div class="figure-card">
-            <div class="figure-img-wrap">
-                <img src="../zhusu.JPG" alt="始祖周定王朱橚画像">
-                <div class="figure-img-title">始祖周定王朱橚御容画像</div>
-            </div>
-            <div class="figure-info">
-                <div class="figure-name">周定王 · 朱橚 <span class="figure-badge">周藩开派始祖</span></div>
-                <div class="figure-meta">生卒：1361 — 1425 · 谥号：定 · 陵寝：河南禹州周定王陵</div>
-                <div class="figure-desc">
-                    太祖第五子，马皇后所生。初封吴王，后改封周王，洪武十四年就藩汴梁（开封）。定王好学博古，以仁慈济世著称，辟药圃、罗医士，亲自辨尝百草，救济饥馑。
-                </div>
-                <div class="figure-achieve">
-                    🌿 <strong>千秋著述：</strong>主编人类首部食用植物科学巨典《救荒本草》及方剂大典《普济方》《袖珍方》。
-                </div>
-            </div>
+        <!-- 分类筛选栏 -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterCategory('all')">全部人物</button>
+            <button class="filter-btn" onclick="filterCategory('ancestor')">开派始祖与皇祖</button>
+            <button class="filter-btn" onclick="filterCategory('culture')">医家曲圣与学术名王</button>
+            <button class="filter-btn" onclick="filterCategory('hero')">明季忠烈宗室</button>
         </div>
 
-        <h2>📜 历代贤王与名家</h2>
-
-        <!-- 周宪王朱有炖 -->
-        <div class="figure-card">
-            <div class="figure-info" style="width: 100%;">
-                <div class="figure-name">周宪王 · 朱有炖（号诚斋） <span class="figure-badge">曲圣 / 戏曲大师</span></div>
-                <div class="figure-meta">生卒：1379 — 1439 · 身份：第二代周王 · 定王嫡长子</div>
-                <div class="figure-desc">
-                    明初最具代表性的戏曲大家与词曲巨擘。工诗善画，精通音律，创作《诚斋乐府》杂剧 31 部及《元宫词》百首，语言通俗生动，开创明代宫廷戏曲与中原市民文学辉映之鼎盛时代。
+        <div id="figureList">
+            <!-- 1. 太祖高皇帝 -->
+            <div class="figure-card" data-cat="ancestor">
+                <div class="figure-img-wrap">
+                    <img src="../taizu.JPG" alt="明太祖朱元璋正容御像">
+                    <div class="figure-img-title">大明太祖高皇帝御容（正容）</div>
+                </div>
+                <div class="figure-info">
+                    <div class="figure-name">太祖高皇帝 · 朱元璋 <span class="figure-badge">大明开国之君 · 宗法之源</span></div>
+                    <div class="figure-meta">生卒：1328 — 1398 · 年号：洪武 · 陵寝：南京明孝陵</div>
+                    <div class="figure-desc">
+                        大明开国皇帝。推翻蒙元统治，恢复中华礼乐与疆土。太祖分封皇子屏藩天下，亲赐周王支派二十字字辈派语（“有子同安睦，勤朝在肃恭，绍伦敷惠润，昭格广登庸”），并确立“木火土金水”五行相生取名家法，为周藩百代法统之源。
+                    </div>
+                    <div class="figure-achieve">
+                        📜 <strong>千秋垂范：</strong>御制《皇明祖训》，定周藩二十字派语，奠定六百载宗支世系之基。
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 周简王朱有爝 -->
-        <div class="figure-card">
-            <div class="figure-info" style="width: 100%;">
-                <div class="figure-name">周简王 · 朱有爝 <span class="figure-badge">周藩大宗继袭之源</span></div>
-                <div class="figure-meta">生卒：1392 — 1452 · 身份：第三代周王 · 定王第四子</div>
-                <div class="figure-desc">
-                    初封祥符王。宪王薨逝无嗣，宣德三年奉旨继袭周王爵位，是后世历代周王与绝大多数周藩宗支的共同直系先祖。
+            <!-- 2. 周定王朱橚 -->
+            <div class="figure-card" data-cat="ancestor culture">
+                <div class="figure-img-wrap">
+                    <img src="../zhusu.JPG" alt="始祖周定王朱橚画像">
+                    <div class="figure-img-title">始祖周定王朱橚御容画像</div>
+                </div>
+                <div class="figure-info">
+                    <div class="figure-name">周定王 · 朱橚 <span class="figure-badge badge-doc">周藩开派始祖 · 科学巨匠</span></div>
+                    <div class="figure-meta">生卒：1361 — 1425 · 谥号：定 · 陵寝：河南禹州周定王陵（三峰山）</div>
+                    <div class="figure-desc">
+                        太祖第五子，孝慈高皇后马氏所生。初封吴王，洪武十一年改封周王，洪武十四年就藩汴京（开封）。定王好学博古，以仁慈济世著称。在汴京王府设良医所，辟地为药圃辨识天下草木，亲验可食野生植物 414 种，绘图注法，开创人类食用植物救荒学之先河。
+                    </div>
+                    <div class="figure-achieve">
+                        🌿 <strong>学术巨作：</strong>主编《救荒本草》（世界植物学奠基之作）、《普济方》（收方61739首，古代最大方剂巨著）、《袖珍方》。
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- 末代周王朱恭枵 -->
-        <div class="figure-card">
-            <div class="figure-info" style="width: 100%;">
-                <div class="figure-name">末代周王 · 朱恭枵 <span class="figure-badge">节烈忠义宗室</span></div>
-                <div class="figure-meta">承袭年代：明万历至崇祯年间 · 历史事件：崇祯十五年开封保卫战</div>
-                <div class="figure-desc">
-                    明末李自成三围汴京，周王朱恭枵散尽数百年王府库银犒赏将士守城，誓与开封共存亡。九月黄河决口水灌大内，王府没入泥沙，恭枵率宗室转徙避乱，忠义气节冠绝宗藩。
+            <!-- 3. 周宪王朱有炖 -->
+            <div class="figure-card" data-cat="culture">
+                <div class="figure-info">
+                    <div class="figure-name">周宪王 · 朱有炖（号诚斋） <span class="figure-badge badge-art">第二代周王 · 一代曲圣</span></div>
+                    <div class="figure-meta">生卒：1379 — 1439 · 身份：定王嫡长子 · 陵寝：开封祥符故茔</div>
+                    <div class="figure-desc">
+                        明初戏曲界领军人物与词曲大师。笃学好古，精通音律，兼善诗词书画。著有杂剧 31 部汇编为《诚斋乐府》，作品音律谐和、语言生动，全景式记录了明初汴梁市井风貌与岁时民俗；另撰《元宫词》百首，为考订元代大都宫廷掌故之第一手诗史珍品。
+                    </div>
+                    <div class="figure-achieve">
+                        🎭 <strong>文学地位：</strong>中国戏曲史上留存剧本最多、刊刻体系最完整的明代杂剧名家。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. 周简王朱有爝 -->
+            <div class="figure-card" data-cat="ancestor">
+                <div class="figure-info">
+                    <div class="figure-name">周简王 · 朱有爝 <span class="figure-badge">第三代周王 · 周藩大宗之源</span></div>
+                    <div class="figure-meta">生卒：1392 — 1452 · 初封：祥符王 · 袭封：宣德三年 (1428)</div>
+                    <div class="figure-desc">
+                        定王第四子。因长兄周宪王无嗣，宣德三年奉旨继袭周王爵位。简王恪守祖训、敦睦宗族，后世历代周王及绝大多数周藩宗支，皆为其血脉承嗣后裔。
+                    </div>
+                    <div class="figure-achieve">
+                        👑 <strong>宗支法统：</strong>承前启后，周藩自第四代周靖王以下诸王皆为简王一脉传承。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. 宗室名家朱睦㮮 -->
+            <div class="figure-card" data-cat="culture">
+                <div class="figure-info">
+                    <div class="figure-name">朱睦㮮（海宁王支系） <span class="figure-badge badge-doc">金石目录学宗师</span></div>
+                    <div class="figure-meta">生卒：1517 — 1586 · 郡望：开封府 · 字伯承，号西海</div>
+                    <div class="figure-desc">
+                        明代著名学者、藏书家与目录学家。博通经史，好古嗜学，筑“万卷堂”聚书数万卷。所撰《篇海类编》《金石碑帖考》《授经图》等，在中原乃至全国文献考据学史上具有崇高地位。
+                    </div>
+                    <div class="figure-achieve">
+                        📚 <strong>学术贡献：</strong>推动明代金石考据与图书文献整理，被后世誉为明代藩邸治学第一人。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. 末代周王朱恭枵 -->
+            <div class="figure-card" data-cat="hero">
+                <div class="figure-info">
+                    <div class="figure-name">周恭王 · 朱恭枵 <span class="figure-badge badge-hero">末代周王 · 散银守城孤忠</span></div>
+                    <div class="figure-meta">在位年代：明万历至崇祯年间 · 历史事件：崇祯十五年 (1642) 开封保卫战</div>
+                    <div class="figure-desc">
+                        崇祯年间李自成起义军三围开封。周王朱恭枵倾尽二百年王府库藏白银数百万两犒赏守城军民，誓死坚守八个月。九月黄河大水漫灌开封，周王府没入泥沙，恭枵率宗室转徙彰德、卫辉，忠义节烈贯通日月。
+                    </div>
+                    <div class="figure-achieve">
+                        ⚔️ <strong>名垂青史：</strong>散财卫国，大节昭然，《明史·诸王传》特立传颂其节烈。
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. 南明抗清殉难宗室 朱慈𤆝 -->
+            <div class="figure-card" data-cat="hero">
+                <div class="figure-info">
+                    <div class="figure-name">朱慈𤆝（周藩末代宗室） <span class="figure-badge badge-hero">南明殉节义士</span></div>
+                    <div class="figure-meta">年代：明末清初 · 封爵：宗室 · 转战：江南抗清义军</div>
+                    <div class="figure-desc">
+                        甲申国难后南渡，参加抗清勤王斗争，屡拒清廷招抚，誓不剃发改服。城陷被执，赋绝命诗从容就义，展现了大明周藩宗室威武不屈之浩然宗风。
+                    </div>
+                    <div class="figure-achieve">
+                        🕊️ <strong>气节长存：</strong>“宁为玉碎，不改朱颜”，周藩后裔忠烈典范。
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,6 +234,22 @@
     <script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
+        }
+
+        function filterCategory(cat) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.figure-card');
+            cards.forEach(card => {
+                const cats = card.getAttribute('data-cat');
+                if (cat === 'all' || cats.includes(cat)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
     </script>
 </body>
