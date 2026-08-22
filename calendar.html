@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>明代年号干支与公历换算器 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+
+        .calc-box { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; }
+        .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+        .calc-select, .calc-input { padding: 0.5rem 0.8rem; font-size: 1rem; border: 1px solid #dcd3cb; border-radius: 4px; background: #fff; }
+        .calc-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.5rem 1.2rem; border-radius: 4px; font-size: 1rem; cursor: pointer; }
+        .calc-btn:hover { background: #701414; }
+
+        .res-display { display: none; background: #fff8f0; border-left: 4px solid #8c1d1d; padding: 1rem; margin-top: 1rem; font-size: 1.05rem; color: #8c1d1d; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="calendar.html" style="color:#fff; font-weight:bold;">纪年换算</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="villages.html">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
+                <a href="genealogy-guide.html">修谱指南</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>明代年号干支与公历速查换算器</h1>
+        <div class="intro-box">
+            族人在考订古旧谱牒、墓志铭、神道碑时，常遇“洪武八年乙卯”、“万历四十三年乙卯”等干支年号。本工具可快速完成公历与明代纪年之间的互查。
+        </div>
+
+        <div class="calc-box">
+            <h2>📜 年号转公历查询</h2>
+            <div class="form-row">
+                <select id="eraSelect" class="calc-select">
+                    <option value="1368,31,洪武">洪武 (明太祖 1368-1398)</option>
+                    <option value="1399,4,建文">建文 (明惠宗 1399-1402)</option>
+                    <option value="1403,22,永乐">永乐 (明成祖 1403-1424)</option>
+                    <option value="1425,1,洪熙">洪熙 (明仁宗 1425)</option>
+                    <option value="1426,10,宣德">宣德 (明宣宗 1426-1435)</option>
+                    <option value="1436,14,正统">正统 (明英宗 1436-1449)</option>
+                    <option value="1450,7,景泰">景泰 (明代宗 1450-1456)</option>
+                    <option value="1457,8,天顺">天顺 (明英宗 1457-1464)</option>
+                    <option value="1465,23,成化">成化 (明宪宗 1465-1487)</option>
+                    <option value="1488,18,弘治">弘治 (明孝宗 1488-1505)</option>
+                    <option value="1506,16,正德">正德 (明武宗 1506-1521)</option>
+                    <option value="1522,45,嘉靖">嘉靖 (明世宗 1522-1566)</option>
+                    <option value="1567,6,隆庆">隆庆 (明穆宗 1567-1572)</option>
+                    <option value="1573,48,万历">万历 (明神宗 1573-1620)</option>
+                    <option value="1620,1,泰昌">泰昌 (明光宗 1620)</option>
+                    <option value="1621,7,天启">天启 (明熹宗 1621-1627)</option>
+                    <option value="1628,17,崇祯">崇祯 (明思宗 1628-1644)</option>
+                </select>
+                <span>第</span>
+                <input type="number" id="eraYear" class="calc-input" value="1" min="1" max="50" style="width: 80px;">
+                <span>年</span>
+                <button class="calc-btn" onclick="calcEraToAD()">查询公历与干支</button>
+            </div>
+            <div id="eraResult" class="res-display"></div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        const gan = ["甲", "乙", "丙", "丁", "戊", "己", "庚", "辛", "壬", "癸"];
+        const zhi = ["子", "丑", "寅", "卯", "辰", "巳", "午", "未", "申", "酉", "戌", "亥"];
+        const shengxiao = ["鼠", "牛", "虎", "兔", "龙", "蛇", "马", "羊", "猴", "鸡", "狗", "猪"];
+
+        function getGanzhi(year) {
+            const g = (year - 4) % 10;
+            const z = (year - 4) % 12;
+            return gan[g] + zhi[z] + "（" + shengxiao[z] + "年）";
+        }
+
+        function calcEraToAD() {
+            const raw = document.getElementById('eraSelect').value.split(',');
+            const startYear = parseInt(raw[0]);
+            const maxYear = parseInt(raw[1]);
+            const eraName = raw[2];
+            const yearNum = parseInt(document.getElementById('eraYear').value);
+
+            if (yearNum < 1 || yearNum > maxYear) {
+                alert(`【${eraName}】年号最多为 ${maxYear} 年，请重新输入！`);
+                return;
+            }
+
+            const adYear = startYear + yearNum - 1;
+            const gz = getGanzhi(adYear);
+            const res = document.getElementById('eraResult');
+            res.innerHTML = `<strong>查询结果：</strong><br>明朝【${eraName}${yearNum === 1 ? '元' : yearNum}年】 对应 <strong>公元 ${adYear} 年</strong><br>岁次干支：<strong>${gz}</strong>`;
+            res.style.display = 'block';
+        }
+
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
