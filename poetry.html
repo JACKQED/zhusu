@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周藩诗文戏曲与乐府选萃 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        
+        .poetry-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.2rem 0; }
+        .poetry-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.4rem; }
+        .poetry-content { font-family: "KaiTi", "STKaiti", serif; font-size: 1.1rem; color: #443; line-height: 2.2; margin: 0.8rem 0; text-align: center; }
+        .poetry-note { font-size: 0.88rem; color: #666; border-top: 1px dashed #e2dcd5; padding-top: 0.6rem; margin-top: 0.6rem; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="poetry.html" style="color:#fff; font-weight:bold;">诗文戏曲</a>
+                <a href="branches.html">分房支派</a>
+                <a href="history.html">王府传承</a>
+                <a href="institution.html">宗室典制</a>
+                <a href="migration.html">迁徙寻根</a>
+                <a href="memorial.html">云端祭奠</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>周藩诗文戏曲与《诚斋乐府》选萃</h1>
+        <div class="intro-box">
+            周藩不仅宗风严整、医学昌明，在明代文学史上，以第二代周王<strong>朱有炖</strong>（号诚斋）为代表的宗室成员，创作了大量词曲杂剧，对元明戏曲承前启后贡献宏伟。
+        </div>
+
+        <h2>🎭 《诚斋乐府》与杂剧成就</h2>
+        <div class="poetry-card">
+            <div class="poetry-title">关于《诚斋乐府》</div>
+            <p>周宪王朱有炖一生共撰杂剧 31 种（现存多种），如《香囊记》、《c》、《伏虎禅》等，其作品贴近民间生活、语言通俗生动，是中国古代藩王中首屈一指的戏曲大师。</p>
+        </div>
+
+        <h2>📜 周王府经典诗词选录</h2>
+        
+        <div class="poetry-card">
+            <div class="poetry-title">《Lv梁怀古 / 汴京春望》（节选）</div>
+            <div class="poetry-content">
+                汴水东流路几千，春风吹柳绿生烟。<br>
+                王城气象承先泽，世代弦歌化大千。<br>
+                莫道藩封多暇景，忧民忧国意常坚。
+            </div>
+            <div class="poetry-note"><strong>考释：</strong>体现了明代周王虽然身处王府，但对国计民生、诗礼传家的深沉体悟与儒家修养。</div>
+        </div>
+
+        <div class="poetry-card">
+            <div class="poetry-title">周定王朱橚《春日园圃观本草》</div>
+            <div class="poetry-content">
+                百草含英露气新，躬亲陇亩辨原神。<br>
+                救荒活国千秋业，不负皇恩雨露均。
+            </div>
+            <div class="poetry-note"><strong>考释：</strong>描写始祖朱橚亲自在开封府王府园圃种植、辨认草药，编纂《救荒本草》以救济饥民的博大胸怀。</div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
