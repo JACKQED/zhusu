@@ -8,99 +8,203 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
-        .site-header { background: #8c1d1d; color: #fff; padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
         .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.9rem; font-size: 0.88rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
-        
+
         .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
-        
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.6rem; text-align: center; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; text-align: center; }
+
         /* 祭奠大殿神位卡片 */
-        .shrine-box { background: linear-gradient(180deg, #8c1d1d 0%, #4a0d0d 100%); color: #f9e6d0; border-radius: 8px; padding: 2.5rem 1.5rem; text-align: center; margin: 1.5rem 0; box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
+        .shrine-box { background: radial-gradient(circle, #2d0b0b 0%, #150303 100%); border: 3px solid #d4af37; border-radius: 8px; padding: 2.5rem 1.5rem; text-align: center; color: #f9e6d0; position: relative; box-shadow: 0 8px 25px rgba(0,0,0,0.3); margin: 1.5rem 0; }
         .tablet-title { font-size: 1.1rem; letter-spacing: 2px; color: #d4af37; margin-bottom: 0.5rem; }
-        .tablet-main { font-size: 1.8rem; font-weight: bold; letter-spacing: 4px; color: #fff; border-top: 1px solid rgba(212,175,55,0.4); border-bottom: 1px solid rgba(212,175,55,0.4); display: inline-block; padding: 0.8rem 2rem; margin: 0.8rem 0; }
-        .tablet-sub { font-size: 0.95rem; color: #f0dcb9; }
-        
+        .tablet-main { font-size: 1.6rem; font-weight: bold; letter-spacing: 3px; color: #ffeb3b; border-top: 1px solid rgba(212,175,55,0.4); border-bottom: 1px solid rgba(212,175,55,0.4); display: inline-block; padding: 0.8rem 2rem; margin: 0.8rem 0; font-family: "KaiTi", "STKaiti", serif; }
+        .tablet-sub { font-size: 0.92rem; color: #f0dcb9; letter-spacing: 1px; }
+
+        .sub-tablets { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-top: 1.2rem; border-top: 1px dashed rgba(212,175,55,0.3); padding-top: 1rem; }
+        .tablet-small { background: rgba(140,29,29,0.7); border: 1px solid #d4af37; padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.8rem; color: #f9e6d0; font-family: "KaiTi", serif; }
+
+        /* 供奉台展示 */
+        .offering-display { background: rgba(0,0,0,0.4); border: 1px dashed #d4af37; border-radius: 6px; padding: 1rem; margin: 1.5rem auto 0; max-width: 650px; display: flex; justify-content: space-around; align-items: center; }
+        .offering-item { text-align: center; font-size: 1.8rem; transition: transform 0.3s; }
+        .offering-item span { display: block; font-size: 0.8rem; color: #d4af37; margin-top: 0.3rem; }
+        .offering-item.active { transform: scale(1.2); filter: drop-shadow(0 0 10px #ffeb3b); }
+
         /* 祭拜交互按钮区 */
-        .ritual-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
-        .ritual-btn { background: #d4af37; color: #3a1c00; border: none; padding: 0.6rem 1.4rem; font-size: 1rem; font-weight: bold; border-radius: 20px; cursor: pointer; transition: transform 0.1s, background 0.2s; }
-        .ritual-btn:hover { background: #e5c358; transform: scale(1.05); }
-        .stat-text { margin-top: 1.2rem; font-size: 0.9rem; color: #ecd0a2; }
+        .ritual-actions { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; flex-wrap: wrap; }
+        .ritual-btn { background: #8c1d1d; color: #f9e6d0; border: 1px solid #d4af37; padding: 0.65rem 1.4rem; font-size: 0.95rem; font-weight: bold; border-radius: 25px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 0.4rem; }
+        .ritual-btn:hover { background: #a62424; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(140,29,29,0.3); }
+        .stat-text { margin-top: 1.2rem; font-size: 0.9rem; color: #ecd0a2; text-align: center; }
 
-        /* 留言留言板 */
-        .message-form { background: #fdf6ec; border: 1px solid #faecd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; font-weight: bold; color: #6b4d1b; margin-bottom: 0.3rem; font-size: 0.95rem; }
-        .form-input { width: 100%; padding: 0.6rem; border: 1px solid #dcd3cb; border-radius: 4px; font-size: 0.95rem; }
-        .submit-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.6rem 1.5rem; border-radius: 4px; font-size: 1rem; cursor: pointer; }
-        .submit-btn:hover { background: #701414; }
+        /* 留言板 */
+        .message-form { background: #faf5ee; border: 1px solid #e0cfbf; padding: 1.8rem; border-radius: 8px; margin: 2rem 0; }
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .form-group { margin-bottom: 0.8rem; display: flex; flex-direction: column; }
+        .form-group label { display: block; font-weight: bold; color: #6b4d1b; margin-bottom: 0.3rem; font-size: 0.9rem; }
+        .form-input { width: 100%; padding: 0.6rem 0.8rem; border: 1px solid #d4c4b4; border-radius: 4px; font-size: 0.9rem; background: #fff; font-family: inherit; }
+        .form-input:focus { outline: none; border-color: #8c1d1d; box-shadow: 0 0 5px rgba(140,29,29,0.2); }
+        .submit-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.7rem 2rem; border-radius: 4px; font-size: 0.95rem; font-weight: bold; cursor: pointer; margin-top: 1rem; transition: background 0.2s; }
+        .submit-btn:hover { background: #a62424; }
 
-        .messages-list { margin-top: 1.5rem; }
-        .message-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; margin-bottom: 1rem; border-left: 3px solid #8c1d1d; }
+        .messages-list { margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+        .message-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; border-left: 4px solid #8c1d1d; }
         .msg-header { display: flex; justify-content: space-between; font-size: 0.85rem; color: #888; margin-bottom: 0.4rem; }
-        .msg-author { font-weight: bold; color: #8c1d1d; font-size: 1rem; }
-        .msg-body { font-size: 0.95rem; color: #444; }
+        .msg-author { font-weight: bold; color: #8c1d1d; font-size: 0.98rem; }
+        .msg-branch { font-size: 0.82rem; background: #efe5dc; color: #6b4d1b; padding: 1px 6px; border-radius: 3px; margin-left: 0.4rem; font-weight: normal; }
+        .msg-body { font-size: 0.92rem; color: #444; line-height: 1.7; }
+
+        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 0.9rem 1.1rem; margin: 1.5rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.7; text-align: center; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+            .tablet-main { font-size: 1.3rem; padding: 0.6rem 1rem; }
+            .message-form { padding: 1.2rem; }
+        }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <nav class="nav-menu">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
                 <a href="index.html">首页</a>
                 <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="calendar.html">纪年换算</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="villages.html">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
                 <a href="branches.html">分房支派</a>
-                <a href="history.html">王府传承</a>
                 <a href="migration.html">迁徙寻根</a>
                 <a href="memorial.html" style="color:#fff; font-weight:bold;">云端祭奠</a>
-                <a href="classics.html">典籍著述</a>
-                <a href="figures/index.html">历代人物</a>
-                <a href="documents.html">谱牒古迹</a>
-                <a href="rules.html">祖训家规</a>
+                <a href="genealogy-guide.html">修谱指南</a>
+                <a href="search.html">🔍 搜索</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <h1>周藩宗祠云祭奠与追思堂</h1>
-        <p style="margin-top: 1rem;">慎终追远，民德归厚。无论宗亲身在何方，皆可在此敬香追念先祖，铭记血脉渊源，寄托后世景仰之情。</p>
+        <div class="intro-box">
+            慎终追远，民德归厚。无论宗亲身在何方，皆可在此恭敬祭奠大明太祖高皇帝第五子<strong>周定王朱橚</strong>及历代王府列祖先贤，铭记血脉渊源，寄托后世敬仰。
+        </div>
 
         <!-- 云神位大殿 -->
         <div class="shrine-box">
             <div class="tablet-title">大明太祖高皇帝第五子</div>
-            <div class="tablet-main">周定王 朱橚 先祖神位</div>
+            <div class="tablet-main">周定王 朱橚 元妃冯氏 先祖神位</div>
             <div class="tablet-sub">暨 周藩历代先王、列祖列宗、迁封各房先贤神位</div>
 
-            <div class="ritual-actions">
-                <button class="ritual-btn" onclick="performRitual('敬香')">🕯️ 虔诚敬香</button>
-                <button class="ritual-btn" onclick="performRitual('献花')">💐 敬献鲜花</button>
-                <button class="ritual-btn" onclick="performRitual('敬酒')">🍶 敬献清酒</button>
+            <!-- 十四郡王配享列位 -->
+            <div class="sub-tablets">
+                <div class="tablet-small">长房·周宪王</div>
+                <div class="tablet-small">二房·汝南王</div>
+                <div class="tablet-small">三房·顺阳王</div>
+                <div class="tablet-small">四房·祥符王(周简王)</div>
+                <div class="tablet-small">五房·新乡王</div>
+                <div class="tablet-small">六房·宁陵王</div>
+                <div class="tablet-small">七房·杞县王</div>
+                <div class="tablet-small">八房·信阳王</div>
+                <div class="tablet-small">九房·镇平王</div>
+                <div class="tablet-small">十房·遂平王</div>
+                <div class="tablet-small">十一房·封丘王</div>
+                <div class="tablet-small">十二房·鲁山王</div>
+                <div class="tablet-small">十三房·邺王</div>
+                <div class="tablet-small">十四房·胙城王</div>
             </div>
-            <div class="stat-text" id="ritualStat">今日感应：已有 <span id="countNum">128</span> 位周藩后人敬香缅怀</div>
+
+            <!-- 供桌祭品台 -->
+            <div class="offering-display">
+                <div class="offering-item" id="itemIncense">
+                    🕯️<span>高香香火 (<b id="countIncense">136</b>)</span>
+                </div>
+                <div class="offering-item" id="itemFlower">
+                    💐<span>鲜花素果 (<b id="countFlower">102</b>)</span>
+                </div>
+                <div class="offering-item" id="itemWine">
+                    🍶<span>清酒福礼 (<b id="countWine">118</b>)</span>
+                </div>
+                <div class="offering-item" id="itemKowtow">
+                    🙇<span>行三叩礼 (<b id="countKowtow">358</b>)</span>
+                </div>
+            </div>
+
+            <!-- 祭拜交互按钮区 -->
+            <div class="ritual-actions">
+                <button class="ritual-btn" onclick="performRitual('incense')">🕯️ 虔诚敬香</button>
+                <button class="ritual-btn" onclick="performRitual('flower')">💐 敬献鲜花</button>
+                <button class="ritual-btn" onclick="performRitual('wine')">🍶 敬献清酒</button>
+                <button class="ritual-btn" onclick="performRitual('kowtow')">🙇 庄严叩拜</button>
+            </div>
+            
+            <div class="stat-text" id="ritualStat">今日感应：已有 <span id="countNum">714</span> 人次周藩后人敬奠缅怀</div>
         </div>
 
+        <div class="quote-box">
+            “赫赫周藩，作保中原。辑方救荒，泽被万全。千秋岁远，宗德永延。”
+        </div>
+
+        <!-- 宗亲追思寄语与留言板 -->
         <h2>✍️ 宗亲追思寄语与寻根留言</h2>
         <div class="message-form">
-            <div class="form-group">
-                <label>宗亲称呼 / 派字辈分：</label>
-                <input type="text" id="msgName" class="form-input" placeholder="例：十九世 朱广某 / 周藩后裔">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>宗亲称呼 / 派字辈分：</label>
+                    <input type="text" id="msgName" class="form-input" placeholder="例：十九世 朱广某 / 封丘常东村宗亲">
+                </div>
+                <div class="form-group">
+                    <label>所属支派 / 现居地：</label>
+                    <input type="text" id="msgBranch" class="form-input" placeholder="例：十一房封丘王 / 河南开封祥符" value="河南封丘李庄常东村朱氏">
+                </div>
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label>追思感言或宗支寻亲留言：</label>
+                    <textarea id="msgContent" class="form-input" rows="3" placeholder="写下对先祖的缅怀、祝福或手头家谱线索..."></textarea>
+                </div>
             </div>
-            <div class="form-group">
-                <label>追思感言或宗支寻亲留言：</label>
-                <textarea id="msgContent" class="form-input" rows="3" placeholder="写下对先祖的缅怀、祝福或手头家谱线索..."></textarea>
-            </div>
-            <button class="submit-btn" onclick="postMessage()">发表追思留言</button>
+            <button class="submit-btn" onclick="postMessage()">发表追思留言 ➔</button>
         </div>
 
         <div class="messages-list" id="messageList">
+            <!-- 预设宗亲留言 -->
             <div class="message-card">
                 <div class="msg-header">
-                    <span class="msg-author">朱氏后裔（河南开封）</span>
+                    <div>
+                        <span class="msg-author">封丘常东村宗亲 朱明</span>
+                        <span class="msg-branch">十一房封丘王房</span>
+                    </div>
+                    <span>刚刚 谨寄</span>
+                </div>
+                <div class="msg-body">周藩封丘康懿王后裔、封丘李庄常东村子孙敬拜始祖朱橚公！愿先祖庇佑族人安泰，弘扬周藩仁孝家风！</div>
+            </div>
+
+            <div class="message-card">
+                <div class="msg-header">
+                    <div>
+                        <span class="msg-author">朱氏后裔（河南开封）</span>
+                        <span class="msg-branch">周大宗直系</span>
+                    </div>
                     <span>2026年 谨寄</span>
                 </div>
                 <div class="msg-body">先祖编撰《救荒本草》《普济方》，功德无量。后世子孙定当恪守清正家训，敦睦宗亲！</div>
@@ -108,10 +212,24 @@
 
             <div class="message-card">
                 <div class="msg-header">
-                    <span class="msg-author">皖北周藩宗亲（字辈【绍】）</span>
+                    <div>
+                        <span class="msg-author">皖北周藩宗亲（字辈【绍】）</span>
+                        <span class="msg-branch">宿州萧县大朱村</span>
+                    </div>
                     <span>2026年 谨寄</span>
                 </div>
                 <div class="msg-body">自开封迁至宿州一带，字辈严整，见网站如见家谱宗堂，甚慰！</div>
+            </div>
+
+            <div class="message-card">
+                <div class="msg-header">
+                    <div>
+                        <span class="msg-author">云南大理宗亲 朱建华</span>
+                        <span class="msg-branch">二房汝南王房</span>
+                    </div>
+                    <span>2026年 谨寄</span>
+                </div>
+                <div class="msg-body">滇西汝南房后裔遥拜中原始祖！愿天涯周藩宗亲心系一脉，和合共荣。</div>
             </div>
         </div>
     </main>
@@ -121,17 +239,45 @@
     </footer>
 
     <script>
-        let count = 128;
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+
         function performRitual(type) {
-            count++;
-            document.getElementById('countNum').innerText = count;
-            alert(`已为您向先祖【${type}】！福泽后昆，庇佑宗族平安昌盛。`);
+            const map = {
+                'incense': { countId: 'countIncense', elemId: 'itemIncense', title: '敬献高香三炷' },
+                'flower': { countId: 'countFlower', elemId: 'itemFlower', title: '敬献时鲜花果' },
+                'wine': { countId: 'countWine', elemId: 'itemWine', title: '敬献清酒福礼' },
+                'kowtow': { countId: 'countKowtow', elemId: 'itemKowtow', title: '行三跪九叩礼' }
+            };
+
+            const conf = map[type];
+            if (!conf) return;
+
+            const countElem = document.getElementById(conf.countId);
+            const boxElem = document.getElementById(conf.elemId);
+            const totalNum = document.getElementById('countNum');
+
+            let cur = parseInt(countElem.innerText) || 0;
+            countElem.innerText = cur + 1;
+
+            let total = parseInt(totalNum.innerText) || 0;
+            totalNum.innerText = total + 1;
+
+            boxElem.classList.add('active');
+            setTimeout(() => {
+                boxElem.classList.remove('active');
+            }, 600);
+
+            alert(`【祭奠成功】您已向大明周定王及历代先贤${conf.title}！福泽后昆，庇佑宗族平安昌盛。`);
         }
 
         function postMessage() {
             const name = document.getElementById('msgName').value.trim();
+            const branch = document.getElementById('msgBranch').value.trim() || '周藩宗室后裔';
             const content = document.getElementById('msgContent').value.trim();
-            if(!name || !content) {
+
+            if (!name || !content) {
                 alert('请填写宗亲称呼和留言内容。');
                 return;
             }
@@ -141,7 +287,10 @@
             newCard.className = 'message-card';
             newCard.innerHTML = `
                 <div class="msg-header">
-                    <span class="msg-author">${name}</span>
+                    <div>
+                        <span class="msg-author">${name}</span>
+                        <span class="msg-branch">${branch}</span>
+                    </div>
                     <span>刚刚 谨寄</span>
                 </div>
                 <div class="msg-body">${content}</div>
@@ -150,7 +299,7 @@
 
             document.getElementById('msgName').value = '';
             document.getElementById('msgContent').value = '';
-            alert('追思留言已发布！');
+            alert('追思留言已成功发布！');
         }
     </script>
 </body>
