@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周藩后裔全国聚落与村庄考 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+
+        /* 筛选按钮组 */
+        .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+        .filter-btn { background: #fcf9f5; border: 1px solid #dcd3cb; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.88rem; cursor: pointer; color: #555; transition: all 0.2s; }
+        .filter-btn.active, .filter-btn:hover { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
+
+        .village-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+        .village-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; border-top: 3px solid #8c1d1d; }
+        .village-name { font-size: 1.1rem; font-weight: bold; color: #8c1d1d; }
+        .village-province { display: inline-block; font-size: 0.75rem; background: #efe5dc; color: #6b4d1b; padding: 1px 6px; border-radius: 3px; margin-left: 0.4rem; }
+        .village-detail { font-size: 0.9rem; color: #555; margin-top: 0.5rem; line-height: 1.7; }
+        .village-detail strong { color: #333; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="villages.html" style="color:#fff; font-weight:bold;">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
+                <a href="genealogy-guide.html">修谱指南</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>周藩后裔全国聚落与村庄地名考</h1>
+        <div class="intro-box">
+            明末崇祯十五年黄河决水及清顺治年间鼎革，周王府宗室子孙自汴梁王城散迁四方。为避祸乱，多数宗亲隐居乡野，聚族而居，形成了带有<strong>“朱家楼”、“朱王庄”、“王府营”</strong>等显著宗族标记的传统村落。
+        </div>
+
+        <!-- 省份筛选 -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterProvince('全部')">全部区域</button>
+            <button class="filter-btn" onclick="filterProvince('河南')">河南大本营</button>
+            <button class="filter-btn" onclick="filterProvince('安徽')">安徽皖北</button>
+            <button class="filter-btn" onclick="filterProvince('江苏')">江苏徐淮</button>
+            <button class="filter-btn" onclick="filterProvince('山东')">山东鲁西南</button>
+            <button class="filter-btn" onclick="filterProvince('西南')">云南/四川</button>
+        </div>
+
+        <div class="village-grid" id="villageGrid">
+            <!-- 河南 -->
+            <div class="village-card" data-prov="河南">
+                <div class="village-name">开封祥符·朱仙镇聚落 <span class="village-province">河南·开封</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>周王大宗直系 / 祥符王房<br>
+                    <strong>历史考据：</strong>开封城陷后，王府近支宗室南迁至朱仙镇贾鲁河沿岸，以经商、耕读为业，世代保存字辈序列。
+                </div>
+            </div>
+
+            <div class="village-card" data-prov="河南">
+                <div class="village-name">禹州·无梁周山朱家营 <span class="village-province">河南·许昌</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>周定王陵奉祀户支脉<br>
+                    <strong>历史考据：</strong>定王朱橚归葬禹州三峰山后，周府留派宗支与奉祀护陵族人长居此地，今村旁留存有明代地宫与神道古迹。
+                </div>
+            </div>
+
+            <div class="village-card" data-prov="河南">
+                <div class="village-name">商丘·虞城朱庄与王府村 <span class="village-province">河南·商丘</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>遂平王 / 汝阳王分流<br>
+                    <strong>历史考据：</strong>豫东黄淮平原周藩重要聚落地，村中朱氏历代沿用“绍、伦、敷、惠、润、昭”等字派，谱系井然。
+                </div>
+            </div>
+
+            <div class="village-card" data-prov="河南">
+                <div class="village-name">新乡·延津胙城故地朱营 <span class="village-province">河南·新乡</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>胙城王 / 封丘王房<br>
+                    <strong>历史考据：</strong>黄河北岸周藩两郡王后裔世居地，清代乾隆年间曾重修宗祠与族谱。
+                </div>
+            </div>
+
+            <!-- 安徽 -->
+            <div class="village-card" data-prov="安徽">
+                <div class="village-name">宿州·萧县朱老庄与大朱村 <span class="village-province">安徽·宿州</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>镇平王 / 遂平王支脉<br>
+                    <strong>历史考据：</strong>明末清初自开封东迁至皖北，以“耕读传家”立世，是皖北地区规模较大的周藩聚落。
+                </div>
+            </div>
+
+            <div class="village-card" data-prov="安徽">
+                <div class="village-name">亳州·涡阳朱大庄 <span class="village-province">安徽·亳州</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>周藩宿州分衍支<br>
+                    <strong>历史考据：</strong>宗祠立有“有本堂”匾额，后人相传先祖自汴梁迁来，保留完整的明太祖二十字派语。
+                </div>
+            </div>
+
+            <!-- 江苏 -->
+            <div class="village-card" data-prov="江苏">
+                <div class="village-name">徐州·丰县朱阁村 <span class="village-province">江苏·徐州</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>周藩东迁宗支<br>
+                    <strong>历史考据：</strong>明清交替之际经商丘迁入徐州丰沛一带，代代严守单字名五行相生家法。
+                </div>
+            </div>
+
+            <!-- 山东 -->
+            <div class="village-card" data-prov="山东">
+                <div class="village-name">菏泽·曹县朱家楼 <span class="village-province">山东·菏泽</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>豫东周藩迁鲁支派<br>
+                    <strong>历史考据：</strong>地处豫鲁交界，明季水患后宗族徙居建楼避水，后世繁衍为鲁西南望族。
+                </div>
+            </div>
+
+            <!-- 西南 -->
+            <div class="village-card" data-prov="西南">
+                <div class="village-name">大理·喜洲与邓川朱氏村 <span class="village-province">云南·大理</span></div>
+                <div class="village-detail">
+                    <strong>源流房派：</strong>汝南王朱有爋随迁支<br>
+                    <strong>历史考据：</strong>永乐年间汝南王安置大理，随行及留滇宗室与当地融合，世代流传周王家史，字辈昭然。
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+
+        function filterProvince(prov) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.village-card');
+            cards.forEach(card => {
+                if (prov === '全部' || card.getAttribute('data-prov') === prov) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
