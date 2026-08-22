@@ -18,31 +18,42 @@
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
 
         .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.6rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        h3 { color: #8c1d1d; margin: 1rem 0 0.5rem 0; font-size: 1.05rem; }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
 
         .book-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.5rem 0; border-top: 3px solid #8c1d1d; }
-        .book-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .book-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; }
-        .book-tag { font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; color: #fff; }
+        .book-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+        .book-title { font-size: 1.25rem; color: #8c1d1d; font-weight: bold; }
+        .book-tag { font-size: 0.78rem; padding: 2px 8px; border-radius: 4px; color: #fff; font-weight: normal; }
         .tag-med { background: #2e7d32; }
         .tag-art { background: #6a1b9a; }
         .tag-print { background: #b26a00; }
+        .tag-chronology { background: #8c1d1d; }
 
         .book-meta { font-size: 0.88rem; color: #777; margin: 0.4rem 0 0.8rem 0; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
-        .book-desc { font-size: 0.95rem; color: #444; line-height: 1.8; }
+        .book-desc { font-size: 0.95rem; color: #444; line-height: 1.8; margin-bottom: 0.8rem; }
         
         .book-img-box { text-align: center; margin: 1.2rem 0; background: #faf5ee; padding: 1rem; border-radius: 6px; border: 1px solid #ebdcd0; }
         .book-img-box img { max-width: 320px; width: 100%; height: auto; border-radius: 4px; border: 1px solid #dcd3cb; box-shadow: 0 4px 10px rgba(0,0,0,0.08); }
         .book-img-caption { font-size: 0.82rem; color: #8c1d1d; margin-top: 0.5rem; font-weight: bold; }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 0.8rem 1rem; margin: 0.8rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.8rem; margin: 1rem 0; }
+        .stat-item { background: #fff; border: 1px solid #ebdcd0; border-radius: 6px; padding: 0.8rem 0.5rem; text-align: center; }
+        .stat-num { font-size: 1.25rem; font-weight: bold; color: #8c1d1d; line-height: 1.2; }
+        .stat-label { font-size: 0.78rem; color: #666; margin-top: 0.3rem; }
+
+        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 0.9rem 1.1rem; margin: 0.9rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.7; }
         
         .comp-table { width: 100%; border-collapse: collapse; margin-top: 0.8rem; font-size: 0.88rem; }
-        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.6rem 0.8rem; text-align: left; }
-        .comp-table th { background: #f4efe9; color: #8c1d1d; }
+        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.65rem 0.8rem; text-align: left; }
+        .comp-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
+        .comp-table tr:nth-child(even) { background: #faf8f5; }
+
+        .feature-list { margin: 0.8rem 0 0.8rem 1.2rem; font-size: 0.92rem; color: #444; }
+        .feature-list li { margin-bottom: 0.4rem; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
@@ -53,6 +64,7 @@
             .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
             .container { padding: 1.2rem; }
             .table-wrap { overflow-x: auto; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -85,11 +97,12 @@
     <main class="container">
         <h1>大明周藩传世典籍与学术著述全考</h1>
         <div class="intro-box">
-            明代周藩以仁孝好学、崇文尚医著称于世。始祖周定王朱橚在开封建“王府药圃”与“良医所”，开创救荒本草学与方剂集大成之先河；历代嗣王兼善诗词、曲艺与善本刊刻，形成了璀璨的周藩文献谱系。
+            明代周藩以“仁孝好学、崇文尚医、精通艺律”冠绝诸藩。始祖周定王朱橚在开封王府辟“生药圃”、建“良医所”，躬行植物培育与医方考辨，开创救荒本草学与巨部方剂集成之先河；其世子周宪王朱有燉兼善词曲、风物考证与古籍重刊，形成了明代宗室中体量最宏大、科学与艺术兼备的“周藩文献宝库”。
         </div>
 
         <h2>🌿 始祖朱橚农医科学巨著</h2>
 
+        <!-- 《救荒本草》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《救荒本草》（全二卷·四百一十四种）</span>
@@ -101,102 +114,203 @@
                 <div class="book-img-caption">📖 明周王府原刻《救荒本草》木刻植物图谱书影</div>
             </div>
 
-            <div class="book-meta">编纂：周定王朱橚 · 绘图校核：周王府群儒 · 刊行：明永乐四年 (1406)</div>
+            <div class="book-meta">编纂：周定王朱橚 · 绘图校核：周王府群儒与画工 · 刊行：明永乐四年 (1406)</div>
+            
             <div class="book-desc">
-                朱橚设圃于开封王府，广纳中原、嵩山、太行之野生草木，亲验其苗叶花实，辨识可食部位与去毒加工之法。全书分为<strong>草部（245种）、木部（80种）、米谷部（20种）、果部（23种）、菜部（46种）</strong>。每种植物皆附写实木刻插图，图文并茂，首创以“救荒度饥”为目的之植物分类体系。
+                朱橚因见中原连年饥馑，乃设生药圃于开封周王府，引种嵩山、太行山及中原原野之野生草木，亲验其萌芽花实，辨识可食部位与去毒加工之法。每种植物皆附<strong>实物写生木刻插图</strong>，首创以“救荒备饥”为目的之植物学分类与利用体系，被英国科技史学家李约瑟誉为中国植物学史上的划时代专著。
             </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-num">414 种</div>
+                    <div class="stat-label">收录植物总数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">276 种</div>
+                    <div class="stat-label">周藩新录首载植物</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">414 幅</div>
+                    <div class="stat-label">精准木刻写生图</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-num">5 大部</div>
+                    <div class="stat-label">草 / 木 / 米谷 / 果 / 菜</div>
+                </div>
+            </div>
+
+            <h3>📋 《救荒本草》分类与代表性植物考</h3>
+            <div class="table-wrap">
+                <table class="comp-table">
+                    <tr>
+                        <th>部类</th>
+                        <th>卷帙</th>
+                        <th>收录数量</th>
+                        <th>周藩首载</th>
+                        <th>代表性食用植物与加工要点</th>
+                    </tr>
+                    <tr>
+                        <td><strong>草部</strong></td>
+                        <td>上、下卷</td>
+                        <td>245 种</td>
+                        <td>178 种</td>
+                        <td>苦荬菜、马齿苋、灰菜、荠菜、漏芦（采嫩叶煠熟，水淘去苦味，油盐调食）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>木部</strong></td>
+                        <td>上、下卷</td>
+                        <td>80 种</td>
+                        <td>47 种</td>
+                        <td>杜梨、榆树（榆钱、榆皮取粉）、枸杞、桑椹（采嫩芽焯熟或晒干磨面）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>米谷部</strong></td>
+                        <td>上卷</td>
+                        <td>20 种</td>
+                        <td>11 种</td>
+                        <td>稗子、野秫、野粟、荞麦（采实磨面作饼饵或煮粥）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>果部</strong></td>
+                        <td>下卷</td>
+                        <td>23 种</td>
+                        <td>14 种</td>
+                        <td>野葡萄、君迁子、山楂、酸枣、郁李仁（生食、渍蜜或风干充饥）</td>
+                    </tr>
+                    <tr>
+                        <td><strong>菜部</strong></td>
+                        <td>下卷</td>
+                        <td>46 种</td>
+                        <td>26 种</td>
+                        <td>蔓菁、水芹、苜蓿、野油菜（采苗叶洗净，盐渍或沸水焯食）</td>
+                    </tr>
+                </table>
+            </div>
+
             <div class="quote-box">
-                “古人以农桑为本，医药为先……予因采摘草木之可食者，种植于圃，绘图析理，以备岁饥之用。” ——《救荒本草·序》
+                “先王目击其艰，虑夫凶年饥岁，民不聊生，乃采野草之可食者，播种于圃，躬自品尝，绘图列说，命工梓行，以贻后世。” ——周宪王朱有燉《救荒本草·后序》
             </div>
         </div>
 
+        <!-- 《普济方》 -->
         <div class="book-card">
             <div class="book-header">
-                <span class="book-title">《普济方》（全一百六十八卷·六万一千七百三十九方）</span>
+                <span class="book-title">《普济方》（全一百六十八卷/四库本四百二十六卷·六万一千七百三十九方）</span>
                 <span class="book-tag tag-med">中医古籍收方之冠</span>
             </div>
-            <div class="book-meta">主编：周定王朱橚、滕硕、刘醇 · 成书：明洪武三十一年 (1398)</div>
+            <div class="book-meta">主编：周定王朱橚、教授滕硕、李恒、刘醇 · 成书：明洪武三十一年 (1398)</div>
             <div class="book-desc">
-                周王府广收天下医书秘籍，上溯《黄帝内经》《伤寒论》，下逮金元四大家，历时十余年编纂而成。涵盖医论、脏腑、伤寒、妇科、儿科、针灸、痈疽等全科，完整保存了大量宋元以前已佚失的医方典籍。
+                周王府广罗海内医书秘籍，上溯《黄帝内经》《难经》《伤寒杂病论》，下逮金元四大家，历时十余年编纂而成。全书收录医方 <strong>61,739 首</strong>，插图 239 幅，涵盖脏腑、伤寒、杂病、妇人、小儿、外科、针灸诸科，完整保存了大量宋元以前已佚失的医方典籍，被誉为“中国古代第一大医学百科全书”。
             </div>
+
+            <h3>📊 中国古代大型官私修方书规模对照</h3>
             <div class="table-wrap">
                 <table class="comp-table">
                     <tr>
                         <th>著作名称</th>
-                        <th>主编时代</th>
+                        <th>主编时代与编者</th>
                         <th>收录医方数</th>
-                        <th>历史地位</th>
+                        <th>卷帙规模</th>
+                        <th>历史地位与文献价值</th>
                     </tr>
                     <tr>
                         <td><strong>《太平圣惠方》</strong></td>
-                        <td>北宋 (992)</td>
+                        <td>北宋 (992) · 王怀隐等</td>
                         <td>16,834 首</td>
-                        <td>宋代官修巨著</td>
+                        <td>100 卷</td>
+                        <td>宋初官修医学巨著</td>
                     </tr>
                     <tr>
                         <td><strong>《圣济总录》</strong></td>
-                        <td>北宋 (1117)</td>
+                        <td>北宋 (1117) · 宋徽宗敕修</td>
                         <td>近 20,000 首</td>
-                        <td>宋徽宗敕修</td>
+                        <td>200 卷</td>
+                        <td>北宋后期官修医学全书</td>
                     </tr>
                     <tr>
                         <td><strong>周藩《普济方》</strong></td>
-                        <td>明初 (1398)</td>
+                        <td><strong>明初 (1398) · 周王朱橚</strong></td>
                         <td><strong>61,739 首</strong></td>
-                        <td><strong>中国古代第一大方剂百科全书</strong></td>
+                        <td><strong>426 卷</strong></td>
+                        <td><strong>中国古代体量最大之方剂渊海，存世古方集大成者</strong></td>
                     </tr>
                 </table>
             </div>
+
+            <div class="quote-box">
+                “自轩岐以下迄于元明，巨细毕备，古今医方之渊海也。虽其间多杂采各家之说，未能尽加考订，然诸书多已散佚，得此而藉以考见源流，亦博考者之所必资矣。” ——《四库全书总目提要》
+            </div>
         </div>
 
+        <!-- 《袖珍方》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《袖珍方》（全四卷·三千余方）</span>
                 <span class="book-tag tag-med">战地民生急救指南</span>
             </div>
-            <div class="book-meta">编撰：周定王朱橚 · 刊刻：明洪武三十年</div>
+            <div class="book-meta">编撰：周定王朱橚 · 刊刻：明洪武三十年 (1397)</div>
             <div class="book-desc">
-                系定王从《普济方》中提炼而出的便携急救手册。专选药材易得、炮制简便、见效迅捷之方，供随军行伍及偏远乡村无医之地应急治病，明清两代多次翻刻流传。
+                系定王从《普济方》浩繁方海中提炼而出的便携式临证急救手册。专门选取<strong>药材易得、炮制简便、见效迅捷</strong>之良方，供随军行伍、偏远乡村及无医之地应急治病之用。此书简明实用，明清两代屡经翻刻，流传甚广。
             </div>
+            <ul class="feature-list">
+                <li><strong>辨证精简：</strong>分列伤寒、中风、痈疽、金疮、妇儿急症等常见病门；</li>
+                <li><strong>用药平易：</strong>多选用中原寻常易得草药与家常调料（生姜、葱白、盐、醋等）；</li>
+                <li><strong>便于携带：</strong>采用袖珍小字本印行，利于医士随军随身翻阅。</li>
+            </ul>
         </div>
 
+        <!-- 《保生余录》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《保生余录》（全三卷）</span>
-                <span class="book-tag tag-med">道家养生与食疗</span>
+                <span class="book-tag tag-med">道家养生与食疗名著</span>
             </div>
             <div class="book-meta">辑录：周定王朱橚 · 刊刻：明初王府刻本</div>
             <div class="book-desc">
-                总结四时调摄、起居禁忌、食疗药膳、老人保元等养生法则，倡导治未病与顺应自然的摄生思想。
+                定王总结先秦至宋元道家养生理论与民间寿世验方汇编而成。书中详述四时调摄、起居禁忌、食疗药膳、老人保元与导引吐纳之术，倡导“治未病”与顺应自然的摄生思想，为明代宗室养生学的代表之作。
             </div>
         </div>
 
-        <h2>🎭 宪王朱有炖戏曲与文学名著</h2>
+        <h2>🎭 宪王朱有燉戏曲与文学名著</h2>
 
+        <!-- 《诚斋乐府》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《诚斋乐府》（杂剧三十一种·散曲八卷）</span>
                 <span class="book-tag tag-art">大明戏曲鼎峰</span>
             </div>
-            <div class="book-meta">著者：周宪王朱有炖（号诚斋） · 刊刻：明初周府藩刻本</div>
+            <div class="book-meta">著者：周宪王朱有燉（号诚斋） · 刊刻：明正统至天顺年间周藩刻本</div>
             <div class="book-desc">
-                存世代表作包括《义勇辞金》《关云长千里独行》《黑旋风仗义疏财》《牡丹仙》《香囊记》等。宪王精通音律，作品兼具北曲豪劲与南曲婉丽，开创了明代宫廷王府演剧与市民市井曲艺交融的新范式。
+                朱有燉为明代杂剧名家，存世杂剧数量居明代诸曲家之首。宪王精通音律，作品兼具北曲之豪劲与南曲之婉丽，开创了王府演剧与市民市井曲艺交融的新范式，在日本及海外汉学界亦享有极高评价。
             </div>
+            
+            <h3>🎭 代表性杂剧分类名录</h3>
+            <ul class="feature-list">
+                <li><strong>水浒英雄剧：</strong>《黑旋风仗义疏财》《黑旋风乔断案》——传承元杂剧水浒余韵，生动刻画李逵等市井豪侠；</li>
+                <li><strong>三国历史剧：</strong>《义勇辞金》《关云长千里独行》——赞颂忠义风骨，对明代演义小说戏曲化影响深远；</li>
+                <li><strong>神仙道化剧：</strong>《牡丹仙》《八仙庆寿》《刘晨阮肇误入桃源》——王府节庆承应之作，辞藻富丽，音律精工；</li>
+                <li><strong>世情婚恋剧：</strong>《香囊记》《赵元遇上皇》——描摹宋元市井生活与男女情爱，极具烟火气息。</li>
+            </ul>
         </div>
 
+        <!-- 《元宫词》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《元宫词》（全一百首）</span>
                 <span class="book-tag tag-art">元大都风物诗史</span>
             </div>
-            <div class="book-meta">著者：周宪王朱有炖 · 著成年：明永乐年间</div>
+            <div class="book-meta">著者：周宪王朱有燉 · 著成年：明永乐年间</div>
             <div class="book-desc">
-                以百首七言绝句生动记载元代大都大内宫殿格局、岁时庆典、宫廷饮食、服饰仪仗，是研究蒙元民俗与北方风土不可多得的珍贵诗史。
+                宪王以百首七言绝句，详尽描摹元大都大内宫殿格局、岁时庆典、宫廷饮食（如马奶酒、诈马宴）、服饰仪仗及北方风俗。此组诗既具极高的文学艺术价值，亦是研究蒙元宫廷制度与北方民俗的珍贵第一手诗史资料。
+            </div>
+            <div class="quote-box">
+                “诈马筵开玉殿春，千官同拜紫微宸。银盆盛肉葡萄酒，敕赐金牌第一人。” ——朱有燉《元宫词·节选》
             </div>
         </div>
 
         <h2>📖 周王府重刻与校勘珍本善本</h2>
 
+        <!-- 《幼幼新书》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《幼幼新书》（全四十卷）</span>
@@ -204,20 +318,58 @@
             </div>
             <div class="book-meta">主持校刻：周定王府良医所 · 刊刻：明洪武年间</div>
             <div class="book-desc">
-                重刊宋代庄绰儿科经典。开封王府以宋版为底本，广校诸家，使这部收罗千首儿科古方、图谱的医学巨典免于湮灭。
+                重刊宋代庄绰儿科经典。开封周王府以宋代善本为底本，广校诸家传本，纠正讹误，使这部收罗千首儿科古方、图谱的医学巨典得以完整流传后世，对明代儿科学的发展起到了承前启后的关键作用。
             </div>
         </div>
 
+        <!-- 《本草发挥》 -->
         <div class="book-card">
             <div class="book-header">
                 <span class="book-title">《本草发挥》（全四卷）</span>
                 <span class="book-tag tag-print">金元医理名著</span>
             </div>
-            <div class="book-meta">校勘：周王府名医所 · 刊行：明代藩刻本</div>
+            <div class="book-meta">校勘：周王府名医所 · 刊行：明代周藩刻本</div>
             <div class="book-desc">
-                元代徐彦纯辑录张元素、李杲、朱震亨等金元诸家本草药性理论。周藩精刻本校勘精准，为明代中原医家研习脏腑辨证之必读书目。
+                元代徐彦纯辑录张元素、李杲、朱震亨等金元诸家本草药性理论。周藩精刻本字画精整、校勘精准，成为明代中原医家研习脏腑辨证与药物归经理论的案头必读书目。
             </div>
         </div>
+
+        <h2>⏳ 周王府修书与刊刻文献大事简表</h2>
+        <div class="table-wrap">
+            <table class="comp-table">
+                <tr>
+                    <th>年代</th>
+                    <th>主持者</th>
+                    <th>典籍/事件</th>
+                    <th>文献贡献与地位</th>
+                </tr>
+                <tr>
+                    <td><strong>洪武三十年 (1397)</strong></td>
+                    <td>周定王 朱橚</td>
+                    <td>刊刻《袖珍方》四卷</td>
+                    <td>提炼急救便携医方三千余首，布施中原军民。</td>
+                </tr>
+                <tr>
+                    <td><strong>洪武三十一年 (1398)</strong></td>
+                    <td>周定王 朱橚</td>
+                    <td>《普济方》编纂成帙</td>
+                    <td>收方61,739首，成中国古代收方最多的方剂全书。</td>
+                </tr>
+                <tr>
+                    <td><strong>永乐四年 (1406)</strong></td>
+                    <td>周定王 / 周宪王</td>
+                    <td>《救荒本草》二卷刊行</td>
+                    <td>图文精刻414种植物，开创中国写生植物学之先河。</td>
+                </tr>
+                <tr>
+                    <td><strong>正统至景泰年间</strong></td>
+                    <td>周宪王 朱有燉</td>
+                    <td>《诚斋乐府》杂剧散曲刊刻</td>
+                    <td>刊行杂剧31种、散曲数百套，奠定大明戏曲鼎峰地位。</td>
+                </tr>
+            </table>
+        </div>
+
     </main>
 
     <footer class="site-footer">
