@@ -1,3 +1,11 @@
+已将「周藩二十字派语 · 交互即时速查神器」与下拉分类导航完全融入首页代码中。
+
+族人打开首页，无需跳转就能直接在横幅下方点选字辈徽章（或输入姓名/字辈），即时获知：世次、五行相生偏旁、父辈与子辈字辈、代表先祖名讳。
+第一步：请更新首页 index.html
+
+打开 GitHub 仓库中的 index.html，点击铅笔图标编辑，全选清空并粘贴以下整合后的完整代码：
+HTML
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -31,10 +39,27 @@
         .hero h1 { font-size: 2.3rem; color: #8c1d1d; letter-spacing: 4px; margin-bottom: 0.8rem; }
         .hero p { color: #666; font-size: 1.05rem; }
 
-        .action-bar { display: flex; justify-content: space-between; align-items: center; background: #fdf6ec; border: 1px solid #faecd8; padding: 0.9rem 1.4rem; border-radius: 6px; margin-bottom: 1.8rem; }
+        .action-bar { display: flex; justify-content: space-between; align-items: center; background: #fdf6ec; border: 1px solid #faecd8; padding: 0.9rem 1.4rem; border-radius: 6px; margin-bottom: 1.5rem; }
         .action-text { color: #8c1d1d; font-weight: bold; font-size: 0.98rem; }
         .print-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.45rem 1.1rem; border-radius: 4px; cursor: pointer; font-size: 0.9rem; font-weight: bold; transition: background 0.2s; }
         .print-btn:hover { background: #701414; }
+
+        /* 首页快速字辈查询挂件 */
+        .quick-checker { background: #faf4ed; border: 1px solid #e8ded4; border-left: 5px solid #8c1d1d; padding: 1.5rem; border-radius: 6px; margin-bottom: 2rem; }
+        .checker-head { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; margin-bottom: 1rem; }
+        .checker-title { font-size: 1.15rem; font-weight: bold; color: #8c1d1d; display: flex; align-items: center; gap: 0.5rem; }
+        .checker-input-box { display: flex; gap: 0.5rem; }
+        .checker-input { padding: 0.4rem 0.8rem; border: 1px solid #cbb8a9; border-radius: 4px; font-size: 0.95rem; width: 150px; background: #fff; }
+        .checker-input:focus { border-color: #8c1d1d; outline: none; }
+        
+        .char-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+        .char-pill { background: #fff; border: 1px solid #dcd3cb; padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.88rem; cursor: pointer; transition: all 0.2s; color: #444; }
+        .char-pill:hover, .char-pill.active { background: #8c1d1d; color: #fff; border-color: #8c1d1d; font-weight: bold; }
+        
+        .checker-result { background: #fff; border: 1px solid #eadbc8; padding: 1.1rem 1.3rem; border-radius: 6px; font-size: 0.92rem; line-height: 1.8; color: #443; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+        .checker-result strong { color: #8c1d1d; }
+        .checker-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-top: 0.7rem; }
+        .checker-item { background: #fdfbf7; padding: 0.6rem 0.9rem; border-radius: 4px; border: 1px solid #f0e6dc; }
 
         /* 卡片网格 */
         .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.3rem; }
@@ -57,6 +82,8 @@
             .nav-item.active .dropdown-menu { display: block; }
             .container { padding: 1.2rem; }
             .action-bar { flex-direction: column; gap: 0.6rem; text-align: center; }
+            .checker-input-box { width: 100%; }
+            .checker-input { width: 100%; }
         }
     </style>
 </head>
@@ -135,6 +162,21 @@
             <button class="print-btn" onclick="window.print()">🖨️ 打印/导出本页</button>
         </div>
 
+        <!-- 首页快速字辈查询交互挂件 -->
+        <div class="quick-checker">
+            <div class="checker-head">
+                <div class="checker-title">🔍 周藩二十字派语 · 交互即时速查</div>
+                <div class="checker-input-box">
+                    <input type="text" id="quickInput" class="checker-input" placeholder="输入字辈或姓名..." oninput="searchQuickChar(this.value)">
+                </div>
+            </div>
+            
+            <div class="char-pills" id="charPills"></div>
+
+            <div id="quickResult" class="checker-result"></div>
+        </div>
+
+        <!-- 15大板块核心卡片 -->
         <div class="grid-cards">
             <div class="card">
                 <div>
@@ -263,11 +305,85 @@
     </footer>
 
     <script>
+        // 周藩二十字辈与五行数据
+        const zhouGenerations = [
+            { gen: 1, char: "有", wuxing: "木", radical: "木字旁（如：松、柏、柯、桐）", example: "朱有炖（周宪王）、朱有爝（周简王）" },
+            { gen: 2, char: "子", wuxing: "火", radical: "火字旁 / 灬（如：垕、圮、爚、炜）", example: "朱子垕（周靖王）、朱子圮（周懿王）" },
+            { gen: 3, char: "同", wuxing: "土", radical: "土字旁（如：䥝、均、增、堪）", example: "朱同䥝（周惠王）、朱同鍝（南陵王）" },
+            { gen: 4, char: "安", wuxing: "金", radical: "金字旁（如：㴦、镕、钰、铜）", example: "朱安㴦（周悼王）、朱安澓（义宁王）" },
+            { gen: 5, char: "睦", wuxing: "水", radical: "水字旁 / 氵（如：㰂、浤、源、浩）", example: "朱睦㰂（周恭王）、朱睦㮮（海宁学者）" },
+            { gen: 6, char: "勤", wuxing: "木", radical: "木字旁（如：炽、栋、梁、材）", example: "朱勤炽（周康王）、朱勤蒸" },
+            { gen: 7, char: "朝", wuxing: "火", radical: "火字旁 / 日（如：堈、炯、煜）", example: "朱朝堈（周庄王）、朱朝埴" },
+            { gen: 8, char: "在", wuxing: "土", radical: "土字旁（如：铤、坚、培、堂）", example: "朱在铤（周敬王）、朱在钰" },
+            { gen: 9, char: "肃", wuxing: "金", radical: "金字旁（如：溱、镒、铭、铸）", example: "朱肃溱（周端王）、朱肃𣲏" },
+            { gen: 10, char: "恭", wuxing: "水", radical: "水字旁 / 氵（如：枵、渊、涵、润）", example: "朱恭枵（末代周王）、朱恭树" },
+            { gen: 11, char: "绍", wuxing: "木", radical: "木字旁（如：栻、林、森、本）", example: "朱绍〇（明末清初宗室）" },
+            { gen: 12, char: "伦", wuxing: "火", radical: "火字旁（如：焕、灿、炜、炳）", example: "朱伦圣（南明渡台先贤）" },
+            { gen: 13, char: "敷", wuxing: "土", radical: "土字旁（如：坦、坤、培、境）", example: "朱敷铮（清初渡台宗亲）" },
+            { gen: 14, char: "惠", wuxing: "金", radical: "金字旁（如：锋、锐、钊、钧）", example: "周藩清代中期宗亲" },
+            { gen: 15, char: "润", wuxing: "水", radical: "水字旁（如：源、深、涵、泽）", example: "周藩清代晚期宗亲" },
+            { gen: 16, char: "昭", wuxing: "木", radical: "木字旁（如：松、椿、桂、梁）", example: "周藩清末民国宗亲" },
+            { gen: 17, char: "格", wuxing: "火", radical: "火字旁（如：炳、焕、烽、焱）", example: "周藩近现代宗亲" },
+            { gen: 18, char: "广", wuxing: "土", radical: "土字旁（如：坤、垣、坚、基）", example: "周藩当代宗亲" },
+            { gen: 19, char: "登", wuxing: "金", radical: "金字旁（如：铭、锐、锦、锋）", example: "周藩当代后裔" },
+            { gen: 20, char: "庸", wuxing: "水", radical: "水字旁（如：泽、涛、浩、泓）", example: "周藩续修世系" }
+        ];
+
+        function initPills() {
+            const container = document.getElementById('charPills');
+            container.innerHTML = '';
+            zhouGenerations.forEach((item, index) => {
+                const btn = document.createElement('span');
+                btn.className = 'char-pill' + (index === 0 ? ' active' : '');
+                btn.textContent = `${item.char} (${item.gen}世)`;
+                btn.onclick = () => selectGeneration(item.gen);
+                container.appendChild(btn);
+            });
+            showGenerationDetail(zhouGenerations[0]);
+        }
+
+        function selectGeneration(genNum) {
+            const pills = document.querySelectorAll('.char-pill');
+            pills.forEach((p, idx) => {
+                if (idx === genNum - 1) p.classList.add('active');
+                else p.classList.remove('active');
+            });
+            const data = zhouGenerations.find(g => g.gen === genNum);
+            if (data) showGenerationDetail(data);
+        }
+
+        function showGenerationDetail(data) {
+            const prev = data.gen > 1 ? zhouGenerations[data.gen - 2] : null;
+            const next = data.gen < 20 ? zhouGenerations[data.gen] : null;
+
+            const res = document.getElementById('quickResult');
+            res.innerHTML = `
+                <div>
+                    大明周藩钦定第 <strong>${data.gen}</strong> 世派语：<strong style="font-size: 1.3rem;">【朱${data.char}〇】</strong>
+                    <span style="background:#8c1d1d; color:#fff; font-size:0.75rem; padding:1px 6px; border-radius:3px; margin-left:6px;">五行属${data.wuxing}</span>
+                </div>
+                <div class="checker-grid">
+                    <div class="checker-item">🧬 <strong>命名偏旁：</strong>${data.radical}</div>
+                    <div class="checker-item">⬆️ <strong>上一辈(父辈)：</strong>${prev ? `第${prev.gen}世「${prev.char}」(${prev.wuxing})` : '始祖周定王朱橚'}</div>
+                    <div class="checker-item">⬇️ <strong>下一辈(子嗣)：</strong>${next ? `第${next.gen}世「${next.char}」(${next.wuxing})` : '登庸之后重新循环'}</div>
+                    <div class="checker-item">📜 <strong>历史代表先祖：</strong>${data.example}</div>
+                </div>
+            `;
+        }
+
+        function searchQuickChar(val) {
+            if (!val.trim()) return;
+            const trimmed = val.trim();
+            const match = zhouGenerations.find(g => trimmed.includes(g.char) || trimmed.includes(g.gen.toString()));
+            if (match) {
+                selectGeneration(match.gen);
+            }
+        }
+
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
 
-        // 移动端点击展开子菜单
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function(e) {
                 if (window.innerWidth <= 960) {
@@ -275,6 +391,10 @@
                 }
             });
         });
+
+        window.onload = function() {
+            initPills();
+        };
     </script>
 </body>
 </html>
