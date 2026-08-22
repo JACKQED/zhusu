@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周藩数字家谱树 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+
+        .container { max-width: 1000px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        
+        .tree-instructions { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 0.8rem 1rem; margin: 1.2rem 0; font-size: 0.9rem; color: #6b4d1b; }
+        
+        /* 纯 CSS / DOM 交互式树形图容器 */
+        .tree-viewport { overflow-x: auto; padding: 2rem 0; text-align: center; white-space: nowrap; background: #fcf9f5; border: 1px solid #e8dfd8; border-radius: 8px; }
+        .tree-wrap { display: inline-block; margin: 0 auto; }
+        
+        .tree-node { display: inline-block; padding: 0.6rem 1rem; border-radius: 6px; font-weight: bold; text-decoration: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
+        .node-emperor { background: #8c1d1d; color: #f9e6d0; font-size: 1.1rem; border: 2px solid #631212; }
+        .node-king { background: #b84343; color: #fff; font-size: 1rem; }
+        .node-branch { background: #fff; color: #8c1d1d; border: 1px solid #8c1d1d; font-size: 0.88rem; margin: 0.3rem; }
+        .node-branch:hover { background: #8c1d1d; color: #fff; }
+
+        .branch-group { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; max-width: 880px; margin: 1.5rem auto 0; }
+        .line-v { width: 2px; height: 20px; background: #8c1d1d; margin: 0 auto; }
+
+        .detail-panel { margin-top: 1.5rem; background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; min-height: 80px; }
+        .detail-title { font-size: 1.1rem; color: #8c1d1d; font-weight: bold; }
+        .detail-desc { font-size: 0.95rem; color: #555; margin-top: 0.4rem; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html" style="color:#fff; font-weight:bold;">🌲 家谱树</a>
+                <a href="branches.html">分房支派</a>
+                <a href="history.html">王府传承</a>
+                <a href="institution.html">宗室典制</a>
+                <a href="migration.html">迁徙寻根</a>
+                <a href="memorial.html">云端祭奠</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>周藩数字世系家谱树</h1>
+        <div class="tree-instructions">💡 提示：点击下方任意先祖节点，可实时在下方展示面板查看其官阶、封国及传裔详情。</div>
+
+        <div class="tree-viewport">
+            <div class="tree-wrap">
+                <!-- 根节点：明太祖 -->
+                <div class="tree-node node-emperor" onclick="showDetail('明太祖 朱元璋', '大明开国皇帝，洪武三年分封诸皇子，建皇明宗法与二十字辈规制。')">
+                    明太祖 朱元璋（高皇帝）
+                </div>
+                <div class="line-v"></div>
+
+                <!-- 二级节点：周定王 -->
+                <div class="tree-node node-king" onclick="showDetail('始祖 周定王 朱橚', '皇五子，洪武十一年改封周王，就藩开封府。主持编修《救荒本草》《普济方》，为周藩大始祖。')">
+                    【始祖】周定王 朱橚
+                </div>
+                <div class="line-v"></div>
+
+                <!-- 三级节点：十四大分房郡王 -->
+                <div style="font-size:0.85rem; color:#8c1d1d; margin-bottom:0.5rem; font-weight:bold;">── 诸子十四大郡王分房 ──</div>
+                <div class="branch-group">
+                    <div class="tree-node node-branch" onclick="showDetail('周宪王 朱有炖（长房）', '周定王嫡长子，袭周王爵。号诚斋，著名杂剧家，著《诚斋乐府》。无嗣。')">长房: 朱有炖</div>
+                    <div class="tree-node node-branch" onclick="showDetail('汝南王 朱有爋（二房）', '周定王次子，建文四年封汝南王，后随迁云南大理，支脉播迁滇豫。')">二房: 朱有爋</div>
+                    <div class="tree-node node-branch" onclick="showDetail('顺阳王 朱有烜（三房）', '周定王三子，永乐元年封顺阳王，早薨无嗣。')">三房: 朱有烜</div>
+                    <div class="tree-node node-branch" onclick="showDetail('祥符王/周简王 朱有爝（四房·大宗）', '周定王四子，初封祥符王，后继袭周王爵，为后世历代周王之大宗直系。')">四房: 朱有爝</div>
+                    <div class="tree-node node-branch" onclick="showDetail('新安王 朱有熹（五房）', '周定王五子，永乐元年封新安王，后裔分居开封各邑。')">五房: 朱有熹</div>
+                    <div class="tree-node node-branch" onclick="showDetail('永宁王 朱有灮（六房）', '周定王六子，开府河南，子孙繁盛，传袭数代。')">六房: 朱有灮</div>
+                    <div class="tree-node node-branch" onclick="showDetail('汝阳王 朱有煽（七房）', '周定王七子，永乐四年封汝阳王，后裔宗支繁盛。')">七房: 朱有煽</div>
+                    <div class="tree-node node-branch" onclick="showDetail('镇平王 朱有爌（八房）', '周定王八子，永乐四年封镇平王，后裔分布于宛南及皖北。')">八房: 朱有爌</div>
+                    <div class="tree-node node-branch" onclick="showDetail('宜阳王 朱有炥（九房）', '周定王九子，永乐九年封宜阳王。')">九房: 朱有炥</div>
+                    <div class="tree-node node-branch" onclick="showDetail('遂平王 朱有颎（十房）', '周定王十子，永乐九年封遂平王。')">十房: 朱有颎</div>
+                    <div class="tree-node node-branch" onclick="showDetail('封丘王 朱有煴（十一房）', '周定王十一子，开府黄河北岸新乡、封丘一带。')">十一房: 朱有煴</div>
+                    <div class="tree-node node-branch" onclick="showDetail('罗山王 朱有熼（十二房）', '周定王十二子，永乐九年封罗山王。')">十二房: 朱有熼</div>
+                    <div class="tree-node node-branch" onclick="showDetail('内乡王 朱有焵（十三房）', '周定王十三子，开府南阳内乡。')">十三房: 朱有焵</div>
+                    <div class="tree-node node-branch" onclick="showDetail('胙城王 朱有燆（十四房）', '周定王十四子，封于胙城，后裔繁衍于延津、胙城及黄河沿线。')">十四房: 朱有燆</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-panel" id="detailBox">
+            <div class="detail-title" id="detailTitle">点击上方家谱树节点查看档案</div>
+            <div class="detail-desc" id="detailDesc">收录明太祖、周定王及十四大郡王各房系源流考据。</div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+        function showDetail(title, desc) {
+            document.getElementById('detailTitle').innerText = title;
+            document.getElementById('detailDesc').innerText = desc;
+        }
+    </script>
+</body>
+</html>
