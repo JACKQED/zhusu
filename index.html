@@ -8,20 +8,15 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
-        /* 顶部导航栏 */
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
         .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
         .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
-        
-        /* 手机端汉堡按钮（默认隐藏，手机端显示） */
         .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
-
-        /* 导航链接 */
+        
         .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
         .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
 
-        /* 主内容区域 */
         .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .hero { text-align: center; padding: 2rem 1rem; border-bottom: 2px solid #8c1d1d; margin-bottom: 1.5rem; }
         .hero h1 { font-size: 2.2rem; color: #8c1d1d; letter-spacing: 3px; margin-bottom: 0.8rem; }
@@ -41,48 +36,28 @@
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
-        /* 📱 手机端专用适配样式 (屏幕宽度小于 768px 时生效) */
         @media (max-width: 768px) {
             .menu-toggle { display: block; }
-            .nav-menu {
-                display: none; /* 默认折叠 */
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: #7a1515;
-                padding: 1rem 0;
-                box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            }
-            .nav-menu.show { display: flex; } /* 点击后展开 */
-            .nav-menu a {
-                margin: 0.4rem 0;
-                padding: 0.5rem 1.5rem;
-                width: 100%;
-                font-size: 0.95rem;
-                border-bottom: 1px solid rgba(255,255,255,0.05);
-            }
-            .container { padding: 1.5rem; margin: 1rem 0.5rem; }
-            .hero h1 { font-size: 1.7rem; }
-            .hero p { font-size: 0.95rem; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
             .action-bar { flex-direction: column; gap: 0.5rem; text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 顶部导航 -->
     <header class="site-header">
         <div class="header-inner">
             <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="切换菜单">☰</button>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" style="color:#fff; font-weight:bold;">首页</a>
                 <a href="lineage.html">世系字辈</a>
                 <a href="tree.html">家谱树</a>
                 <a href="naming.html">命名助手</a>
-                <a href="hall.html">堂号楹联</a>  
+                <a href="hall.html">堂号楹联</a>
                 <a href="chronology.html">王府年表</a>
                 <a href="ancestors.html">昭穆神位</a>
                 <a href="estates.html">郡王封地</a>
@@ -90,16 +65,13 @@
                 <a href="tombs.html">王陵陵寝</a>
                 <a href="epigraphy.html">碑刻圹志</a>
                 <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
                 <a href="genealogy-guide.html">修谱指南</a>
                 <a href="branches.html">分房支派</a>
                 <a href="history.html">王府传承</a>
                 <a href="institution.html">宗室典制</a>
                 <a href="migration.html">迁徙寻根</a>
                 <a href="memorial.html">云端祭奠</a>
-                <a href="classics.html">典籍著述</a>
-                <a href="figures/index.html">历代人物</a>
-                <a href="documents.html">谱牒古迹</a>
-                <a href="rules.html">祖训家规</a>
                 <a href="search.html" style="color:#f9e6d0; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
@@ -127,26 +99,58 @@
 
             <div class="card">
                 <div>
-                    <h3>🏛️ 分房支派</h3>
-                    <p>周定王诸子十四大郡王分房名录，考订各房脉络与迁徙渊源。</p>
+                    <h3>🌲 数字家谱树</h3>
+                    <p>太祖-周定王-十四大分房脉络图，支持点击直观查阅各房生平。</p>
                 </div>
-                <a href="branches.html">查阅分房支派 →</a>
+                <a href="tree.html">打开数字谱系树 →</a>
             </div>
 
             <div class="card">
                 <div>
-                    <h3>🎖️ 宗室典制</h3>
-                    <p>明代宗室八等封爵品阶、岁禄规制、宗女封号及王府官署考。</p>
+                    <h3>🪦 碑刻圹志</h3>
+                    <p>收录周定王、周宪王等地下玄宫出土原始圹志铭文与金石考据。</p>
                 </div>
-                <a href="institution.html">研读封爵礼制 →</a>
+                <a href="epigraphy.html">查阅金石圹志 →</a>
             </div>
 
             <div class="card">
                 <div>
-                    <h3>🗺️ 迁徙寻根</h3>
-                    <p>明清周藩后裔流布各省路线考证，及宗亲寻根线索生成登记台。</p>
+                    <h3>🏡 聚落地名</h3>
+                    <p>豫皖苏鲁滇各地周藩村庄、朱家楼及自然聚落迁徙流布图志。</p>
                 </div>
-                <a href="migration.html">进入寻根联谊 →</a>
+                <a href="villages.html">查阅聚落分布 →</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>👑 郡王封地</h3>
+                    <p>周定王诸子十四大郡王分封年代、治所封国与传承方志考。</p>
+                </div>
+                <a href="estates.html">查阅分封沿革 →</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>🏛️ 昭穆神位</h3>
+                    <p>周藩历代十一世亲王左昭右穆位次排布与宗庙祭祀神位谱。</p>
+                </div>
+                <a href="ancestors.html">查阅昭穆神位 →</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>⏳ 王府年表</h3>
+                    <p>开封周王府自洪武筑城至崇祯水灌之大事编年与宫阙考。</p>
+                </div>
+                <a href="chronology.html">查阅年表规制 →</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <h3>📚 典籍著述</h3>
+                    <p>周王府编纂《救荒本草》《普济方》《诚斋乐府》等十部巨著考。</p>
+                </div>
+                <a href="classics.html">查阅科学著述 →</a>
             </div>
 
             <div class="card">
@@ -159,34 +163,10 @@
 
             <div class="card">
                 <div>
-                    <h3>⏳ 王府传承</h3>
-                    <p>历代周王传袭谱系树状图与周王府大事记编年时间线。</p>
+                    <h3>🗺️ 迁徙寻根</h3>
+                    <p>明清周藩后裔流布各省路线考证，及宗亲寻根线索生成登记台。</p>
                 </div>
-                <a href="history.html">查阅传承史话 →</a>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h3>📚 典籍著述</h3>
-                    <p>周藩学术宝库：记录始祖朱橚主编之《救荒本草》《普济方》等巨著。</p>
-                </div>
-                <a href="classics.html">查阅科学著述 →</a>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h3>📜 历代人物</h3>
-                    <p>收录始祖周定王朱橚、词曲大家周宪王朱有炖及历代后裔生平。</p>
-                </div>
-                <a href="figures/index.html">浏览人物小传 →</a>
-            </div>
-
-            <div class="card">
-                <div>
-                    <h3>🏛️ 谱牒古迹</h3>
-                    <p>开封明周王府遗迹、禹州周王陵寝考证与宗谱文献影印档案。</p>
-                </div>
-                <a href="documents.html">查看古迹文献 →</a>
+                <a href="migration.html">进入寻根联谊 →</a>
             </div>
 
             <div class="card">
@@ -196,6 +176,14 @@
                 </div>
                 <a href="rules.html">研读祖训家风 →</a>
             </div>
+
+            <div class="card">
+                <div>
+                    <h3>📜 修谱指南</h3>
+                    <p>欧苏谱例、字辈考辨、生卒避讳及周藩族谱防伪续修凡例。</p>
+                </div>
+                <a href="genealogy-guide.html">研读修谱指南 →</a>
+            </div>
         </div>
     </main>
 
@@ -203,11 +191,9 @@
         <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
     </footer>
 
-    <!-- 手机菜单切换脚本 -->
     <script>
         function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('show');
+            document.getElementById('navMenu').classList.toggle('show');
         }
     </script>
 </body>
