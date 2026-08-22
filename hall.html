@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>堂号楹联与祭祖祝文 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
+
+        .card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.2rem 0; }
+        .card-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.6rem; }
+        
+        .couplet-box { background: #fcf6ed; border: 1px dashed #bfa588; padding: 1.2rem; border-radius: 6px; text-align: center; color: #8c1d1d; font-weight: bold; font-size: 1.05rem; margin: 1rem 0; letter-spacing: 2px; }
+        .oration-box { background: #fff8f0; border-left: 4px solid #8c1d1d; padding: 1.2rem; font-size: 0.95rem; line-height: 2; color: #443; margin-top: 1rem; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="hall.html" style="color:#fff; font-weight:bold;">堂号楹联</a>
+                <a href="branches.html">分房支派</a>
+                <a href="history.html">王府传承</a>
+                <a href="institution.html">宗室典制</a>
+                <a href="migration.html">迁徙寻根</a>
+                <a href="memorial.html">云端祭奠</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>周藩堂号、楹联与祭祖祝文</h1>
+        <p style="margin-top: 1rem;">宗祠堂号是血脉聚合的标志，宗祠楹联铭刻先祖功业，四时祝文寄托子孙追远之诚。</p>
+
+        <h2>🏛️ 周藩传世堂号</h2>
+        <div class="card">
+            <div class="card-title">救荒堂 / 保生堂</div>
+            <p>纪念始祖周定王朱橚在汴京编纂《救荒本草》《普济方》、济世活人之仁德，周藩多支后裔以“救荒”、“保生”、“济生”为宗支堂号，彰显医德与仁风。</p>
+        </div>
+
+        <div class="card">
+            <div class="card-title">有本堂 / 汴梁堂</div>
+            <p>“有本”取自《孟子》“原泉混混，不舍昼夜，盈科而后进，放乎四海，有本者如是”之意，警勉后人寻根知本；“汴梁堂”则标明周王开府开封（汴梁）之根本发源地。</p>
+        </div>
+
+        <h2>📜 宗祠传家楹联</h2>
+        <div class="couplet-box">
+            上联：太祖分封，汴梁开府垂百代<br>
+            下联：定王博古，救荒本草泽千秋
+        </div>
+
+        <div class="couplet-box">
+            上联：二十字辈昭穆序，五行相生木火土金水<br>
+            下联：十四房派枝叶茂，千秋同奉祖训礼义仁
+        </div>
+
+        <h2>🕯️ 岁时四时祭祖祝文（范本）</h2>
+        <p style="font-size:0.9rem; color:#666;">（清明、冬至或岁首祭祀祖先时恭读，族人可根据具体房支微调先祖称谓）</p>
+        <div class="oration-box">
+            <strong>维公元岁次某年某月某日：</strong><br><br>
+            大明太祖高皇帝暨始祖周定王朱橚后裔第○世孙某某等，谨具清酌庶羞、鲜花香烛之仪，致祭于列祖列宗之神位前，曰：<br><br>
+            <em>“维我先祖，源自凤阳，受封汴梁。定王仁厚，博古好学；手著本草，普济万民。
+            二十派语，源流昭然；十四分房，枝繁叶茂。
+            历遭鼎革，后裔播迁；虽分四海，本出一源。
+            今逢令节，虔诚拜叩；敬奉先德，慎终追远。
+            伏愿列祖：佑我宗族，福寿康宁；耕读继世，忠孝传家！
+            尚飨！”</em>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
