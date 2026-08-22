@@ -9,7 +9,7 @@
         body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .header-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
         .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
         .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
         
@@ -18,26 +18,52 @@
         .nav-menu a:hover { color: #fff; text-decoration: underline; }
 
         .container { max-width: 1000px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.6rem; }
         
-        .tree-instructions { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 0.8rem 1rem; margin: 1.2rem 0; font-size: 0.9rem; color: #6b4d1b; }
-        
-        /* 纯 CSS / DOM 交互式树形图容器 */
-        .tree-viewport { overflow-x: auto; padding: 2rem 0; text-align: center; white-space: nowrap; background: #fcf9f5; border: 1px solid #e8dfd8; border-radius: 8px; }
-        .tree-wrap { display: inline-block; margin: 0 auto; }
-        
-        .tree-node { display: inline-block; padding: 0.6rem 1rem; border-radius: 6px; font-weight: bold; text-decoration: none; cursor: pointer; transition: all 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.08); }
-        .node-emperor { background: #8c1d1d; color: #f9e6d0; font-size: 1.1rem; border: 2px solid #631212; }
-        .node-king { background: #b84343; color: #fff; font-size: 1rem; }
-        .node-branch { background: #fff; color: #8c1d1d; border: 1px solid #8c1d1d; font-size: 0.88rem; margin: 0.3rem; }
-        .node-branch:hover { background: #8c1d1d; color: #fff; }
+        .tree-instructions { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.92rem; color: #6b4d1b; line-height: 1.7; border-radius: 0 4px 4px 0; }
 
-        .branch-group { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.6rem; max-width: 880px; margin: 1.5rem auto 0; }
-        .line-v { width: 2px; height: 20px; background: #8c1d1d; margin: 0 auto; }
+        /* 控制工具条 */
+        .tree-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; background: #faf5ee; padding: 0.8rem 1rem; border-radius: 6px; border: 1px solid #ebdcd0; margin: 1.2rem 0; }
+        .toolbar-group { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
+        .btn-tool { background: #8c1d1d; color: #fff; border: none; padding: 0.4rem 0.9rem; border-radius: 4px; font-size: 0.85rem; cursor: pointer; transition: background 0.2s; }
+        .btn-tool:hover { background: #a62424; }
+        .btn-tool.secondary { background: #fff; color: #8c1d1d; border: 1px solid #8c1d1d; }
+        .btn-tool.secondary:hover { background: #fbeeed; }
+        .search-input { padding: 0.4rem 0.7rem; border: 1px solid #d4c4b4; border-radius: 4px; font-size: 0.85rem; width: 170px; }
+        .search-input:focus { outline: none; border-color: #8c1d1d; }
 
-        .detail-panel { margin-top: 1.5rem; background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; min-height: 80px; }
-        .detail-title { font-size: 1.1rem; color: #8c1d1d; font-weight: bold; }
-        .detail-desc { font-size: 0.95rem; color: #555; margin-top: 0.4rem; }
+        /* 家谱树容器 */
+        .tree-viewport { overflow-x: auto; padding: 1.8rem; background: #fcf9f5; border: 1px solid #e8dfd8; border-radius: 8px; margin: 1rem 0; }
+        .tree-tree { position: relative; }
+        .tree-tree ul { padding-left: 20px; list-style: none; position: relative; margin: 0; }
+        .tree-tree li { margin: 10px 0; position: relative; padding-left: 18px; }
+        .tree-tree li::before { content: ''; position: absolute; top: 18px; left: 0; width: 14px; height: 1px; background: #c8b7a6; }
+        .tree-tree li::after { content: ''; position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: #c8b7a6; }
+        .tree-tree li:last-child::after { height: 18px; }
+
+        /* 节点卡片 */
+        .tree-node { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 6px; font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.06); user-select: none; border: 1px solid #dcd3cb; background: #fff; }
+        .tree-node:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(140,29,29,0.18); border-color: #8c1d1d; }
+        .tree-node.highlight { background: #fff3e0; border-color: #ff9800; box-shadow: 0 0 10px rgba(255,152,0,0.4); }
+
+        .node-emperor { background: #8c1d1d; color: #ffeb3b; border-color: #631212; }
+        .node-king { background: #a82424; color: #fff; border-color: #d4af37; }
+        .node-main-branch { background: #fff5f5; color: #8c1d1d; border: 1.5px solid #8c1d1d; }
+        .node-branch { background: #fff; color: #444; border-left: 4px solid #8c1d1d; }
+        .node-gray { background: #f5f5f5; color: #777; border-left: 4px solid #999; }
+
+        .node-tag { font-size: 0.72rem; padding: 1px 5px; border-radius: 3px; background: #ebdcd0; color: #6b4d1b; font-weight: normal; }
+        .node-emperor .node-tag, .node-king .node-tag { background: rgba(255,255,255,0.25); color: #fff; }
+        .toggle-btn { font-size: 0.75rem; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(0,0,0,0.1); margin-right: 0.2rem; }
+
+        /* 底部档案面板 */
+        .detail-panel { margin-top: 1.5rem; background: #fdfbf7; border: 1px solid #e8dfd8; border-top: 3px solid #8c1d1d; padding: 1.4rem; border-radius: 6px; }
+        .detail-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 0.6rem; border-bottom: 1px dashed #ebdcd0; padding-bottom: 0.4rem; }
+        .detail-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; }
+        .detail-badge { font-size: 0.78rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 4px; }
+        .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.6rem; background: #fff; padding: 0.8rem; border-radius: 4px; border: 1px solid #f0e6dc; font-size: 0.88rem; margin: 0.6rem 0; }
+        .detail-grid strong { color: #8c1d1d; }
+        .detail-desc { font-size: 0.92rem; color: #444; line-height: 1.8; margin-top: 0.6rem; }
 
         .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
 
@@ -47,6 +73,8 @@
             .nav-menu.show { display: flex; }
             .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
             .container { padding: 1.2rem; }
+            .tree-toolbar { flex-direction: column; align-items: stretch; }
+            .search-input { width: 100%; }
         }
     </style>
 </head>
@@ -59,11 +87,21 @@
                 <a href="index.html">首页</a>
                 <a href="lineage.html">世系字辈</a>
                 <a href="tree.html" style="color:#fff; font-weight:bold;">🌲 家谱树</a>
+                <a href="naming.html">命名助手</a>
+                <a href="calendar.html">纪年换算</a>
+                <a href="hall.html">堂号楹联</a>
+                <a href="chronology.html">王府年表</a>
+                <a href="ancestors.html">昭穆神位</a>
+                <a href="estates.html">郡王封地</a>
+                <a href="villages.html">聚落地名</a>
+                <a href="tombs.html">王陵陵寝</a>
+                <a href="epigraphy.html">碑刻圹志</a>
+                <a href="poetry.html">诗文戏曲</a>
+                <a href="classics.html">典籍著述</a>
                 <a href="branches.html">分房支派</a>
-                <a href="history.html">王府传承</a>
-                <a href="institution.html">宗室典制</a>
                 <a href="migration.html">迁徙寻根</a>
                 <a href="memorial.html">云端祭奠</a>
+                <a href="genealogy-guide.html">修谱指南</a>
                 <a href="search.html">🔍 搜索</a>
             </nav>
         </div>
@@ -71,46 +109,267 @@
 
     <main class="container">
         <h1>周藩数字世系家谱树</h1>
-        <div class="tree-instructions">💡 提示：点击下方任意先祖节点，可实时在下方展示面板查看其官阶、封国及传裔详情。</div>
+        <div class="tree-instructions">
+            💡 <strong>交互提示：</strong>点击带 <code>[+] / [−]</code> 标记的节点可展开或收起子分支；点击任意先祖节点，下方档案面板将即时呈现其名讳、封国治所、五行偏旁与后裔聚落考据。
+        </div>
 
-        <div class="tree-viewport">
-            <div class="tree-wrap">
-                <!-- 根节点：明太祖 -->
-                <div class="tree-node node-emperor" onclick="showDetail('明太祖 朱元璋', '大明开国皇帝，洪武三年分封诸皇子，建皇明宗法与二十字辈规制。')">
-                    明太祖 朱元璋（高皇帝）
-                </div>
-                <div class="line-v"></div>
-
-                <!-- 二级节点：周定王 -->
-                <div class="tree-node node-king" onclick="showDetail('始祖 周定王 朱橚', '皇五子，洪武十一年改封周王，就藩开封府。主持编修《救荒本草》《普济方》，为周藩大始祖。')">
-                    【始祖】周定王 朱橚
-                </div>
-                <div class="line-v"></div>
-
-                <!-- 三级节点：十四大分房郡王 -->
-                <div style="font-size:0.85rem; color:#8c1d1d; margin-bottom:0.5rem; font-weight:bold;">── 诸子十四大郡王分房 ──</div>
-                <div class="branch-group">
-                    <div class="tree-node node-branch" onclick="showDetail('周宪王 朱有炖（长房）', '周定王嫡长子，袭周王爵。号诚斋，著名杂剧家，著《诚斋乐府》。无嗣。')">长房: 朱有炖</div>
-                    <div class="tree-node node-branch" onclick="showDetail('汝南王 朱有爋（二房）', '周定王次子，建文四年封汝南王，后随迁云南大理，支脉播迁滇豫。')">二房: 朱有爋</div>
-                    <div class="tree-node node-branch" onclick="showDetail('顺阳王 朱有烜（三房）', '周定王三子，永乐元年封顺阳王，早薨无嗣。')">三房: 朱有烜</div>
-                    <div class="tree-node node-branch" onclick="showDetail('祥符王/周简王 朱有爝（四房·大宗）', '周定王四子，初封祥符王，后继袭周王爵，为后世历代周王之大宗直系。')">四房: 朱有爝</div>
-                    <div class="tree-node node-branch" onclick="showDetail('新安王 朱有熹（五房）', '周定王五子，永乐元年封新安王，后裔分居开封各邑。')">五房: 朱有熹</div>
-                    <div class="tree-node node-branch" onclick="showDetail('永宁王 朱有灮（六房）', '周定王六子，开府河南，子孙繁盛，传袭数代。')">六房: 朱有灮</div>
-                    <div class="tree-node node-branch" onclick="showDetail('汝阳王 朱有煽（七房）', '周定王七子，永乐四年封汝阳王，后裔宗支繁盛。')">七房: 朱有煽</div>
-                    <div class="tree-node node-branch" onclick="showDetail('镇平王 朱有爌（八房）', '周定王八子，永乐四年封镇平王，后裔分布于宛南及皖北。')">八房: 朱有爌</div>
-                    <div class="tree-node node-branch" onclick="showDetail('宜阳王 朱有炥（九房）', '周定王九子，永乐九年封宜阳王。')">九房: 朱有炥</div>
-                    <div class="tree-node node-branch" onclick="showDetail('遂平王 朱有颎（十房）', '周定王十子，永乐九年封遂平王。')">十房: 朱有颎</div>
-                    <div class="tree-node node-branch" onclick="showDetail('封丘王 朱有煴（十一房）', '周定王十一子，开府黄河北岸新乡、封丘一带。')">十一房: 朱有煴</div>
-                    <div class="tree-node node-branch" onclick="showDetail('罗山王 朱有熼（十二房）', '周定王十二子，永乐九年封罗山王。')">十二房: 朱有熼</div>
-                    <div class="tree-node node-branch" onclick="showDetail('内乡王 朱有焵（十三房）', '周定王十三子，开府南阳内乡。')">十三房: 朱有焵</div>
-                    <div class="tree-node node-branch" onclick="showDetail('胙城王 朱有燆（十四房）', '周定王十四子，封于胙城，后裔繁衍于延津、胙城及黄河沿线。')">十四房: 朱有燆</div>
-                </div>
+        <!-- 工具栏 -->
+        <div class="tree-toolbar">
+            <div class="toolbar-group">
+                <button class="btn-tool" onclick="expandAll()">全部展开</button>
+                <button class="btn-tool secondary" onclick="collapseAll()">全部收起</button>
+                <button class="btn-tool secondary" onclick="expandMajorOnly()">仅看亲王大宗</button>
+            </div>
+            <div class="toolbar-group">
+                <input type="text" id="treeSearch" class="search-input" placeholder="输入人名/王号搜索..." onkeyup="searchTree()">
             </div>
         </div>
 
+        <!-- 谱系树结构 -->
+        <div class="tree-viewport">
+            <div class="tree-tree">
+                <ul>
+                    <li>
+                        <div class="tree-node node-emperor" onclick="toggleNode(this, 'zhu_yuanzhang')">
+                            <span class="toggle-btn">−</span>
+                            <span>明太祖 朱元璋 (高皇帝)</span>
+                            <span class="node-tag">皇明之祖</span>
+                        </div>
+                        <ul id="treeRoot">
+                            <li>
+                                <div class="tree-node node-king" onclick="toggleNode(this, 'zhu_su')">
+                                    <span class="toggle-btn">−</span>
+                                    <span>【始祖】周定王 朱橚</span>
+                                    <span class="node-tag">木 · 皇五子</span>
+                                </div>
+                                <ul>
+                                    <!-- 长房 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youdun')">
+                                            <span>长房：周宪王 朱有燉</span>
+                                            <span class="node-tag">火 (燉)</span>
+                                            <span style="font-size:0.75rem; color:#888;">(无嗣)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 二房 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxun')">
+                                            <span>二房：汝南王 朱有爋</span>
+                                            <span class="node-tag">火 (爋)</span>
+                                            <span style="font-size:0.75rem; color:#6a1b9a;">(滇黔房)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 三房 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkuang1')">
+                                            <span>三房：顺阳怀庄王 朱有爌</span>
+                                            <span class="node-tag">火 (爌)</span>
+                                            <span style="font-size:0.75rem; color:#888;">(宛洛房)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 四房 祥符王/周大宗 -->
+                                    <li>
+                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_youjue')">
+                                            <span class="toggle-btn">−</span>
+                                            <span>四房：祥符王 / 周简王 朱有爝</span>
+                                            <span class="node-tag" style="background:#8c1d1d; color:#fff;">火 (爝) · 承袭大宗</span>
+                                        </div>
+                                        <ul>
+                                            <li>
+                                                <div class="tree-node node-branch" onclick="selectPerson('zhu_zihou')">
+                                                    <span>第四代：周靖王 朱子垕</span>
+                                                    <span class="node-tag">土 (垕)</span>
+                                                    <span style="font-size:0.75rem; color:#888;">(无嗣)</span>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_ziqiao')">
+                                                    <span class="toggle-btn">−</span>
+                                                    <span>第五代：周懿王 朱子墧</span>
+                                                    <span class="node-tag">土 (墧)</span>
+                                                </div>
+                                                <ul>
+                                                    <li>
+                                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_tongguan')">
+                                                            <span class="toggle-btn">−</span>
+                                                            <span>第六代：周惠王 朱同䥸</span>
+                                                            <span class="node-tag">金 (䥸)</span>
+                                                        </div>
+                                                        <ul>
+                                                            <li>
+                                                                <div class="tree-node node-branch" onclick="selectPerson('zhu_anguo')">
+                                                                    <span>第七代：周悼王 朱安㳡</span>
+                                                                    <span class="node-tag">水 (㳡)</span>
+                                                                    <span style="font-size:0.75rem; color:#888;">(追封)</span>
+                                                                </div>
+                                                                <ul>
+                                                                    <li>
+                                                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_mujue')">
+                                                                            <span class="toggle-btn">−</span>
+                                                                            <span>第八代：周恭王 朱睦㮮</span>
+                                                                            <span class="node-tag">木 (㮮)</span>
+                                                                        </div>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_chaogang')">
+                                                                                    <span class="toggle-btn">−</span>
+                                                                                    <span>第九代：周庄王 朱朝堈</span>
+                                                                                    <span class="node-tag">火 (堈)</span>
+                                                                                </div>
+                                                                                <ul>
+                                                                                    <li>
+                                                                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_zaizhen')">
+                                                                                            <span class="toggle-btn">−</span>
+                                                                                            <span>第十代：周敬王 朱在鋟</span>
+                                                                                            <span class="node-tag">金 (鋟)</span>
+                                                                                        </div>
+                                                                                        <ul>
+                                                                                            <li>
+                                                                                                <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_suzhao')">
+                                                                                                    <span class="toggle-btn">−</span>
+                                                                                                    <span>第十一代：周端王 朱肃溱</span>
+                                                                                                    <span class="node-tag">水 (溱)</span>
+                                                                                                </div>
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <div class="tree-node node-main-branch" onclick="selectPerson('zhu_gongxiao')">
+                                                                                                            <span>末代：周王 朱恭枵</span>
+                                                                                                            <span class="node-tag">木 (枵)</span>
+                                                                                                            <span style="font-size:0.75rem; color:#b26a00;">(1642殉难)</span>
+                                                                                                        </div>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- 五房 新乡王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxin')">
+                                            <span>五房：新乡王 朱有𤊟</span>
+                                            <span class="node-tag">火 (𤊟)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(卫辉新乡)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 六房 宁陵王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youlan')">
+                                            <span>六房：宁陵王 朱有爤</span>
+                                            <span class="node-tag">火 (爤)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(商丘宁陵)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 七房 杞县王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkai')">
+                                            <span>七房：杞县王 朱有炌</span>
+                                            <span class="node-tag">火 (炌)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(开封杞县)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 八房 信阳王 -->
+                                    <li>
+                                        <div class="tree-node node-gray" onclick="selectPerson('zhu_youxun2')">
+                                            <span>八房：信阳王 朱有燖</span>
+                                            <span class="node-tag">火 (燖)</span>
+                                            <span style="font-size:0.75rem; color:#999;">(无嗣国除)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 九房 镇平王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkuang2')">
+                                            <span>九房：镇平恭定王 朱有爌(㫤)</span>
+                                            <span class="node-tag">火 (爌)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(南阳镇平)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 十房 遂平王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youlong')">
+                                            <span>十房：遂平悼恭王 朱有熡</span>
+                                            <span class="node-tag">火 (熡)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(汝宁遂平)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 十一房 封丘王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youyun')">
+                                            <span>十一房：封丘康懿王 朱有𤓂</span>
+                                            <span class="node-tag">火 (𤓂)</span>
+                                            <span style="font-size:0.75rem; color:#1565c0;">(封丘常东村脉)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 十二房 鲁山王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxian')">
+                                            <span>十二房：鲁山悼恭王 朱有灦</span>
+                                            <span class="node-tag">火 (灦)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(汝州鲁山)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 十三房 邺王 -->
+                                    <li>
+                                        <div class="tree-node node-gray" onclick="selectPerson('zhu_youyue')">
+                                            <span>十三房：邺王 朱有爚</span>
+                                            <span class="node-tag">火 (爚)</span>
+                                            <span style="font-size:0.75rem; color:#999;">(无嗣国除)</span>
+                                        </div>
+                                    </li>
+
+                                    <!-- 十四房 胙城王 -->
+                                    <li>
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youqiao')">
+                                            <span>十四房：胙城庄简王 朱有燆</span>
+                                            <span class="node-tag">火 (燆)</span>
+                                            <span style="font-size:0.75rem; color:#2e7d32;">(卫辉胙城)</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 详细档案展示面板 -->
         <div class="detail-panel" id="detailBox">
-            <div class="detail-title" id="detailTitle">点击上方家谱树节点查看档案</div>
-            <div class="detail-desc" id="detailDesc">收录明太祖、周定王及十四大郡王各房系源流考据。</div>
+            <div class="detail-header">
+                <span class="detail-title" id="detailTitle">始祖 周定王 朱橚</span>
+                <span class="detail-badge" id="detailBadge">周藩大始祖</span>
+            </div>
+            <div class="detail-grid" id="detailGrid">
+                <div><strong>五行所属：</strong>木字旁 (橚)</div>
+                <div><strong>在位年号：</strong>洪武十四年之国 ~ 洪熙元年 (1381-1425)</div>
+                <div><strong>封国治所：</strong>开封府周王府紫禁城</div>
+                <div><strong>陵寝吉壤：</strong>河南禹州无梁镇无风山地宫</div>
+            </div>
+            <div class="detail-desc" id="detailDesc">
+                明太祖高皇帝第五子。天资明达，笃学崇医。就藩开封后辟王府生药圃，广植中原草木，编纂《救荒本草》（414种）与《普济方》（61,739首），为周藩全派之始祖。
+            </div>
         </div>
     </main>
 
@@ -122,9 +381,312 @@
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
-        function showDetail(title, desc) {
-            document.getElementById('detailTitle').innerText = title;
-            document.getElementById('detailDesc').innerText = desc;
+
+        // 人物数据库
+        const personData = {
+            'zhu_yuanzhang': {
+                title: '明太祖 朱元璋 (高皇帝)',
+                badge: '大明开国皇帝',
+                wuxing: '太祖本源',
+                reign: '洪武元年 ~ 洪武三十一年 (1368-1398)',
+                place: '应天府紫禁城 (南京)',
+                tomb: '南京紫金山明孝陵',
+                desc: '大明开国皇帝。确立皇明宗法，亲为二十四子各拟二十字世系派语，并规定取名第三字依“木火土金水”五行相生定偏旁。'
+            },
+            'zhu_su': {
+                title: '始祖 周定王 朱橚',
+                badge: '周藩第一代亲王',
+                wuxing: '木字旁 (橚)',
+                reign: '洪武三年封吴王，洪武十一年改封周王，十四年就藩',
+                place: '开封府周王府大内',
+                tomb: '河南禹州市无梁镇无风山玄宫 (国保单位)',
+                desc: '太祖第五子。好学博古，崇尚医药农学。辟生药圃于开封王府，主持编纂《救荒本草》《普济方》，为中国古代科学著述之丰碑。育十五子，十四子受封郡王。'
+            },
+            'zhu_youdun': {
+                title: '长房：周宪王 朱有燉 (号诚斋)',
+                badge: '周第二代王 · 曲圣',
+                wuxing: '火字旁 (燉)',
+                reign: '永乐二十二年 ~ 正统四年 (1425-1439)',
+                place: '开封府周王府',
+                tomb: '开封祥符故里 / 禹州',
+                desc: '定王嫡长子。大明一代戏曲巨匠，精通音律，刊印《诚斋乐府》（杂剧31种、散曲数百套），著《元宫词》百首。无嗣，弟朱有爝承袭亲王大宗。'
+            },
+            'zhu_youxun': {
+                title: '二房：汝南王 朱有爋',
+                badge: '西南滇黔房始祖',
+                wuxing: '火字旁 (爋)',
+                reign: '建文四年册封 (1402)',
+                place: '云南大理府',
+                tomb: '云南大理 / 保山',
+                desc: '定王嫡次子。建文初受封，永乐中谪居大理。后代繁衍于大理喜洲、邓川、保山及楚雄，为西南规模最大的周藩宗系。'
+            },
+            'zhu_youkuang1': {
+                title: '三房：顺阳怀庄王 朱有爌',
+                badge: '宛洛顺阳房',
+                wuxing: '火字旁 (爌)',
+                reign: '永乐二年册封 ~ 宣德八年 (1404-1433)',
+                place: '南阳府顺阳县 (今淅川)',
+                tomb: '南阳淅川 / 禹州',
+                desc: '定王第三子。受封南阳顺阳，宣德八年薨。子朱子峹袭封顺阳恭简王，后裔世居淅川、邓州及开封。'
+            },
+            'zhu_youjue': {
+                title: '四房：祥符王 / 周简王 朱有爝',
+                badge: '周第三代王 · 大宗直系源头',
+                wuxing: '火字旁 (爝)',
+                reign: '永乐元年封祥符王，正统四年继袭周王 (1439-1452)',
+                place: '开封府周王府',
+                tomb: '河南禹州三峰山',
+                desc: '定王第四子。兄宪王无嗣，正统四年承嗣周亲王大统，谥曰简。后世历代周亲王皆出自简王直系一脉。'
+            },
+            'zhu_youxin': {
+                title: '五房：新乡王 朱有𤊟',
+                badge: '豫北新乡房',
+                wuxing: '火字旁 (𤊟)',
+                reign: '永乐元年册封 ~ 正统四年 (1403-1439)',
+                place: '卫辉府新乡县',
+                tomb: '河南新乡 / 获嘉',
+                desc: '定王第五子。开府卫辉新乡，明清两代宗亲广泛分布于新乡、获嘉朱厂、辉县及焦作各县。'
+            },
+            'zhu_youlan': {
+                title: '六房：宁陵王 朱有爤',
+                badge: '豫东淮上房',
+                wuxing: '火字旁 (爤)',
+                reign: '永乐元年册封 (1403)',
+                place: '归德府宁陵县 (今商丘宁陵)',
+                tomb: '河南商丘宁陵',
+                desc: '定王第六子。治所商丘宁陵，后裔世居商丘、宁陵，明末清初部分宗支播迁至安徽宿州萧县大朱村一带。'
+            },
+            'zhu_youkai': {
+                title: '七房：杞县王 朱有炌',
+                badge: '开封近畿房',
+                wuxing: '火字旁 (炌)',
+                reign: '永乐元年册封 (1403)',
+                place: '开封府杞县',
+                tomb: '河南开封杞县',
+                desc: '定王第七子。封国地近汴梁，后裔聚居于杞县高阳朱寨、通许、兰考及开封近郊，多筑有朱家楼。'
+            },
+            'zhu_youxun2': {
+                title: '八房：信阳王 朱有燖',
+                badge: '无嗣国除',
+                wuxing: '火字旁 (燖)',
+                reign: '永乐二年 ~ 永乐十八年 (1404-1420)',
+                place: '汝宁府信阳州',
+                tomb: '河南信阳',
+                desc: '定王第八子。永乐十八年薨，无嗣国除。'
+            },
+            'zhu_youkuang2': {
+                title: '九房：镇平恭定王 朱有爌(㫤)',
+                badge: '宛南镇平房',
+                wuxing: '火字旁 (爌/㫤)',
+                reign: '永乐二年 ~ 景泰六年 (1404-1455)',
+                place: '南阳府镇平县',
+                tomb: '南阳镇平 / 禹州',
+                desc: '定王第九子。开府宛南镇平，后代传衍于镇平朱家营、邓州、内乡及安徽亳州涡阳。'
+            },
+            'zhu_youlong': {
+                title: '十房：遂平悼恭王 朱有熡',
+                badge: '豫南遂平房',
+                wuxing: '火字旁 (熡)',
+                reign: '永乐十年册封 (1412)',
+                place: '汝宁府遂平县',
+                tomb: '河南驻马店遂平',
+                desc: '定王第十子。世袭七代至明末，子孙广泛分布于遂平朱湖、西平及安徽阜阳一带。'
+            },
+            'zhu_youyun': {
+                title: '十一房：封丘康懿王 朱有𤓂',
+                badge: '豫北黄河房 (封丘常东村脉)',
+                wuxing: '火字旁 (𤓂)',
+                reign: '永乐十年册封 (1412)',
+                place: '开封府封丘县',
+                tomb: '河南封丘 / 新乡',
+                desc: '定王第十一子。开府黄河北岸封丘。崇祯大水后，后裔散居于黄河大堤故道滩区，<strong>封丘县李庄乡常东村朱氏</strong>即属此房派重要传衍支脉。'
+            },
+            'zhu_youxian': {
+                title: '十二房：鲁山悼恭王 朱有灦',
+                badge: '伏牛山麓房',
+                wuxing: '火字旁 (灦)',
+                reign: '永乐十年册封 (1412)',
+                place: '汝州鲁山县 (今平顶山)',
+                tomb: '河南鲁山 / 平顶山',
+                desc: '定王第十二子。封地位于伏牛山东麓，后裔分布于鲁山朱洼、郏县、宝丰及禹州。'
+            },
+            'zhu_youyue': {
+                title: '十三房：邺王 朱有爚',
+                badge: '无嗣国除',
+                wuxing: '火字旁 (爚)',
+                reign: '永乐十年册封 (1412)',
+                place: '彰德府安阳',
+                tomb: '河南安阳',
+                desc: '定王第十三子。宣德初年早薨无嗣国除。'
+            },
+            'zhu_youqiao': {
+                title: '十四房：胙城庄简王 朱有燆',
+                badge: '豫北胙城房',
+                wuxing: '火字旁 (燆)',
+                reign: '永乐十年册封 (1412)',
+                place: '卫辉府胙城县 (今延津胙城)',
+                tomb: '河南延津胙城',
+                desc: '定王第十四子。治所临近黄河古渡口，后裔世居延津胙城朱营、原阳及鲁西南一带。'
+            },
+            'zhu_zihou': {
+                title: '第四代：周靖王 朱子垕',
+                badge: '周第四代亲王',
+                wuxing: '土字旁 (垕)',
+                reign: '景泰六年 ~ 景泰七年 (1455-1456)',
+                place: '开封周府',
+                tomb: '禹州无梁镇后沟村地下玄宫',
+                desc: '简王长子。在位一年薨无嗣，弟朱子墧袭封。陵寝设有精妙防盗排水机关。'
+            },
+            'zhu_ziqiao': {
+                title: '第五代：周懿王 朱子墧',
+                badge: '周第五代亲王',
+                wuxing: '土字旁 (墧)',
+                reign: '天顺元年 ~ 成化二十二年 (1457-1486)',
+                place: '开封周府',
+                tomb: '禹州大洪山周陵区',
+                desc: '简王次子。在位三十年，政治宽仁，开封周王府进入极盛繁衍时期。'
+            },
+            'zhu_tongguan': {
+                title: '第六代：周惠王 朱同䥸',
+                badge: '周第六代亲王',
+                wuxing: '金字旁 (䥸)',
+                reign: '成化二十三年 ~ 弘治十一年 (1487-1498)',
+                place: '开封周府',
+                tomb: '河南禹州神垕',
+                desc: '懿王长子。初封睢阳王，成化末袭亲王，在位十一年薨。'
+            },
+            'zhu_anguo': {
+                title: '第七代：周悼王 朱安㳡',
+                badge: '追封亲王',
+                wuxing: '水字旁 (㳡)',
+                reign: '弘治十三年卒 (未及即位)',
+                place: '开封周府',
+                tomb: '开封 / 禹州',
+                desc: '惠王世子。早卒追封为周悼王，子朱睦㮮承嗣大统。'
+            },
+            'zhu_mujue': {
+                title: '第八代：周恭王 朱睦㮮',
+                badge: '周第八代亲王',
+                wuxing: '木字旁 (㮮)',
+                reign: '正德元年 ~ 嘉靖十七年 (1506-1538)',
+                place: '开封周府',
+                tomb: '开封祥符',
+                desc: '悼王长子。在位三十二年，端谨守礼，敦睦宗族。'
+            },
+            'zhu_chaogang': {
+                title: '第九代：周庄王 朱朝堈',
+                badge: '周第九代亲王',
+                wuxing: '火字旁 (堈)',
+                reign: '嘉靖十九年 ~ 隆庆六年 (1540-1572)',
+                place: '开封周府',
+                tomb: '开封祥符',
+                desc: '恭王次子。在位三十二年，王府文风昌盛。'
+            },
+            'zhu_zaizhen': {
+                title: '第十代：周敬王 朱在鋟',
+                badge: '周第十代亲王',
+                wuxing: '金字旁 (鋟)',
+                reign: '万历元年 ~ 万历十一年 (1573-1583)',
+                place: '开封周府',
+                tomb: '开封祥符',
+                desc: '庄王长子。在位十年薨。'
+            },
+            'zhu_suzhao': {
+                title: '第十一代：周端王 朱肃溱',
+                badge: '周第十一代亲王',
+                wuxing: '水字旁 (溱)',
+                reign: '万历十四年 (1586)',
+                place: '开封周府',
+                tomb: '开封祥符',
+                desc: '敬王长子。袭封同年薨。'
+            },
+            'zhu_gongxiao': {
+                title: '末代：周王 朱恭枵',
+                badge: '周末代亲王 · 殉节名王',
+                wuxing: '木字旁 (枵)',
+                reign: '万历十六年 ~ 崇祯十五年 (1588-1642)',
+                place: '开封周王府紫禁城',
+                tomb: '开封城 / 殉难处',
+                desc: '端王长子。崇祯十五年李自成三围开封，朱恭枵散尽家财招募守城。九月黄河大水灌城，王府沉没，朱恭枵殉难，周藩二百六十余载宫城入水。'
+            }
+        };
+
+        // 节点点击交互
+        function toggleNode(elem, key) {
+            const ul = elem.nextElementSibling;
+            const btn = elem.querySelector('.toggle-btn');
+            if (ul && ul.tagName === 'UL') {
+                if (ul.style.display === 'none') {
+                    ul.style.display = 'block';
+                    if (btn) btn.innerText = '−';
+                } else {
+                    ul.style.display = 'none';
+                    if (btn) btn.innerText = '+';
+                }
+            }
+            selectPerson(key);
+        }
+
+        // 显示人物档案
+        function selectPerson(key) {
+            const data = personData[key];
+            if (!data) return;
+
+            document.getElementById('detailTitle').innerText = data.title;
+            document.getElementById('detailBadge').innerText = data.badge;
+            
+            document.getElementById('detailGrid').innerHTML = `
+                <div><strong>五行属性：</strong>${data.wuxing}</div>
+                <div><strong>在位年号：</strong>${data.reign}</div>
+                <div><strong>封国治所：</strong>${data.place}</div>
+                <div><strong>陵寝吉壤：</strong>${data.tomb}</div>
+            `;
+            
+            document.getElementById('detailDesc').innerHTML = `<strong>文史与宗谱考据：</strong><br>${data.desc}`;
+        }
+
+        // 展开全部
+        function expandAll() {
+            const uls = document.querySelectorAll('.tree-tree ul');
+            uls.forEach(ul => ul.style.display = 'block');
+            const btns = document.querySelectorAll('.toggle-btn');
+            btns.forEach(b => b.innerText = '−');
+        }
+
+        // 折叠全部
+        function collapseAll() {
+            const uls = document.querySelectorAll('.tree-tree ul ul');
+            uls.forEach(ul => ul.style.display = 'none');
+            const btns = document.querySelectorAll('.toggle-btn');
+            btns.forEach(b => b.innerText = '+');
+        }
+
+        // 仅看亲王大宗
+        function expandMajorOnly() {
+            collapseAll();
+            document.getElementById('treeRoot').style.display = 'block';
+            const majorUls = document.querySelectorAll('#treeRoot > li > ul, #treeRoot > li > ul > li:nth-child(4) ul');
+            majorUls.forEach(ul => ul.style.display = 'block');
+        }
+
+        // 搜索定位
+        function searchTree() {
+            const kw = document.getElementById('treeSearch').value.trim().toLowerCase();
+            const nodes = document.querySelectorAll('.tree-node');
+            
+            nodes.forEach(node => {
+                const text = node.innerText.toLowerCase();
+                if (kw && text.includes(kw)) {
+                    node.classList.add('highlight');
+                    let parent = node.parentElement;
+                    while (parent && parent.classList.contains('tree-viewport') === false) {
+                        if (parent.tagName === 'UL') parent.style.display = 'block';
+                        parent = parent.parentElement;
+                    }
+                } else {
+                    node.classList.remove('highlight');
+                }
+            });
         }
     </script>
 </body>
