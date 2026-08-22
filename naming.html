@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周藩五行命名助手 - 大明周藩纪事</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        
+        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
+        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        
+        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+
+        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
+        
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        
+        .tool-card { background: #fcf9f5; border: 1px solid #e8dfd8; padding: 1.8rem; border-radius: 8px; margin-top: 1.5rem; }
+        .form-row { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.2rem; }
+        .form-label { font-weight: bold; color: #8c1d1d; }
+        .select-input { padding: 0.6rem 1rem; font-size: 1rem; border: 1px solid #dcd3cb; border-radius: 4px; background: #fff; outline: none; }
+        .btn-gen { background: #8c1d1d; color: #fff; border: none; padding: 0.6rem 1.5rem; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: bold; }
+        .btn-gen:hover { background: #701414; }
+
+        .result-panel { margin-top: 1.5rem; display: none; background: #fff; border: 1px solid #e2dcd5; padding: 1.5rem; border-radius: 6px; }
+        .char-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.8rem; margin-top: 1rem; }
+        .char-tag { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 0.5rem 0.8rem; border-radius: 4px; text-align: center; }
+        .char-tag strong { color: #8c1d1d; font-size: 1.2rem; display: block; }
+        .char-tag span { font-size: 0.8rem; color: #666; }
+
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu.show { display: flex; }
+            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="site-logo">大明周藩纪事</a>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <nav class="nav-menu" id="navMenu">
+                <a href="index.html">首页</a>
+                <a href="lineage.html">世系字辈</a>
+                <a href="tree.html">家谱树</a>
+                <a href="naming.html" style="color:#fff; font-weight:bold;">✨ 命名助手</a>
+                <a href="branches.html">分房支派</a>
+                <a href="history.html">王府传承</a>
+                <a href="institution.html">宗室典制</a>
+                <a href="migration.html">迁徙寻根</a>
+                <a href="memorial.html">云端祭奠</a>
+                <a href="classics.html">典籍著述</a>
+                <a href="figures/index.html">历代人物</a>
+                <a href="documents.html">谱牒古迹</a>
+                <a href="rules.html">祖训家规</a>
+                <a href="search.html">🔍 搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>明式宗室取名与五行偏旁助手</h1>
+        <div class="intro-box">
+            明太祖规制：宗室子孙皆为单姓双名。<strong>第一字必承御赐字辈派语，第二字必从五行（木→火→土→金→水）偏旁</strong>相生循环。
+        </div>
+
+        <div class="tool-card">
+            <div class="form-row">
+                <label class="form-label">选择字辈（世次）：</label>
+                <select id="genSelect" class="select-input">
+                    <option value="有">第2世 ·【有】（属火偏旁）</option>
+                    <option value="子">第3世 ·【子】（属土偏旁）</option>
+                    <option value="同">第4世 ·【同】（属金偏旁）</option>
+                    <option value="安">第5世 ·【安】（属水偏旁）</option>
+                    <option value="睦">第6世 ·【睦】（属木偏旁）</option>
+                    <option value="勤">第7世 ·【勤】（属火偏旁）</option>
+                    <option value="朝">第8世 ·【朝】（属土偏旁）</option>
+                    <option value="在">第9世 ·【在】（属金偏旁）</option>
+                    <option value="肃">第10世 ·【肃】（属水偏旁）</option>
+                    <option value="恭">第11世 ·【恭】（属木偏旁）</option>
+                    <option value="绍">第12世 ·【绍】（属火偏旁）</option>
+                    <option value="伦">第13世 ·【伦】（属土偏旁）</option>
+                    <option value="敷">第14世 ·【敷】（属金偏旁）</option>
+                    <option value="惠">第15世 ·【惠】（属水偏旁）</option>
+                    <option value="润">第16世 ·【润】（属木偏旁）</option>
+                    <option value="昭">第17世 ·【昭】（属火偏旁）</option>
+                    <option value="恪">第18世 ·【恪/格】（属土偏旁）</option>
+                    <option value="广">第19世 ·【广】（属金偏旁）</option>
+                    <option value="登">第20世 ·【登/庸/荣】（属水偏旁）</option>
+                </select>
+                <button class="btn-gen" onclick="generateNames()">生成规制备选名</button>
+            </div>
+
+            <div id="resultPanel" class="result-panel">
+                <h3 id="resTitle" style="color:#8c1d1d;"></h3>
+                <p id="resRule" style="font-size:0.95rem; color:#666; margin-top:0.4rem;"></p>
+                <div class="char-grid" id="charGrid"></div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
+
+    <script>
+        const dict = {
+            '木': [
+                { c: '栋', d: '栋梁之材' }, { c: '楠', d: '坚实芳香' }, { c: '楷', d: '端庄典范' },
+                { c: '彬', d: '文采斐然' }, { c: '权', d: '通达谋略' }, { c: '朴', d: '淳真内敛' },
+                { c: '柯', d: '高洁挺拔' }, { c: '枫', d: '风雅丰盈' }
+            ],
+            '火': [
+                { c: '煜', d: '光辉照耀' }, { c: '炜', d: '鲜明光彩' }, { c: '烨', d: '盛大明亮' },
+                { c: '烁', d: '光芒夺目' }, { c: '煊', d: '声名通达' }, { c: '焕', d: '焕然一新' },
+                { c: '烽', d: '抱负宏远' }, { c: '熠', d: '神采飞扬' }
+            ],
+            '土': [
+                { c: '基', d: '基业长青' }, { c: '培', d: '涵养敦厚' }, { c: '坦', d: '心怀坦荡' },
+                { c: '坤', d: '厚德载物' }, { c: '坚', d: '刚毅坚定' }, { c: '垚', d: '高山耸立' },
+                { c: '境', d: '心怀远境' }, { c: '均', d: '端平正直' }
+            ],
+            '金': [
+                { c: '鉴', d: '明察审视' }, { c: '铎', d: '声振四方' }, { c: '钧', d: '沉稳重达' },
+                { c: '镕', d: '陶铸成器' }, { c: '铠', d: '坚固护身' }, { c: '钊', d: '刚励勉力' },
+                { c: '铭', d: '志铭德行' }, { c: '锐', d: '锐意奋进' }
+            ],
+            '水': [
+                { c: '润', d: '温润泽物' }, { c: '涵', d: '包容海量' }, { c: '淳', d: '敦厚笃实' },
+                { c: '浩', d: '浩然正气' }, { c: '治', d: '经世理政' }, { c: '深', d: '深思远虑' },
+                { c: '渊', d: '渊博笃学' }, { c: '清', d: '高风廉清' }
+            ]
+        };
+
+        const genMap = {
+            '有': { elem: '火', seq: 2 }, '子': { elem: '土', seq: 3 }, '同': { elem: '金', seq: 4 },
+            '安': { elem: '水', seq: 5 }, '睦': { elem: '木', seq: 6 }, '勤': { elem: '火', seq: 7 },
+            '朝': { elem: '土', seq: 8 }, '在': { elem: '金', seq: 9 }, '肃': { elem: '水', seq: 10 },
+            '恭': { elem: '木', seq: 11 }, '绍': { elem: '火', seq: 12 }, '伦': { elem: '土', seq: 13 },
+            '敷': { elem: '金', seq: 14 }, '惠': { elem: '水', seq: 15 }, '润': { elem: '木', seq: 16 },
+            '昭': { elem: '火', seq: 17 }, '恪': { elem: '土', seq: 18 }, '广': { elem: '金', seq: 19 },
+            '登': { elem: '水', seq: 20 }
+        };
+
+        function generateNames() {
+            const gen = document.getElementById('genSelect').value;
+            const info = genMap[gen];
+            const chars = dict[info.elem];
+
+            document.getElementById('resTitle').innerText = `周藩第 ${info.seq} 世 · 字辈【朱${gen}○】`;
+            document.getElementById('resRule').innerText = `按照五行相生相承，末字须选用【${info.elem}】字偏旁。备选佳字如下：`;
+
+            const grid = document.getElementById('charGrid');
+            grid.innerHTML = chars.map(item => `
+                <div class="char-tag">
+                    <strong>朱${gen}${item.c}</strong>
+                    <span>${item.d}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('resultPanel').style.display = 'block';
+        }
+
+        function toggleMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
