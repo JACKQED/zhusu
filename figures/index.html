@@ -3,37 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>朱氏后辈子孙纪事 - 大明周藩纪事</title>
+    <title>朱氏历代人物纪事 - 大明周藩纪事</title>
     <style>
-        body { font-family: "PingFang SC", "Microsoft YaHei", serif; margin: 0; padding: 2rem; background: #faf8f5; color: #333; line-height: 1.8; }
-        .container { max-width: 800px; margin: 0 auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        .site-header { background: #8c1d1d; color: #fff; padding: 1rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .header-inner { max-width: 900px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
+        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 1.5rem; font-size: 0.95rem; }
+        .nav-menu a:hover { color: #fff; text-decoration: underline; }
+        .container { max-width: 900px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        .person-card { border: 1px solid #e8dfd8; padding: 1.2rem; border-radius: 6px; margin: 1rem 0; background: #fdfbf7; }
+        .person-card { border: 1px solid #e8dfd8; padding: 1.5rem; border-radius: 6px; margin: 1.2rem 0; background: #fdfbf7; }
         .person-name { font-size: 1.15rem; font-weight: bold; color: #8c1d1d; }
+        .person-name a { color: #8c1d1d; text-decoration: none; }
+        .person-name a:hover { text-decoration: underline; }
         .person-tag { display: inline-block; background: #efe5dc; color: #6b4d1b; font-size: 0.8rem; padding: 2px 6px; border-radius: 3px; margin-left: 8px; }
-        .back-btn { display: inline-block; margin-top: 2rem; padding: 0.4rem 1rem; background: #8c1d1d; color: #fff; border-radius: 4px; text-decoration: none; }
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>后代子孙与名人事迹</h1>
-        <p>此栏目用于收录周藩历代宗支后人、迁徙各地的族人小传及近现代家族长辈之生平事迹。</p>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="../index.html" class="site-logo">大明周藩纪事</a>
+            <nav class="nav-menu">
+                <a href="../index.html">首页</a>
+                <a href="../lineage.html">世系字辈</a>
+                <a href="../classics.html">典籍著述</a>
+                <a href="index.html" style="color:#fff; font-weight:bold;">历代人物</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>历代人物与名人事迹</h1>
+        <p style="margin-top: 1rem;">收录周王府历代宗亲、学术名宿以及迁徙各地之朱氏后辈子孙生平小传。</p>
+
+        <div class="person-card">
+            <div class="person-name"><a href="zhu-su.html">【始祖】周定王 朱橚 →</a> <span class="person-tag">明太祖第五子</span></div>
+            <p style="margin-top: 0.5rem; color: #555;">封吴王，后改封周王就藩开封。博古好学，主持编纂《救荒本草》《普济方》，造福苍生。</p>
+        </div>
 
         <div class="person-card">
             <div class="person-name">周宪王 朱有炖 <span class="person-tag">第二世 · 字辈【有】</span></div>
-            <p style="margin-top: 0.5rem; font-size: 0.95rem; color: #555;">
-                周定王长子，明代著名戏曲家、词曲家。号诚斋，著有杂剧三十一种（如《诚斋乐府》），在元明杂剧过渡时期具有极高的文学史地位。
-            </p>
+            <p style="margin-top: 0.5rem; color: #555;">朱橚长子，著名戏曲家、词曲家。号诚斋，著有杂剧三十一种（《诚斋乐府》）。</p>
         </div>
 
         <div class="person-card">
-            <div class="person-name">【支系先祖 / 近代族人待录入】 <span class="person-tag">支脉传记</span></div>
-            <p style="margin-top: 0.5rem; font-size: 0.95rem; color: #555;">
-                可在此处继续添加你的直系祖父辈、迁徙始祖或近现代杰出后人的生平记载。
-            </p>
+            <div class="person-name">【支脉先祖 / 近代族人待录入】 <span class="person-tag">支脉传记</span></div>
+            <p style="margin-top: 0.5rem; color: #555;">待后世子孙考订家谱后，在此增补各房分支迁徙与家族前辈生平。</p>
         </div>
+    </main>
 
-        <a href="../index.html" class="back-btn">← 返回首页</a>
-    </div>
+    <footer class="site-footer">
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+    </footer>
 </body>
 </html>
