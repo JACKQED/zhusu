@@ -141,13 +141,13 @@
     <main class="container">
         <h1>全站全局文献与索引检索</h1>
         <div class="intro-box">
-            本搜索引擎收录大明周藩全站 18 个核心子系统，支持<strong>人物生平、二十字派、典籍医方、郡王封地、古迹陵寝、纪年换算及近现代英贤</strong>等所有词条的毫秒级即时检索。
+            本搜索引擎收录大明周藩全站 18 个核心子系统，支持<strong>人物生平、二十字派、典籍医方、郡王封地、古迹陵寝、纪年换算及近现代周藩英贤</strong>等所有词条的毫秒级即时检索。
         </div>
 
         <!-- 搜索主体 -->
         <div class="search-hero">
             <div class="search-input-wrap">
-                <input type="text" id="searchInput" class="search-input" placeholder="输入关键词（如：救荒本草、禹州、睦、朱镕基、开封、简王）..." oninput="doSearch(this.value)">
+                <input type="text" id="searchInput" class="search-input" placeholder="输入关键词（如：救荒本草、禹州、睦、朱橚、开封、简王、朱睦㮮）..." oninput="doSearch(this.value)">
                 <button class="clear-btn" onclick="clearSearch()">清空重置</button>
             </div>
             
@@ -156,7 +156,7 @@
                 <span class="hot-tag" onclick="quickTag('救荒本草')">救荒本草</span>
                 <span class="hot-tag" onclick="quickTag('周定王陵')">周定王陵</span>
                 <span class="hot-tag" onclick="quickTag('字辈')">二十字辈</span>
-                <span class="hot-tag" onclick="quickTag('朱镕基')">朱镕基(岷藩)</span>
+                <span class="hot-tag" onclick="quickTag('朱睦㮮')">朱睦㮮</span>
                 <span class="hot-tag" onclick="quickTag('普济方')">普济方</span>
                 <span class="hot-tag" onclick="quickTag('开封')">开封周王府</span>
                 <span class="hot-tag" onclick="quickTag('纪年换算')">纪年换算</span>
@@ -177,14 +177,14 @@
     </footer>
 
     <script>
-        // 全站知识库索引数据库
+        // 全站知识库索引数据库（纯正周藩体系）
         const siteDatabase = [
             {
                 title: "大明周藩传世典籍与学术著述全考",
                 category: "典籍著述",
                 url: "classics.html",
-                keywords: "救荒本草 普济方 袖珍方 保生余录 诚斋乐府 元宫词 幼幼新书 本草发挥 周定王 朱橚 医学 植物学 方剂 戏曲 木刻插图",
-                summary: "系统收录周王府编纂刊刻的《救荒本草》（人类首部食用植物科学图谱）、《普济方》（收方61739首，古代最大方剂全书）及周宪王朱有炖《诚斋乐府》等十部传世巨著考。"
+                keywords: "救荒本草 普济方 袖珍方 保生余录 诚斋乐府 元宫词 幼幼新书 本草发挥 篇海类编 金石碑帖考 周定王 朱橚 朱睦㮮 医学 植物学 方剂 戏曲 木刻插图",
+                summary: "系统收录周王府编纂刊刻的《救荒本草》（人类首部食用植物科学图谱）、《普济方》（收方61739首，古代最大方剂全书）、周宪王朱有炖《诚斋乐府》及海宁宗室朱睦㮮《篇海类编》等传世巨著考。"
             },
             {
                 title: "周藩历代先祖与杰出人物纪传",
@@ -197,8 +197,8 @@
                 title: "大明周藩名人堂（历代英贤与近现代名录）",
                 category: "周藩名人堂",
                 url: "hall-of-fame.html",
-                keywords: "名人堂 朱镕基 岷藩 八大山人 朱耷 宁藩 济生堂 辛亥革命 近现代教育 植物学家 农科院 考古文博 宗亲理事 寻根线索征集",
-                summary: "汇聚自明代藩封至近现代周藩在农医科学、诗词曲艺、忠义死节、文博教育与宗族修撰中的英贤名录；特载明皇室三大宗藩（周藩、岷藩、宁藩）渊源考析。"
+                keywords: "名人堂 济生堂 辛亥革命 近现代教育 植物学家 农科院 考古文博 宗亲理事 寻根线索征集 周定王后裔 豫皖苏鲁陕滇",
+                summary: "汇聚自明代藩封至近现代周藩在农医科学、诗词曲艺、忠义死节、文博教育与宗族修撰中的英贤名录；特载周藩后裔近现代人物考与线索征集令。"
             },
             {
                 title: "周藩世系二十字辈与五行相生命名法则",
