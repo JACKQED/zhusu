@@ -6,38 +6,58 @@
     <title>周藩历代昭穆神位谱 - 大明周藩纪事</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
         
+        /* 顶部导航 */
         .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 960px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.5rem; }
-        .site-logo { font-size: 1.25rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; }
+        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
+        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
         .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
         
-        .nav-menu { display: flex; align-items: center; flex-wrap: wrap; }
-        .nav-menu a { color: #f9e6d0; text-decoration: none; margin-left: 0.75rem; font-size: 0.85rem; }
-        .nav-menu a:hover { color: #fff; text-decoration: underline; }
-
-        .container { max-width: 960px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 0.8rem; }
-
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; }
+        /* 下拉分类导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-item { position: relative; }
+        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
+        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
         
-        .altar-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.5rem; }
-        .tablet-card { background: #fffaf4; border: 1px solid #dccbb6; border-top: 3px solid #8c1d1d; padding: 1.2rem; border-radius: 4px; text-align: center; }
-        .tablet-name { font-size: 1.15rem; font-weight: bold; color: #8c1d1d; letter-spacing: 1px; }
-        .tablet-meta { font-size: 0.85rem; color: #777; margin-top: 0.3rem; }
-        .tablet-tag { display: inline-block; padding: 1px 6px; font-size: 0.75rem; border-radius: 3px; background: #8c1d1d; color: #fff; margin-bottom: 0.4rem; }
+        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
+        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .nav-item:hover .dropdown-menu { display: block; }
+
+        /* 主体容器 */
+        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
+        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+
+        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+
+        /* 享堂神位格局 */
+        .altar-center { text-align: center; margin: 2rem 0; }
+        .altar-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1.5rem; }
+        
+        .tablet-card { background: #fffaf4; border: 1px solid #dccbb6; border-top: 4px solid #8c1d1d; padding: 1.4rem; border-radius: 6px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .tablet-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(140,29,29,0.1); }
+        .tablet-name { font-size: 1.2rem; font-weight: bold; color: #8c1d1d; letter-spacing: 1px; font-family: "KaiTi", "STKaiti", serif; }
+        .tablet-meta { font-size: 0.88rem; color: #666; margin-top: 0.4rem; line-height: 1.6; }
+        .tablet-tag { display: inline-block; padding: 2px 8px; font-size: 0.75rem; border-radius: 4px; background: #8c1d1d; color: #fff; margin-bottom: 0.5rem; font-weight: bold; }
         .tag-zhao { background: #b84343; }
-        .tag-mu { background: #8c1d1d; }
+        .tag-mu { background: #6a1b9a; }
+        .tag-main { background: #d4af37; color: #3a1c00; font-size: 0.82rem; padding: 3px 10px; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 2rem 0 1rem; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
 
-        @media (max-width: 768px) {
+        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+
+        @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; }
+            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
             .nav-menu.show { display: flex; }
-            .nav-menu a { margin: 0.4rem 0; padding: 0.5rem 1.5rem; width: 100%; }
+            .nav-item { width: 100%; }
+            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
+            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-item.active .dropdown-menu { display: block; }
+            .container { padding: 1.2rem; }
             .altar-container { grid-template-columns: 1fr; }
         }
     </style>
@@ -48,19 +68,59 @@
             <a href="index.html" class="site-logo">大明周藩纪事</a>
             <button class="menu-toggle" onclick="toggleMenu()">☰</button>
             <nav class="nav-menu" id="navMenu">
-                <a href="index.html">首页</a>
-                <a href="lineage.html">世系字辈</a>
-                <a href="tree.html">家谱树</a>
-                <a href="naming.html">命名助手</a>
-                <a href="hall.html">堂号楹联</a>
-                <a href="chronology.html">王府年表</a>
-                <a href="ancestors.html" style="color:#fff; font-weight:bold;">昭穆神位</a>
-                <a href="branches.html">分房支派</a>
-                <a href="history.html">王府传承</a>
-                <a href="institution.html">宗室典制</a>
-                <a href="migration.html">迁徙寻根</a>
-                <a href="memorial.html">云端祭奠</a>
-                <a href="search.html">🔍 搜索</a>
+                <a href="index.html" class="nav-link">首页</a>
+                
+                <!-- 宗系人物 -->
+                <div class="nav-item">
+                    <span class="nav-link" style="color:#fff; font-weight:bold;">👑 宗系人物 ▾</span>
+                    <div class="dropdown-menu">
+                        <a href="figures/index.html">历代人物</a>
+                        <a href="hall-of-fame.html">周藩名人堂</a>
+                        <a href="lineage.html">世系字辈</a>
+                        <a href="tree.html">数字家谱树</a>
+                        <a href="ancestors.html" style="background:#8c1d1d; color:#fff;">昭穆神位</a>
+                        <a href="branches.html">分房支派</a>
+                        <a href="history.html">王府传承</a>
+                    </div>
+                </div>
+
+                <!-- 典籍金石 -->
+                <div class="nav-item">
+                    <span class="nav-link">📚 典籍金石 ▾</span>
+                    <div class="dropdown-menu">
+                        <a href="classics.html">典籍著述</a>
+                        <a href="epigraphy.html">碑刻圹志</a>
+                        <a href="poetry.html">诗文戏曲</a>
+                        <a href="hall.html">堂号楹联</a>
+                        <a href="institution.html">宗室典制</a>
+                        <a href="rules.html">祖训家规</a>
+                    </div>
+                </div>
+
+                <!-- 封地陵寝 -->
+                <div class="nav-item">
+                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
+                    <div class="dropdown-menu">
+                        <a href="chronology.html">王府年表</a>
+                        <a href="estates.html">郡王封地</a>
+                        <a href="villages.html">聚落地名</a>
+                        <a href="tombs.html">王陵陵寝</a>
+                        <a href="migration.html">迁徙寻根</a>
+                    </div>
+                </div>
+
+                <!-- 考据工具 -->
+                <div class="nav-item">
+                    <span class="nav-link">🛠️ 考据工具 ▾</span>
+                    <div class="dropdown-menu">
+                        <a href="calendar.html">纪年干支换算</a>
+                        <a href="naming.html">五行命名助手</a>
+                        <a href="genealogy-guide.html">修谱指南凡例</a>
+                        <a href="memorial.html">云端享堂祭奠</a>
+                    </div>
+                </div>
+
+                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -68,96 +128,107 @@
     <main class="container">
         <h1>周藩历代昭穆神位谱</h1>
         <div class="intro-box">
-            古礼宗庙之制：<strong>始祖居中，父为昭（左）、子为穆（右）</strong>，代代相递。此谱依明制周王府宗庙神位编次，以正尊卑昭穆之序。
+            古礼宗庙之制：<strong>始祖居中，父为昭（左）、子为穆（右）</strong>，代代相递。此谱依明代周王府太庙享堂神位规制编次，以正尊卑昭穆之序，垂范后昆，慎终追远。
         </div>
 
-        <div style="text-align: center; margin: 1.5rem 0;">
-            <div class="tablet-card" style="max-width: 450px; margin: 0 auto; background: #8c1d1d; color: #fff; border-top: none;">
-                <span class="tablet-tag" style="background: #d4af37; color: #3a1c00;">百代不迁之宗</span>
-                <div class="tablet-name" style="color: #fff; font-size: 1.3rem;">大明太祖高皇帝 第五子<br>始祖 周定王 朱橚 先祖神位</div>
-                <div class="tablet-meta" style="color: #f9e6d0;">配 妃冯氏（宋国公冯胜之女）</div>
+        <!-- 始祖正尊大位 -->
+        <div class="altar-center">
+            <div class="tablet-card" style="max-width: 500px; margin: 0 auto; background: #8c1d1d; color: #fff; border: 2px solid #d4af37; box-shadow: 0 4px 16px rgba(140,29,29,0.25);">
+                <span class="tablet-tag tag-main">👑 百代不迁之宗 · 周藩大始祖</span>
+                <div class="tablet-name" style="color: #fff; font-size: 1.4rem; line-height: 1.6; margin-top: 0.3rem;">
+                    大明太祖高皇帝 第五子<br>始祖 周定王 朱橚 先祖神位
+                </div>
+                <div class="tablet-meta" style="color: #f9e6d0; margin-top: 0.5rem;">
+                    配 元妃冯氏（宋国公胜之女） · 继妃倪氏
+                </div>
             </div>
         </div>
 
-        <h2>⚖️ 历代周王昭穆位次</h2>
+        <h2>⚖️ 享堂历代亲王左昭右穆位次</h2>
         <div class="altar-container">
             <!-- 昭位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左昭 · 二世</span>
-                <div class="tablet-name">周宪王 朱有炖 神位</div>
-                <div class="tablet-meta">定王嫡长子 · 袭周王 · 配妃巩氏</div>
+                <span class="tablet-tag tag-zhao">左 昭 · 第一世</span>
+                <div class="tablet-name">周宪王 朱有燉 神位</div>
+                <div class="tablet-meta">定王嫡长子 · 袭周王 · 配妃巩氏（贞烈王妃）</div>
             </div>
             <!-- 穆位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右穆 · 二世</span>
+                <span class="tablet-tag tag-mu">右 穆 · 第一世</span>
                 <div class="tablet-name">周简王 朱有爝 神位</div>
-                <div class="tablet-meta">定王第四子 · 继袭周王 · 配妃张氏</div>
+                <div class="tablet-meta">定王第四子 · 继袭周王大宗 · 配妃张氏</div>
             </div>
 
             <!-- 昭位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左昭 · 三世</span>
+                <span class="tablet-tag tag-zhao">左 昭 · 第二世</span>
                 <div class="tablet-name">周靖王 朱子垕 神位</div>
-                <div class="tablet-meta">简王庶长子 · 袭周王</div>
+                <div class="tablet-meta">简王庶长子 · 袭周王 · 在位一年薨无嗣</div>
             </div>
             <!-- 穆位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右穆 · 三世</span>
+                <span class="tablet-tag tag-mu">右 穆 · 第二世</span>
                 <div class="tablet-name">周懿王 朱子墧 神位</div>
-                <div class="tablet-meta">简王庶次子 · 继袭周王</div>
+                <div class="tablet-meta">简王庶次子 · 继袭周王 · 配妃杨氏</div>
             </div>
 
             <!-- 昭位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左昭 · 四世</span>
-                <div class="tablet-name">周惠王 朱同䥝 神位</div>
-                <div class="tablet-meta">懿王嫡长子 · 袭周王</div>
+                <span class="tablet-tag tag-zhao">左 昭 · 第三世</span>
+                <div class="tablet-name">周惠王 朱同䥸 神位</div>
+                <div class="tablet-meta">懿王嫡长子 · 初封睢阳王 · 袭周王</div>
             </div>
             <!-- 穆位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右穆 · 五世</span>
-                <div class="tablet-name">周悼王 朱安㴦 神位</div>
-                <div class="tablet-meta">惠王庶长子 · 追封周王</div>
+                <span class="tablet-tag tag-mu">右 穆 · 第四世</span>
+                <div class="tablet-name">周悼王 朱安㳡 神位</div>
+                <div class="tablet-meta">惠王世子 · 未及即位早卒 · 追封周王</div>
             </div>
 
             <!-- 昭位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左昭 · 六世</span>
+                <span class="tablet-tag tag-zhao">左 昭 · 第五世</span>
                 <div class="tablet-name">周恭王 朱睦㰂 神位</div>
-                <div class="tablet-meta">悼王嫡长子 · 袭周王</div>
+                <div class="tablet-meta">悼王嫡长子 · 袭周王 · 在位三十二年</div>
             </div>
             <!-- 穆位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右穆 · 七世</span>
-                <div class="tablet-name">周康王 朱勤熄 神位</div>
-                <div class="tablet-meta">恭王嫡长子 · 追封周王</div>
+                <span class="tablet-tag tag-mu">右 穆 · 第六世</span>
+                <div class="tablet-name">周康王 朱勤炽 神位</div>
+                <div class="tablet-meta">恭王嫡长子 · 周世子早卒 · 追封周王</div>
             </div>
 
             <!-- 昭位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左昭 · 八世</span>
+                <span class="tablet-tag tag-zhao">左 昭 · 第七世</span>
                 <div class="tablet-name">周庄王 朱朝堈 神位</div>
-                <div class="tablet-meta">康王嫡长子 · 袭周王</div>
+                <div class="tablet-meta">恭王次子 · 继袭周王 · 文风极盛</div>
             </div>
             <!-- 穆位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右穆 · 九世</span>
+                <span class="tablet-tag tag-mu">右 穆 · 第八世</span>
                 <div class="tablet-name">周敬王 朱在鋟 神位</div>
-                <div class="tablet-meta">庄王嫡长子 · 袭周王</div>
+                <div class="tablet-meta">庄王庶长子 · 袭周王 · 在位十年</div>
             </div>
 
             <!-- 昭位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左昭 · 十世</span>
+                <span class="tablet-tag tag-zhao">左 昭 · 第九世</span>
                 <div class="tablet-name">周端王 朱肃溱 神位</div>
-                <div class="tablet-meta">敬王嫡长子 · 袭周王</div>
+                <div class="tablet-meta">敬王庶长子 · 袭周王 · 万历十四年薨</div>
             </div>
             <!-- 穆位 -->
             <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右穆 · 十一世</span>
+                <span class="tablet-tag tag-mu">右 穆 · 第十世</span>
                 <div class="tablet-name">末代周王 朱恭枵 神位</div>
-                <div class="tablet-meta">端王庶长子 · 开封保卫战忠义守城</div>
+                <div class="tablet-meta">端王庶长子 · 散财守城殉难 · 节烈贯日</div>
             </div>
+        </div>
+
+        <h2>📖 昭穆制度宗法解说</h2>
+        <div class="quote-box">
+            <p><strong>• 宗庙位次法则：</strong>太庙之中，始祖周定王居于正中太祖之位，自第二代起，一世为昭居左（奇数），二世为穆居右（偶数），左昭右穆，列次秩然。</p>
+            <p><strong>• 亲王大宗与郡王宗支：</strong>周藩宗法以周王府太庙为通族总祠，十四大郡王宗支（如封丘王房、新乡王房、顺阳王房等）亦各设分祠，恪守太祖五行相生家法，虽远徙数百年，长幼尊卑不紊。</p>
         </div>
     </main>
 
@@ -169,6 +240,14 @@
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                if (window.innerWidth <= 960) {
+                    this.classList.toggle('active');
+                }
+            });
+        });
     </script>
 </body>
 </html>
