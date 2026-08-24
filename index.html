@@ -158,7 +158,7 @@
         <!-- 首页快速字辈查询交互挂件 -->
         <div class="quick-checker">
             <div class="checker-head">
-                <div class="checker-title">🔍 周藩二十字派语 · 交互即时速查</div>
+                <div class="checker-title">🔍 周藩二十字派语 · 交互即时速查（以太祖为一世）</div>
                 <div class="checker-input-box">
                     <input type="text" id="quickInput" class="checker-input" placeholder="输入字辈或姓名..." oninput="searchQuickChar(this.value)">
                 </div>
@@ -299,26 +299,26 @@
 
     <script>
         const zhouGenerations = [
-            { gen: 1, char: "有", wuxing: "木", radical: "木字旁（如：松、柏、柯、桐）", example: "朱有炖（周宪王）、朱有爝（周简王）" },
-            { gen: 2, char: "子", wuxing: "火", radical: "火字旁 / 灬（如：垕、圮、爚、炜）", example: "朱子垕（周靖王）、朱子圮（周懿王）" },
-            { gen: 3, char: "同", wuxing: "土", radical: "土字旁（如：䥝、均、增、堪）", example: "朱同䥝（周惠王）、朱同鍝（南陵王）" },
-            { gen: 4, char: "安", wuxing: "金", radical: "金字旁（如：㴦、镕、钰、铜）", example: "朱安㴦（周悼王）、朱安澓（义宁王）" },
-            { gen: 5, char: "睦", wuxing: "水", radical: "水字旁 / 氵（如：㰂、浤、源、浩）", example: "朱睦㰂（周恭王）、朱睦㮮（海宁学者）" },
-            { gen: 6, char: "勤", wuxing: "木", radical: "木字旁（如：炽、栋、梁、材）", example: "朱勤炽（周康王）、朱勤蒸" },
-            { gen: 7, char: "朝", wuxing: "火", radical: "火字旁 / 日（如：堈、炯、煜）", example: "朱朝堈（周庄王）、朱朝埴" },
-            { gen: 8, char: "在", wuxing: "土", radical: "土字旁（如：铤、坚、培、堂）", example: "朱在铤（周敬王）、朱在钰" },
-            { gen: 9, char: "肃", wuxing: "金", radical: "金字旁（如：溱、镒、铭、铸）", example: "朱肃溱（周端王）、朱肃𣲏" },
-            { gen: 10, char: "恭", wuxing: "水", radical: "水字旁 / 氵（如：枵、渊、涵、润）", example: "朱恭枵（末代周王）、朱恭树" },
-            { gen: 11, char: "绍", wuxing: "木", radical: "木字旁（如：栻、林、森、本）", example: "朱绍〇（明末清初宗室）" },
-            { gen: 12, char: "伦", wuxing: "火", radical: "火字旁（如：焕、灿、炜、炳）", example: "朱伦圣（南明渡台先贤）" },
-            { gen: 13, char: "敷", wuxing: "土", radical: "土字旁（如：坦、坤、培、境）", example: "朱敷铮（清初渡台宗亲）" },
-            { gen: 14, char: "惠", wuxing: "金", radical: "金字旁（如：锋、锐、钊、钧）", example: "周藩清代中期宗亲" },
-            { gen: 15, char: "润", wuxing: "水", radical: "水字旁（如：源、深、涵、泽）", example: "周藩清代晚期宗亲" },
-            { gen: 16, char: "昭", wuxing: "木", radical: "木字旁（如：松、椿、桂、梁）", example: "周藩清末民国宗亲" },
-            { gen: 17, char: "格", wuxing: "火", radical: "火字旁（如：炳、焕、烽、焱）", example: "周藩近现代宗亲" },
-            { gen: 18, char: "广", wuxing: "土", radical: "土字旁（如：坤、垣、坚、基）", example: "周藩当代宗亲" },
-            { gen: 19, char: "登", wuxing: "金", radical: "金字旁（如：铭、锐、锦、锋）", example: "周藩当代后裔" },
-            { gen: 20, char: "庸", wuxing: "水", radical: "水字旁（如：泽、涛、浩、泓）", example: "周藩续修世系" }
+            { gen: 3, char: "有", wuxing: "火", radical: "火字旁 / 灬、日（如：燉、爝、爌、𤊟）", example: "朱有燉（周宪王）、朱有爝（周简王）、朱有爌（镇平王）" },
+            { gen: 4, char: "子", wuxing: "土", radical: "土字旁 / 山、石（如：垕、埅、圿、埛）", example: "朱子垕（周靖王）、朱子埅（周懿王）" },
+            { gen: 5, char: "同", wuxing: "金", radical: "金字旁 / 钅、玉（如：䥝、鎋、釪）", example: "朱同䥝（周惠王）、朱同鎋" },
+            { gen: 6, char: "安", wuxing: "水", radical: "水字旁 / 氵、雨（如：㶇、河、潩、㳡）", example: "朱安㶇（周悼王）、朱安河" },
+            { gen: 7, char: "睦", wuxing: "木", radical: "木字旁 / 林、竹（如：㰂、㮮、橍）", example: "朱睦㰂（周恭王）、朱睦㮮（周藩宗正 / 镇平王支）" },
+            { gen: 8, char: "勤", wuxing: "火", radical: "火字旁 / 灬、日（如：熄、烲、煐）", example: "朱勤熄（周康王）" },
+            { gen: 9, char: "朝", wuxing: "土", radical: "土字旁 / 山、石（如：堈、垿、增）", example: "朱朝堈（周庄王）" },
+            { gen: 10, char: "在", wuxing: "金", radical: "金字旁 / 钅、玉（如：铤、鋟、鉷）", example: "朱在铤（周敬王）" },
+            { gen: 11, char: "肃", wuxing: "水", radical: "水字旁 / 氵、雨（如：溱、湸、浤）", example: "朱肃溱（周端王）" },
+            { gen: 12, char: "恭", wuxing: "木", radical: "木字旁 / 林、竹（如：枵、楌、柯）", example: "朱恭枵（周孝王 · 末代周王）" },
+            { gen: 13, char: "绍", wuxing: "火", radical: "火字旁 / 灬、日（如：煌、炫、煜）", example: "明末周藩宗室" },
+            { gen: 14, char: "伦", wuxing: "土", radical: "土字旁 / 山、石（如：垣、基、培）", example: "朱伦圣（南明渡台宗室）" },
+            { gen: 15, char: "敷", wuxing: "金", radical: "金字旁 / 钅、玉（如：铮、铭、锐）", example: "朱敷铮、周藩清初宗亲" },
+            { gen: 16, char: "惠", wuxing: "水", radical: "水字旁 / 氵、雨（如：清、泽、浩）", example: "周藩清代宗亲" },
+            { gen: 17, char: "润", wuxing: "木", radical: "木字旁 / 林、竹（如：栋、林、森）", example: "周藩清代宗亲" },
+            { gen: 18, char: "昭", wuxing: "火", radical: "火字旁 / 灬、日（如：旭、晔、明）", example: "周藩近现代宗亲" },
+            { gen: 19, char: "格", wuxing: "土", radical: "土字旁 / 山、石（如：坤、培、坚）", example: "周藩近现代宗亲" },
+            { gen: 20, char: "广", wuxing: "金", radical: "金字旁 / 钅、玉（如：锐、铭、锦）", example: "周藩当代宗亲" },
+            { gen: 21, char: "登", wuxing: "水", radical: "水字旁 / 氵、雨（如：源、浩、洋）", example: "周藩当代后裔" },
+            { gen: 22, char: "庸", wuxing: "木", radical: "木字旁 / 林、竹（如：荣、森、栋）", example: "周藩当代后裔" }
         ];
 
         function initPills() {
@@ -336,8 +336,9 @@
 
         function selectGeneration(genNum) {
             const pills = document.querySelectorAll('.char-pill');
+            const targetIndex = zhouGenerations.findIndex(g => g.gen === genNum);
             pills.forEach((p, idx) => {
-                if (idx === genNum - 1) p.classList.add('active');
+                if (idx === targetIndex) p.classList.add('active');
                 else p.classList.remove('active');
             });
             const data = zhouGenerations.find(g => g.gen === genNum);
@@ -345,8 +346,9 @@
         }
 
         function showGenerationDetail(data) {
-            const prev = data.gen > 1 ? zhouGenerations[data.gen - 2] : null;
-            const next = data.gen < 20 ? zhouGenerations[data.gen] : null;
+            const currentIndex = zhouGenerations.findIndex(g => g.gen === data.gen);
+            const prev = currentIndex > 0 ? zhouGenerations[currentIndex - 1] : null;
+            const next = currentIndex < zhouGenerations.length - 1 ? zhouGenerations[currentIndex + 1] : null;
 
             const res = document.getElementById('quickResult');
             res.innerHTML = `
@@ -356,7 +358,7 @@
                 </div>
                 <div class="checker-grid">
                     <div class="checker-item">🧬 <strong>命名偏旁：</strong>${data.radical}</div>
-                    <div class="checker-item">⬆️ <strong>上一辈(父辈)：</strong>${prev ? `第${prev.gen}世「${prev.char}」(${prev.wuxing})` : '始祖周定王朱橚'}</div>
+                    <div class="checker-item">⬆️ <strong>上一辈(父辈)：</strong>${prev ? `第${prev.gen}世「${prev.char}」(${prev.wuxing})` : '第二世：始祖周定王朱橚（木）'}</div>
                     <div class="checker-item">⬇️ <strong>下一辈(子嗣)：</strong>${next ? `第${next.gen}世「${next.char}」(${next.wuxing})` : '登庸之后重新循环'}</div>
                     <div class="checker-item">📜 <strong>历史代表先祖：</strong>${data.example}</div>
                 </div>
