@@ -36,10 +36,10 @@
         /* 字辈大字展示排版 */
         .poem-display { background: #fdfbf7; border: 1px solid #ebdcd0; border-top: 3px solid #8c1d1d; padding: 2rem; border-radius: 6px; text-align: center; margin: 1.5rem 0; }
         .poem-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; margin-bottom: 1rem; letter-spacing: 1px; }
-        .poem-chars { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; max-width: 750px; margin: 0 auto; }
-        .poem-char-box { background: #fff; border: 1px solid #dcd3cb; width: 55px; height: 65px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
+        .poem-chars { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
+        .poem-char-box { background: #fff; border: 1px solid #dcd3cb; width: 58px; height: 68px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
         .char-main { font-size: 1.5rem; font-weight: bold; color: #8c1d1d; font-family: "KaiTi", "STKaiti", serif; line-height: 1.1; }
-        .char-sub { font-size: 0.72rem; color: #777; margin-top: 2px; }
+        .char-sub { font-size: 0.72rem; color: #777; margin-top: 3px; }
 
         /* 表格样式 */
         .table-wrap { overflow-x: auto; margin-top: 1rem; }
@@ -64,7 +64,7 @@
             .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
             .nav-item.active .dropdown-menu { display: block; }
             .container { padding: 1.2rem; }
-            .poem-char-box { width: 42px; height: 52px; }
+            .poem-char-box { width: 44px; height: 54px; }
             .char-main { font-size: 1.2rem; }
         }
     </style>
@@ -141,7 +141,7 @@
 
         <!-- 核心字辈展示 -->
         <div class="poem-display">
-            <div class="poem-title">📜 大明周藩御赐正宗二十字派语</div>
+            <div class="poem-title">📜 大明周藩御赐正宗二十字派语（以太祖为一世）</div>
             <div class="poem-chars">
                 <div class="poem-char-box"><div class="char-main">有</div><div class="char-sub">三世</div></div>
                 <div class="poem-char-box"><div class="char-main">子</div><div class="char-sub">四世</div></div>
@@ -161,8 +161,8 @@
                 <div class="poem-char-box"><div class="char-main">昭</div><div class="char-sub">十八世</div></div>
                 <div class="poem-char-box"><div class="char-main">格</div><div class="char-sub">十九世</div></div>
                 <div class="poem-char-box"><div class="char-main">广</div><div class="char-sub">二十世</div></div>
-                <div class="poem-char-box"><div class="char-main">登</div><div class="char-sub">二十一</div></div>
-                <div class="poem-char-box"><div class="char-main">庸</div><div class="char-sub">二十二</div></div>
+                <div class="poem-char-box"><div class="char-main">登</div><div class="char-sub">二十一世</div></div>
+                <div class="poem-char-box"><div class="char-main">庸</div><div class="char-sub">二十二世</div></div>
             </div>
         </div>
 
@@ -171,10 +171,10 @@
             <table class="comp-table">
                 <thead>
                     <tr>
-                        <th style="width: 100px;">世次</th>
-                        <th style="width: 150px;">辈分用字</th>
-                        <th style="width: 140px;">五行偏旁法</th>
-                        <th style="width: 200px;">代表人物与封爵</th>
+                        <th style="width: 100px;">皇室世次</th>
+                        <th style="width: 130px;">辈分用字</th>
+                        <th style="width: 140px;">末字五行偏旁</th>
+                        <th style="width: 210px;">代表人物与封爵</th>
                         <th>历史事迹与传承纪要</th>
                     </tr>
                 </thead>
@@ -182,79 +182,107 @@
                     <tr>
                         <td><strong>一世</strong></td>
                         <td>朱元璋</td>
-                        <td><span style="color:#8c1d1d;">土金</span></td>
+                        <td><span style="color:#8c1d1d;">土 / 金</span></td>
                         <td>明太祖高皇帝</td>
-                        <td>大明开国之君，分封皇子屏藩天下，创制周藩法统。</td>
+                        <td>大明开国之君，分封皇子屏藩天下，创制周藩法统与宗室取名祖制。</td>
                     </tr>
                     <tr>
                         <td><strong>二世</strong></td>
                         <td>朱橚</td>
                         <td><span style="color:#2e7d32; font-weight:bold;">木字旁</span> (橚)</td>
-                        <td>周定王（始祖）</td>
-                        <td>太祖第五子，洪武十一年封周王，就藩开封。编纂《救荒本草》《普济方》。</td>
+                        <td>周定王（周藩始祖）</td>
+                        <td>太祖第五子，洪武十一年改封周王，就藩开封。编纂《救荒本草》《普济方》。</td>
                     </tr>
                     <tr>
                         <td><strong>三世</strong></td>
-                        <td>**有** 字辈</td>
-                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span> (燉、爝、𤊟)</td>
+                        <td><strong>有</strong> 字辈</td>
+                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span> (燉、爝、爌)</td>
                         <td>周宪王朱有燉、周简王朱有爝</td>
                         <td>定王诸子，开创十四大分房。宪王为一代曲圣，简王承嗣大宗。</td>
                     </tr>
                     <tr>
                         <td><strong>四世</strong></td>
-                        <td>**子** 字辈</td>
-                        <td><span style="color:#b26a00; font-weight:bold;">土字旁</span> (垕、墧、峹)</td>
-                        <td>周靖王朱子垕、周懿王朱子墧</td>
-                        <td>简王之子，相继袭封周王，藩邸文风鼎盛。</td>
+                        <td><strong>子</strong> 字辈</td>
+                        <td><span style="color:#b26a00; font-weight:bold;">土字旁</span> (垕、埅、圿)</td>
+                        <td>周靖王朱子垕、周懿王朱子埅</td>
+                        <td>简王之子，相继袭封周王，开封藩邸文风鼎盛。</td>
                     </tr>
                     <tr>
                         <td><strong>五世</strong></td>
-                        <td>**同** 字辈</td>
-                        <td><span style="color:#1565c0; font-weight:bold;">金字旁</span> (䥸、釪)</td>
-                        <td>周惠王朱同䥸</td>
-                        <td>懿王长子，袭封周王，在位平稳，宗支繁衍迅速。</td>
+                        <td><strong>同</strong> 字辈</td>
+                        <td><span style="color:#1565c0; font-weight:bold;">金字旁</span> (䥝、鎋)</td>
+                        <td>周惠王朱同䥝</td>
+                        <td>懿王庶长子，袭封周王，在位平稳，宗支繁衍迅速。</td>
                     </tr>
                     <tr>
                         <td><strong>六世</strong></td>
-                        <td>**安** 字辈</td>
-                        <td><span style="color:#00838f; font-weight:bold;">水字旁</span> (㳡、潩)</td>
-                        <td>周悼王朱安㳡</td>
-                        <td>惠王世子，未及即位早卒，追封周王。</td>
+                        <td><strong>安</strong> 字辈</td>
+                        <td><span style="color:#00838f; font-weight:bold;">水字旁</span> (㶇、河)</td>
+                        <td>周悼王朱安㶇</td>
+                        <td>惠王世子，早卒追封周王；其子朱睦㰂袭爵周王。</td>
                     </tr>
                     <tr>
                         <td><strong>七世</strong></td>
-                        <td>**睦** 字辈</td>
+                        <td><strong>睦</strong> 字辈</td>
                         <td><span style="color:#2e7d32; font-weight:bold;">木字旁</span> (㰂、㮮)</td>
-                        <td>周恭王朱睦㰂、学者朱睦㮮</td>
-                        <td>恭王袭爵；宗室朱睦㮮筑“万卷堂”聚书考据，撰《篇海类编》。</td>
+                        <td>周恭王朱睦㰂、宗正朱睦㮮</td>
+                        <td>恭王袭爵；宗室朱睦㮮任周藩宗正，筑“万卷堂”聚书考据，撰《金石图》《篇海类编》。</td>
                     </tr>
                     <tr>
                         <td><strong>八世</strong></td>
-                        <td>**勤** 字辈</td>
-                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span> (𤇍、煐)</td>
-                        <td>周康王朱勤炽</td>
-                        <td>恭王世子，追封周王。</td>
+                        <td><strong>勤</strong> 字辈</td>
+                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span> (熄、烲)</td>
+                        <td>周康王朱勤熄</td>
+                        <td>恭王世子，早逝追封周王。</td>
                     </tr>
                     <tr>
                         <td><strong>九世</strong></td>
-                        <td>**朝** 字辈</td>
+                        <td><strong>朝</strong> 字辈</td>
                         <td><span style="color:#b26a00; font-weight:bold;">土字旁</span> (堈、垿)</td>
                         <td>周庄王朱朝堈</td>
-                        <td>康王长子，袭周王，万历年间文教大备。</td>
+                        <td>康王长子，袭周王，嘉靖、万历年间重视文教修史。</td>
                     </tr>
                     <tr>
                         <td><strong>十世</strong></td>
-                        <td>**在** 字辈</td>
-                        <td><span style="color:#1565c0; font-weight:bold;">金字旁</span> (鋟、鋌)</td>
-                        <td>周敬王朱在鋟</td>
+                        <td><strong>在</strong> 字辈</td>
+                        <td><span style="color:#1565c0; font-weight:bold;">金字旁</span> (铤、鉷)</td>
+                        <td>周敬王朱在铤</td>
                         <td>庄王长子，袭封周王。</td>
                     </tr>
                     <tr>
                         <td><strong>十一世</strong></td>
-                        <td>**肃** 字辈</td>
+                        <td><strong>肃</strong> 字辈</td>
                         <td><span style="color:#00838f; font-weight:bold;">水字旁</span> (溱、湸)</td>
-                        <td>周端王朱肃溱、末代周王朱恭枵</td>
-                        <td>端王长子；其子朱恭枵为末代周王，崇祯十五年散银保卫开封，忠烈殉国。</td>
+                        <td>周端王朱肃溱</td>
+                        <td>敬王长子，袭封周王，万历年间主持校勘善本书籍。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>十二世</strong></td>
+                        <td><strong>恭</strong> 字辈</td>
+                        <td><span style="color:#2e7d32; font-weight:bold;">木字旁</span> (枵、楌)</td>
+                        <td>周孝王朱恭枵</td>
+                        <td>端王长子，袭封周王。崇祯十五年李自成围城，毁家纾难散银犒军守卫汴京。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>十三世</strong></td>
+                        <td><strong>绍</strong> 字辈</td>
+                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span></td>
+                        <td>周藩明末宗室</td>
+                        <td>明末清初宗室，历经甲申之变与黄河灌城之难。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>十四世</strong></td>
+                        <td><strong>伦</strong> 字辈</td>
+                        <td><span style="color:#b26a00; font-weight:bold;">土字旁</span></td>
+                        <td>朱伦圣（渡台宗室）</td>
+                        <td>随延平王郑成功渡海东征台湾，使周藩宗火跨海绵延。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>十五世至二十二世</strong></td>
+                        <td>敷、惠、润、昭、格、广、登、庸</td>
+                        <td>金 ➔ 水 ➔ 木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木</td>
+                        <td>周藩清代至当代宗亲后裔</td>
+                        <td>隐居豫、皖、鲁、苏、陕、滇等地，耕读传家，谨遵字辈五行寻根认祖。</td>
                     </tr>
                 </tbody>
             </table>
@@ -263,19 +291,19 @@
         <h2>🏛️ 明代宗室命名“五行相生”家法</h2>
         <div class="feature-card">
             <p>
-                根据朱元璋制定的《皇明祖训》，明代宗室命名有一套极其严格的<strong>“偏旁五行相生轮回制”</strong>。每个亲王支派的首字按字辈（如“有、子、同、安、睦……”），名字的末字则必须严格按照五行相生顺序循环：
+                根据朱元璋制定的《皇明祖训》，明代宗室命名有一套极其严格的<strong>“偏旁五行相生轮回制”</strong>。每个亲王支派的名首字按派语（如“有、子、同、安、睦……”），名字末字则必须严格按照五行相生顺序循环：
+            </p>
+            <p style="margin-top: 0.6rem; font-weight: bold; color: #8c1d1d;">
+                木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ……
             </p>
             <p style="margin-top: 0.6rem;">
-                <strong>木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木 ……</strong>
-            </p>
-            <p style="margin-top: 0.6rem;">
-                例如：定王朱橚（一世·木）生子二世“有”字辈，末字从“火”（朱有**燉**、朱有**爝**）；三世“子”字辈，末字从“土”（朱子**垕**、朱子**墧**）；四世“同”字辈，末字从“金”（朱同**䥸**）。这套命名法不仅是辈分识别的密码，也是现代后裔辨别真伪家谱的最高准则。
+                例如（以太祖为一世）：始祖周定王朱橚（<strong>二世·木</strong>）；生子<strong>三世“有”字辈</strong>，末字从“<strong>火</strong>”（朱有**燉**、朱有**爝**）；<strong>四世“子”字辈</strong>，末字从“<strong>土</strong>”（朱子**垕**、朱子**埅**）；<strong>五世“同”字辈</strong>，末字从“<strong>金</strong>”（朱同**䥝**）；<strong>六世“安”字辈</strong>，末字从“<strong>水</strong>”（朱安**㶇**）；<strong>七世“睦”字辈</strong>，末字又循环回“<strong>木</strong>”（朱睦**㰂**、朱睦**㮮**）。
             </p>
         </div>
 
         <h2>📖 寻根认祖提示</h2>
         <div class="quote-box">
-            <p>如果您或您的家族世传字辈中含有<strong>“有、子、同、安, 睦、勤、朝、在、肃、恭、绍、伦、敷、惠、润……”</strong>等字，且先祖记述源自开封、卫辉、南阳、汝南或云南大理等地，极有可能是大明周藩后裔。欢迎使用本站的<a href="naming.html" style="color:#8c1d1d; font-weight:bold;">五行命名助手</a>与<a href="migration.html" style="color:#8c1d1d; font-weight:bold;">迁徙寻根台</a>进行宗支对证！</p>
+            <p>如果您或您的家族世传字辈中含有<strong>“有、子、同、安、睦、勤、朝、在、肃、恭、绍、伦、敷、惠、润、昭、格、广、登、庸”</strong>，且先祖源流记述出自河南开封周王府，极有可能是大明周藩后裔。欢迎使用本站的<a href="naming.html" style="color:#8c1d1d; font-weight:bold;">五行命名助手</a>与<a href="migration.html" style="color:#8c1d1d; font-weight:bold;">迁徙寻根台</a>进行宗支对证！</p>
         </div>
     </main>
 
