@@ -5,66 +5,313 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩宗谱考辨与修谱凡例 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
-        /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
+        /* 主容器 */
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
+        h3 { 
+            color: var(--crimson); 
+            margin: 1.2rem 0 0.5rem 0; 
+            font-size: 1.08rem; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        .guide-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.6rem; border-radius: 6px; margin: 1.4rem 0; border-top: 3px solid #8c1d1d; transition: transform 0.2s, box-shadow 0.2s; }
-        .guide-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        .guide-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.8rem; display: flex; align-items: center; justify-content: space-between; }
-        .guide-tag { font-size: 0.75rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 3px; font-weight: normal; }
+        .guide-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 1.8rem; 
+            border-radius: 6px; 
+            margin: 1.6rem 0; 
+            border-top: 4px solid var(--crimson); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .guide-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 14px rgba(0,0,0,0.06); 
+        }
+        .guide-title { 
+            font-size: 1.25rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            margin-bottom: 1rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            border-bottom: 1px dashed #E2D7C5;
+            padding-bottom: 0.5rem;
+        }
+        .guide-tag { 
+            font-size: 0.76rem; 
+            background: var(--crimson); 
+            color: #fff; 
+            padding: 2px 9px; 
+            border-radius: 3px; 
+            font-weight: normal; 
+        }
 
         ul.rule-list { list-style: none; padding-left: 0; }
-        ul.rule-list li { margin-bottom: 0.8rem; padding: 0.8rem 1rem; background: #fff; border: 1px solid #ebdcd0; border-radius: 4px; line-height: 1.8; font-size: 0.93rem; color: #444; }
-        ul.rule-list li strong { color: #8c1d1d; }
+        ul.rule-list li { 
+            margin-bottom: 0.9rem; 
+            padding: 0.9rem 1.2rem; 
+            background: #fff; 
+            border: 1px solid #EAE2D5; 
+            border-radius: 4px; 
+            line-height: 1.85; 
+            font-size: 0.94rem; 
+            color: #443D36; 
+        }
+        ul.rule-list li strong { color: var(--crimson); }
 
-        .sample-box { background: #fffaf4; border: 1px dashed #c8b7a6; padding: 1.2rem; border-radius: 4px; font-family: "KaiTi", "STKaiti", serif; font-size: 1.02rem; line-height: 2; color: #3a2b20; margin-top: 0.8rem; }
+        .sample-box { 
+            background: #FAF7EE; 
+            border: 1px dashed #C59B27; 
+            padding: 1.2rem 1.4rem; 
+            border-radius: 4px; 
+            font-family: "KaiTi", "STKaiti", serif; 
+            font-size: 1.02rem; 
+            line-height: 2.1; 
+            color: #3A2B20; 
+            margin-top: 1rem; 
+        }
+        .sample-box strong {
+            color: var(--crimson);
+            font-family: inherit;
+        }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.8rem 0 1rem; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        /* 欧式图示模型 */
+        .tree-schema-box {
+            background: #fff;
+            border: 1px solid #E2D7C5;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 0.8rem;
+            overflow-x: auto;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 2rem 0 1rem; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box cite {
+            display: block;
+            margin-top: 0.5rem;
+            color: var(--crimson);
+            font-style: normal;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-align: right;
+        }
+
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -114,12 +361,12 @@
                         <a href="calendar.html">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
                         <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html" style="background:#8c1d1d; color:#fff;">修谱指南凡例</a>
+                        <a href="genealogy-guide.html" style="background:var(--crimson); color:#fff;">修谱指南凡例</a>
                         <a href="memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -134,76 +381,98 @@
         
         <div class="guide-card">
             <div class="guide-title">
-                <span>一、正本清源：二十字辈与五行严核</span>
+                <span>一、正本清源：二十字派语与五行相生严核</span>
                 <span class="guide-tag">宗法根本</span>
             </div>
             <ul class="rule-list">
                 <li>
-                    <strong>严格依御赐字派入谱：</strong>以明太祖朱元璋为第一世，始祖周定王朱橚为第二世。周藩各支宗亲名字第二字必须严核太祖高皇帝御赐周藩二十字派语（<strong>有子同安睦，勤朝在肃恭，绍伦敷惠润，昭格广登庸</strong>），自三世【有】字辈起严格循序排定，严禁私更字序。
+                    <strong>严格依御赐字派入谱：</strong>以明太祖高皇帝朱元璋为第一世，始祖周定王朱橚为第二世。周藩各支宗亲名字第二字必须严核太祖御赐周藩二十字派语：<br>
+                    <span style="display:block; margin: 0.4rem 0; color:var(--crimson); font-weight:bold; font-size:1.05rem; text-align:center;">
+                        “有子同安睦，勤朝在肃恭。绍伦敷惠润，昭格广登庸。”
+                    </span>
+                    凡自第三世【有】字辈起，须严格循序按代排定，严禁私改、倒插或僭用外藩派语。
                 </li>
                 <li>
-                    <strong>偏旁五行相生相承：</strong>明代宗室末字严格依“木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木”五行偏旁递转相生。清初改随俗取名之支脉，须在世系录中附注其所应承之五行行次。
+                    <strong>偏旁五行相生相承：</strong>明代宗室末字严格依“木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木”偏旁规律递转相生。清初因避祸隐姓改从单名或随俗用字之支脉，在世系录名下须附注其所属世代及应承之五行行次，以备后世考核。
                 </li>
             </ul>
         </div>
 
         <div class="guide-card">
             <div class="guide-title">
-                <span>二、体例规范：欧苏合璧图表互证</span>
+                <span>二、体例规范：欧苏合璧，图传互证</span>
                 <span class="guide-tag">版式规制</span>
             </div>
             <ul class="rule-list">
                 <li>
-                    <strong>世系图（谱图 · 欧阳修式）：</strong>采用五世一表排版，横看分房支脉、纵看世代次序，父子相连，脉络井然。
+                    <strong>世系图（谱图 · 欧阳修体）：</strong>采用“五世一表”排版，横见分房派系、纵见昭穆次第，高曾祖考相连，支脉一线贯穿，开卷即可一览全房源流。
+                    <div class="tree-schema-box">
+                        <strong>【欧式图例规范】</strong><br>
+                        一世（太祖朱元璋） ➔ 二世（周定王朱橚） ➔ 三世（周简王朱有爝） ➔ 四世（周懿王朱子墧） ➔ 五世（周惠王朱同䥸）
+                    </div>
                 </li>
                 <li>
-                    <strong>世系录（谱传 · 苏洵式）：</strong>详记每位先祖之讳名、派名、字号、生卒年月日（干支与公元对照并载）、配偶姓氏氏族、归葬茔向（附地名穴向）、育子行次及主要行状。
+                    <strong>世系录（谱传 · 苏洵体）：</strong>详记每位先祖之讳名、派名、字号、生卒年月日（公历与明代纪年双载）、配偶氏族、归葬茔向（地名与山向）、育子行次及主要行状、勋封爵衔。
                 </li>
             </ul>
             <div class="sample-box">
-                【世系录入谱范例（以太祖为一世）】：<br>
-                “十三世 朱绍○，行一。生于明万历○年○月○日，卒于崇祯○年○月○日，寿○。配李氏，合葬封丘李庄常东村北原向乾山巽向。子三：伦○、伦○、伦○。女一，适张。”
+                <strong>【世系录标准入谱范例（以太祖为一世）】</strong>：<br>
+                “十二世 朱恭枵，端王长子。万历十四年封世子，万历十六年袭封周王。性刚正惠和，崇文好施。崇祯十五年壬午李自成三围汴京，王毁家纾难，出府库金犒赏守城军士。九月河决水灌开封，城没殉国。配王妃陈氏。子一：朱绍○。”
             </div>
         </div>
 
         <div class="guide-card">
             <div class="guide-title">
-                <span>三、秉笔直书：严禁攀附与存疑待考</span>
-                <span class="guide-tag">严谨实录</span>
+                <span>三、实事求是：严禁伪攀与存疑待考</span>
+                <span class="guide-tag">修谱史德</span>
             </div>
             <ul class="rule-list">
                 <li>
-                    <strong>不附会、不妄攀：</strong>明末清初因大水兵燹散失断代之支脉，应如实记为“始迁祖某某，自开封/封丘迁此”，严禁在无金石文书确证下随意上攀名王。
+                    <strong>不附会、不妄攀：</strong>崇祯十五年黄河决口及甲申鼎革之后，周藩宗室散处豫、皖、苏、鲁各邑，部分支脉早年谱牒毁于水火，出现数代断代者。修谱时应遵“信以传信、疑以传疑”之笔法，实录为“始迁祖某某，自汴梁迁此”，切不可无凭无据强接明代封王名下。
                 </li>
                 <li>
-                    <strong>辨明承嗣与出抚：</strong>出继、入嗣、兼祧、抚养等宗亲法统，须于名下用小字分注“承某某房嗣”或“出抚某某”，以清昭穆血食。
+                    <strong>出抚兼祧辨明宗祧：</strong>凡宗亲有出继、入嗣、兼祧、异姓抚养等情况，须于名讳下用双行小字注明“出抚某公为嗣”或“兼祧两房”，以确保血缘与宗祧脉络清晰。
+                </li>
+                <li>
+                    <strong>女眷入谱标准：</strong>顺应现代文明修谱原则，宗女书名入谱，详载所适配偶姓名、籍贯；若招婿承祧者，亦应详注其事由。
                 </li>
             </ul>
         </div>
 
         <div class="guide-card">
             <div class="guide-title">
-                <span>四、谱牒防伪与数字云端保存</span>
+                <span>四、印鉴防伪与数字云端长久保存</span>
                 <span class="guide-tag">典藏永续</span>
             </div>
             <ul class="rule-list">
                 <li>
-                    <strong>宗谱字号编号：</strong>木刻或胶印宗谱修竣后，编列“天、地、玄、黄”等字号分发各房长专管，清明冬至大祭验查。
+                    <strong>谱本字号编列与钤印：</strong>宗谱修竣印刷后，按“天地玄黄、宇宙洪荒”编列领谱字号，由各房长或族老具领专管，封面加盖宗祠骑缝朱印，定期祭祖时验核查点，防范私贩与窜改。
                 </li>
                 <li>
-                    <strong>数字化双重备份：</strong>对明清历次修撰之古谱、碑拓进行高分辨率影印扫描，结合全站数字家谱库（`tree.html`）实现云端、本地双重永久保存。
+                    <strong>金石互证与数字化存念：</strong>妥善保护地下出土之圹志拓片、祖墓碑文。将老谱与修竣新谱制作高分辨率扫描档案，并在宗族云端谱系（如本站数字家谱树）同步建档，实现线上互联、线下存念。
                 </li>
+            </ul>
+        </div>
+
+        <h2>🔍 周藩后裔辨谱考真“四核原则”</h2>
+        <div class="guide-card">
+            <ul class="rule-list">
+                <li><strong>一核字辈行次：</strong>次字是否严谨对应“有子同安睦，勤朝在肃恭……”二十字序；</li>
+                <li><strong>二核偏旁生克：</strong>第三字是否暗含“木 ➔ 火 ➔ 土 ➔ 金 ➔ 水”之偏旁部首流转；</li>
+                <li><strong>三核迁徙原委：</strong>祖传迁徙记忆是否与明末开封大水、周王府覆没后北渡黄河至封丘、延津，或南逃宛、汝之路线吻合；</li>
+                <li><strong>四核碑刻金石：</strong>祖坟墓碑或出土残碣上是否有“明周藩某王之裔”、“皇明宗室”等金石字样。</li>
             </ul>
         </div>
 
         <h2>📖 修谱传宗要训</h2>
         <div class="quote-box">
-            <p>“谱牒之修，非为矜夸阀阅，实为收族睦宗。使散徙千百载之裔孙，开卷知其根柢，瞻图明其尊卑。敦仁崇礼，不坠先祖救荒济世之芳规。” ——周藩续修宗谱凡例跋</p>
+            <p>“夫家之有谱，犹国之有史也。史不备则朝章废弛，谱不修则昭穆紊乱。吾周藩受封汴梁二百六十余载，以仁德医药泽被生民。今日修谱，非为矜夸阀阅，实为联缀散佚、警诫后学。后世子孙展卷瞻礼，当念创业之维艰，秉崇文好生之德，庶不忝太祖高皇帝与定王之裔也。”</p>
+            <cite>—— 辑录自大明周藩《续修家谱凡例序》</cite>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
