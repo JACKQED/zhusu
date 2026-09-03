@@ -5,88 +5,340 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>明代年号干支与公历双向速查换算器 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.8; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉分类导航 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主容器 */
-        .container { max-width: 1080px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px;
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 0.9rem 1.2rem; 
+            margin: 1.2rem 0 1.5rem; 
+            font-size: 0.92rem; 
+            color: #614D2A; 
+            line-height: 1.8; 
+            border-radius: 0 6px 6px 0; 
+        }
 
         /* 快捷标签 */
-        .preset-bar { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
-        .preset-label { font-size: 0.85rem; color: #777; font-weight: bold; }
-        .preset-btn { background: #f5efe6; border: 1px solid #dcd3cb; padding: 0.25rem 0.7rem; border-radius: 15px; font-size: 0.82rem; cursor: pointer; color: #8c1d1d; transition: all 0.2s; }
-        .preset-btn:hover { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
+        .preset-bar { 
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            margin: 1.2rem 0; 
+            background: #FCFAF6;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #EAE2D5;
+        }
+        .preset-label { font-size: 0.86rem; color: var(--crimson); font-weight: bold; }
+        .preset-btn { 
+            background: #FFF; 
+            border: 1px solid #D8CFBE; 
+            padding: 0.25rem 0.75rem; 
+            border-radius: 15px; 
+            font-size: 0.82rem; 
+            cursor: pointer; 
+            color: #443D36; 
+            transition: all 0.2s; 
+        }
+        .preset-btn:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            border-color: var(--crimson); 
+        }
 
         /* 选项卡面板 */
-        .tab-bar { display: flex; border-bottom: 2px solid #8c1d1d; margin-top: 1.5rem; gap: 0.5rem; }
-        .tab-btn { padding: 0.6rem 1.2rem; background: #f4efe9; border: 1px solid #dcd3cb; border-bottom: none; border-radius: 6px 6px 0 0; font-size: 0.95rem; font-weight: bold; color: #666; cursor: pointer; }
-        .tab-btn.active { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
+        .tab-bar { 
+            display: flex; 
+            border-bottom: 2px solid var(--crimson); 
+            margin-top: 1.8rem; 
+            gap: 0.4rem; 
+        }
+        .tab-btn { 
+            padding: 0.6rem 1.2rem; 
+            background: #F4EFE9; 
+            border: 1px solid #DCD3CB; 
+            border-bottom: none; 
+            border-radius: 6px 6px 0 0; 
+            font-size: 0.92rem; 
+            font-weight: bold; 
+            color: #666; 
+            cursor: pointer; 
+            transition: all 0.2s;
+        }
+        .tab-btn.active { 
+            background: var(--crimson); 
+            color: #fff; 
+            border-color: var(--crimson); 
+        }
         
-        .calc-panel { display: none; background: #fdfbf7; border: 1px solid #e8dfd8; border-top: none; padding: 1.8rem; border-radius: 0 0 6px 6px; }
+        .calc-panel { 
+            display: none; 
+            background: #FCFAF6; 
+            border: 1px solid #EAE2D5; 
+            border-top: none; 
+            padding: 1.8rem; 
+            border-radius: 0 0 6px 6px; 
+        }
         .calc-panel.active { display: block; }
 
         /* 表单控件 */
-        .form-row { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; margin: 1rem 0; }
-        .calc-select, .calc-input { padding: 0.55rem 0.8rem; font-size: 1rem; border: 1px solid #c8bdb4; border-radius: 4px; background: #fff; color: #333; outline: none; }
-        .calc-select:focus, .calc-input:focus { border-color: #8c1d1d; box-shadow: 0 0 0 2px rgba(140,29,29,0.15); }
-        .calc-btn { background: #8c1d1d; color: #fff; border: none; padding: 0.55rem 1.4rem; border-radius: 4px; font-size: 1rem; cursor: pointer; font-weight: bold; transition: background 0.2s; }
-        .calc-btn:hover { background: #6f1212; }
+        .form-row { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; margin: 0.8rem 0; }
+        .calc-select, .calc-input { 
+            padding: 0.52rem 0.8rem; 
+            font-size: 0.95rem; 
+            border: 1px solid #C8BDB4; 
+            border-radius: 4px; 
+            background: #fff; 
+            color: #333; 
+            outline: none; 
+        }
+        .calc-select:focus, .calc-input:focus { 
+            border-color: var(--crimson); 
+            box-shadow: 0 0 0 2px rgba(140,29,29,0.15); 
+        }
+        .calc-btn { 
+            background: var(--crimson); 
+            color: #fff; 
+            border: none; 
+            padding: 0.52rem 1.4rem; 
+            border-radius: 4px; 
+            font-size: 0.95rem; 
+            cursor: pointer; 
+            font-weight: bold; 
+            transition: background 0.2s; 
+        }
+        .calc-btn:hover { background: var(--dark-crimson); }
 
         /* 结果展示卡片 */
-        .res-display { display: none; background: #fff8f0; border: 1px solid #f0dec8; border-left: 5px solid #8c1d1d; padding: 1.2rem; margin-top: 1.2rem; border-radius: 4px; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
-        .res-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.6rem; }
-        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.8rem; margin-top: 0.6rem; }
-        .res-item { background: #fff; padding: 0.6rem 0.8rem; border-radius: 4px; border: 1px solid #ebdcd0; font-size: 0.9rem; }
-        .res-item strong { color: #8c1d1d; }
-        .res-context { margin-top: 0.8rem; padding-top: 0.8rem; border-top: 1px dashed #dfd0c0; font-size: 0.9rem; color: #554; }
+        .res-display { 
+            display: none; 
+            background: #fff; 
+            border: 1px solid #EADBCE; 
+            border-left: 5px solid var(--crimson); 
+            padding: 1.4rem; 
+            margin-top: 1.5rem; 
+            border-radius: 4px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03); 
+        }
+        .res-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .res-title { font-size: 1.2rem; color: var(--crimson); font-weight: bold; }
+        .copy-btn {
+            background: #FAF5EB;
+            border: 1px solid #E2D7C5;
+            padding: 2px 8px;
+            font-size: 0.78rem;
+            color: #614D2A;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .copy-btn:hover { background: var(--crimson); color: #fff; border-color: var(--crimson); }
+        .res-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 0.6rem; }
+        .res-item { background: #FAF8F2; padding: 0.65rem 0.9rem; border-radius: 4px; border: 1px solid #EFE8DA; font-size: 0.9rem; }
+        .res-item strong { color: var(--crimson); }
+        .res-context { margin-top: 0.9rem; padding-top: 0.9rem; border-top: 1px dashed #E2D7C5; font-size: 0.92rem; color: #443D36; }
 
         /* 对照表格 */
-        .table-wrap { overflow-x: auto; margin-top: 1.2rem; }
-        .era-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .era-table th, .era-table td { border: 1px solid #e2dcd5; padding: 0.65rem 0.8rem; text-align: left; }
-        .era-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .era-table tr:nth-child(even) { background: #faf6f0; }
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .era-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 650px; }
+        .era-table th, .era-table td { border: 1px solid #E5DFC5; padding: 0.7rem 0.9rem; text-align: left; }
+        .era-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .era-table tr:nth-child(even) { background: #FCFAF6; }
+        .era-table tr:hover { background: #FFF9F0; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            .form-row { flex-direction: column; align-items: stretch; }
+            .calc-select, .calc-input, .calc-btn { width: 100%; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -133,7 +385,7 @@
                 <div class="nav-item">
                     <span class="nav-link" style="color:#fff; font-weight:bold;">🛠️ 考据工具 ▾</span>
                     <div class="dropdown-menu">
-                        <a href="calendar.html" style="background:#8c1d1d; color:#fff;">纪年干支换算</a>
+                        <a href="calendar.html" style="background:var(--crimson); color:#fff;">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
                         <a href="naming-guide.html">起名专栏与宗法</a>
                         <a href="genealogy-guide.html">修谱指南凡例</a>
@@ -141,7 +393,7 @@
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -158,7 +410,7 @@
             <button class="preset-btn" onclick="quickCheck(1381)">洪武十四年 (定王就藩开封)</button>
             <button class="preset-btn" onclick="quickCheck(1406)">永乐四年 (救荒本草初刻)</button>
             <button class="preset-btn" onclick="quickCheck(1425)">洪熙元年 (定王薨葬禹州)</button>
-            <button class="preset-btn" onclick="quickCheck(1428)">宣德三年 (宪王薨/简王袭)</button>
+            <button class="preset-btn" onclick="quickCheck(1439)">正统四年 (宪王薨/简王承统)</button>
             <button class="preset-btn" onclick="quickCheck(1642)">崇祯十五年 (开封水患宗室转徙)</button>
         </div>
 
@@ -191,9 +443,11 @@
                     <option value="1621,7,天启,明熹宗朱由校">天启 (明熹宗 1621-1627)</option>
                     <option value="1628,17,崇祯,明思宗朱由检">崇祯 (明思宗 1628-1644)</option>
                 </select>
-                <span>第</span>
-                <input type="number" id="eraYear" class="calc-input" value="1" min="1" max="31" style="width: 85px;">
-                <span>年</span>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span>第</span>
+                    <input type="number" id="eraYear" class="calc-input" value="1" min="1" max="31" style="width: 85px;">
+                    <span>年</span>
+                </div>
                 <button class="calc-btn" onclick="calcEraToAD()">查询公历与干支</button>
             </div>
             <div id="eraResult" class="res-display"></div>
@@ -202,9 +456,11 @@
         <!-- 模式二：公历转明朝年号 -->
         <div id="tab2" class="calc-panel">
             <div class="form-row">
-                <span>输入公历年份：公元</span>
-                <input type="number" id="adInput" class="calc-input" value="1406" min="1368" max="1644" style="width: 110px;">
-                <span>年 (范围：1368 - 1644)</span>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span>输入公历年份：公元</span>
+                    <input type="number" id="adInput" class="calc-input" value="1406" min="1368" max="1644" style="width: 110px;">
+                    <span>年</span>
+                </div>
                 <button class="calc-btn" onclick="calcADToEra()">换算大明年号</button>
             </div>
             <div id="adResult" class="res-display"></div>
@@ -213,8 +469,10 @@
         <!-- 模式三：六十干支速查 -->
         <div id="tab3" class="calc-panel">
             <div class="form-row">
-                <span>选择岁次干支：</span>
-                <select id="ganzhiSelect" class="calc-select"></select>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                    <span>选择岁次干支：</span>
+                    <select id="ganzhiSelect" class="calc-select"></select>
+                </div>
                 <button class="calc-btn" onclick="calcGanzhiList()">查询明代所有对应年份</button>
             </div>
             <div id="ganzhiResult" class="res-display"></div>
@@ -234,29 +492,29 @@
                 </thead>
                 <tbody>
                     <tr><td>明太祖</td><td><strong>洪武</strong></td><td>31年</td><td>1368 — 1398</td><td>周定王 朱橚 (洪武十四年就藩汴京)</td></tr>
-                    <tr><td>明惠宗</td><td><strong>建文</strong></td><td>4年</td><td>1399 — 1402</td><td>周定王 朱橚 (建文初谪迁，成祖复藩)</td></tr>
+                    <tr><td>明惠宗</td><td><strong>建文</strong></td><td>4年</td><td>1399 — 1402</td><td>周定王 朱橚 (建文初谪迁，成祖靖难后复藩)</td></tr>
                     <tr><td>明成祖</td><td><strong>永乐</strong></td><td>22年</td><td>1403 — 1424</td><td>周定王 朱橚 (编纂《救荒本草》《普济方》)</td></tr>
-                    <tr><td>明仁宗</td><td><strong>洪熙</strong></td><td>1年</td><td>1425</td><td>周宪王 朱有炖 (定王薨葬禹州三峰山)</td></tr>
-                    <tr><td>明宣宗</td><td><strong>宣德</strong></td><td>10年</td><td>1426 — 1435</td><td>周宪王 朱有炖 ➔ 周简王 朱有爝 (宣德三年袭)</td></tr>
-                    <tr><td>明英宗</td><td><strong>正统</strong></td><td>14年</td><td>1436 — 1449</td><td>周简王 朱有爝</td></tr>
-                    <tr><td>明代宗</td><td><strong>景泰</strong></td><td>7年</td><td>1450 — 1456</td><td>周简王 朱有爝 ➔ 周靖王 朱子垕 (景泰三年袭)</td></tr>
-                    <tr><td>明英宗</td><td><strong>天顺</strong></td><td>8年</td><td>1457 — 1464</td><td>周靖王 朱子垕 ➔ 周懿王 朱子圮 (天顺元年袭)</td></tr>
-                    <tr><td>明宪宗</td><td><strong>成化</strong></td><td>23年</td><td>1465 — 1487</td><td>周惠王 朱同䥝 (成化二十三年袭)</td></tr>
-                    <tr><td>明孝宗</td><td><strong>弘治</strong></td><td>18年</td><td>1488 — 1505</td><td>周惠王 朱同䥝 ➔ 周悼王 朱安㴦 (追封)</td></tr>
-                    <tr><td>明武宗</td><td><strong>正德</strong></td><td>16年</td><td>1506 — 1521</td><td>周恭王 朱睦㰂 (正德三年袭)</td></tr>
-                    <tr><td>明世宗</td><td><strong>嘉靖</strong></td><td>45年</td><td>1522 — 1566</td><td>周恭王 朱睦㰂 ➔ 周康王 朱勤炽 (嘉靖三十五年袭)</td></tr>
-                    <tr><td>明穆宗</td><td><strong>隆庆</strong></td><td>6年</td><td>1567 — 1572</td><td>周庄王 朱朝堈 (隆庆四年袭)</td></tr>
-                    <tr><td>明神宗</td><td><strong>万历</strong></td><td>48年</td><td>1573 — 1620</td><td>周端王 朱在铤 ➔ 周敬王 朱肃溱 ➔ 周恭王 朱恭枵</td></tr>
-                    <tr><td>明光宗</td><td><strong>泰昌</strong></td><td>1年</td><td>1620</td><td>周敬王 朱肃溱 / 朱恭枵</td></tr>
-                    <tr><td>明熹宗</td><td><strong>天启</strong></td><td>7年</td><td>1621 — 1627</td><td>周王 朱恭枵</td></tr>
-                    <tr><td>明思宗</td><td><strong>崇祯</strong></td><td>17年</td><td>1628 — 1644</td><td>周王 朱恭枵 (崇祯十五年开封水患，宗室散迁)</td></tr>
+                    <tr><td>明仁宗</td><td><strong>洪熙</strong></td><td>1年</td><td>1425</td><td>周定王 朱橚 (八月薨葬禹州) ➔ 周宪王 朱有燉</td></tr>
+                    <tr><td>明宣宗</td><td><strong>宣德</strong></td><td>10年</td><td>1426 — 1435</td><td>周宪王 朱有燉 (号诚斋，一代曲圣)</td></tr>
+                    <tr><td>明英宗</td><td><strong>正统</strong></td><td>14年</td><td>1436 — 1449</td><td>周宪王 朱有燉 (正统四年薨无嗣) ➔ 周简王 朱有爝 (承袭大宗)</td></tr>
+                    <tr><td>明代宗</td><td><strong>景泰</strong></td><td>7年</td><td>1450 — 1456</td><td>周简王 朱有爝 (景泰三年薨) ➔ 周靖王 朱子垕 (景泰六年袭，七年薨)</td></tr>
+                    <tr><td>明英宗</td><td><strong>天顺</strong></td><td>8年</td><td>1457 — 1464</td><td>周懿王 朱子墧 (天顺元年袭)</td></tr>
+                    <tr><td>明宪宗</td><td><strong>成化</strong></td><td>23年</td><td>1465 — 1487</td><td>周懿王 朱子墧 (成化二十二年薨) ➔ 周惠王 朱同䥸 (成化二十三年袭)</td></tr>
+                    <tr><td>明孝宗</td><td><strong>弘治</strong></td><td>18年</td><td>1488 — 1505</td><td>周惠王 朱同䥸 (弘治十一年薨) ➔ 周悼王 朱安㳡 (世子早卒追封) ➔ 周恭王 朱睦㰂 (弘治十四年袭)</td></tr>
+                    <tr><td>明武宗</td><td><strong>正德</strong></td><td>16年</td><td>1506 — 1521</td><td>周恭王 朱睦㰂</td></tr>
+                    <tr><td>明世宗</td><td><strong>嘉靖</strong></td><td>45年</td><td>1522 — 1566</td><td>周恭王 朱睦㰂 (嘉靖十七年薨) ➔ 周庄王 朱朝堈 (嘉靖十九年袭，三十年薨) ➔ 周敬王 朱在鋌 (嘉靖三十四年袭)</td></tr>
+                    <tr><td>明穆宗</td><td><strong>隆庆</strong></td><td>6年</td><td>1567 — 1572</td><td>周敬王 朱在鋌</td></tr>
+                    <tr><td>明神宗</td><td><strong>万历</strong></td><td>48年</td><td>1573 — 1620</td><td>周敬王 朱在鋌 (万历十一年薨) ➔ 周端王 朱肃溱 (万历十四年袭)</td></tr>
+                    <tr><td>明光宗</td><td><strong>泰昌</strong></td><td>1年</td><td>1620</td><td>周端王 朱肃溱</td></tr>
+                    <tr><td>明熹宗</td><td><strong>天启</strong></td><td>7年</td><td>1621 — 1627</td><td>周端王 朱肃溱</td></tr>
+                    <tr><td>明思宗</td><td><strong>崇祯</strong></td><td>17年</td><td>1628 — 1644</td><td>周端王 朱肃溱 (崇祯八年薨) ➔ 周王 朱恭枵 (崇祯十五年开封水患抗节，宗室散迁)</td></tr>
                 </tbody>
             </table>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -287,6 +545,7 @@
         // 初始化60干支下拉列表
         function initGanzhiOptions() {
             const sel = document.getElementById('ganzhiSelect');
+            sel.innerHTML = '';
             for (let i = 0; i < 60; i++) {
                 const g = gan[i % 10];
                 const z = zhi[i % 12];
@@ -297,31 +556,30 @@
             }
         }
 
+        // 标准干支算法
         function getGanzhi(year) {
-            let offset = (year - 4) % 60;
-            if (offset < 0) offset += 60;
-            const g = (year - 4) % 10;
-            const z = (year - 4) % 12;
-            const gIdx = g < 0 ? g + 10 : g;
-            const zIdx = z < 0 ? z + 12 : z;
+            let gIdx = (year - 4) % 10;
+            if (gIdx < 0) gIdx += 10;
+            let zIdx = (year - 4) % 12;
+            if (zIdx < 0) zIdx += 12;
             return gan[gIdx] + zhi[zIdx] + "（" + shengxiao[zIdx] + "年）";
         }
 
+        // 获取周藩世系与历史背景
         function getZhouKing(year) {
-            if (year < 1381) return "周定王朱橚受封吴王/周王，尚未就藩汴京";
-            if (year <= 1425) return "始祖 · 周定王 朱橚（开封主政，创良医所、撰《救荒本草》）";
-            if (year <= 1439) return "第二代 · 周宪王 朱有炖（号诚斋，一代曲圣）";
-            if (year <= 1452) return "第三代 · 周简王 朱有爝（周王大宗直系之源）";
-            if (year <= 1456) return "第四代 · 周靖王 朱子垕（禹州靖王陵玄宫）";
-            if (year <= 1485) return "第五代 · 周懿王 朱子圮";
-            if (year <= 1498) return "第六代 · 周惠王 朱同䥝";
-            if (year <= 1502) return "第七代 · 周悼王 朱安㴦（追封）";
-            if (year <= 1538) return "第八代 · 周恭王 朱睦㰂";
-            if (year <= 1568) return "第九代 · 周康王 朱勤炽";
-            if (year <= 1583) return "第十代 · 周庄王 朱朝堈";
-            if (year <= 1586) return "第十一代 · 周敬王 朱在铤";
-            if (year <= 1613) return "第十二代 · 周端王 朱肃溱";
-            return "第十三代 · 周王 朱恭枵（崇祯十五年坚守汴梁，水决后宗室迁播各邑）";
+            if (year < 1381) return "周定王朱橚初封吴王/周王，尚未就藩汴京";
+            if (year <= 1425) return "始祖 · 周定王 朱橚（开封主政，创良医所、撰《救荒本草》；洪熙元年薨葬禹州）";
+            if (year <= 1439) return "第二代 · 周宪王 朱有燉（号诚斋，一代曲圣，撰《诚斋乐府》；正统四年薨无嗣）";
+            if (year <= 1452) return "第三代 · 周简王 朱有爝（定王第四子，承袭大统，为周王直系大宗之源）";
+            if (year <= 1456) return "第四代 · 周靖王 朱子垕（简王庶长子，在位一年薨无嗣；禹州后沟村玄宫）";
+            if (year <= 1486) return "第五代 · 周懿王 朱子墧（简王庶次子，在位三十年，周藩全盛之世）";
+            if (year <= 1498) return "第六代 · 周惠王 朱同䥸（懿王庶长子，成化二十三年袭，弘治十一年薨）";
+            if (year <= 1500) return "世子 · 周悼王 朱安㳡（惠王嫡长子，早卒追封）";
+            if (year <= 1538) return "第八代 · 周恭王 朱睦㰂（悼王庶长子，正德元年袭，端谨守礼）";
+            if (year <= 1551) return "第九代 · 周庄王 朱朝堈（恭王之孙、康王朱勤熄之子，嘉靖十九年袭）";
+            if (year <= 1583) return "第十代 · 周敬王 朱在鋌（庄王庶长子，嘉靖三十四年袭，万历十一年薨）";
+            if (year <= 1635) return "第十一代 · 周端王 朱肃溱（敬王嫡长子，万历十四年袭，崇祯八年薨）";
+            return "末代 · 周王 朱恭枵（端王长子，崇祯十五年坚守汴梁，李自成决河水灌城后殉难，宗室播迁各邑）";
         }
 
         function updateMaxYear() {
@@ -330,6 +588,12 @@
             const input = document.getElementById('eraYear');
             input.max = maxYear;
             if (parseInt(input.value) > maxYear) input.value = maxYear;
+        }
+
+        function copyText(str) {
+            navigator.clipboard.writeText(str).then(() => {
+                alert('已复制考据结果到剪贴板！');
+            });
         }
 
         // 模式1：年号查公历
@@ -350,10 +614,14 @@
             const gz = getGanzhi(adYear);
             const king = getZhouKing(adYear);
             const eraText = yearNum === 1 ? `${eraName}元年` : `${eraName}${yearNum}年`;
+            const clipText = `大明${eraText}（公元${adYear}年 · ${gz} · ${emperor}）`;
 
             const res = document.getElementById('eraResult');
             res.innerHTML = `
-                <div class="res-title">考据结果：大明【${eraText}】</div>
+                <div class="res-head">
+                    <div class="res-title">考据结果：大明【${eraText}】</div>
+                    <button class="copy-btn" onclick="copyText('${clipText}')">📋 复制记录</button>
+                </div>
                 <div class="res-grid">
                     <div class="res-item"><strong>公历年份：</strong>公元 <strong>${adYear}</strong> 年</div>
                     <div class="res-item"><strong>岁次干支：</strong><strong>${gz}</strong></div>
@@ -383,10 +651,14 @@
 
             const gz = getGanzhi(ad);
             const king = getZhouKing(ad);
+            const clipText = `公元${ad}年（${matchEra.join(" / ")} · ${gz}）`;
 
             const res = document.getElementById('adResult');
             res.innerHTML = `
-                <div class="res-title">考据结果：公元 ${ad} 年</div>
+                <div class="res-head">
+                    <div class="res-title">考据结果：公元 ${ad} 年</div>
+                    <button class="copy-btn" onclick="copyText('${clipText}')">📋 复制记录</button>
+                </div>
                 <div class="res-grid">
                     <div class="res-item"><strong>大明年号：</strong><strong>${matchEra.join(" / ")}</strong></div>
                     <div class="res-item"><strong>岁次干支：</strong><strong>${gz}</strong></div>
@@ -423,14 +695,14 @@
             let rowsHtml = list.map(item => `
                 <tr>
                     <td><strong>公元 ${item.ad} 年</strong></td>
-                    <td><strong style="color:#8c1d1d;">${item.era}</strong></td>
+                    <td><strong style="color:var(--crimson);">${item.era}</strong></td>
                     <td>${item.emperor}</td>
                     <td>${item.king}</td>
                 </tr>
             `).join('');
 
             res.innerHTML = `
-                <div class="res-title">岁次【${targetGZ}】在明代共出现 ${list.length} 次：</div>
+                <div class="res-title" style="margin-bottom:0.8rem;">岁次【${targetGZ}】在明代共出现 ${list.length} 次：</div>
                 <div class="table-wrap">
                     <table class="era-table" style="background:#fff;">
                         <thead><tr><th>公历</th><th>明代年号</th><th>当朝皇帝</th><th>周藩世系背景</th></tr></thead>
