@@ -5,68 +5,301 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩历代昭穆神位谱 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
         /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; text-align: center; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        /* 享堂神位格局 */
-        .altar-center { text-align: center; margin: 2rem 0; }
-        .altar-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; margin-top: 1.5rem; }
+        /* 享堂神位正尊 */
+        .altar-center { 
+            text-align: center; 
+            margin: 2rem 0; 
+        }
+        .altar-container { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 1.5rem; 
+            margin-top: 1.5rem; 
+        }
         
-        .tablet-card { background: #fffaf4; border: 1px solid #dccbb6; border-top: 4px solid #8c1d1d; padding: 1.4rem; border-radius: 6px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
-        .tablet-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(140,29,29,0.1); }
-        .tablet-name { font-size: 1.2rem; font-weight: bold; color: #8c1d1d; letter-spacing: 1px; font-family: "KaiTi", "STKaiti", serif; }
-        .tablet-meta { font-size: 0.88rem; color: #666; margin-top: 0.4rem; line-height: 1.6; }
-        .tablet-tag { display: inline-block; padding: 2px 8px; font-size: 0.75rem; border-radius: 4px; background: #8c1d1d; color: #fff; margin-bottom: 0.5rem; font-weight: bold; }
-        .tag-zhao { background: #b84343; }
-        .tag-mu { background: #6a1b9a; }
-        .tag-main { background: #d4af37; color: #3a1c00; font-size: 0.82rem; padding: 3px 10px; }
+        .altar-column-header {
+            text-align: center;
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--crimson);
+            padding: 0.5rem;
+            background: #FAF5EB;
+            border-radius: 4px;
+            border: 1px solid #EAE2D5;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+        }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 2rem 0 1rem; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .tablet-card { 
+            background: #FCFAF7; 
+            border: 1px solid #E8E0D2; 
+            border-top: 4px solid var(--crimson); 
+            padding: 1.4rem; 
+            border-radius: 6px; 
+            text-align: center; 
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .tablet-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 14px rgba(140,29,29,0.12); 
+            border-color: var(--accent-gold);
+            border-top-color: var(--crimson);
+        }
+        .tablet-name { 
+            font-size: 1.25rem; 
+            font-weight: bold; 
+            color: var(--crimson); 
+            letter-spacing: 1px; 
+            font-family: "KaiTi", "STKaiti", serif; 
+        }
+        .tablet-meta { 
+            font-size: 0.88rem; 
+            color: #555; 
+            margin-top: 0.45rem; 
+            line-height: 1.65; 
+        }
+        .tablet-tag { 
+            display: inline-block; 
+            padding: 2px 8px; 
+            font-size: 0.76rem; 
+            border-radius: 4px; 
+            background: var(--crimson); 
+            color: #fff; 
+            margin-bottom: 0.5rem; 
+            font-weight: bold; 
+        }
+        .tag-zhao { background: #9E2A2B; }
+        .tag-mu { background: #5A2A6B; }
+        .tag-main { 
+            background: var(--accent-gold); 
+            color: #2C1A00; 
+            font-size: 0.82rem; 
+            padding: 3px 12px; 
+        }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 2.2rem 0 1rem; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box strong { color: var(--crimson); }
+        .quote-box p { margin-bottom: 0.5rem; }
+        .quote-box p:last-child { margin-bottom: 0; }
+
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
             .altar-container { grid-template-columns: 1fr; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -78,7 +311,7 @@
                         <a href="hall-of-fame.html">周藩名人堂</a>
                         <a href="lineage.html">世系字辈</a>
                         <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html" style="background:#8c1d1d; color:#fff;">昭穆神位</a>
+                        <a href="ancestors.html" style="background:var(--crimson); color:#fff;">昭穆神位</a>
                         <a href="branches.html">分房支派</a>
                         <a href="history.html">王府传承</a>
                     </div>
@@ -115,12 +348,13 @@
                     <div class="dropdown-menu">
                         <a href="calendar.html">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
+                        <a href="naming-guide.html">起名专栏与宗法</a>
                         <a href="genealogy-guide.html">修谱指南凡例</a>
                         <a href="memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -128,92 +362,103 @@
     <main class="container">
         <h1>周藩历代昭穆神位谱</h1>
         <div class="intro-box">
-            古礼宗庙之制：<strong>始祖居中，父为昭（左）、子为穆（右）</strong>，代代相递。此谱以大明太祖高皇帝为第一世总始祖居中，周藩受封始祖定王为第二世居昭（左），历代亲王依世系字辈正尊卑昭穆之序，垂范后昆，慎终追远。
+            古礼宗庙之制：<strong>“始祖居中，父为昭（左）、子为穆（右）”</strong>，代代交错相承。本神位谱以大明太祖高皇帝为第一世总始祖居正尊大位，始祖周定王朱橚为第二世居左昭大位，历代嗣统亲王依世系字辈正尊卑昭穆之序，垂范后昆，慎终追远。
         </div>
 
         <!-- 始祖正尊大位（朱元璋为第一世） -->
         <div class="altar-center">
-            <div class="tablet-card" style="max-width: 520px; margin: 0 auto; background: #8c1d1d; color: #fff; border: 2px solid #d4af37; box-shadow: 0 4px 16px rgba(140,29,29,0.25);">
+            <div class="tablet-card" style="max-width: 540px; margin: 0 auto; background: var(--crimson); color: #fff; border: 2px solid var(--accent-gold); box-shadow: 0 4px 18px rgba(140,29,29,0.25);">
                 <span class="tablet-tag tag-main">👑 百代不迁之宗 · 第一世大始祖</span>
-                <div class="tablet-name" style="color: #fff; font-size: 1.45rem; line-height: 1.6; margin-top: 0.3rem;">
+                <div class="tablet-name" style="color: #fff; font-size: 1.48rem; line-height: 1.6; margin-top: 0.3rem;">
                     大明太祖高皇帝 朱元璋 圣祖神位
                 </div>
-                <div class="tablet-meta" style="color: #f9e6d0; margin-top: 0.5rem;">
-                    配 孝慈高皇后马氏 · 开创大明 钦赐周藩字辈二十字
+                <div class="tablet-meta" style="color: #F8E6B8; margin-top: 0.5rem;">
+                    配 孝慈高皇后马氏 · 开创大明天下 亲赐周藩二十字派语
                 </div>
             </div>
         </div>
 
         <h2>⚖️ 享堂历代亲王左昭右穆位次</h2>
+        
         <div class="altar-container">
-            <!-- 二世：左昭（朱橚） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左 昭 · 第二世</span>
-                <div class="tablet-name">周定王 朱橚 神位</div>
-                <div class="tablet-meta">太祖高皇帝第五子 · 周藩始封祖 · 配元妃冯氏、继妃倪氏</div>
-            </div>
-            
-            <!-- 三世：右穆（有字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右 穆 · 第三世</span>
-                <div class="tablet-name">周宪王 朱有燉 / 周简王 朱有爝 神位</div>
-                <div class="tablet-meta">定王嫡长子（袭王 配巩氏）· 定王第四子（继袭大宗 配张氏）</div>
+            <!-- 左昭列（双数世次：二、四、六、八、十、十二） -->
+            <div class="altar-column">
+                <div class="altar-column-header">🏛️ 左 昭 列（左列正位）</div>
+
+                <!-- 二世：左昭（朱橚） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-zhao">左 昭 · 第二世</span>
+                    <div class="tablet-name">周定王 朱橚 神位</div>
+                    <div class="tablet-meta">太祖高皇帝第五子 · 周藩始封祖 · 配元妃冯氏、继妃倪氏 · 葬禹州无风山</div>
+                </div>
+
+                <!-- 四世：左昭（子字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-zhao">左 昭 · 第四世</span>
+                    <div class="tablet-name">周靖王 朱子垕 / 周懿王 朱子墧 神位</div>
+                    <div class="tablet-meta">简王庶长子（袭王 在位一年薨无嗣）· 简王庶次子（继袭大统 在位三十年 配妃杨氏）</div>
+                </div>
+
+                <!-- 六世：左昭（安字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-zhao">左 昭 · 第六世</span>
+                    <div class="tablet-name">周悼王 朱安㶇 神位</div>
+                    <div class="tablet-meta">惠王庶次子 · 册封周世子 · 早卒追封周王 · 配妃李氏</div>
+                </div>
+
+                <!-- 八世：左昭（朝字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-zhao">左 昭 · 第八世</span>
+                    <div class="tablet-name">周康王 朱勤熄 / 周庄王 朱朝堈 神位</div>
+                    <div class="tablet-meta">恭王嫡长子（早卒追封周康王）· 康王嫡长子（嘉靖十九年袭爵周王 配妃王氏）</div>
+                </div>
+
+                <!-- 十世：左昭（肃字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-zhao">左 昭 · 第十世</span>
+                    <div class="tablet-name">周端王 朱肃溱 神位</div>
+                    <div class="tablet-meta">敬王嫡长子 · 万历十四年袭封周王 · 崇祯八年薨 · 配妃袁氏</div>
+                </div>
             </div>
 
-            <!-- 四世：左昭（子字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左 昭 · 第四世</span>
-                <div class="tablet-name">周靖王 朱子垕 / 周懿王 朱子墝 神位</div>
-                <div class="tablet-meta">简王庶长子（袭王 薨无嗣）· 简王庶次子（继袭 配杨氏）</div>
-            </div>
+            <!-- 右穆列（单数世次：三、五、七、九、十一） -->
+            <div class="altar-column">
+                <div class="altar-column-header">🏛️ 右 穆 列（右列正位）</div>
 
-            <!-- 五世：右穆（同字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右 穆 · 第五世</span>
-                <div class="tablet-name">周惠王 朱同䥝 神位</div>
-                <div class="tablet-meta">懿王嫡长子 · 初封睢阳王 · 袭周王 · 配妃金氏</div>
-            </div>
+                <!-- 三世：右穆（有字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-mu">右 穆 · 第三世</span>
+                    <div class="tablet-name">周宪王 朱有燉 / 周简王 朱有爝 神位</div>
+                    <div class="tablet-meta">定王嫡长子（袭封周王 号诚斋 无嗣）· 定王第四子（正统四年继袭亲王大统 配妃张氏）</div>
+                </div>
 
-            <!-- 六世：左昭（安字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左 昭 · 第六世</span>
-                <div class="tablet-name">周悼王 朱安㴦 神位</div>
-                <div class="tablet-meta">惠王世子 · 未及即位早卒 · 追封周王 · 配妃李氏</div>
-            </div>
+                <!-- 五世：右穆（同字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-mu">右 穆 · 第五世</span>
+                    <div class="tablet-name">周惠王 朱同䥸 神位</div>
+                    <div class="tablet-meta">懿王庶长子 · 初封睢阳王 · 成化二十三年袭封周王 · 配妃谭氏、次妃高氏</div>
+                </div>
 
-            <!-- 七世：右穆（睦字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右 穆 · 第七世</span>
-                <div class="tablet-name">周恭王 朱睦㮟 神位</div>
-                <div class="tablet-meta">悼王嫡长子 · 袭周王 · 在位三十二年端重守礼</div>
-            </div>
+                <!-- 七世：右穆（睦字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-mu">右 穆 · 第七世</span>
+                    <div class="tablet-name">周恭王 朱睦㰂 神位</div>
+                    <div class="tablet-meta">悼王庶长子 · 弘治十四年袭封周王 · 在位三十二年恪守礼法 · 配妃金氏</div>
+                </div>
 
-            <!-- 八世：左昭（勤/朝字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左 昭 · 第八世</span>
-                <div class="tablet-name">周康王 朱勤炽 / 周庄王 朱朝堈 神位</div>
-                <div class="tablet-meta">恭王嫡长子（世子早卒追封）· 恭王庶次子（镇国将军继袭）</div>
-            </div>
+                <!-- 九世：右穆（在字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-mu">右 穆 · 第九世</span>
+                    <div class="tablet-name">周敬王 朱在鋌 神位</div>
+                    <div class="tablet-meta">庄王庶长子 · 嘉靖三十四年袭封周王 · 万历十一年薨 · 配妃袁氏</div>
+                </div>
 
-            <!-- 九世：右穆（在字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右 穆 · 第九世</span>
-                <div class="tablet-name">周敬王 朱在铤 神位</div>
-                <div class="tablet-meta">庄王庶长子 · 袭周王 · 在位十年端谨博雅</div>
-            </div>
-
-            <!-- 十世：左昭（肃字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-zhao">左 昭 · 第十世</span>
-                <div class="tablet-name">周端王 朱肃溱 神位</div>
-                <div class="tablet-meta">敬王庶长子 · 袭周王 · 万历十四年薨</div>
-            </div>
-
-            <!-- 十一世：右穆（恭字辈） -->
-            <div class="tablet-card">
-                <span class="tablet-tag tag-mu">右 穆 · 第十一世</span>
-                <div class="tablet-name">末代周王 朱恭枵 神位</div>
-                <div class="tablet-meta">端王庶长子 · 散财守城殉国难 · 忠烈贯日月</div>
+                <!-- 十一世：右穆（恭字辈） -->
+                <div class="tablet-card">
+                    <span class="tablet-tag tag-mu">右 穆 · 第十一世</span>
+                    <div class="tablet-name">末代周王 朱恭枵 神位</div>
+                    <div class="tablet-meta">端王嫡长子 · 崇祯十五年毁家纾难坚守汴梁 · 黄河灌城殉节 · 谥周孝王</div>
+                </div>
             </div>
         </div>
 
@@ -225,7 +470,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
