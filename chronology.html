@@ -5,70 +5,281 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周王府编年史与建筑格局考 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
         /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
+        h3 { 
+            color: var(--crimson); 
+            margin: 1.2rem 0 0.5rem 0; 
+            font-size: 1.08rem; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        /* 建筑格局卡片 */
-        .layout-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.3rem; margin: 1.2rem 0; }
-        .layout-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.4rem; border-radius: 6px; border-top: 3px solid #8c1d1d; transition: transform 0.2s, box-shadow 0.2s; }
-        .layout-card:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-        .layout-title { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem; }
-        .layout-desc { font-size: 0.92rem; color: #444; line-height: 1.7; text-align: justify; }
+        /* 建筑格局网格 */
+        .layout-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 1.4rem; 
+            margin: 1.4rem 0 2rem; 
+        }
+        .layout-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 1.6rem; 
+            border-radius: 6px; 
+            border-top: 4px solid var(--crimson); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .layout-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06); 
+        }
+        .layout-title { 
+            font-size: 1.18rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            margin-bottom: 0.6rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 0.4rem; 
+            border-bottom: 1px dashed #E2D7C5;
+            padding-bottom: 0.4rem;
+        }
+        .layout-desc { 
+            font-size: 0.93rem; 
+            color: #443D36; 
+            line-height: 1.8; 
+            text-align: justify; 
+        }
+        .layout-desc strong {
+            color: var(--crimson);
+        }
 
         /* 年表表格 */
-        .table-wrap { overflow-x: auto; margin-top: 1rem; }
-        .chronology-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .chronology-table th, .chronology-table td { border: 1px solid #e2dcd5; padding: 0.75rem 0.9rem; text-align: left; }
-        .chronology-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .chronology-table tr:nth-child(even) { background: #faf8f5; }
-        .year-tag { font-weight: bold; color: #8c1d1d; white-space: nowrap; }
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .chronology-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 780px; }
+        .chronology-table th, .chronology-table td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        .chronology-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .chronology-table tr:nth-child(even) { background: #FCFAF6; }
+        .chronology-table tr:hover { background: #FFF9F0; }
+        .year-tag { font-weight: bold; color: var(--crimson); white-space: nowrap; font-size: 0.92rem; }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.8rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 2.2rem 0 1rem; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box strong { color: var(--crimson); }
+        .quote-box p { margin-bottom: 0.5rem; }
+        .quote-box p:last-child { margin-bottom: 0; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
+
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -103,7 +314,7 @@
                 <div class="nav-item">
                     <span class="nav-link" style="color:#fff; font-weight:bold;">🗺️ 封地陵寝 ▾</span>
                     <div class="dropdown-menu">
-                        <a href="chronology.html" style="background:#8c1d1d; color:#fff;">王府年表</a>
+                        <a href="chronology.html" style="background:var(--crimson); color:#fff;">王府年表</a>
                         <a href="estates.html">郡王封地</a>
                         <a href="villages.html">聚落地名</a>
                         <a href="tombs.html">王陵陵寝</a>
@@ -123,7 +334,7 @@
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -131,124 +342,124 @@
     <main class="container">
         <h1>周王府编年史与建筑格局考</h1>
         <div class="intro-box">
-            明代开封周王府始建于洪武十一年（1378年），叠压于宋金皇宫旧址之上，号称“中原紫禁城”。王府城垣高深、殿宇巍峨，自洪武十四年定王就藩，至崇祯十五年（1642年）水灌开封王城没入泥沙，历经十一世亲王传承二百六十余载，见证了大明宗藩极盛与悲壮终局。
+            明代开封周王府始建于洪武十一年（1378年），叠压于北宋东京与金汴京皇宫旧址之上，号称“中原紫禁城”。王府城垣高深、殿宇崇丽，自洪武十四年定王正式就藩，至崇祯十五年（1642年）河决灌城没入泥沙，历经十一代亲王嗣统凡二百六十余载，见证了大明宗藩之极盛风华与悲壮终局。
         </div>
 
         <h2>🏛️ 开封周王府建筑形制与空间格局考</h2>
         <div class="layout-grid">
             <div class="layout-card">
-                <div class="layout-title">🧱 外罗城（萧墙）与四方城门</div>
+                <div class="layout-title">🧱 外罗城（萧墙）与四方外门</div>
                 <div class="layout-desc">
-                    周王府外设周长九里十三步的砖砌萧墙。四方设门：南门为<strong>端礼门</strong>（正门），北门为<strong>广智门</strong>，东门为<strong>体仁门</strong>，西门为<strong>遵义门</strong>。外城构筑了开封内城的核心屏障。
+                    王府外围设砖砌罗城（俗称<strong>萧墙</strong>），周长九里十三步（约4.5公里），高二丈九尺。辟四座重檐城门：南门为<strong>端礼门</strong>（正门）、北门为<strong>广智门</strong>、东门为<strong>体仁门</strong>、西门为<strong>遵义门</strong>，为开封内城之核心屏障。
                 </div>
             </div>
 
             <div class="layout-card">
-                <div class="layout-title">👑 紫禁城与核心正殿殿宇</div>
+                <div class="layout-title">👑 王城紫禁城与核心殿宇轴线</div>
                 <div class="layout-desc">
-                    内城为高大青砖紫禁城。中轴线上自南向北依次为端礼门、承运门、<strong>承运殿</strong>（亲王升座主殿）、<strong>存心殿</strong>与<strong>寝殿</strong>，后为王府后苑，两庑配殿设宗正司、长史司。
+                    内城为规制严整的砖石紫禁城，周长五里，设四门与角楼。南北中轴线上依次布局<strong>承运门</strong>、<strong>承运殿</strong>（亲王升座听政主殿）、<strong>存心殿</strong>与<strong>寝殿</strong>，后部筑煤山与御苑。两侧设长史司、宗正司与典仪所。
                 </div>
             </div>
 
             <div class="layout-card">
-                <div class="layout-title">🌿 仁德良医所与开封生药圃</div>
+                <div class="layout-title">🌿 仁德良医所与生药圃</div>
                 <div class="layout-desc">
-                    设于王府东华门外与后苑。始祖周定王辟地为圃，引种太行、嵩山野生植物四百余种，设良医所集海内医士编纂《救荒本草》与《普济方》，为中原医道核心。
+                    依附于周王府东华门外及萧墙内苑。始祖周定王辟地为药圃，广泛试种中原与太行山脉草木400余种，设良医所延请名医集纂<strong>《普济方》</strong>与<strong>《救荒本草》</strong>，构筑了明代藩王中规模最大的医学研究基地。
                 </div>
             </div>
 
             <div class="layout-card">
-                <div class="layout-title">📚 藩邸藏书万卷堂与郡王邸群</div>
+                <div class="layout-title">📚 藩邸藏书万卷堂与郡王府邸群</div>
                 <div class="layout-desc">
-                    开封城内环绕周王府布局十四大郡王城内宅邸（如双龙巷祥符王府、北门里封丘王府等）。宗室学者朱睦㮮筑“万卷堂”聚书数万卷，文风冠绝中原。
+                    开封城内以周王府为核心，星罗棋布建有十四大郡王城内邸舍（如双龙巷祥符王府、新街口永宁王府等）。宗室学者朱睦㮮建“<strong>万卷堂</strong>”聚珍本数万卷，开创明代宗室文献与金石目录学派。
                 </div>
             </div>
         </div>
 
-        <h2>⏳ 周藩二百六十年重大历史编年表</h2>
+        <h2>⏳ 周藩二百六十载重大历史编年表</h2>
         <div class="table-wrap">
             <table class="chronology-table">
                 <thead>
                     <tr>
-                        <th style="width: 140px;">年代与纪年</th>
-                        <th style="width: 180px;">历史事件</th>
-                        <th>史实考据与宗藩影响</th>
+                        <th style="width: 150px;">年代与纪年</th>
+                        <th style="width: 190px;">重大历史事件</th>
+                        <th>史实考据与宗藩沿革影响</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><span class="year-tag">洪武三年 (1370)</span></td>
-                        <td>皇五子初封吴王</td>
-                        <td>明太祖朱元璋大封诸子，皇五子朱橚受封吴王，封国杭州。</td>
+                        <td>皇五子册封吴王</td>
+                        <td>明太祖朱元璋初建藩服，大封诸皇子。皇五子朱橚年甫十岁，正式受封为吴王，定封国于钱塘（杭州）。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">洪武十一年 (1378)</span></td>
                         <td>改封周王 · 营建汴梁王城</td>
-                        <td>太祖下诏改封朱橚为周王，选定中原重镇汴梁（开封宋金故宫遗址）大举营建周王府。</td>
+                        <td>太祖诏改封朱橚为周王，选定中原雄藩开封府为封国。征发夫役于宋金皇宫旧址上规画营筑周王府紫禁城与萧墙。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">洪武十四年 (1381)</span></td>
                         <td>周王正式就藩开封</td>
-                        <td>周定王朱橚正式之国开封，设生药圃辨验野生草木，设良医所施药活人，中原宗藩之基确立。</td>
+                        <td>十月三十日，周定王朱橚正式之国汴京。辟王府生药圃、设良医所，收容名医辨验中原草木，周藩二百六十载立国基业确立。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">洪武三十一年 (1398)</span></td>
-                        <td>《普济方》编纂成帙</td>
-                        <td>周王府良医所历时十余年编成中国古代最大方剂类书《普济方》（收方61,739首）。</td>
+                        <td>《普济方》全书编纂成帙</td>
+                        <td>周王府良医所腾硕、刘醇等名医历经十余年协同攻关，辑成古代最大规模方剂类书《普济方》（收方61,739首，绘图239幅）。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">永乐四年 (1406)</span></td>
-                        <td>《救荒本草》刊刻行世</td>
-                        <td>周定王主编之植物学图谱《救荒本草》二卷刊印，首创世界食用植物学。</td>
+                        <td>《救荒本草》初刻行世</td>
+                        <td>周定王朱橚亲绘亲撰之科学名作《救荒本草》二卷于开封王府雕版初印，记载414种可救荒野生植物，开创中国与世界食用植物学之先声。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">永乐十年 (1412)</span></td>
-                        <td>诸子大分封郡王</td>
-                        <td>定王诸子陆续受封封丘王、遂平王、鲁山王、胙城王等十四大郡王，分设府邸。</td>
+                        <td>诸子大分封建立十四分房</td>
+                        <td>周定王诸子陆续受封祥符王、顺阳王、封丘王、遂平王、鲁山王、胙城王等十四大郡王爵位，各建郡王邸舍，形成完备分房体系。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">洪熙元年 (1425)</span></td>
-                        <td>周定王朱橚薨逝</td>
-                        <td>定王薨，享年六十五，谥曰“定”，次年安葬于禹州老龙头山（无风山）全砖券顶地下玄宫。世子朱有燉继袭。</td>
+                        <td>周定王薨逝归葬禹州</td>
+                        <td>八月二十日，始祖周定王朱橚薨逝，享年六十五，谥曰“定”。次年（宣德元年）十月二十八日钦赐安葬于禹州老龙头山（无风山）地下玄宫。嫡长子朱有燉袭封。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">正统四年 (1439)</span></td>
                         <td>宪王薨逝 · 简王继袭大宗</td>
-                        <td>一代曲圣周宪王朱有燉薨无嗣（遗《诚斋乐府》《元宫词》）。四弟祥符王朱有爝奉旨承袭周亲王爵（周简王），周藩大宗自此一脉传袭。</td>
+                        <td>一代曲圣周宪王朱有燉薨无嗣，留下《诚斋乐府》31种杂剧及《元宫词》。四弟祥符王朱有爝奉旨继袭周亲王爵（谥曰简），周藩大宗此后皆出自简王直系。</td>
                     </tr>
                     <tr>
-                        <td><span class="year-tag">成化至正德年间</span></td>
-                        <td>周藩鼎盛 · 宗族繁衍</td>
-                        <td>周懿王、周惠王、周恭王相继在位，周王府宗室达数千人，分封中原各府县，文教礼制大备。</td>
+                        <td><span class="year-tag">成化至弘治年间</span></td>
+                        <td>周藩极盛 · 宗支繁衍</td>
+                        <td>周懿王朱子墧、周惠王朱同䥸相继在位，周王府进入极盛期。王府宗室达数千人，分设郡王、镇国将军等府第，文教昌盛。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">嘉靖至万历年间</span></td>
-                        <td>万卷堂著书与金石大兴</td>
-                        <td>宗室学者朱睦㮮筑“万卷堂”聚书考据，撰《篇海类编》《金石碑帖考》；周庄王、周端王修撰《周藩宗谱》。</td>
+                        <td>万卷堂著书与金石目录大兴</td>
+                        <td>镇平王支系学者朱睦㮮任周藩宗正，筑“万卷堂”聚书考订经史，编纂《金石碑帖考》《篇海类编》；周庄王、周端王相继主持修辑《周藩宗谱》。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">崇祯十五年 (1642)</span></td>
-                        <td>开封保卫战 · 水灌王城</td>
-                        <td>李自成三围开封，末代周王朱恭枵倾尽王府库银数百万两犒师死守八月。九月黄河大水漫灌开封城，周王府没入泥沙。恭枵率宗室北渡撤往彰德。</td>
+                        <td>开封保卫战 · 水没王城殉难</td>
+                        <td>李自成起义军三围开封。末代周王朱恭枵倾尽王府积蓄数百万两银饷犒师死守城垣达八月。九月十五日黄河大水漫灌开封，周王城没入泥沙，周藩壮烈殉节，宗亲播迁四方。</td>
                     </tr>
                     <tr>
                         <td><span class="year-tag">顺治至康熙年间</span></td>
-                        <td>宗室散居 · 隐德保全</td>
-                        <td>明季天倾后，周藩宗室散居于豫、皖、苏、鲁、陕、滇等省乡村，隐去宗室头衔，恪守二十字派与耕读家风。部分宗室（朱伦圣）随郑成功渡海传宗于台湾。</td>
+                        <td>宗室散居 · 恪守字辈寻根</td>
+                        <td>明末兵燹水患后，周藩宗亲散居豫、皖、苏、鲁、陕、滇各地乡村，隐去显贵身份耕读传家，谨遵太祖“有子同安睦”二十字派语传承血脉；宗亲朱伦圣东渡台湾繁衍。</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <h2>📖 明周王府文史考古互证</h2>
+        <h2>📖 明周王府文史与现代考古互证</h2>
         <div class="quote-box">
-            <p><strong>• 考古实证：</strong>当代开封“城摞城”地层考古完整揭示了明周王府紫禁城青砖城垣、北门广智门遗址及“昭代贤宗”匾额，确证了王府宏大空间格局；</p>
-            <p><strong>• 宗藩遗泽：</strong>开封周王府虽沉于泥沙之下，但先祖周定王所遗《救荒本草》《普济方》及“有子同安睦”二十字派语，历经六百载风雨依然在中原大地代代相传。</p>
+            <p><strong>• 城摞城考古铁证：</strong>现代开封“城摞城”地层考古发掘中，于地下数米深处完整清理出明代周王府紫禁城青砖墙基、北门广智门遗址、护城河（玉带河），并在新街口发掘出完整的明永宁王府遗址与万历四十年“昭代贤宗”填金大匾，完全印证了明代方志与圹志中周王府巍峨恢弘之记载；</p>
+            <p><strong>• 宗藩遗泽绵长：</strong>开封周王城虽沉没于黄河泥沙之中，但先祖周定王所遗之《救荒本草》《普济方》与“有子同安睦”二十字世系派语，历经六百余载风雨沧桑，依然深深铭刻在中原与海内外周藩后裔心中。</p>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
