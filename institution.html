@@ -5,69 +5,250 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>明代宗室爵位与典制考 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
-        /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
-        
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.5rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
-        
-        .table-wrap { overflow-x: auto; margin-top: 1rem; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-        th, td { border: 1px solid #e2dcd5; padding: 0.75rem 0.9rem; text-align: left; }
-        th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        tr:nth-child(even) { background: #faf8f5; }
-        
-        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.78rem; color: #fff; background: #8c1d1d; font-weight: normal; }
-        .badge-female { background: #6a1b9a; }
-        .badge-rank { background: #b26a00; }
+        /* 主容器 */
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
 
-        .feature-card { background: #fdfbf7; border: 1px solid #e8dfd8; border-radius: 6px; padding: 1.4rem; margin: 1.2rem 0; border-top: 3px solid #8c1d1d; }
-        .feature-card p { font-size: 0.93rem; color: #444; line-height: 1.8; margin-bottom: 0.6rem; }
-        .feature-card ul { margin: 0.6rem 0 0.6rem 1.4rem; font-size: 0.9rem; color: #555; line-height: 1.8; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.8rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        /* 表格排版 */
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 780px; }
+        th, td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        tr:nth-child(even) { background: #FCFAF6; }
+        tr:hover { background: #FFF9F0; }
+        
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 0.75rem; color: #fff; background: var(--crimson); font-weight: normal; }
+        .badge-female { background: #6A1B9A; }
+        .badge-rank { background: #B26A00; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .feature-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE3D6; 
+            border-radius: 6px; 
+            padding: 1.6rem; 
+            margin: 1.8rem 0; 
+            border-top: 3px solid var(--crimson); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .feature-card p { font-size: 0.94rem; color: #443D36; line-height: 1.85; margin-bottom: 0.6rem; }
+        .feature-card ul { margin: 0.6rem 0 0.6rem 1.4rem; font-size: 0.92rem; color: #443D36; line-height: 1.85; }
+        .feature-card strong { color: var(--crimson); }
+
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 2rem 0 1rem; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box strong { color: var(--crimson); }
+        .quote-box p { margin-bottom: 0.5rem; }
+        .quote-box p:last-child { margin-bottom: 0; }
+
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -93,7 +274,7 @@
                         <a href="epigraphy.html">碑刻圹志</a>
                         <a href="poetry.html">诗文戏曲</a>
                         <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html" style="background:#8c1d1d; color:#fff;">宗室典制</a>
+                        <a href="institution.html" style="background:var(--crimson); color:#fff;">宗室典制</a>
                         <a href="rules.html">祖训家规</a>
                     </div>
                 </div>
@@ -116,12 +297,13 @@
                     <div class="dropdown-menu">
                         <a href="calendar.html">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
+                        <a href="naming-guide.html">起名专栏与宗法</a>
                         <a href="genealogy-guide.html">修谱指南凡例</a>
                         <a href="memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -129,7 +311,7 @@
     <main class="container">
         <h1>明代宗室封爵与礼制考</h1>
         <div class="intro-box">
-            明代宗室制度依据《皇明祖训》定制，确立了<strong>“世袭递降、分等授爵、亲疏有别”</strong>的法度。除亲王、郡王嫡长子继承爵位外，其余诸子皆按辈分降等受封将军或中尉，宗女亦有严密封阶与仪宾制度，构成了明代藩王二百六十余年的宗法基石。
+            明代宗室制度严格依据《皇明祖训》定制，确立了<strong>“世袭递降、分等授爵、亲疏有别”</strong>的根本法度。除亲王、郡王嫡长子袭爵外，其余诸子皆按辈分降等受封将军或中尉，宗女亦有严格封阶与仪宾之制，构成了大明周王府二百六十余年繁衍生息的宗法基石。
         </div>
 
         <h2>👑 宗室男嗣八等封爵与禄米体系</h2>
@@ -137,22 +319,22 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 140px;">封爵名称</th>
-                        <th>承封资格与身份对应</th>
+                        <th style="width: 130px;">封爵名称</th>
+                        <th>承封资格与世系对应</th>
                         <th style="width: 100px;">品阶</th>
-                        <th style="width: 180px;">规定岁禄（米）</th>
+                        <th style="width: 190px;">岁禄标准（米）</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><strong>亲王</strong></td>
-                        <td>皇帝之子（除皇太子外）或袭爵嫡长子</td>
+                        <td>皇帝诸子（除皇太子外）或袭爵嫡长子（周王大宗）</td>
                         <td><span class="badge badge-rank">超品</span></td>
                         <td>岁禄一万石（周定王初封规制）</td>
                     </tr>
                     <tr>
                         <td><strong>郡王</strong></td>
-                        <td>亲王诸子（除世子外）或袭爵嫡长子</td>
+                        <td>亲王诸子（除世子外）或袭爵嫡长子（周藩十四郡王）</td>
                         <td><span class="badge badge-rank">超品 / 正一品</span></td>
                         <td>岁禄二千石</td>
                     </tr>
@@ -176,7 +358,7 @@
                     </tr>
                     <tr>
                         <td><strong>镇国中尉</strong></td>
-                        <td>奉国将军诸子</td>
+                        <td>奉国将军诸子（如周藩宗正朱睦㮮）</td>
                         <td>从四品</td>
                         <td>岁禄四百石</td>
                     </tr>
@@ -188,61 +370,61 @@
                     </tr>
                     <tr>
                         <td><strong>奉国中尉</strong></td>
-                        <td>辅国中尉以下诸子（至宗族末代）</td>
+                        <td>辅国中尉以下诸子（至宗族末代不复降等）</td>
                         <td>从六品</td>
-                        <td>岁禄二百石（不再降等）</td>
+                        <td>岁禄二百石（世袭不替）</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <h2>🌸 宗女封阶与仪宾制度</h2>
+        <h2>🌸 宗女封阶与宗人府仪宾品级（依《大明会典》考）</h2>
         <div class="table-wrap">
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 140px;">宗女封阶</th>
-                        <th>身份对应</th>
-                        <th style="width: 160px;">配偶（夫君）封号</th>
-                        <th>礼制待遇与冠服</th>
+                        <th style="width: 120px;">宗女封阶</th>
+                        <th>受封资格对应</th>
+                        <th style="width: 140px;">配偶封号与官阶</th>
+                        <th>仪服与岁禄礼制</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><span class="badge badge-female">郡主</span></td>
-                        <td>亲王之女</td>
-                        <td>郡马 / 宗人府仪宾（正二品）</td>
-                        <td>冠服饰以金翟，禄米八百石</td>
+                        <td>亲王之女（除公主外首尊）</td>
+                        <td>郡主仪宾 · <strong>从二品</strong></td>
+                        <td>禄米八百石，冠服饰以金翟，胸背狮子，鈒花金带</td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-female">县主</span></td>
                         <td>郡王之女</td>
-                        <td>仪宾（从二品）</td>
-                        <td>禄米六百石</td>
+                        <td>县主仪宾 · <strong>从三品</strong></td>
+                        <td>禄米六百石，金绣孔雀胸背</td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-female">郡君</span></td>
                         <td>镇国将军之女</td>
-                        <td>仪宾（正三品）</td>
-                        <td>禄米四百石</td>
+                        <td>郡君仪宾 · <strong>从四品</strong></td>
+                        <td>禄米四百石，白泽胸背</td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-female">县君</span></td>
                         <td>辅国将军之女</td>
-                        <td>仪宾（从三品）</td>
+                        <td>县君仪宾 · <strong>从五品</strong></td>
                         <td>禄米三百石</td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-female">乡君</span></td>
                         <td>奉国将军之女</td>
-                        <td>仪宾（正四品）</td>
+                        <td>乡君仪宾 · <strong>从六品</strong></td>
                         <td>禄米二百石</td>
                     </tr>
                     <tr>
                         <td><span class="badge badge-female">宗女</span></td>
-                        <td>中尉以下之女</td>
-                        <td>仪宾（从四品）</td>
-                        <td>由宗人府给发脂粉银与服色</td>
+                        <td>中尉以下之女（无封号）</td>
+                        <td>仪宾无品阶（免除杂徭）</td>
+                        <td>由宗人府与布政司给发脂粉银与布帛</td>
                     </tr>
                 </tbody>
             </table>
@@ -251,27 +433,27 @@
         <h2>🏛️ 周王府长史司与属官机构考</h2>
         <div class="feature-card">
             <p>
-                明代周王府设<strong>周王府长史司</strong>（设正三品长史一人、从四品副长史一人），作为朝廷派驻王府总揽文书、礼仪与纪律的核心官署。下设“七所八局”完善的治理机构：
+                依据《大明会典》，周王府作为亲王国，设有朝廷委派的<strong>周王府长史司</strong>（设正三品长史一人、从四品副长史一人），总揽王府文书案牍、礼制迎送与规诫之责。下设完备之“七所八局”：
             </p>
             <ul>
-                <li><strong>良医所：</strong>设正八品正科一人、从九品副科一人。周定王以此为依托，招纳中原名医，主持编纂《救荒本草》与《普济方》，为明代藩府科学著述之枢纽；</li>
-                <li><strong>审理所：</strong>掌王府宗室词讼与内部纪律，核查宗法违制；</li>
-                <li><strong>典膳所、奉祠所、典宝所：</strong>分别掌管王府四时祭祀、玉馔宴飨、冠服印玺；</li>
-                <li><strong>纪善所、典仪所：</strong>负责宗室子弟经史教育、言行督导及朝见封拜大典；</li>
-                <li><strong>开封宗正司：</strong>设于周王府东华门外，专司十四房郡王宗室的名籍造册与宗谱勘定。</li>
+                <li><strong>良医所：</strong>设正八品正科一人、从九品副科一人。周定王以此为基地，延揽滕硕、李恒、刘醇等名医，主持编撰《救荒本草》与《普济方》，为明代王府科学著述之先锋；</li>
+                <li><strong>审理所：</strong>掌王府宗室词讼与内部纪律，惩戒宗室不法；</li>
+                <li><strong>典膳所、奉祠所、典宝所：</strong>分别掌管亲王宴飨玉馔、四时宗庙祭祀（享堂神主）及金宝印玺；</li>
+                <li><strong>纪善所、典仪所：</strong>掌宗室子弟经史教导，督导言行礼义，导引朝见封拜典礼；</li>
+                <li><strong>开封宗正司：</strong>设于周王府东华门外，由德高望重之宗室（如朱睦㮮）掌理，专司十四房郡王宗室名籍造册、婚配请名与宗牒考勘。</li>
             </ul>
         </div>
 
-        <h2>📖 皇明宗藩典制三大特征</h2>
+        <h2>📖 皇明宗藩典制三大铁律</h2>
         <div class="quote-box">
-            <p><strong>• 爵位不跨房转移：</strong>亲王、郡王绝嗣者，由朝廷遣官会勘宗谱，按血缘昭穆由本宗近支弟侄承继（如周宪王无嗣，由四弟祥符王朱有爝承嗣周王大统）；</p>
-            <p><strong>• 赐名与请封程序：</strong>宗子年满十岁须由王府长史司具呈宗人府请名，第二字严格按“木火土金水”相生定偏旁；婚配须请旨封授仪宾；</p>
-            <p><strong>• 宗法与国法兼严：</strong>《皇明祖训》严禁宗室私置兵马、擅离封邑，违者削爵软禁凤阳高墙；周藩二百六十载以恭顺守礼、好学著述为中原诸藩表率。</p>
+            <p><strong>• 爵位不跨房转移：</strong>亲王、郡王绝嗣者，由宗人府遣官会同礼部勘核玉牒，按血缘昭穆由本宗近支弟侄承继（如周宪王无嗣，由同母弟祥符王朱有爝承袭亲王大统）；</p>
+            <p><strong>• 赐名与请封程序：</strong>宗子年满十岁由王府长史司具呈宗人府请名，末字严格按“木火土金水”相生定偏旁；婚配须请旨封授仪宾，严禁私自结姻；</p>
+            <p><strong>• 宗法与国法兼严：</strong>《皇明祖训》严禁宗室私置兵马、擅离封地，违者削爵软禁凤阳高墙；周藩二百六十载以恭顺守礼、好学著述为中原诸藩表率。</p>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -279,6 +461,7 @@
             document.getElementById('navMenu').classList.toggle('show');
         }
 
+        // 移动端点击展开子菜单
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function(e) {
                 if (window.innerWidth <= 960) {
