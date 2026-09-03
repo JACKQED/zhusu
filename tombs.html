@@ -5,80 +5,342 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩历代王陵与陵寝考 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
         /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.6rem 0; font-size: 1.05rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
+        h3 { 
+            color: var(--crimson); 
+            margin: 1.2rem 0 0.6rem 0; 
+            font-size: 1.08rem; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        .tomb-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.8rem; border-radius: 6px; margin: 1.5rem 0; border-top: 3px solid #8c1d1d; transition: transform 0.2s, box-shadow 0.2s; }
-        .tomb-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
-        .tomb-title { font-size: 1.3rem; color: #8c1d1d; font-weight: bold; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .tomb-badge { font-size: 0.78rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: normal; }
-        .badge-green { background: #2e7d32; }
-        .tomb-desc { font-size: 0.95rem; color: #444; margin-top: 0.6rem; line-height: 1.8; text-align: justify; }
+        /* 陵寝卡片 */
+        .tomb-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 2rem; 
+            border-radius: 6px; 
+            margin: 1.6rem 0; 
+            border-top: 4px solid var(--crimson); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .tomb-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06); 
+        }
+        .tomb-title { 
+            font-size: 1.3rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            border-bottom: 1px dashed #E2D7C5;
+            padding-bottom: 0.5rem;
+        }
+        .tomb-badge { 
+            font-size: 0.78rem; 
+            background: var(--crimson); 
+            color: #fff; 
+            padding: 2px 9px; 
+            border-radius: 4px; 
+            font-weight: normal; 
+        }
+        .badge-green { background: #2E7D32; }
+        .tomb-desc { 
+            font-size: 0.94rem; 
+            color: #443D36; 
+            margin-top: 0.8rem; 
+            line-height: 1.85; 
+            text-align: justify; 
+        }
         
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
-        .stat-item { background: #fff; border: 1px solid #ebdcd0; border-radius: 6px; padding: 0.8rem 0.5rem; text-align: center; }
-        .stat-num { font-size: 1.3rem; font-weight: bold; color: #8c1d1d; line-height: 1.2; }
-        .stat-label { font-size: 0.8rem; color: #666; margin-top: 0.3rem; }
+        /* 统计数据条 */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 1rem; 
+            margin: 1.2rem 0; 
+        }
+        .stat-item { 
+            background: #fff; 
+            border: 1px solid #EAE2D5; 
+            border-radius: 6px; 
+            padding: 0.9rem 0.5rem; 
+            text-align: center; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .stat-num { 
+            font-size: 1.4rem; 
+            font-weight: bold; 
+            color: var(--crimson); 
+            line-height: 1.2; 
+        }
+        .stat-label { 
+            font-size: 0.8rem; 
+            color: var(--muted); 
+            margin-top: 0.35rem; 
+        }
 
-        .ascii-diagram { background: #2b2b2b; color: #e6e6e6; padding: 1.2rem; border-radius: 6px; font-family: "Courier New", Courier, monospace; font-size: 0.85rem; line-height: 1.4; overflow-x: auto; margin: 1.2rem 0; white-space: pre; border: 1px solid #444; }
+        /* 结构平剖图 */
+        .ascii-diagram { 
+            background: #181716; 
+            color: #E8E1D3; 
+            padding: 1.4rem; 
+            border-radius: 6px; 
+            font-family: "Courier New", Courier, monospace, serif; 
+            font-size: 0.88rem; 
+            line-height: 1.5; 
+            overflow-x: auto; 
+            margin: 1.2rem 0; 
+            white-space: pre; 
+            border: 1px solid #443F3A; 
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.8);
+        }
 
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; background: #fff; padding: 1rem; border-radius: 4px; border: 1px dashed #dcd3cb; margin-top: 1rem; font-size: 0.9rem; }
-        .info-item strong { color: #8c1d1d; }
+        .info-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 0.8rem; 
+            background: #fff; 
+            padding: 1rem 1.2rem; 
+            border-radius: 4px; 
+            border: 1px solid #EFE8DA; 
+            margin-top: 1rem; 
+            font-size: 0.9rem; 
+            color: #443D36;
+        }
+        .info-item strong { color: var(--crimson); }
 
-        .table-wrap { overflow-x: auto; margin-top: 0.8rem; }
-        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.65rem 0.8rem; text-align: left; }
-        .comp-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .comp-table tr:nth-child(even) { background: #faf8f5; }
+        /* 表格样式 */
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 780px; }
+        .comp-table th, .comp-table td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        .comp-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .comp-table tr:nth-child(even) { background: #FCFAF6; }
+        .comp-table tr:hover { background: #FFF9F0; }
 
-        .travel-guide { background: #f0f7f4; border: 1px solid #cce5db; border-radius: 6px; padding: 1.4rem; margin-top: 1.8rem; font-size: 0.93rem; color: #234f3b; line-height: 1.8; border-left: 4px solid #2e7d32; }
-        .travel-guide strong { color: #1b5e20; }
+        /* 瞻仰交通指引卡 */
+        .travel-guide { 
+            background: #F4F7F3; 
+            border: 1px solid #D0DEC9; 
+            border-radius: 6px; 
+            padding: 1.5rem; 
+            margin-top: 2rem; 
+            font-size: 0.93rem; 
+            color: #2D4C33; 
+            line-height: 1.85; 
+            border-left: 4px solid #2E7D32; 
+        }
+        .travel-guide strong { color: #1B5E20; }
+        .travel-guide p { margin-bottom: 0.5rem; }
+        .travel-guide p:last-child { margin-bottom: 0; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -116,7 +378,7 @@
                         <a href="chronology.html">王府年表</a>
                         <a href="estates.html">郡王封地</a>
                         <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html" style="background:#8c1d1d; color:#fff;">王陵陵寝</a>
+                        <a href="tombs.html" style="background:var(--crimson); color:#fff;">王陵陵寝</a>
                         <a href="migration.html">迁徙寻根</a>
                     </div>
                 </div>
@@ -127,12 +389,13 @@
                     <div class="dropdown-menu">
                         <a href="calendar.html">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
+                        <a href="naming-guide.html">起名专栏与宗法</a>
                         <a href="genealogy-guide.html">修谱指南凡例</a>
                         <a href="memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -140,7 +403,7 @@
     <main class="container">
         <h1>周藩历代王陵与陵寝考</h1>
         <div class="intro-box">
-            明代周藩诸王就藩开封，而其长眠归宿多选址于<strong>河南禹州（古钧州）具茨山与大洪山余脉</strong>。周王陵建筑群以禹州无风山“周定王陵”与“王妃黄罗伞地宫”最为瞩目，其庞大的无梁青砖拱券与同穴分室格局，冠绝全国明代藩王玄宫，为<strong>全国重点文物保护单位</strong>。
+            明代周藩诸王就藩开封，而其长眠归宿多选址于<strong>河南禹州（古钧州）具茨山与大洪山余脉</strong>。周王陵建筑群以禹州无梁镇“周定王陵”与“王妃黄罗伞地宫”最为瞩目，其庞大的无梁青砖拱券与同穴分室格局，冠绝全国明代藩王玄宫，为<strong>全国重点文物保护单位</strong>。
         </div>
 
         <h2>🏛️ 始祖周定王陵寝与双奇玄宫</h2>
@@ -152,13 +415,13 @@
                 <span class="tomb-badge">全国重点文物保护单位</span>
             </div>
             <div class="tomb-desc">
-                周定王朱橚逝于明洪熙元年（1425年），次年（宣德元年）奉敕安葬于禹州老龙头山（无风山）。玄宫全部采用特制青砖砌筑，不施一根木梁立柱，由前、中、后及左右配殿等共 10 间大室构成，总面积达 1400 余平方米，中室穹窿券顶高达 15 米，展现了明初最高超的力学与砌筑技艺。
+                周定王朱橚逝于明洪熙元年（1425年），次年（宣德元年）奉敕安葬于禹州老龙头山（无风山）。玄宫全部采用特制青砖砌筑，不施一根木梁立柱，由前、中、后及左右配殿等共 10 间大室构成，总面积达 1,400 余平方米，中室穹窿券顶高达 15 米，展现了明初最高超的力学与仿木砖砌技艺。
             </div>
 
             <div class="stats-grid">
                 <div class="stat-item">
                     <div class="stat-num">1,400 ㎡</div>
-                    <div class="stat-label">定王主墓玄宫面积</div>
+                    <div class="stat-label">定王主墓玄宫总面积</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">15 米</div>
@@ -166,39 +429,40 @@
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">10 大室</div>
-                    <div class="stat-label">主玄宫墓室总数</div>
+                    <div class="stat-label">主玄宫墓室结构总数</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">600 余年</div>
-                    <div class="stat-label">地宫砖券保存完好</div>
+                    <div class="stat-label">砖券历经沧桑保存完好</div>
                 </div>
             </div>
 
             <h3>📐 定王主陵玄宫空间格局示意</h3>
             <div class="ascii-diagram">
-                    【周定王主墓地宫（1400㎡ 全砖无梁券顶结构）】
-                            ┌───┬───┬───┬───┐
-                            │后1│后2│后3│后4│  （后排四室：冥器与随葬库）
-                            └───┴─┬─┴───┴───┘
-                                  │
-              ┌──────────┐  ┌─────┴─────┐  ┌──────────┐
-              │ 左一室   │──│           │──│ 右一室   │ （夫人陪葬室）
-              ├──────────┤  │   中  室  │  ├──────────┤
-              │ 左二室   │──│ (定王梓宫)│──│ 右二室   │ （夫人陪葬室）
-              └──────────┘  └─────┬─────┘  └──────────┘
-                                  │ (高15米拱券)
-                            ┌─────┴─────┐
-                            │   前  室  │ （祭奠享堂）
-                            └─────┬─────┘
-                                  │
-                              [ 墓道/甬道 ]
+【大明周定王主陵玄宫平面示意图（1400㎡ 全砖无梁券顶结构）】
+
+                        ┌───┬───┬───┬───┐
+                        │后1│后2│后3│后4│  （后排四室：冥器、漆器与随葬库）
+                        └───┴─┬─┴───┴───┘
+                              │
+          ┌──────────┐  ┌─────┴─────┐  ┌──────────┐
+          │ 左一配室 │──│           │──│ 右一配室 │ （夫人随葬室）
+          ├──────────┤  │   中  室  │  ├──────────┤
+          │ 左二配室 │──│ (定王梓宫)│──│ 右二配室 │ （夫人随葬室）
+          └──────────┘  └─────┬─────┘  └──────────┘
+                              │ (仿木斗拱青砖券门)
+                        ┌─────┴─────┐
+                        │   前  室  │ （祭奠享堂 · 出土圹志）
+                        └─────┬─────┘
+                              │
+                         [ 墓道/封门墙 ]
             </div>
 
             <div class="info-grid">
                 <div class="info-item"><strong>地理坐标：</strong>河南省禹州市无梁镇大周亭村</div>
                 <div class="info-item"><strong>营建年代：</strong>明洪熙元年至宣德元年 (1425-1426)</div>
                 <div class="info-item"><strong>结构特征：</strong>多室串联、仿木青砖斗拱无梁券顶</div>
-                <div class="info-item"><strong>同葬人员：</strong>周定王朱橚、元妃冯氏及陪葬夫人</div>
+                <div class="info-item"><strong>同葬人员：</strong>周定王朱橚、元妃冯氏及随葬夫人</div>
             </div>
         </div>
 
@@ -206,10 +470,10 @@
         <div class="tomb-card">
             <div class="tomb-title">
                 <span>周定王妃陪葬墓（“黄罗伞”同穴分室环形玄宫）</span>
-                <span class="tomb-badge badge-green">全国唯一孤例</span>
+                <span class="tomb-badge badge-green">全国考古唯一孤例</span>
             </div>
             <div class="tomb-desc">
-                位于定王陵以西数十米处，为周定王次妃倪氏等人的陪葬玄宫。地宫构筑成罕见的<strong>圆形“黄罗伞”伞状放射结构</strong>。中央以巨大砖柱为伞柄，外围由宽敞环廊串联 17 座规格规整的放射状券室，所有弧形砖石皆量身烧造，天衣无缝，被古建界誉为“地下宫殿的奇迹”。
+                位于定王陵以西数十米处，为周定王次妃倪氏等人的陪葬玄宫。地宫构筑成极其罕见的<strong>圆形“黄罗伞”伞状放射结构</strong>。中央以巨大砖砌圆柱为伞轴，外围由宽敞环廊串联 17 座规格规整的独立放射状券室，所有弧形砖石皆量身烧造，环环相扣，被中国古代建筑史学界誉为“地下建筑工程奇迹”。
             </div>
 
             <div class="stats-grid">
@@ -223,143 +487,154 @@
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">360°</div>
-                    <div class="stat-label">全环形连通甬道</div>
+                    <div class="stat-label">圆形贯通环廊甬道</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-num">同穴分室</div>
-                    <div class="stat-label">明代宗藩葬制实证</div>
+                    <div class="stat-label">明代宗藩独特丧葬礼制</div>
                 </div>
             </div>
 
             <h3>📐 王妃“黄罗伞”放射状地宫示意</h3>
             <div class="ascii-diagram">
-            【王妃陪葬墓：“黄罗伞 / 同穴分室”环形玄宫】
-                              ┌───[9号主室]───┐
-                          ┌───┘  (倪氏主妃)    └───┐
-                      ┌───┘                        └───┐
-                  [券室]                            [券室]
-                    │         ╭──────────╮            │
-                  [券室]     │   中央   │          [券室]
-                    │        │  实心伞柄 │            │
-                  [券室]     │ (环形甬道)│          [券室]
-                    │         ╰──────────╯            │
-                  [券室]                            [券室]
-                      └───┐                        ┌───┘
-                          └───┐   [ 墓道入口 ]  ┌───┘
-                              └───┴───┴───┴───┘
-                      (17间券室呈放射状围绕中央伞轴)
+【王妃陪葬墓：“黄罗伞 / 同穴分室”环形玄宫平面】
+
+                          ┌───[9号正中主室]───┐
+                      ┌───┘    (倪氏次妃梓宫)  └───┐
+                  ┌───┘                            └───┐
+              [券室]                                    [券室]
+                │           ╭──────────╮            │
+              [券室]       │   中央   │          [券室]
+                │         │  实心伞轴 │            │
+              [券室]       │ (环形甬道)│          [券室]
+                │           ╰──────────╯            │
+              [券室]                                    [券室]
+                  └───┐                            ┌───┘
+                      └───┐   [ 墓道入口 ]    ┌───┘
+                          └───┴───┴───┴───┘
+                    (17间券室呈放射状围绕中央伞轴连通)
             </div>
         </div>
 
-        <h2>👑 周藩历代嗣王陵寝沿革名录</h2>
-
+        <h2>👑 周藩历代亲王陵寝沿革名录</h2>
         <div class="table-wrap">
             <table class="comp-table">
-                <tr>
-                    <th>周王世系</th>
-                    <th>名讳与谥号</th>
-                    <th>在位年代</th>
-                    <th>陵寝归宿与方位</th>
-                    <th>考古与历史记载</th>
-                </tr>
-                <tr>
-                    <td><strong>始祖 (第一代)</strong></td>
-                    <td>周定王 朱橚</td>
-                    <td>1370 - 1425</td>
-                    <td>禹州无梁镇无风山（老龙头山）</td>
-                    <td>已发掘，全砖无梁殿大玄宫，国保单位</td>
-                </tr>
-                <tr>
-                    <td><strong>第二代</strong></td>
-                    <td>周宪王 朱有燉</td>
-                    <td>1425 - 1439</td>
-                    <td>开封祥符故地 / 禹州</td>
-                    <td>遗命薄葬，崇尚简朴，出土珍贵志石</td>
-                </tr>
-                <tr>
-                    <td><strong>第三代</strong></td>
-                    <td>周简王 朱有爝</td>
-                    <td>1439 - 1452</td>
-                    <td>禹州具茨山余脉</td>
-                    <td>定王第四子袭爵，遵循宗藩葬制归葬钧州</td>
-                </tr>
-                <tr>
-                    <td><strong>第四代</strong></td>
-                    <td>周靖王 朱子垕</td>
-                    <td>1455 - 1456</td>
-                    <td>禹州无梁镇后沟村</td>
-                    <td>设有独特排水防盗暗道与青石券顶</td>
-                </tr>
-                <tr>
-                    <td><strong>第五代</strong></td>
-                    <td>周懿王 朱子墧</td>
-                    <td>1457 - 1486</td>
-                    <td>禹州大洪山周藩陵区</td>
-                    <td>简王次子，在位三十年，藩邸兴盛</td>
-                </tr>
-                <tr>
-                    <td><strong>第六代</strong></td>
-                    <td>周惠王 朱同䥸</td>
-                    <td>1487 - 1498</td>
-                    <td>禹州神垕/无梁山原</td>
-                    <td>出土买地券与琉璃随葬器物</td>
-                </tr>
-                <tr>
-                    <td><strong>第七代</strong></td>
-                    <td>周悼王 朱安㳡</td>
-                    <td>追封</td>
-                    <td>开封 / 禹州周陵区</td>
-                    <td>惠王世子早卒，追封周王</td>
-                </tr>
-                <tr>
-                    <td><strong>第八代</strong></td>
-                    <td>周恭王 朱睦㰂</td>
-                    <td>1506 - 1538</td>
-                    <td>开封祥符 / 禹州</td>
-                    <td>悼王长子，在位三十二年</td>
-                </tr>
-                <tr>
-                    <td><strong>第九代</strong></td>
-                    <td>周庄王 朱朝堈</td>
-                    <td>1540 - 1572</td>
-                    <td>开封祥符 / 禹州</td>
-                    <td>恭王次子，在位三十二年</td>
-                </tr>
-                <tr>
-                    <td><strong>第十代</strong></td>
-                    <td>周敬王 朱在鋟</td>
-                    <td>1573 - 1583</td>
-                    <td>开封祥符 / 禹州</td>
-                    <td>庄王长子，在位十年</td>
-                </tr>
-                <tr>
-                    <td><strong>第十一代</strong></td>
-                    <td>周端王 朱肃溱</td>
-                    <td>1586</td>
-                    <td>开封祥符 / 禹州</td>
-                    <td>敬王长子，袭封同年薨</td>
-                </tr>
-                <tr>
-                    <td><strong>末代周王</strong></td>
-                    <td>周王 朱恭枵</td>
-                    <td>1588 - 1642</td>
-                    <td>开封城 / 殉难处</td>
-                    <td>1642年李自成水灌开封，殉国名王</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th style="width: 100px;">周王世系</th>
+                        <th style="width: 130px;">名讳与谥号</th>
+                        <th style="width: 120px;">在位年代</th>
+                        <th style="width: 220px;">陵寝归宿与方位</th>
+                        <th>考古发掘与史实考据</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>第二代 (始祖)</strong></td>
+                        <td>周定王 朱橚</td>
+                        <td>1370 - 1425</td>
+                        <td>禹州无梁镇无风山（老龙头山）</td>
+                        <td>已考古发掘，全砖仿木斗拱无梁大玄宫，全国重点文物保护单位。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第三代</strong></td>
+                        <td>周宪王 朱有燉</td>
+                        <td>1425 - 1439</td>
+                        <td>开封祥符故茔 / 禹州</td>
+                        <td>遗命薄葬，从简入土；出土《周宪王圹志》与《御制贞烈贞顺墓志铭》。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第三代 (继袭)</strong></td>
+                        <td>周简王 朱有爝</td>
+                        <td>1439 - 1452</td>
+                        <td>禹州三峰山 / 具茨山余脉</td>
+                        <td>祥符王承嗣周亲王大统，遵周藩祖制归葬禹州三峰山。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第四代</strong></td>
+                        <td>周靖王 朱子垕</td>
+                        <td>1455 - 1456</td>
+                        <td>禹州无梁镇后沟村</td>
+                        <td>简王庶长子，在位一年薨；玄宫设有独特暗道与精湛青石拱券。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第四代 (继袭)</strong></td>
+                        <td>周懿王 朱子墧</td>
+                        <td>1457 - 1486</td>
+                        <td>禹州大洪山周藩陵区</td>
+                        <td>简王次子，在位三十年极盛之世，陵寝规模宏大。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第五代</strong></td>
+                        <td>周惠王 朱同䥸</td>
+                        <td>1487 - 1498</td>
+                        <td>禹州神垕 / 无梁山原</td>
+                        <td>成化末袭周王，出土有买地券、明代琉璃随葬冥器。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第六代 (追封)</strong></td>
+                        <td>周悼王 朱安㶇</td>
+                        <td>弘治十三年卒</td>
+                        <td>开封祥符 / 禹州周陵区</td>
+                        <td>惠王世子早卒追封，子朱睦㰂袭封周王。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第七代</strong></td>
+                        <td>周恭王 朱睦㰂</td>
+                        <td>1506 - 1538</td>
+                        <td>开封祥符 / 禹州</td>
+                        <td>悼王庶长子，在位三十二年，端严守法，配妃金氏。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第八代 (追封)</strong></td>
+                        <td>周康王 朱勤熄</td>
+                        <td>世子早卒追封</td>
+                        <td>开封祥符 / 禹州</td>
+                        <td>恭王嫡长子，早卒追谥周康王，子朱朝堈嗣位。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第九代</strong></td>
+                        <td>周庄王 朱朝堈</td>
+                        <td>1540 - 1572</td>
+                        <td>开封祥符 / 禹州</td>
+                        <td>康王长子，在位三十二年，嘉靖、隆庆年间文治昌盛。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第十代</strong></td>
+                        <td>周敬王 朱在鋌</td>
+                        <td>1573 - 1583</td>
+                        <td>开封祥符 / 禹州</td>
+                        <td>庄王庶长子，嘉靖三十四年袭封，万历十一年薨。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第十一代</strong></td>
+                        <td>周端王 朱肃溱</td>
+                        <td>1586 - 1635</td>
+                        <td>开封祥符 / 禹州</td>
+                        <td>敬王长子，万历十四年袭封，崇祯八年薨。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>第十二代 (末代)</strong></td>
+                        <td>末代周王 朱恭枵</td>
+                        <td>1635 - 1642</td>
+                        <td>开封城 / 卫辉（殉难处）</td>
+                        <td>崇祯十五年散家财犒军守卫汴梁，黄河决水灌城后殉国，谥周孝王。</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
         <h2>🚗 宗亲实地寻根瞻仰指引</h2>
         <div class="travel-guide">
             <p><strong>📍 导航定位：</strong>河南省许昌市禹州市无梁镇大周亭村 · “禹州明周王陵景区”</p>
-            <p><strong>🚗 自驾交通：</strong>郑栾高速（S88）无梁站下高速，沿指示牌向东行驶约 3 公里即可抵达。</p>
-            <p><strong>🚄 高铁换乘：</strong>乘坐高铁至“禹州站”或“许昌东站/郑州南站”，换乘当地客运或出租直达无梁镇周王陵。</p>
-            <p><strong>🕯️ 瞻仰提示：</strong>地宫内部全年恒温约 15℃，地面平整铺设步道，后裔宗亲瞻拜请遵守文物保护指引，地下玄宫内严禁明火敬香。</p>
+            <p><strong>🚗 自驾交通：</strong>郑栾高速（S88）无梁站下高速，沿指示牌向东行驶约 3 公里即可直达景区广场。</p>
+            <p><strong>🚄 高铁换乘：</strong>乘高铁至“禹州站”或“许昌东站/郑州南站”，转乘当地客运班车或预约出租直抵无梁镇周定王陵。</p>
+            <p><strong>🕯️ 瞻拜须知：</strong>地下玄宫全年恒温约 15℃，地表建有神道与保护享堂。后裔宗亲瞻仰时请遵守文物保护规定，玄宫地宫内严禁明火敬香。</p>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
