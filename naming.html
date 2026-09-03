@@ -5,77 +5,358 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩宗室五行命名助手与字辈校验 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.8; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px;
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        /* 交互计算工具卡片 */
-        .tool-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 2rem; border-radius: 8px; margin: 1.5rem 0; border-top: 4px solid #8c1d1d; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin: 1rem 0; }
+        /* 选项卡按钮 */
+        .tab-bar { 
+            display: flex; 
+            border-bottom: 2px solid var(--crimson); 
+            margin-top: 1.2rem; 
+            gap: 0.4rem; 
+        }
+        .tab-btn { 
+            padding: 0.6rem 1.3rem; 
+            background: #F4EFE9; 
+            border: 1px solid #DCD3CB; 
+            border-bottom: none; 
+            border-radius: 6px 6px 0 0; 
+            font-size: 0.92rem; 
+            font-weight: bold; 
+            color: #666; 
+            cursor: pointer; 
+            transition: all 0.2s;
+        }
+        .tab-btn.active { 
+            background: var(--crimson); 
+            color: #fff; 
+            border-color: var(--crimson); 
+        }
+
+        /* 工具卡片面板 */
+        .tool-panel { 
+            display: none;
+            background: #FCFAF6; 
+            border: 1px solid #EAE2D5; 
+            border-top: none;
+            padding: 1.8rem; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02); 
+        }
+        .tool-panel.active { display: block; }
+
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.2rem; margin: 1rem 0; }
         .form-group { display: flex; flex-direction: column; }
-        .form-group label { font-weight: bold; color: #6b4d1b; margin-bottom: 0.4rem; font-size: 0.92rem; }
-        .form-control { width: 100%; padding: 0.65rem 0.9rem; border: 1px solid #d4c4b4; border-radius: 4px; font-size: 0.92rem; background: #fff; font-family: inherit; }
-        .form-control:focus { outline: none; border-color: #8c1d1d; box-shadow: 0 0 5px rgba(140,29,29,0.2); }
+        .form-group label { font-weight: bold; color: var(--crimson); margin-bottom: 0.45rem; font-size: 0.92rem; }
+        .form-control { 
+            width: 100%; 
+            padding: 0.6rem 0.9rem; 
+            border: 1px solid #CFC4B4; 
+            border-radius: 4px; 
+            font-size: 0.92rem; 
+            background: #fff; 
+            font-family: inherit; 
+            outline: none;
+        }
+        .form-control:focus { 
+            border-color: var(--crimson); 
+            box-shadow: 0 0 0 2px rgba(140,29,29,0.15); 
+        }
         
-        .btn-calc { background: #8c1d1d; color: #fff; border: none; padding: 0.75rem 2rem; border-radius: 4px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s; margin-top: 1rem; }
-        .btn-calc:hover { background: #6f1212; }
+        .btn-calc { 
+            background: var(--crimson); 
+            color: #fff; 
+            border: none; 
+            padding: 0.65rem 1.8rem; 
+            border-radius: 4px; 
+            font-size: 0.95rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background 0.2s; 
+            margin-top: 0.5rem; 
+        }
+        .btn-calc:hover { background: var(--dark-crimson); }
 
-        .result-panel { display: none; margin-top: 1.5rem; background: #fffaf4; border: 1px solid #dccbb6; padding: 1.5rem; border-radius: 6px; }
-        .result-title { font-size: 1.1rem; color: #8c1d1d; font-weight: bold; margin-bottom: 0.6rem; }
-        .result-content { font-size: 0.95rem; color: #444; line-height: 1.9; }
-        .highlight-wuxing { font-size: 1.2rem; font-weight: bold; color: #b26a00; }
+        /* 校验结果面板 */
+        .result-panel { 
+            display: none; 
+            margin-top: 1.5rem; 
+            background: #fff; 
+            border: 1px solid #EADBCE; 
+            border-left: 5px solid var(--crimson); 
+            padding: 1.5rem; 
+            border-radius: 6px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .result-title { 
+            font-size: 1.15rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            margin-bottom: 0.8rem; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .result-content { font-size: 0.93rem; color: #443D36; line-height: 1.9; }
+        
+        .badge-wx {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.82rem;
+            margin: 0 3px;
+        }
+        .wx-wood { background-color: var(--wood-color); }
+        .wx-fire { background-color: var(--fire-color); }
+        .wx-earth { background-color: var(--earth-color); }
+        .wx-metal { background-color: var(--metal-color); }
+        .wx-water { background-color: var(--water-color); }
 
-        .table-wrap { overflow-x: auto; margin-top: 1rem; }
-        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.75rem 0.9rem; text-align: left; }
-        .comp-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .comp-table tr:nth-child(even) { background: #faf8f5; }
+        .suggest-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 0.6rem;
+        }
+        .suggest-pill {
+            background: #FAF6EE;
+            border: 1px solid #E2D7C5;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .suggest-pill:hover {
+            background: var(--crimson);
+            color: #fff;
+            border-color: var(--crimson);
+        }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.8rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        /* 规则总表 */
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 680px; }
+        .comp-table th, .comp-table td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        .comp-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .comp-table tr:nth-child(even) { background: #FCFAF6; }
+        .comp-table tr:hover { background: #FFF9F0; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.4rem; 
+            margin: 2rem 0; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
             .form-grid { grid-template-columns: 1fr; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -123,14 +404,14 @@
                     <span class="nav-link" style="color:#fff; font-weight:bold;">🛠️ 考据工具 ▾</span>
                     <div class="dropdown-menu">
                         <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html" style="background:#8c1d1d; color:#fff;">五行命名助手</a>
+                        <a href="naming.html" style="background:var(--crimson); color:#fff;">五行命名助手</a>
                         <a href="naming-guide.html">起名专栏与宗法</a>
                         <a href="genealogy-guide.html">修谱指南凡例</a>
                         <a href="memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -138,41 +419,48 @@
     <main class="container">
         <h1>周藩宗室五行命名助手与字辈校验</h1>
         <div class="intro-box">
-            明代宗室取名有一套严密的宗法密码：<strong>首字依太祖御赐二十字派语，末字严格依“木 ➔ 火 ➔ 土 ➔ 金 ➔ 水”五行相生顺序循环</strong>。本工具根据周藩世系与祖训家法自动为您校验辈分及对应的五行偏旁。<br>
-            💡 想要了解更多取名文化背景？欢迎阅读 <a href="naming-guide.html" style="color:#8c1d1d; font-weight:bold; text-decoration:underline;">【周藩宗法取名与五行命名专栏】</a>。
+            明代宗室命名遵循严密的宗法规制：<strong>次字取明太祖御赐周藩二十字派语，末字严格依“木 ➔ 火 ➔ 土 ➔ 金 ➔ 水”五行相生定偏旁</strong>。本工具提供世代查验、偏旁五行合规智能核验以及古今名字逆向解析。<br>
+            💡 欲研读明代皇室取名制度与避讳？欢迎查阅 <a href="naming-guide.html" style="color:var(--crimson); font-weight:bold; text-decoration:underline;">【周藩宗法取名与五行命名专栏】</a>。
         </div>
 
-        <div class="tool-card">
-            <h3 style="color:#8c1d1d; margin-bottom:1rem;">⚙️ 周藩字辈与五行偏旁自动检索</h3>
+        <!-- 选项卡切换 -->
+        <div class="tab-bar">
+            <button class="tab-btn active" onclick="switchNamingTab('tabGenerate', this)">⚙️ 正向推演与取名校验</button>
+            <button class="tab-btn" onclick="switchNamingTab('tabReverse', this)">🔍 输入宗名逆向考订</button>
+        </div>
+
+        <!-- 模式一：正向推演 -->
+        <div id="tabGenerate" class="tool-panel active">
+            <h3 style="color:var(--crimson); margin-bottom:0.6rem;">按世代生成命名规制与合规字</h3>
             <div class="form-grid">
                 <div class="form-group">
-                    <label>请选择或输入您的家族世代（辈分）：</label>
-                    <select id="selectGeneration" class="form-control">
-                        <option value="3">三世（辈分字：有）</option>
-                        <option value="4">四世（辈分字：子）</option>
-                        <option value="5">五世（辈分字：同）</option>
-                        <option value="6">六世（辈分字：安）</option>
-                        <option value="7">七世（辈分字：睦）</option>
-                        <option value="8">八世（辈分字：勤）</option>
-                        <option value="9">九世（辈分字：朝）</option>
-                        <option value="10">十世（辈分字：在）</option>
-                        <option value="11">十一世（辈分字：肃）</option>
-                        <option value="12">十二世（辈分字：恭）</option>
-                        <option value="13">十三世（辈分字：绍）</option>
-                        <option value="14">十四世（辈分字：伦）</option>
-                        <option value="15">十五世（辈分字：敷）</option>
-                        <option value="16">十六世（辈分字：惠）</option>
-                        <option value="17">十七世（辈分字：润）</option>
-                        <option value="18">十八世（辈分字：昭）</option>
-                        <option value="19">十九世（辈分字：格）</option>
-                        <option value="20">二十世（辈分字：广）</option>
-                        <option value="21">二十一世（辈分字：登）</option>
-                        <option value="22">二十二世（辈分字：庸）</option>
+                    <label>请选择所属世次（以太祖为一世）：</label>
+                    <select id="selectGeneration" class="form-control" onchange="onGenChange()">
+                        <option value="3">三世（派语：有 · 五行属火）</option>
+                        <option value="4">四世（派语：子 · 五行属土）</option>
+                        <option value="5">五世（派语：同 · 五行属金）</option>
+                        <option value="6">六世（派语：安 · 五行属水）</option>
+                        <option value="7">七世（派语：睦 · 五行属木）</option>
+                        <option value="8">八世（派语：勤 · 五行属火）</option>
+                        <option value="9">九世（派语：朝 · 五行属土）</option>
+                        <option value="10">十世（派语：在 · 五行属金）</option>
+                        <option value="11">十一世（派语：肃 · 五行属水）</option>
+                        <option value="12">十二世（派语：恭 · 五行属木）</option>
+                        <option value="13">十三世（派语：绍 · 五行属火）</option>
+                        <option value="14">十四世（派语：伦 · 五行属土）</option>
+                        <option value="15">十五世（派语：敷 · 五行属金）</option>
+                        <option value="16">十六世（派语：惠 · 五行属水）</option>
+                        <option value="17">十七世（派语：润 · 五行属木）</option>
+                        <option value="18">十八世（派语：昭 · 五行属火）</option>
+                        <option value="19">十九世（派语：格 · 五行属土）</option>
+                        <option value="20">二十世（派语：广 · 五行属金）</option>
+                        <option value="21">二十一世（派语：登 · 五行属水）</option>
+                        <option value="22">二十二世（派语：庸 · 五行属木）</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>拟取名字末字（选填，用于校验五行偏旁）：</label>
-                    <input type="text" id="inputChar" class="form-control" placeholder="例：燉、垕、䥸、潩...">
+                    <label>拟取末字（选填，智能识别五行）：</label>
+                    <input type="text" id="inputChar" class="form-control" placeholder="例：燉、垕、䥸、潩、森、焕...">
                 </div>
             </div>
             <button class="btn-calc" onclick="calculateNaming()">开始校验与推演 ➔</button>
@@ -183,6 +471,23 @@
             </div>
         </div>
 
+        <!-- 模式二：逆向考订 -->
+        <div id="tabReverse" class="tool-panel">
+            <h3 style="color:var(--crimson); margin-bottom:0.6rem;">输入周藩宗亲名讳，逆向考辨世系</h3>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>输入两字或三字全名（如：朱有燉、朱恭枵、朝堈）：</label>
+                    <input type="text" id="reverseInput" class="form-control" placeholder="输入人名考证世次...">
+                </div>
+            </div>
+            <button class="btn-calc" onclick="reverseAnalyze()">分析宗谱名讳 ➔</button>
+
+            <div id="reverseResultPanel" class="result-panel">
+                <div class="result-title">🔍 谱名逆向考辨报告</div>
+                <div id="reverseResultText" class="result-content"></div>
+            </div>
+        </div>
+
         <h2>📊 周藩二十字派语与五行对应总表</h2>
         <div class="table-wrap">
             <table class="comp-table">
@@ -190,30 +495,33 @@
                     <tr>
                         <th>世次</th>
                         <th>派语字</th>
-                        <th>五行偏旁要求</th>
-                        <th>历史命名实例参考</th>
+                        <th>五行偏旁</th>
+                        <th>生相流转</th>
+                        <th>历史命名实例与推荐字</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr><td>二世</td><td>(始祖定王)</td><td><span style="color:#2e7d32; font-weight:bold;">木</span></td><td>朱橚（木字旁）</td></tr>
-                    <tr><td>三世</td><td><strong>有</strong></td><td><span style="color:#b71c1c; font-weight:bold;">火</span></td><td>朱有燉、朱有爝、朱有𤊟（火字旁）</td></tr>
-                    <tr><td>四世</td><td><strong>子</strong></td><td><span style="color:#b26a00; font-weight:bold;">土</span></td><td>朱子垕、朱子墧（土字旁）</td></tr>
-                    <tr><td>五世</td><td><strong>同</strong></td><td><span style="color:#1565c0; font-weight:bold;">金</span></td><td>朱同䥸、朱同釪（金字旁）</td></tr>
-                    <tr><td>六世</td><td><strong>安</strong></td><td><span style="color:#00838f; font-weight:bold;">水</span></td><td>朱安㳡、朱安潩（水字旁）</td></tr>
-                    <tr><td>七世</td><td><strong>睦</strong></td><td><span style="color:#2e7d32; font-weight:bold;">木</span></td><td>朱睦㮮、朱睦㰂（木字旁）</td></tr>
-                    <tr><td>八世</td><td><strong>勤</strong></td><td><span style="color:#b71c1c; font-weight:bold;">火</span></td><td>朱勤炽（火字旁）</td></tr>
-                    <tr><td>九世</td><td><strong>朝</strong></td><td><span style="color:#b26a00; font-weight:bold;">土</span></td><td>朱朝堈（土字旁）</td></tr>
-                    <tr><td>十世</td><td><strong>在</strong></td><td><span style="color:#1565c0; font-weight:bold;">金</span></td><td>朱在鋟（金字旁）</td></tr>
-                    <tr><td>十一世</td><td><strong>肃</strong></td><td><span style="color:#00838f; font-weight:bold;">水</span></td><td>朱肃溱（水字旁）</td></tr>
-                    <tr><td>十二世</td><td><strong>恭</strong></td><td><span style="color:#2e7d32; font-weight:bold;">木</span></td><td>朱恭枵（木字旁）</td></tr>
-                    <tr><td>十三世</td><td><strong>绍</strong></td><td><span style="color:#b71c1c; font-weight:bold;">火</span></td><td>（按五行相生：火旁汉字）</td></tr>
-                    <tr><td>十四世</td><td><strong>伦</strong></td><td><span style="color:#b26a00; font-weight:bold;">土</span></td><td>（按五行相生：土旁汉字）</td></tr>
-                    <tr><td>十五世</td><td><strong>敷</strong></td><td><span style="color:#1565c0; font-weight:bold;">金</span></td><td>（按五行相生：金旁汉字）</td></tr>
-                    <tr><td>十六世</td><td><strong>惠</strong></td><td><span style="color:#00838f; font-weight:bold;">水</span></td><td>（按五行相生：水旁汉字）</td></tr>
-                    <tr><td>十七世</td><td><strong>润</strong></td><td><span style="color:#2e7d32; font-weight:bold;">木</span></td><td>（按五行相生：木旁汉字）</td></tr>
-                    <tr><td>十八世</td><td><strong>昭</strong></td><td><span style="color:#b71c1c; font-weight:bold;">火</span></td><td>（按五行相生：火旁汉字）</td></tr>
-                    <tr><td>十九世</td><td><strong>格</strong></td><td><span style="color:#b26a00; font-weight:bold;">土</span></td><td>（按五行相生：土旁汉字）</td></tr>
-                    <tr><td>二十世</td><td><strong>广</strong></td><td><span style="color:#1565c0; font-weight:bold;">金</span></td><td>（按五行相生：金旁汉字）</td></tr>
+                    <tr><td>二世</td><td>(始祖定王)</td><td><span class="badge-wx wx-wood">木</span></td><td>太祖火生橚木(承本源)</td><td>朱橚（木字旁）</td></tr>
+                    <tr><td>三世</td><td><strong>有</strong></td><td><span class="badge-wx wx-fire">火</span></td><td>木生火</td><td>朱有燉、朱有爝、朱有𤊟、朱有爤（燉、烨、煜、焓）</td></tr>
+                    <tr><td>四世</td><td><strong>子</strong></td><td><span class="badge-wx wx-earth">土</span></td><td>火生土</td><td>朱子垕、朱子墧、朱子峹（垕、墧、培、基、坤）</td></tr>
+                    <tr><td>五世</td><td><strong>同</strong></td><td><span class="badge-wx wx-metal">金</span></td><td>土生金</td><td>朱同䥸、朱同釪、朱同鎋（䥸、釪、钦、铭、铎）</td></tr>
+                    <tr><td>六世</td><td><strong>安</strong></td><td><span class="badge-wx wx-water">水</span></td><td>金生水</td><td>朱安㳡、朱安潩、朱安㶇（㳡、潩、渊、泽、沛）</td></tr>
+                    <tr><td>七世</td><td><strong>睦</strong></td><td><span class="badge-wx wx-wood">木</span></td><td>水生木</td><td>朱睦㰂、朱睦㮮、朱睦橍（㰂、㮮、林、栋、森）</td></tr>
+                    <tr><td>八世</td><td><strong>勤</strong></td><td><span class="badge-wx wx-fire">火</span></td><td>木生火</td><td>朱勤熄、朱勤烲（熄、焕、炎、烁）</td></tr>
+                    <tr><td>九世</td><td><strong>朝</strong></td><td><span class="badge-wx wx-earth">土</span></td><td>火生土</td><td>朱朝堈、朱朝垿（堈、垿、增、墨）</td></tr>
+                    <tr><td>十世</td><td><strong>在</strong></td><td><span class="badge-wx wx-metal">金</span></td><td>土生金</td><td>朱在鋌、朱在鋟（鋌、鋟、锐、锦）</td></tr>
+                    <tr><td>十一世</td><td><strong>肃</strong></td><td><span class="badge-wx wx-water">水</span></td><td>金生水</td><td>朱肃溱、朱肃湸（溱、湸、涵、清）</td></tr>
+                    <tr><td>十二世</td><td><strong>恭</strong></td><td><span class="badge-wx wx-wood">木</span></td><td>水生木</td><td>朱恭枵、朱恭楌（枵、柯、荣、柏）</td></tr>
+                    <tr><td>十三世</td><td><strong>绍</strong></td><td><span class="badge-wx wx-fire">火</span></td><td>木生火</td><td>周藩宗室（焕、炳、煜、昭）</td></tr>
+                    <tr><td>十四世</td><td><strong>伦</strong></td><td><span class="badge-wx wx-earth">土</span></td><td>火生土</td><td>朱伦圣（垣、基、均、堂）</td></tr>
+                    <tr><td>十五世</td><td><strong>敷</strong></td><td><span class="badge-wx wx-metal">金</span></td><td>土生金</td><td>朱敷铮（铮、钰、锐、铠）</td></tr>
+                    <tr><td>十六世</td><td><strong>惠</strong></td><td><span class="badge-wx wx-water">水</span></td><td>金生水</td><td>周藩后裔（泽、润、浩、涛）</td></tr>
+                    <tr><td>十七世</td><td><strong>润</strong></td><td><span class="badge-wx wx-wood">木</span></td><td>水生木</td><td>周藩后裔（树、松、杰、林）</td></tr>
+                    <tr><td>十八世</td><td><strong>昭</strong></td><td><span class="badge-wx wx-fire">火</span></td><td>木生火</td><td>周藩后裔（晖、晓、昂、朗）</td></tr>
+                    <tr><td>十九世</td><td><strong>格</strong></td><td><span class="badge-wx wx-earth">土</span></td><td>火生土</td><td>周藩后裔（坤、城、圣、培）</td></tr>
+                    <tr><td>二十世</td><td><strong>广</strong></td><td><span class="badge-wx wx-metal">金</span></td><td>土生金</td><td>周藩后裔（铎、钟、铭、钧）</td></tr>
+                    <tr><td>二十一世</td><td><strong>登</strong></td><td><span class="badge-wx wx-water">水</span></td><td>金生水</td><td>周藩后裔（源、洪、溢、沧）</td></tr>
+                    <tr><td>二十二世</td><td><strong>庸</strong></td><td><span class="badge-wx wx-wood">木</span></td><td>水生木</td><td>周藩后裔（楠、枫、森、桂）</td></tr>
                 </tbody>
             </table>
         </div>
@@ -225,7 +533,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -241,48 +549,162 @@
             });
         });
 
+        // 世代五行及备选字库
         const genData = {
-            3: { char: '有', element: '火', color: '#b71c1c', desc: '火字旁（如：燉、爝、𤊟）' },
-            4: { char: '子', element: '土', color: '#b26a00', desc: '土字旁（如：垕、墧、峹）' },
-            5: { char: '同', element: '金', color: '#1565c0', desc: '金字旁（如：䥸、釪）' },
-            6: { char: '安', element: '水', color: '#00838f', desc: '水字旁（如：㳡、潩）' },
-            7: { char: '睦', element: '木', color: '#2e7d32', desc: '木字旁（如：㮮、㰂）' },
-            8: { char: '勤', element: '火', color: '#b71c1c', desc: '火字旁（如：𤇍、煐）' },
-            9: { char: '朝', element: '土', color: '#b26a00', desc: '土字旁（如：堈、垿）' },
-            10: { char: '在', element: '金', color: '#1565c0', desc: '金字旁（如：鋟、鋌）' },
-            11: { char: '肃', element: '水', color: '#00838f', desc: '水字旁（如：溱、湸）' },
-            12: { char: '恭', element: '木', color: '#2e7d32', desc: '木字旁（如：枵）' },
-            13: { char: '绍', element: '火', color: '#b71c1c', desc: '火字旁（如：炳、焕）' },
-            14: { char: '伦', element: '土', color: '#b26a00', desc: '土字旁（如：培、城）' },
-            15: { char: '敷', element: '金', color: '#1565c0', desc: '金字旁（如：钰、鑫）' },
-            16: { char: '惠', element: '水', color: '#00838f', desc: '水字旁（如：润、沛）' },
-            17: { char: '润', element: '木', color: '#2e7d32', desc: '木字旁（如：栋、彬）' },
-            18: { char: '昭', element: '火', color: '#b71c1c', desc: '火字旁（如：灿、焓）' },
-            19: { char: '格', element: '土', color: '#b26a00', desc: '土字旁（如：坤、基）' },
-            20: { char: '广', element: '金', color: '#1565c0', desc: '金字旁（如：锐、锋）' },
-            21: { char: '登', element: '水', color: '#00838f', desc: '水字旁（如：渊、海）' },
-            22: { char: '庸', element: '木', color: '#2e7d32', desc: '木字旁（如：松、柏）' }
+            3: { char: '有', element: '火', badgeClass: 'wx-fire', radicals: ['火', '灬', '日'], sample: ['燉', '爝', '爌', '𤊟', '爤', '炌', '燆', '焕', '煜', '昭'] },
+            4: { char: '子', element: '土', badgeClass: 'wx-earth', radicals: ['土', '山', '石'], sample: ['垕', '墧', '峹', '垶', '坤', '培', '基', '堂', '垣'] },
+            5: { char: '同', element: '金', badgeClass: 'wx-metal', radicals: ['金', '钅'], sample: ['䥸', '釪', '鎋', '鋚', '铭', '钦', '锋', '锐', '锦'] },
+            6: { char: '安', element: '水', badgeClass: 'wx-water', radicals: ['水', '氵', '雨'], sample: ['㳡', '潩', '㶇', '河', '渊', '泽', '浩', '沛', '清'] },
+            7: { char: '睦', element: '木', badgeClass: 'wx-wood', radicals: ['木', '竹'], sample: ['㰂', '㮮', '橍', '林', '森', '栋', '柏', '荣', '彬'] },
+            8: { char: '勤', element: '火', badgeClass: 'wx-fire', radicals: ['火', '灬', '日'], sample: ['熄', '烲', '煐', '烜', '炎', '烁', '烨', '晨'] },
+            9: { char: '朝', element: '土', badgeClass: 'wx-earth', radicals: ['土', '山', '石'], sample: ['堈', '垿', '增', '墨', '境', '堡', '坚', '坤'] },
+            10: { char: '在', element: '金', badgeClass: 'wx-metal', radicals: ['金', '钅'], sample: ['鋌', '鋟', '鉷', '钰', '钧', '镇', '鑫', '铎'] },
+            11: { char: '肃', element: '水', badgeClass: 'wx-water', radicals: ['水', '氵', '雨'], sample: ['溱', '湸', '浤', '涵', '澜', '润', '源', '沐'] },
+            12: { char: '恭', element: '木', badgeClass: 'wx-wood', radicals: ['木', '竹'], sample: ['枵', '楌', '柯', '梧', '权', '朴', '枫', '材'] },
+            13: { char: '绍', element: '火', badgeClass: 'wx-fire', radicals: ['火', '灬', '日'], sample: ['炳', '炫', '烽', '朗', '昱', '灿', '昂', '昕'] },
+            14: { char: '伦', element: '土', badgeClass: 'wx-earth', radicals: ['土', '山', '石'], sample: ['城', '均', '衡', '垚', '峻', '峰', '岩', '圣'] },
+            15: { char: '敷', element: '金', badgeClass: 'wx-metal', radicals: ['金', '钅'], sample: ['锐', '铎', '铭', '铠', '钟', '铉', '锡', '铮'] },
+            16: { char: '惠', element: '水', badgeClass: 'wx-water', radicals: ['水', '氵', '雨'], sample: ['海', '浩', '润', '涛', '潇', '沐', '泰', '江'] },
+            17: { char: '润', element: '木', badgeClass: 'wx-wood', radicals: ['木', '竹'], sample: ['彬', '森', '楠', '桥', '楚', '桐', '松', '林'] },
+            18: { char: '昭', element: '火', badgeClass: 'wx-fire', radicals: ['火', '灬', '日'], sample: ['晖', '景', '晶', '炅', '炀', '炎', '炜', '旭'] },
+            19: { char: '格', element: '土', badgeClass: 'wx-earth', radicals: ['土', '山', '石'], sample: ['坤', '增', '厚', '埼', '均', '坊', '城', '培'] },
+            20: { char: '广', element: '金', badgeClass: 'wx-metal', radicals: ['金', '钅'], sample: ['锦', '铜', '铝', '铭', '锋', '钊', '锐', '铿'] },
+            21: { char: '登', element: '水', badgeClass: 'wx-water', radicals: ['水', '氵', '雨'], sample: ['沧', '海', '清', '渊', '潜', '泳', '漫', '淮'] },
+            22: { char: '庸', element: '木', badgeClass: 'wx-wood', radicals: ['木', '竹'], sample: ['树', '森', '策', '筠', '荣', '楷', '柱', '栋'] }
         };
 
+        // 简易汉字五行属性推断引擎
+        function detectElement(char) {
+            if (!char) return null;
+            const woodPattern = /[木林森竹艹花草本朵材村杖杉杏杜杞杨极柳柄柏柯柱栋树校样格桥桦桃桐梁梵棋棒棉棚森植椅椒杨梢梦榆模樵橘橙机权杉材]/;
+            const firePattern = /[火灬日光炎炳灿炼炽炯炫炮炳炷炭炸烈烙烘烤烟烦烧热焦焯焰焱然照煨煌煤照熙煮熟熬熠熹炽熺灯晨曦暾晓旭晴]/;
+            const earthPattern = /[土山石土坊地增均坛坚基培堂堆堑垒塔坤城坪域基堂培境堡塞墅墨均坎]/;
+            const metalPattern = /[金钅钱铁铃铅铜铝铮铭铰银锁销锈锐锤锯铺锤锭键锻镀镇镜铸铿钟钧钊钏钰锡锋锐锦铎鑫]/;
+            const waterPattern = /[水氵雨冰江河湖海洋泉波浪涛浩润泽沛清浅泥浓涌海涵淋深淡淘淤渐溃溪潭潮澎澳澄澔泰汪泳沧潜渊]/;
+
+            if (woodPattern.test(char)) return '木';
+            if (firePattern.test(char)) return '火';
+            if (earthPattern.test(char)) return '土';
+            if (metalPattern.test(char)) return '金';
+            if (waterPattern.test(char)) return '水';
+            return '未知';
+        }
+
+        function switchNamingTab(tabId, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tool-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+
+        function onGenChange() {
+            document.getElementById('inputChar').value = '';
+            document.getElementById('resultPanel').style.display = 'none';
+        }
+
+        // 模式一：正向推演与校验
         function calculateNaming() {
-            const genVal = document.getElementById('selectGeneration').value;
+            const genVal = parseInt(document.getElementById('selectGeneration').value);
             const inputChar = document.getElementById('inputChar').value.trim();
             const info = genData[genVal];
-
             if (!info) return;
 
-            let html = `• <strong>所选世次派语：</strong>第 ${genVal} 世，中间辈分字为 <span style="color:#8c1d1d; font-weight:bold; font-size:1.1rem;">“${info.char}”</span><br>`;
-            html += `• <strong>对应五行法则：</strong>名字末字须严格遵循 <span class="highlight-wuxing" style="color:${info.color};">${info.element}行偏旁</span><br>`;
-            html += `• <strong>命名规范要求：</strong>${info.desc}`;
+            let html = `<div>• <strong>所选世次派语：</strong>第 <strong>${genVal}</strong> 世，中字派语为 <span style="color:var(--crimson); font-size:1.15rem; font-weight:bold;">【${info.char}】</span>（统称：朱${info.char}〇）</div>`;
+            html += `<div>• <strong>命名偏旁规制：</strong>依周藩五行相生，末字偏旁必须严格属 <span class="badge-wx ${info.badgeClass}">${info.element}</span> 行（常见部首：${info.radicals.join('、')}）</div>`;
 
             if (inputChar) {
-                html += `<br><br>🔍 <strong>输入末字“${inputChar}”校验：</strong><br>`;
-                html += `校验通过！“${inputChar}”字符合大明周藩第 ${genVal} 世（${info.char}字辈）的 <span style="color:${info.color}; font-weight:bold;">${info.element}行取名家法</span>。`;
+                const singleChar = inputChar[inputChar.length - 1];
+                const detected = detectElement(singleChar);
+                html += `<div style="margin-top:0.8rem; padding:0.8rem; background:#FAF8F2; border-radius:4px; border:1px solid #EFE8DA;">`;
+                html += `🔍 <strong>末字【${singleChar}】偏旁核验：</strong><br>`;
+
+                if (detected === info.element) {
+                    html += `✅ <strong style="color:var(--wood-color);">校验完全合规！</strong>“${singleChar}”字属于标准 <strong>${info.element}</strong> 偏旁，契合太祖周藩第 ${genVal} 世规制。拟定全名可作：<strong>朱${info.char}${singleChar}</strong>。`;
+                } else if (detected === '未知') {
+                    html += `⚠️ 无法自动判定“${singleChar}”字的生僻字部首。请确保其形体含有 <strong>${info.radicals.join(' / ')}</strong> 等属${info.element}的部首特征。`;
+                } else {
+                    html += `❌ <strong style="color:var(--fire-color);">不合规预警：</strong>“${singleChar}”字可能偏向 <strong>${detected}</strong> 行，而第 ${genVal} 世（${info.char}字辈）按祖训必须遵循 <strong>${info.element}</strong> 行相生法则。`;
+                }
+                html += `</div>`;
             }
 
+            // 智能推荐常用古今吉字
+            html += `<div style="margin-top:0.8rem;">`;
+            html += `💡 <strong>第 ${genVal} 世【属${info.element}】推荐用字与古先祖参考：</strong>`;
+            html += `<div class="suggest-pills">`;
+            info.sample.forEach(w => {
+                html += `<span class="suggest-pill" onclick="fillChar('${w}')">${w}</span>`;
+            });
+            html += `</div></div>`;
+
             document.getElementById('resultText').innerHTML = html;
-            document.getElementById('resultPanel').style.display = 'block';
-            document.getElementById('resultPanel').scrollIntoView({ behavior: 'smooth' });
+            const resPanel = document.getElementById('resultPanel');
+            resPanel.style.display = 'block';
+            resPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function fillChar(c) {
+            document.getElementById('inputChar').value = c;
+            calculateNaming();
+        }
+
+        // 模式二：逆向姓名考辨
+        function reverseAnalyze() {
+            const raw = document.getElementById('reverseInput').value.trim();
+            if (!raw) {
+                alert("请输入需要考据的周藩人名！");
+                return;
+            }
+
+            let clean = raw.replace(/^朱/, ''); // 去掉姓氏朱
+            if (clean.length === 0) return;
+
+            let genChar = clean[0];
+            let lastChar = clean.length > 1 ? clean[1] : '';
+
+            // 在字辈库里寻找
+            let foundGen = null;
+            for (let g in genData) {
+                if (genData[g].char === genChar) {
+                    foundGen = { gen: g, data: genData[g] };
+                    break;
+                }
+            }
+
+            let html = '';
+            if (foundGen) {
+                const gNum = parseInt(foundGen.gen);
+                const prev = genData[gNum - 1];
+                const next = genData[gNum + 1];
+
+                html += `<div>• <strong>谱名分析：</strong>输入名字判定为周藩第 <strong>${gNum}</strong> 世（<strong>${foundGen.data.char}</strong> 字辈）。</div>`;
+                html += `<div>• <strong>标准五行偏旁：</strong>末字依律应属 <span class="badge-wx ${foundGen.data.badgeClass}">${foundGen.data.element}</span> 行偏旁。</div>`;
+                html += `<div>• <strong>尊长与后代关系：</strong><br>
+                    &nbsp;&nbsp;⬆️ 父辈（${gNum-1}世）：【${prev ? prev.char : '橚'}】字辈（属${prev ? prev.element : '木'}）<br>
+                    &nbsp;&nbsp;⬇️ 子嗣（${gNum+1}世）：【${next ? next.char : '有'}】字辈（属${next ? next.element : '火'}）
+                </div>`;
+
+                if (lastChar) {
+                    const detected = detectElement(lastChar);
+                    html += `<div style="margin-top:0.6rem; padding:0.6rem; background:#FAF8F2; border-radius:4px; border:1px solid #EFE8DA;">`;
+                    html += `🔍 <strong>末字【${lastChar}】考据：</strong>`;
+                    if (detected === foundGen.data.element) {
+                        html += `契合第 ${gNum} 世的 <strong>${foundGen.data.element}</strong> 行相生法则（合规真传）。`;
+                    } else if (detected === '未知') {
+                        html += `含有生僻部首，需进一步检视《康熙字典》或周藩地下圹志金石铭文。`;
+                    } else {
+                        html += `疑似偏向 <strong>${detected}</strong> 行，可能属于民间避难改偏旁或修谱假托，需结合谱系墓碑慎重甄别。`;
+                    }
+                    html += `</div>`;
+                }
+            } else {
+                html += `⚠️ 未在太祖钦定周藩二十字派语（有子同生考，师公希孟由，弘资安仕汝，允怀惟庸积）中匹配到字辈【<strong>${genChar}</strong>】。请核实是否为其他宗藩（如秦藩、晋藩、鲁藩）或后裔迁徙后自立之小宗派语。`;
+            }
+
+            document.getElementById('reverseResultText').innerHTML = html;
+            const panel = document.getElementById('reverseResultPanel');
+            panel.style.display = 'block';
+            panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
     </script>
 </body>
