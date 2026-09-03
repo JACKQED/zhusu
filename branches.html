@@ -5,83 +5,363 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩十四大分房支派 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
         /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; margin: 1.2rem 0; }
-        .stat-item { background: #fff; border: 1px solid #ebdcd0; border-radius: 6px; padding: 0.8rem 0.5rem; text-align: center; }
-        .stat-num { font-size: 1.3rem; font-weight: bold; color: #8c1d1d; line-height: 1.2; }
-        .stat-label { font-size: 0.8rem; color: #666; margin-top: 0.3rem; }
+        /* 统计数据条 */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); 
+            gap: 1rem; 
+            margin: 1.4rem 0 2rem; 
+        }
+        .stat-item { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            border-radius: 6px; 
+            padding: 1rem 0.6rem; 
+            text-align: center; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .stat-num { 
+            font-size: 1.45rem; 
+            font-weight: bold; 
+            color: var(--crimson); 
+            line-height: 1.2; 
+        }
+        .stat-label { 
+            font-size: 0.82rem; 
+            color: var(--muted); 
+            margin-top: 0.35rem; 
+        }
 
-        .branch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.4rem; margin-top: 1.2rem; }
-        .branch-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.4rem; border-radius: 6px; border-top: 3px solid #8c1d1d; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s, box-shadow 0.2s; }
-        .branch-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
-        .branch-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; border-bottom: 1px dashed #dcd3cb; padding-bottom: 0.4rem; gap: 0.4rem; }
-        .branch-name { font-size: 1.15rem; color: #8c1d1d; font-weight: bold; }
+        /* 筛选条 */
+        .filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 1.2rem 0 1.6rem;
+            background: #FCFAF6;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #EAE2D5;
+        }
+        .filter-btn {
+            background: #fff;
+            border: 1px solid #DCD3CB;
+            padding: 0.35rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.86rem;
+            cursor: pointer;
+            color: #555;
+            transition: all 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--crimson);
+            color: #fff;
+            border-color: var(--crimson);
+            font-weight: bold;
+        }
+
+        /* 分房卡片网格 */
+        .branch-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 1.4rem; 
+            margin-top: 1.2rem; 
+        }
+        .branch-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 1.6rem; 
+            border-radius: 6px; 
+            border-top: 4px solid var(--crimson); 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: space-between; 
+            transition: transform 0.2s, box-shadow 0.2s; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .branch-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); 
+        }
+        .branch-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            margin-bottom: 0.5rem; 
+            border-bottom: 1px dashed #E2D7C5; 
+            padding-bottom: 0.5rem; 
+            gap: 0.4rem; 
+        }
+        .branch-name { 
+            font-size: 1.18rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+        }
         
-        .badge { font-size: 0.75rem; padding: 2px 7px; border-radius: 3px; color: #fff; font-weight: normal; white-space: nowrap; }
-        .badge-main { background: #8c1d1d; }
-        .badge-sub { background: #2e7d32; }
-        .badge-west { background: #6a1b9a; }
-        .badge-gray { background: #616161; }
+        .badge { 
+            font-size: 0.75rem; 
+            padding: 2px 8px; 
+            border-radius: 3px; 
+            color: #fff; 
+            font-weight: normal; 
+            white-space: nowrap; 
+        }
+        .badge-main { background: var(--crimson); }
+        .badge-sub { background: #2E7D32; }
+        .badge-west { background: #6A1B9A; }
+        .badge-gray { background: #666; }
 
-        .branch-meta { font-size: 0.85rem; color: #777; margin-bottom: 0.5rem; }
-        .branch-desc { font-size: 0.92rem; color: #444; line-height: 1.7; flex-grow: 1; text-align: justify; }
-        .branch-loc { margin-top: 0.6rem; font-size: 0.85rem; background: #fff; padding: 0.5rem 0.7rem; border-radius: 4px; border: 1px solid #ebdcd0; color: #8c1d1d; }
+        .branch-meta { 
+            font-size: 0.86rem; 
+            color: var(--muted); 
+            margin-bottom: 0.6rem; 
+        }
+        .branch-desc { 
+            font-size: 0.93rem; 
+            color: #443D36; 
+            line-height: 1.75; 
+            flex-grow: 1; 
+            text-align: justify; 
+        }
+        .branch-loc { 
+            margin-top: 0.8rem; 
+            font-size: 0.86rem; 
+            background: #fff; 
+            padding: 0.55rem 0.8rem; 
+            border-radius: 4px; 
+            border: 1px solid #EAE2D5; 
+            color: var(--crimson); 
+        }
+        .branch-loc strong { color: var(--ink); }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.5rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 2rem 0 1rem; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box strong { color: var(--crimson); }
+        .quote-box p { margin-bottom: 0.5rem; }
+        .quote-box p:last-child { margin-bottom: 0; }
         
-        .table-wrap { overflow-x: auto; margin-top: 0.8rem; }
-        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.75rem 0.9rem; text-align: left; }
-        .comp-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .comp-table tr:nth-child(even) { background: #faf8f5; }
+        /* 表格样式 */
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 720px; }
+        .comp-table th, .comp-table td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        .comp-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .comp-table tr:nth-child(even) { background: #FCFAF6; }
+        .comp-table tr:hover { background: #FFF9F0; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -94,7 +374,7 @@
                         <a href="lineage.html">世系字辈</a>
                         <a href="tree.html">数字家谱树</a>
                         <a href="ancestors.html">昭穆神位</a>
-                        <a href="branches.html" style="background:#8c1d1d; color:#fff;">分房支派</a>
+                        <a href="branches.html" style="background:var(--crimson); color:#fff;">分房支派</a>
                         <a href="history.html">王府传承</a>
                     </div>
                 </div>
@@ -136,7 +416,7 @@
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -145,7 +425,7 @@
         <h1>周藩十四大分房与郡王支派</h1>
         
         <div class="intro-box">
-            始祖周定王朱橚共育十五子（宣德元年《周定王圹志》明载“十五早卒”）。除长子朱有燉袭封亲王、四子朱有爝继袭周王大宗外，其余诸皇子皆分封郡王，建邸传嗣。历经二百六十余载繁衍，形成了大明宗室中结构最完整、支派最清晰的<strong>“周藩十四大房系”</strong>。
+            始祖周定王朱橚共育十五子（宣德元年《周定王圹志》明确记载“子十五人，十五早卒”）。除长子朱有燉袭封亲王、四子朱有爝继袭周王大宗外，其余诸皇子皆分封郡王，建邸传嗣。历经二百六十余载繁衍，形成了大明宗室中脉络清晰、支派严整的<strong>“周藩十四大房系”</strong>。
         </div>
 
         <div class="stats-grid">
@@ -167,161 +447,171 @@
             </div>
         </div>
 
+        <!-- 区域筛选 -->
+        <div class="filter-bar">
+            <button class="filter-btn active" onclick="filterBranch('all', this)">全部十四房</button>
+            <button class="filter-btn" onclick="filterBranch('kaifeng', this)">开封亲王大宗</button>
+            <button class="filter-btn" onclick="filterBranch('north', this)">豫北黄河支派</button>
+            <button class="filter-btn" onclick="filterBranch('west', this)">宛洛豫西支派</button>
+            <button class="filter-btn" onclick="filterBranch('south', this)">豫南淮上支派</button>
+            <button class="filter-btn" onclick="filterBranch('southwest', this)">西南滇黔支派</button>
+        </div>
+
         <h2>🌿 始祖诸子十四大分房全考</h2>
         
-        <div class="branch-grid">
+        <div class="branch-grid" id="branchGrid">
             <!-- 长房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="kaifeng">
                 <div class="branch-header">
                     <span class="branch-name">长房 · 周宪王 朱有燉</span>
                     <span class="badge badge-main">亲王 / 无嗣</span>
                 </div>
                 <div class="branch-meta">封爵：周世子 ➔ 周宪王 (1425袭) · 居开封大内</div>
-                <div class="branch-desc">周定王嫡长子。博学能文，精通音律词曲，号诚斋，为大明一代曲圣。正统四年薨，无子，弟祥符王朱有爝承嗣大统。</div>
-                <div class="branch-loc">📍 归葬地：开封祥符故里 / 禹州</div>
+                <div class="branch-desc">周定王嫡长子。博学能文，精通音律词曲，号诚斋，为大明一代曲圣。正统四年薨，无子，弟祥符王朱有爝奉旨承嗣大统。</div>
+                <div class="branch-loc"><strong>📍 归葬地：</strong>开封祥符故里 / 禹州三峰山</div>
             </div>
 
             <!-- 二房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="southwest">
                 <div class="branch-header">
                     <span class="branch-name">二房 · 汝南王 朱有爋</span>
                     <span class="badge badge-west">西南滇黔房</span>
                 </div>
-                <div class="branch-meta">封爵：汝南王 (1402封) · 谪居云南大理</div>
-                <div class="branch-desc">周定王嫡次子。建文四年封汝南王。永乐年间谪居云南大理府，其后裔历经数百年繁衍，分流于云南保山、大理、楚雄及豫南故里。</div>
-                <div class="branch-loc">📍 后裔分布：云南大理、保山、楚雄及河南汝南</div>
+                <div class="branch-meta">封爵：汝南王 (1402封) · 谪居云南大理府</div>
+                <div class="branch-desc">周定王嫡次子。建文四年封汝南王。永乐中谪居云南大理，后代数百年繁衍，广泛分布于云南大理、保山、楚雄及豫南故里。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>云南大理喜洲、保山、楚雄及河南汝南</div>
             </div>
 
             <!-- 三房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="west">
                 <div class="branch-header">
                     <span class="branch-name">三房 · 顺阳怀庄王 朱有爌</span>
                     <span class="badge badge-sub">宛洛豫西房</span>
                 </div>
                 <div class="branch-meta">封爵：顺阳王 (1404封) · 开府南阳顺阳县</div>
-                <div class="branch-desc">周定王第三子。受封南阳顺阳县（今淅川），宣德八年薨。子朱子峹袭爵为顺阳恭简王，世系传衍于豫西南各邑。</div>
-                <div class="branch-loc">📍 后裔分布：河南淅川、邓州、南阳及开封</div>
+                <div class="branch-desc">周定王第三子。永乐二年受封南阳府顺阳县（今淅川），宣德八年薨。子朱子峹袭爵为顺阳恭简王，世系传衍于豫西南各邑。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南淅川、邓州、南阳及开封各县</div>
             </div>
 
             <!-- 四房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="kaifeng">
                 <div class="branch-header">
                     <span class="branch-name">四房 · 祥符王 / 周简王 朱有爝</span>
                     <span class="badge badge-main">大宗直系亲王</span>
                 </div>
                 <div class="branch-meta">封爵：祥符王 (1403) ➔ 周简王 (1439袭)</div>
-                <div class="branch-desc">周定王第四子。宪王薨后承袭周亲王爵，谥曰简。自此之后，历代周亲王（靖王、懿王、惠王、恭王等）皆为简王直系后裔。</div>
-                <div class="branch-loc">📍 统领开封大宗历代王邸与豫东诸支派</div>
+                <div class="branch-desc">周定王第四子。正统四年承袭周亲王爵，谥曰简。自此之后，历代周王（靖王、懿王、惠王、恭王等）皆出自简王直系后裔。</div>
+                <div class="branch-loc"><strong>📍 统领：</strong>开封周王府历代宗枝与豫东诸县派系</div>
             </div>
 
             <!-- 五房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="north">
                 <div class="branch-header">
                     <span class="branch-name">五房 · 新乡王 朱有𤊟</span>
-                    <span class="badge badge-sub">豫北中原房</span>
+                    <span class="badge badge-sub">豫北黄河房</span>
                 </div>
                 <div class="branch-meta">封爵：新乡王 (1403封) · 治所卫辉府新乡</div>
-                <div class="branch-desc">周定王第五子。永乐元年册封新乡王，府邸设于卫辉新乡。支派繁盛，明清以降宗亲广泛聚居于新乡、获嘉、卫辉及焦作。</div>
-                <div class="branch-loc">📍 后裔分布：河南新乡、获嘉、卫辉、辉县</div>
+                <div class="branch-desc">周定王第五子。永乐元年册封新乡王，府邸设于卫辉新乡。支派繁茂，明清以降宗亲广泛聚居于新乡、获嘉、卫辉及焦作。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南新乡、获嘉朱厂、卫辉、辉县</div>
             </div>
 
             <!-- 六房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="south">
                 <div class="branch-header">
                     <span class="branch-name">六房 · 宁陵王 朱有爤</span>
                     <span class="badge badge-sub">豫东淮上房</span>
                 </div>
                 <div class="branch-meta">封爵：宁陵王 (1403封) · 治所归德府宁陵</div>
-                <div class="branch-desc">周定王第六子。开府商丘宁陵，传袭多代。明末清初后裔分迁于商丘、宁陵、民权、睢县及安徽宿州一带。</div>
-                <div class="branch-loc">📍 后裔分布：河南宁陵、商丘、民权与皖北宿州</div>
+                <div class="branch-desc">周定王第六子。开府商丘宁陵，传袭多代。明末清初后裔分迁于商丘、宁陵、民权、睢县及安徽宿州萧县大朱村一带。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南宁陵、商丘、民权与皖北宿州</div>
             </div>
 
             <!-- 七房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="kaifeng">
                 <div class="branch-header">
                     <span class="branch-name">七房 · 杞县王 朱有炌</span>
                     <span class="badge badge-sub">开封近畿房</span>
                 </div>
-                <div class="branch-meta">封爵：杞县王 (1403封) · 治所开封杞县</div>
-                <div class="branch-desc">周定王第七子。府邸紧邻开封大宗，枝叶稠密。后裔世居杞县、通许、兰考及开封近郊，多有朱庄、朱家楼聚落。</div>
-                <div class="branch-loc">📍 后裔分布：河南杞县、通许、兰考、开封县</div>
+                <div class="branch-meta">封爵：杞县王 (1403封) · 治所开封府杞县</div>
+                <div class="branch-desc">周定王第七子。府邸紧邻开封大宗，枝叶稠密。后裔世居杞县、通许、兰考及开封近郊，多筑有朱庄、朱家楼聚落。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南杞县高阳、通许、兰考、开封近郊</div>
             </div>
 
             <!-- 八房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="south">
                 <div class="branch-header">
                     <span class="branch-name">八房 · 信阳王 朱有燖</span>
                     <span class="badge badge-gray">无嗣国除</span>
                 </div>
                 <div class="branch-meta">封爵：信阳王 (1404封) · 治所汝宁府信阳州</div>
-                <div class="branch-desc">周定王第八子。永乐二年封信阳王，永乐十八年薨，无嗣国除。随侍官军与部分宗支余荫入籍豫南。</div>
-                <div class="branch-loc">📍 原籍：河南信阳州故地</div>
+                <div class="branch-desc">周定王第八子。永乐二年封信阳王，永乐十八年薨，无嗣国除。随侍官军与部分宗室余荫入籍豫南信阳州。</div>
+                <div class="branch-loc"><strong>📍 原籍：</strong>河南信阳州故地</div>
             </div>
 
             <!-- 九房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="west">
                 <div class="branch-header">
                     <span class="branch-name">九房 · 镇平恭定王 朱有爌(㫤)</span>
                     <span class="badge badge-sub">宛洛豫西房</span>
                 </div>
                 <div class="branch-meta">封爵：镇平王 (1404封) · 治所南阳府镇平</div>
-                <div class="branch-desc">周定王第九子。开府宛南镇平县，世袭多代，景泰年间薨。后嗣繁衍于南阳、镇平、邓州、内乡以及皖北亳州。</div>
-                <div class="branch-loc">📍 后裔分布：河南镇平、南阳、邓州及安徽亳州</div>
+                <div class="branch-desc">周定王第九子。开府宛南镇平县，世袭多代，景泰六年薨。后嗣传衍于南阳、镇平、邓州、内乡以及皖北亳州涡阳。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南镇平朱家营、南阳、邓州及安徽亳州</div>
             </div>
 
             <!-- 十房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="south">
                 <div class="branch-header">
                     <span class="branch-name">十房 · 遂平悼恭王 朱有熡</span>
                     <span class="badge badge-sub">豫南淮上房</span>
                 </div>
                 <div class="branch-meta">封爵：遂平王 (1412封) · 治所汝宁府遂平</div>
-                <div class="branch-desc">周定王第十子。永乐十年封遂平王，世袭七代至明末。后裔广泛播迁于驻马店、遂平、西平、汝南及安徽阜阳一带。</div>
-                <div class="branch-loc">📍 后裔分布：河南遂平、西平、驻马店及安徽阜阳</div>
+                <div class="branch-desc">周定王第十子。永乐十年封遂平王，世袭七代至明末。后裔广泛播迁于驻马店、遂平朱湖、西平、汝南及安徽阜阳一带。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南遂平朱湖、西平、驻马店及安徽阜阳</div>
             </div>
 
             <!-- 十一房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="north">
                 <div class="branch-header">
                     <span class="branch-name">十一房 · 封丘康懿王 朱有𤓂</span>
                     <span class="badge badge-sub">豫北黄河房</span>
                 </div>
                 <div class="branch-meta">封爵：封丘王 (1412封) · 治所开封府封丘</div>
-                <div class="branch-desc">周定王第十一子。开府黄河北岸封丘县，宗支盛大。崇祯大水后宗室北渡，依托封丘故地王庄与同宗地缘繁衍生息。</div>
-                <div class="branch-loc">📍 后裔分布：河南封丘、长垣、延津及山东菏泽</div>
+                <div class="branch-desc">周定王第十一子。开府黄河北岸封丘县，宗支盛大。崇祯大水后宗室北渡，依托封丘原有王庄封邑与同宗地缘繁衍生息。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南封丘、长垣、延津及山东菏泽曹县</div>
             </div>
 
             <!-- 十二房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="west">
                 <div class="branch-header">
                     <span class="branch-name">十二房 · 鲁山悼恭王 朱有灦</span>
                     <span class="badge badge-sub">宛洛豫西房</span>
                 </div>
                 <div class="branch-meta">封爵：鲁山王 (1412封) · 治所汝州鲁山县</div>
-                <div class="branch-desc">周定王第十二子。封国位于伏牛山东麓鲁山县。后裔主要分布于平顶山、鲁山、郏县、宝丰及许昌禹州。</div>
-                <div class="branch-loc">📍 后裔分布：河南鲁山、平顶山、宝丰、郏县</div>
+                <div class="branch-desc">周定王第十二子。封国位于伏牛山东麓鲁山县。后裔主要分布于平顶山、鲁山朱洼、郏县、宝丰及许昌禹州各邑。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南鲁山朱洼、平顶山、宝丰、郏县</div>
             </div>
 
             <!-- 十三房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="north">
                 <div class="branch-header">
                     <span class="branch-name">十三房 · 邺王 朱有爚</span>
                     <span class="badge badge-gray">无嗣国除</span>
                 </div>
                 <div class="branch-meta">封爵：邺王 (1412封) · 治所彰德府安阳</div>
-                <div class="branch-desc">周定王第十三子。以古邺城（安阳）为封号，宣德初年早薨无嗣国除，随行部分宗室留居相州故地。</div>
-                <div class="branch-loc">📍 原籍：河南安阳（彰德府）故地</div>
+                <div class="branch-desc">周定王第十三子。以古邺城（安阳）为封号，宣德初年早薨无嗣国除，随行部分宗亲余裔留居相州故地。</div>
+                <div class="branch-loc"><strong>📍 原籍：</strong>河南安阳（彰德府）故地</div>
             </div>
 
             <!-- 十四房 -->
-            <div class="branch-card">
+            <div class="branch-card" data-region="north">
                 <div class="branch-header">
                     <span class="branch-name">十四房 · 胙城庄简王 朱有燆</span>
                     <span class="badge badge-sub">豫北黄河房</span>
                 </div>
                 <div class="branch-meta">封爵：胙城王 (1412封) · 治所卫辉府胙城</div>
-                <div class="branch-desc">周定王第十四子。开府胙城县（今延津胙城），临近古黄河渡口。后代繁衍定居于延津、卫辉、滑县及鲁西各县。</div>
-                <div class="branch-loc">📍 后裔分布：河南延津、原阳、滑县及山东聊城</div>
+                <div class="branch-desc">周定王第十四子。开府胙城县（今延津胙城），临近古黄河渡口。后代繁衍定居于延津、原阳、滑县及鲁西聊城各县。</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南延津胙城朱营、原阳、滑县及山东聊城</div>
             </div>
         </div>
 
@@ -345,7 +635,7 @@
                     </tr>
                     <tr>
                         <td><strong>豫北黄河支派</strong></td>
-                        <td>五房新乡房、十一房封丘房、十四房胙城房</td>
+                        <td>五房新乡房、十一房封丘房、十三房邺王余荫、十四房胙城房</td>
                         <td>卫辉府、新乡县、封丘县、胙城县</td>
                         <td>新乡、获嘉、封丘、长垣、延津、辉县</td>
                     </tr>
@@ -357,29 +647,29 @@
                     </tr>
                     <tr>
                         <td><strong>豫南淮上支派</strong></td>
-                        <td>六房宁陵房、十房遂平房</td>
-                        <td>归德府宁陵、汝宁府遂平</td>
+                        <td>六房宁陵房、八房信阳房余荫、十房遂平房</td>
+                        <td>归德府宁陵、汝宁府遂平、信阳州</td>
                         <td>宁陵、商丘、驻马店、遂平、安徽宿州/阜阳</td>
                     </tr>
                     <tr>
                         <td><strong>西南滇黔支派</strong></td>
                         <td>二房汝南王房</td>
                         <td>云南大理府、永昌府（保山）</td>
-                        <td>云南大理、保山、楚雄、昆明及黔西</td>
+                        <td>云南大理、保山、楚雄、昆明及黔西各州县</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <h2>📖 周藩分房字辈与五行命例法则</h2>
+        <h2>📖 周藩分房字辈与五行命名法则</h2>
         <div class="quote-box">
-            <p><strong>御赐字辈（二十字）：</strong>有子同安睦，勤朝 in 肃恭，绍伦敷惠润，昭格广登庸。</p> <!-- Note: keeping exact clean characters -->
-            <p><strong>五行相生偏旁：</strong>一世木（橚） ➔ 二世火（有燉、有爝） ➔ 三世土（子垕、子墧） ➔ 四世金（同䥸、同釪） ➔ 五世水（安㳡、安潩） ➔ 六世木（睦㮮）……循环不息。</p>
+            <p><strong>钦定正宗二十字派语：</strong>有子同安睦，勤朝在肃恭。绍伦敷惠润，昭格广登庸。</p>
+            <p><strong>五行相生偏旁循环：</strong>二世木（橚） ➔ 三世火（有燉、有爝） ➔ 四世土（子垕、子墧） ➔ 五世金（同䥸、同釪） ➔ 六世水（安㳡、安潩） ➔ 七世木（睦㰂、睦㮮）……循环不息。</p>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -387,6 +677,7 @@
             document.getElementById('navMenu').classList.toggle('show');
         }
 
+        // 移动端菜单
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function(e) {
                 if (window.innerWidth <= 960) {
@@ -394,6 +685,23 @@
                 }
             });
         });
+
+        // 区域筛选
+        function filterBranch(region, btn) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            const cards = document.querySelectorAll('.branch-card');
+            cards.forEach(card => {
+                const reg = card.getAttribute('data-region') || '';
+                if (region === 'all' || reg === region) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
 </body>
 </html>
