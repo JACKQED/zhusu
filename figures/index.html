@@ -5,76 +5,349 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩历代先祖与杰出人物纪传 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
         /* 名人堂横幅 */
-        .fame-banner { background: linear-gradient(135deg, #8c1d1d 0%, #5a1010 100%); color: #f9e6d0; padding: 1.2rem 1.5rem; border-radius: 6px; margin: 1.5rem 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; box-shadow: 0 3px 10px rgba(140,29,29,0.2); }
-        .fame-banner h3 { color: #fff; font-size: 1.2rem; margin-bottom: 0.3rem; }
-        .fame-banner p { font-size: 0.9rem; color: #f0dec8; }
-        .fame-banner a { background: #f9e6d0; color: #8c1d1d; padding: 0.5rem 1.2rem; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.9rem; white-space: nowrap; transition: background 0.2s; }
-        .fame-banner a:hover { background: #fff; }
+        .fame-banner { 
+            background: linear-gradient(135deg, var(--crimson) 0%, var(--dark-crimson) 100%); 
+            color: #FAF2E8; 
+            padding: 1.4rem 1.8rem; 
+            border-radius: 6px; 
+            margin: 1.8rem 0; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 1rem; 
+            box-shadow: 0 4px 14px rgba(140,29,29,0.22); 
+            border-left: 5px solid var(--accent-gold);
+        }
+        .fame-banner h3 { color: #fff; font-size: 1.22rem; margin-bottom: 0.35rem; }
+        .fame-banner p { font-size: 0.9rem; color: #F0DFC8; }
+        .fame-banner a { 
+            background: #FAF2E8; 
+            color: var(--crimson); 
+            padding: 0.55rem 1.3rem; 
+            border-radius: 4px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .fame-banner a:hover { 
+            background: #fff; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15); 
+        }
 
         /* 分类筛选 */
-        .filter-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
-        .filter-btn { background: #fcf9f5; border: 1px solid #dcd3cb; padding: 0.35rem 0.9rem; border-radius: 20px; font-size: 0.85rem; cursor: pointer; color: #555; transition: all 0.2s; }
-        .filter-btn.active, .filter-btn:hover { background: #8c1d1d; color: #fff; border-color: #8c1d1d; }
+        .filter-bar { 
+            display: flex; 
+            gap: 0.5rem; 
+            flex-wrap: wrap; 
+            margin: 1.6rem 0 2rem; 
+            background: #FCFAF6;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #EAE2D5;
+        }
+        .filter-btn { 
+            background: #fff; 
+            border: 1px solid #DCD3CB; 
+            padding: 0.4rem 1rem; 
+            border-radius: 20px; 
+            font-size: 0.86rem; 
+            cursor: pointer; 
+            color: #555; 
+            transition: all 0.2s; 
+        }
+        .filter-btn.active, .filter-btn:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            border-color: var(--crimson); 
+            font-weight: bold;
+        }
 
         /* 人物卡片 */
-        .figure-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.6rem; border-radius: 6px; margin: 1.5rem 0; border-top: 3px solid #8c1d1d; display: flex; gap: 1.8rem; align-items: flex-start; transition: transform 0.2s, box-shadow 0.2s; }
-        .figure-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
-        .figure-img-wrap { flex-shrink: 0; text-align: center; width: 220px; }
-        .figure-img-wrap img { width: 100%; height: auto; border-radius: 6px; border: 2px solid #8c1d1d; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
-        .figure-img-title { font-size: 0.82rem; color: #8c1d1d; font-weight: bold; margin-top: 0.5rem; }
+        .figure-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 1.8rem; 
+            border-radius: 6px; 
+            margin: 1.6rem 0; 
+            border-top: 4px solid var(--crimson); 
+            display: flex; 
+            gap: 1.8rem; 
+            align-items: flex-start; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .figure-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); 
+        }
+        .figure-img-wrap { 
+            flex-shrink: 0; 
+            text-align: center; 
+            width: 220px; 
+        }
+        .figure-img-wrap img { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 6px; 
+            border: 2px solid var(--crimson); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12); 
+            background: #FAF8F2;
+        }
+        .figure-img-title { 
+            font-size: 0.82rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            margin-top: 0.5rem; 
+        }
         
         .figure-info { flex: 1; }
-        .figure-name { font-size: 1.35rem; color: #8c1d1d; font-weight: bold; display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-        .figure-badge { display: inline-block; background: #8c1d1d; color: #fff; font-size: 0.75rem; padding: 2px 8px; border-radius: 4px; font-weight: normal; }
-        .figure-badge.badge-art { background: #6a1b9a; }
-        .figure-badge.badge-hero { background: #b71c1c; }
-        .figure-badge.badge-doc { background: #2e7d32; }
+        .figure-name { 
+            font-size: 1.35rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            display: flex; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+        }
+        .figure-badge { 
+            display: inline-block; 
+            background: var(--crimson); 
+            color: #fff; 
+            font-size: 0.75rem; 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-weight: normal; 
+        }
+        .figure-badge.badge-art { background: #6A1B9A; }
+        .figure-badge.badge-hero { background: #B71C1C; }
+        .figure-badge.badge-doc { background: #2E7D32; }
 
-        .figure-meta { font-size: 0.88rem; color: #777; margin: 0.4rem 0 0.8rem; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
-        .figure-desc { font-size: 0.95rem; color: #444; line-height: 1.8; text-align: justify; }
-        .figure-achieve { background: #fff8f0; border-left: 3px solid #8c1d1d; padding: 0.7rem 0.9rem; margin-top: 0.9rem; font-size: 0.9rem; color: #554; border-radius: 0 4px 4px 0; }
+        .figure-meta { 
+            font-size: 0.88rem; 
+            color: var(--muted); 
+            margin: 0.4rem 0 0.8rem; 
+            border-bottom: 1px dashed #E2D7C5; 
+            padding-bottom: 0.5rem; 
+        }
+        .figure-desc { 
+            font-size: 0.94rem; 
+            color: #443D36; 
+            line-height: 1.85; 
+            text-align: justify; 
+        }
+        .figure-achieve { 
+            background: #FAF7EE; 
+            border-left: 3px solid var(--accent-gold); 
+            padding: 0.75rem 1rem; 
+            margin-top: 0.9rem; 
+            font-size: 0.9rem; 
+            color: #4E4233; 
+            border-radius: 0 4px 4px 0; 
+        }
+        .figure-achieve strong { color: var(--crimson); }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
             .figure-card { flex-direction: column; align-items: center; }
-            .figure-img-wrap { width: 180px; margin-bottom: 1rem; }
+            .figure-img-wrap { width: 190px; margin-bottom: 0.6rem; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
@@ -82,8 +355,10 @@
 
     <header class="site-header">
         <div class="header-inner">
-            <a href="../index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="../index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="../index.html" class="nav-link">首页</a>
                 
@@ -91,7 +366,7 @@
                 <div class="nav-item">
                     <span class="nav-link" style="color:#fff; font-weight:bold;">👑 宗系人物 ▾</span>
                     <div class="dropdown-menu">
-                        <a href="index.html" style="background:#8c1d1d; color:#fff;">历代人物</a>
+                        <a href="index.html" style="background:var(--crimson); color:#fff;">历代人物</a>
                         <a href="../hall-of-fame.html">周藩名人堂</a>
                         <a href="../lineage.html">世系字辈</a>
                         <a href="../tree.html">数字家谱树</a>
@@ -132,12 +407,13 @@
                     <div class="dropdown-menu">
                         <a href="../calendar.html">纪年干支换算</a>
                         <a href="../naming.html">五行命名助手</a>
+                        <a href="../naming-guide.html">起名专栏与宗法</a>
                         <a href="../genealogy-guide.html">修谱指南凡例</a>
                         <a href="../memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="../search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="../search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -159,10 +435,10 @@
 
         <!-- 分类筛选栏 -->
         <div class="filter-bar">
-            <button class="filter-btn active" onclick="filterCategory('all')">全部人物</button>
-            <button class="filter-btn" onclick="filterCategory('ancestor')">开派始祖与皇祖</button>
-            <button class="filter-btn" onclick="filterCategory('culture')">医家曲圣与学术名王</button>
-            <button class="filter-btn" onclick="filterCategory('hero')">明季忠烈宗室</button>
+            <button class="filter-btn active" onclick="filterCategory('all', this)">全部人物</button>
+            <button class="filter-btn" onclick="filterCategory('ancestor', this)">开派始祖与皇祖</button>
+            <button class="filter-btn" onclick="filterCategory('culture', this)">医家曲圣与学术名王</button>
+            <button class="filter-btn" onclick="filterCategory('hero', this)">明季忠烈宗室</button>
         </div>
 
         <div id="figureList">
@@ -174,12 +450,12 @@
                 </div>
                 <div class="figure-info">
                     <div class="figure-name">太祖高皇帝 · 朱元璋 <span class="figure-badge">大明开国之君 · 宗法之源</span></div>
-                    <div class="figure-meta">生卒：1328 — 1398 · 年号：洪武 · 陵寝：南京明孝陵</div>
+                    <div class="figure-meta">一世 · 生卒：1328 — 1398 · 年号：洪武 · 陵寝：南京紫金山明孝陵</div>
                     <div class="figure-desc">
-                        大明开国皇帝。推翻蒙元统治，恢复中华礼乐与疆土。太祖分封皇子屏藩天下，亲赐周王支派二十字字辈派语（“有子同安睦，勤朝在肃恭，绍伦敷惠润，昭格广登庸”），并确立“木火土金水”五行相生取名家法，为周藩百代法统之源。
+                        大明开国皇帝。推翻蒙元统治，恢复中华礼乐与疆土。太祖分封皇子屏藩天下，亲赐周王支派二十字派语（“有子同安睦，勤朝在肃恭，绍伦敷惠润，昭格广登庸”），并确立“木火土金水”五行相生取名家法，为周藩百代法统之基石。
                     </div>
                     <div class="figure-achieve">
-                        📜 <strong>千秋垂范：</strong>御制《皇明祖训》，定周藩二十字派语，奠定六百载宗支世系之基。
+                        📜 <strong>千秋垂范：</strong>御制《皇明祖训》，钦定周藩二十字派语，奠定六百载宗支世系之基。
                     </div>
                 </div>
             </div>
@@ -192,26 +468,26 @@
                 </div>
                 <div class="figure-info">
                     <div class="figure-name">周定王 · 朱橚 <span class="figure-badge badge-doc">周藩开派始祖 · 科学巨匠</span></div>
-                    <div class="figure-meta">生卒：1361 — 1425 · 谥号：定 · 陵寝：河南禹州周定王陵（三峰山）</div>
+                    <div class="figure-meta">二世 · 木字旁 (橚) · 生卒：1361 — 1425 · 谥号：定 · 陵寝：河南禹州周定王陵（无梁镇无风山）</div>
                     <div class="figure-desc">
-                        太祖第五子，孝慈高皇后马氏所生。初封吴王，洪武十一年改封周王，洪武十四年就藩汴京（开封）。定王好学博古，以仁慈济世著称。在汴京王府设良医所，辟地为药圃辨识天下草木，亲验可食野生植物 414 种，绘图注法，开创人类食用植物救荒学之先河。
+                        太祖第五子，孝慈高皇后马氏所生。初封吴王，洪武十一年改封周王，洪武十四年就藩汴京（开封）。定王天资明达，笃学崇医。在汴京王府设良医所，辟生药圃辨识天下草木，亲验可食野生植物 414 种，绘图注法，开创人类食用植物救荒学之先河。
                     </div>
                     <div class="figure-achieve">
-                        🌿 <strong>学术巨作：</strong>主编《救荒本草》（世界植物学奠基之作）、《普济方》（收方61739首，古代最大方剂巨著）、《袖珍方》。
+                        🌿 <strong>学术巨作：</strong>主编《救荒本草》（世界植物学奠基之作）、《普济方》（收方61,739首，古代最大方剂巨著）、《保生余录》。
                     </div>
                 </div>
             </div>
 
-            <!-- 3. 周宪王朱有炖 -->
+            <!-- 3. 周宪王朱有燉 -->
             <div class="figure-card" data-cat="culture">
                 <div class="figure-info">
-                    <div class="figure-name">周宪王 · 朱有炖（号诚斋） <span class="figure-badge badge-art">第二代周王 · 一代曲圣</span></div>
-                    <div class="figure-meta">生卒：1379 — 1439 · 身份：定王嫡长子 · 陵寝：开封祥符故茔</div>
+                    <div class="figure-name">周宪王 · 朱有燉（号诚斋） <span class="figure-badge badge-art">第二代周王 · 一代曲圣</span></div>
+                    <div class="figure-meta">三世 · “有”字辈 · 火字旁 (燉) · 生卒：1379 — 1439 · 身份：定王嫡长子 · 陵寝：开封祥符故茔</div>
                     <div class="figure-desc">
-                        明初戏曲界领军人物与词曲大师。笃学好古，精通音律，兼善诗词书画。著有杂剧 31 部汇编为《诚斋乐府》，作品音律谐和、语言生动，全景式记录了明初汴京风俗与民间岁时节令；另撰《元宫词》百首，为考订元代大都宫廷掌故之第一手诗史珍品。
+                        明初戏曲界领军人物与散曲大师。笃学好古，精通音律，兼善诗词书画。著有杂剧 31 部汇编为《诚斋乐府》，作品音律谐和、语言生动，全景式记录了明初汴京风俗与民间岁时节令；另撰《元宫词》百首，为考订元代大都宫廷掌故之第一手诗史珍品。
                     </div>
                     <div class="figure-achieve">
-                        🎭 <strong>文学地位：</strong>中国戏曲史上留存剧本最多、刊刻体系最完整的明代杂剧名家。
+                        🎭 <strong>文学地位：</strong>中国戏曲史上留存剧本最多、刊刻体系最完整的明代杂剧名家，被誉为“曲中之圣”。
                     </div>
                 </div>
             </div>
@@ -220,12 +496,12 @@
             <div class="figure-card" data-cat="ancestor">
                 <div class="figure-info">
                     <div class="figure-name">周简王 · 朱有爝 <span class="figure-badge">第三代周王 · 周藩大宗之源</span></div>
-                    <div class="figure-meta">生卒：1392 — 1452 · 初封：祥符王 · 袭封：宣德三年 (1428)</div>
+                    <div class="figure-meta">三世 · “有”字辈 · 火字旁 (爝) · 生卒：1392 — 1452 · 初封祥符王 · 正统四年 (1439) 承嗣周王</div>
                     <div class="figure-desc">
-                        定王第四子。因长兄周宪王无嗣，宣德三年奉旨继袭周王爵位。简王恪守祖训、敦睦宗族，后世历代周王及绝大多数周藩宗支，皆为其血脉承嗣后裔。
+                        定王第四子。因长兄周宪王无嗣，正统四年奉旨承嗣亲王大统。简王恪守祖训、敦睦宗族，后世历代周王及绝大多数周藩宗支，皆为其血脉承嗣后裔。
                     </div>
                     <div class="figure-achieve">
-                        👑 <strong>宗支法统：</strong>承前启后，周藩自第四代周靖王以下诸王皆为简王一脉传承。
+                        👑 <strong>宗支法统：</strong>承前启后，周藩自第四代周靖王朱子垕以下历任亲王皆出自简王一脉。
                     </div>
                 </div>
             </div>
@@ -234,12 +510,12 @@
             <div class="figure-card" data-cat="culture">
                 <div class="figure-info">
                     <div class="figure-name">朱睦㮮（镇平王支系） <span class="figure-badge badge-doc">金石目录学宗师</span></div>
-                    <div class="figure-meta">生卒：1517 — 1586 · 封爵：镇国中尉（周藩宗正） · 字灌甫，号西海、西亭、东陂居士</div>
+                    <div class="figure-meta">七世 · “睦”字辈 · 木字旁 (㮮) · 生卒：1517 — 1586 · 封爵：镇国中尉（周藩宗正） · 号东陂居士</div>
                     <div class="figure-desc">
-                        明太祖五世孙，镇平恭定王朱有爌后裔。明代著名学者、藏书家与金石目录学先驱。博通经史，好古嗜学，筑“万卷堂”聚书数万卷。撰有《金石图》（《金石碑帖考》）《五经稽疑》《中州人物志》《逊国纪纂》《篇海类编》等，在明代文献考据与金石学史上享有崇高地位。
+                        镇平恭定王朱有爌后裔。明代著名学者、藏书家与金石目录学先驱。博通经史，好古嗜学，筑“万卷堂”聚书数万卷。撰有《金石图》（《金石碑帖考》）《五经稽疑》《中州人物志》《逊国纪纂》《篇海类编》等，在明代文献考据与金石学史上享有极高声誉。
                     </div>
                     <div class="figure-achieve">
-                        📚 <strong>学术贡献：</strong>开创明代宗室金石考据与目录整理学派，被清代著名学者曹溶推崇为“有明宗室藏书之最”。
+                        📚 <strong>学术贡献：</strong>开创明代宗室金石考据与目录整理学派，被清代著名文献学家曹溶推崇为“有明宗室藏书之最”。
                     </div>
                 </div>
             </div>
@@ -248,26 +524,26 @@
             <div class="figure-card" data-cat="hero">
                 <div class="figure-info">
                     <div class="figure-name">周孝王 · 朱恭枵 <span class="figure-badge badge-hero">末代周王 · 散银守城孤忠</span></div>
-                    <div class="figure-meta">在位年代：明万历至崇祯年间 · 历史事件：崇祯十五年 (1642) 开封保卫战</div>
+                    <div class="figure-meta">十二世 · “恭”字辈 · 木字旁 (枵) · 在位：万历十六年 ~ 崇祯十五年 (1588-1642) · 崇祯十五年开封保卫战</div>
                     <div class="figure-desc">
-                        崇祯年间李自成起义军三围开封。周王朱恭枵倾尽二百年王府库藏白银数百万两犒赏守城军民，誓死坚守八个月。九月黄河大水漫灌开封，周王府没入泥沙，恭枵率宗室转徙彰德、卫辉，忠义节烈贯通日月。
+                        崇祯年间李自成起义军三围开封。周王朱恭枵倾尽王府库藏白银数百万两犒赏守城军民，誓死坚守八个月。九月黄河大水漫灌开封，周王府没入泥沙，朱恭枵率宗室转徙卫辉后殉难，忠义节烈贯通日月。
                     </div>
                     <div class="figure-achieve">
-                        ⚔️ <strong>名垂青史：</strong>散财卫国，大节昭然，《明史·诸王传》特立传颂其节烈。
+                        ⚔️ <strong>名垂青史：</strong>散财卫国，大节昭然，《明史·诸王传》特设长篇史论赞颂其浩然正气。
                     </div>
                 </div>
             </div>
 
-            <!-- 7. 南明抗清殉难宗室 朱慈𤆝 -->
+            <!-- 7. 明末渡台宗室 朱伦圣 -->
             <div class="figure-card" data-cat="hero">
                 <div class="figure-info">
-                    <div class="figure-name">朱慈𤆝（周藩末代宗室） <span class="figure-badge badge-hero">南明殉节义士</span></div>
-                    <div class="figure-meta">年代：明末清初 · 封爵：宗室 · 转战：江南抗清义军</div>
+                    <div class="figure-name">朱伦圣（周藩十四世宗亲） <span class="figure-badge badge-hero">明季东渡 · 闽台开基</span></div>
+                    <div class="figure-meta">十四世 · “伦”字辈 · 土字旁 (圣) · 年代：明末清初 · 事迹：随延平王东渡开台</div>
                     <div class="figure-desc">
-                        甲申国难后南渡，参加抗清勤王斗争，屡拒清廷招抚，誓不剃发改服。城陷被执，赋绝命诗从容就义，展现了大明周藩宗室威武不屈之浩然宗风。
+                        开封沦没与甲申国变后，周藩宗支转徙东南。朱伦圣矢志抗清，随延平王郑成功舰队渡海东征台湾，在台南安平一带屯田生息，将大明周藩之宗脉与文化带过海峡，成为台湾周藩宗亲的重要开基先祖之一。
                     </div>
                     <div class="figure-achieve">
-                        🕊️ <strong>气节长存：</strong>“宁为玉碎，不改朱颜”，周藩后裔忠烈典范。
+                        🌊 <strong>跨海薪火：</strong>“宗火播海表，万古思故邦”，周藩后裔渡台开拓的坚韧见证。
                     </div>
                 </div>
             </div>
@@ -275,7 +551,7 @@
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -292,14 +568,14 @@
             });
         });
 
-        function filterCategory(cat) {
+        function filterCategory(cat, btn) {
             const btns = document.querySelectorAll('.filter-btn');
             btns.forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            if (btn) btn.classList.add('active');
 
             const cards = document.querySelectorAll('.figure-card');
             cards.forEach(card => {
-                const cats = card.getAttribute('data-cat');
+                const cats = card.getAttribute('data-cat') || '';
                 if (cat === 'all' || cats.includes(cat)) {
                     card.style.display = 'flex';
                 } else {
