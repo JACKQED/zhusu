@@ -3,87 +3,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩世系与二十字派语考 - 大明周藩纪事</title>
+    <title>周藩世系传承与御赐二十字派语考 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
         /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px;
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        /* 字辈大字展示排版 */
-        .poem-display { background: #fdfbf7; border: 1px solid #ebdcd0; border-top: 3px solid #8c1d1d; padding: 2rem; border-radius: 6px; text-align: center; margin: 1.5rem 0; }
-        .poem-title { font-size: 1.2rem; color: #8c1d1d; font-weight: bold; margin-bottom: 1rem; letter-spacing: 1px; }
-        .poem-chars { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; max-width: 800px; margin: 0 auto; }
-        .poem-char-box { background: #fff; border: 1px solid #dcd3cb; width: 58px; height: 68px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 4px; box-shadow: 0 2px 5px rgba(0,0,0,0.04); }
-        .char-main { font-size: 1.5rem; font-weight: bold; color: #8c1d1d; font-family: "KaiTi", "STKaiti", serif; line-height: 1.1; }
-        .char-sub { font-size: 0.72rem; color: #777; margin-top: 3px; }
+        /* 字辈展示面板 */
+        .poem-display { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            border-top: 4px solid var(--crimson); 
+            padding: 2rem 1.5rem; 
+            border-radius: 6px; 
+            text-align: center; 
+            margin: 1.8rem 0; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+        .poem-title { 
+            font-size: 1.28rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            margin-bottom: 1.3rem; 
+            letter-spacing: 1.5px; 
+        }
+        .poem-chars { 
+            display: flex; 
+            justify-content: center; 
+            gap: 0.65rem; 
+            flex-wrap: wrap; 
+            max-width: 950px; 
+            margin: 0 auto; 
+        }
+        .poem-char-box { 
+            background: #fff; 
+            border: 1px solid #DCD3CB; 
+            width: 64px; 
+            height: 76px; 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center; 
+            align-items: center; 
+            border-radius: 5px; 
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04); 
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .poem-char-box:hover {
+            transform: translateY(-3px);
+            border-color: var(--crimson);
+            box-shadow: 0 4px 12px rgba(140,29,29,0.18);
+        }
+        .char-main { 
+            font-size: 1.65rem; 
+            font-weight: bold; 
+            color: var(--crimson); 
+            line-height: 1.1; 
+        }
+        .char-sub { 
+            font-size: 0.72rem; 
+            color: #7A7269; 
+            margin-top: 4px; 
+        }
+        .char-wx {
+            font-size: 0.65rem;
+            color: #fff;
+            padding: 0 5px;
+            border-radius: 2px;
+            margin-top: 2px;
+            font-weight: bold;
+        }
+
+        /* 徽标样式 */
+        .badge-wx {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #fff;
+            font-size: 0.82rem;
+            margin: 0 2px;
+        }
+        .wx-wood { background-color: var(--wood-color); }
+        .wx-fire { background-color: var(--fire-color); }
+        .wx-earth { background-color: var(--earth-color); }
+        .wx-metal { background-color: var(--metal-color); }
+        .wx-water { background-color: var(--water-color); }
 
         /* 表格样式 */
-        .table-wrap { overflow-x: auto; margin-top: 1rem; }
-        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.75rem 0.9rem; text-align: left; }
-        .comp-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .comp-table tr:nth-child(even) { background: #faf8f5; }
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 740px; }
+        .comp-table th, .comp-table td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        .comp-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .comp-table tr:nth-child(even) { background: #FCFAF6; }
+        .comp-table tr:hover { background: #FFF9F0; }
 
-        .feature-card { background: #fdfbf7; border: 1px solid #e8dfd8; border-radius: 6px; padding: 1.5rem; margin: 1.5rem 0; border-top: 3px solid #8c1d1d; }
-        .feature-card p { font-size: 0.93rem; color: #444; line-height: 1.8; margin-bottom: 0.8rem; text-align: justify; }
+        .feature-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE3D6; 
+            border-radius: 6px; 
+            padding: 1.6rem; 
+            margin: 1.8rem 0; 
+            border-top: 3px solid var(--crimson); 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .feature-card p { 
+            font-size: 0.94rem; 
+            color: #443D36; 
+            line-height: 1.85; 
+            margin-bottom: 0.8rem; 
+            text-align: justify; 
+        }
+        .feature-card p:last-child { margin-bottom: 0; }
+        .feature-card strong { color: var(--crimson); }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.8rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 2rem 0; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box a {
+            color: var(--crimson);
+            font-weight: bold;
+            text-decoration: underline;
+        }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
-            .poem-char-box { width: 44px; height: 54px; }
-            .char-main { font-size: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            .poem-char-box { width: 48px; height: 60px; }
+            .char-main { font-size: 1.25rem; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
                 <!-- 宗系人物 -->
                 <div class="nav-item">
-                    <span class="nav-link">👑 宗系人物 ▾</span>
+                    <span class="nav-link" style="color:#fff; font-weight:bold;">👑 宗系人物 ▾</span>
                     <div class="dropdown-menu">
                         <a href="figures/index.html">历代人物</a>
                         <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html" style="background:#8c1d1d; color:#fff;">世系字辈</a>
+                        <a href="lineage.html" style="background:var(--crimson); color:#fff;">世系字辈</a>
                         <a href="tree.html">数字家谱树</a>
                         <a href="ancestors.html">昭穆神位</a>
                         <a href="branches.html">分房支派</a>
@@ -118,7 +380,7 @@
 
                 <!-- 考据工具 -->
                 <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">🛠️ 考据工具 ▾</span>
+                    <span class="nav-link">🛠️ 考据工具 ▾</span>
                     <div class="dropdown-menu">
                         <a href="calendar.html">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
@@ -128,7 +390,7 @@
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -136,34 +398,37 @@
     <main class="container">
         <h1>周藩世系传承与御赐二十字派语</h1>
         <div class="intro-box">
-            明太祖朱元璋为保证皇室血脉有序、辈分分明，特为诸王亲自撰赐了二十字世系派语。周藩始祖周定王朱橚一脉严格遵奉此二十字及“五行相生”取名家法。六百余载虽经明清鼎革与大水流散，后裔宗亲依然凭此派语认祖归宗。
+            明太祖高皇帝朱元璋为保证大明皇族“派系昭晰、长幼不紊”，在《皇明祖训·首章》中亲撰周藩专属<strong>二十字世系派语</strong>，并立下<strong>“末字五行相生循环”</strong>的宗法铁律。周定王朱橚后裔历经开封水患与明清沧桑变迁，后人皆凭此二十字派语与五行偏旁认祖归宗。
         </div>
 
         <!-- 核心字辈展示 -->
         <div class="poem-display">
             <div class="poem-title">📜 大明周藩御赐正宗二十字派语（以太祖为一世）</div>
             <div class="poem-chars">
-                <div class="poem-char-box"><div class="char-main">有</div><div class="char-sub">三世</div></div>
-                <div class="poem-char-box"><div class="char-main">子</div><div class="char-sub">四世</div></div>
-                <div class="poem-char-box"><div class="char-main">同</div><div class="char-sub">五世</div></div>
-                <div class="poem-char-box"><div class="char-main">安</div><div class="char-sub">六世</div></div>
-                <div class="poem-char-box"><div class="char-main">睦</div><div class="char-sub">七世</div></div>
-                <div class="poem-char-box"><div class="char-main">勤</div><div class="char-sub">八世</div></div>
-                <div class="poem-char-box"><div class="char-main">朝</div><div class="char-sub">九世</div></div>
-                <div class="poem-char-box"><div class="char-main">在</div><div class="char-sub">十世</div></div>
-                <div class="poem-char-box"><div class="char-main">肃</div><div class="char-sub">十一世</div></div>
-                <div class="poem-char-box"><div class="char-main">恭</div><div class="char-sub">十二世</div></div>
-                <div class="poem-char-box"><div class="char-main">绍</div><div class="char-sub">十三世</div></div>
-                <div class="poem-char-box"><div class="char-main">伦</div><div class="char-sub">十四世</div></div>
-                <div class="poem-char-box"><div class="char-main">敷</div><div class="char-sub">十五世</div></div>
-                <div class="poem-char-box"><div class="char-main">惠</div><div class="char-sub">十六世</div></div>
-                <div class="poem-char-box"><div class="char-main">润</div><div class="char-sub">十七世</div></div>
-                <div class="poem-char-box"><div class="char-main">昭</div><div class="char-sub">十八世</div></div>
-                <div class="poem-char-box"><div class="char-main">格</div><div class="char-sub">十九世</div></div>
-                <div class="poem-char-box"><div class="char-main">广</div><div class="char-sub">二十世</div></div>
-                <div class="poem-char-box"><div class="char-main">登</div><div class="char-sub">二十一世</div></div>
-                <div class="poem-char-box"><div class="char-main">庸</div><div class="char-sub">二十二世</div></div>
+                <div class="poem-char-box"><div class="char-main">有</div><div class="char-sub">三世</div><div class="char-wx wx-fire">火</div></div>
+                <div class="poem-char-box"><div class="char-main">子</div><div class="char-sub">四世</div><div class="char-wx wx-earth">土</div></div>
+                <div class="poem-char-box"><div class="char-main">同</div><div class="char-sub">五世</div><div class="char-wx wx-metal">金</div></div>
+                <div class="poem-char-box"><div class="char-main">安</div><div class="char-sub">六世</div><div class="char-wx wx-water">水</div></div>
+                <div class="poem-char-box"><div class="char-main">睦</div><div class="char-sub">七世</div><div class="char-wx wx-wood">木</div></div>
+                <div class="poem-char-box"><div class="char-main">勤</div><div class="char-sub">八世</div><div class="char-wx wx-fire">火</div></div>
+                <div class="poem-char-box"><div class="char-main">朝</div><div class="char-sub">九世</div><div class="char-wx wx-earth">土</div></div>
+                <div class="poem-char-box"><div class="char-main">在</div><div class="char-sub">十世</div><div class="char-wx wx-metal">金</div></div>
+                <div class="poem-char-box"><div class="char-main">肃</div><div class="char-sub">十一世</div><div class="char-wx wx-water">水</div></div>
+                <div class="poem-char-box"><div class="char-main">恭</div><div class="char-sub">十二世</div><div class="char-wx wx-wood">木</div></div>
+                <div class="poem-char-box"><div class="char-main">绍</div><div class="char-sub">十三世</div><div class="char-wx wx-fire">火</div></div>
+                <div class="poem-char-box"><div class="char-main">伦</div><div class="char-sub">十四世</div><div class="char-wx wx-earth">土</div></div>
+                <div class="poem-char-box"><div class="char-main">敷</div><div class="char-sub">十五世</div><div class="char-wx wx-metal">金</div></div>
+                <div class="poem-char-box"><div class="char-main">惠</div><div class="char-sub">十六世</div><div class="char-wx wx-water">水</div></div>
+                <div class="poem-char-box"><div class="char-main">润</div><div class="char-sub">十七世</div><div class="char-wx wx-wood">木</div></div>
+                <div class="poem-char-box"><div class="char-main">昭</div><div class="char-sub">十八世</div><div class="char-wx wx-fire">火</div></div>
+                <div class="poem-char-box"><div class="char-main">格</div><div class="char-sub">十九世</div><div class="char-wx wx-earth">土</div></div>
+                <div class="poem-char-box"><div class="char-main">广</div><div class="char-sub">二十世</div><div class="char-wx wx-metal">金</div></div>
+                <div class="poem-char-box"><div class="char-main">登</div><div class="char-sub">二十一世</div><div class="char-wx wx-water">水</div></div>
+                <div class="poem-char-box"><div class="char-main">庸</div><div class="char-sub">二十二世</div><div class="char-wx wx-wood">木</div></div>
             </div>
+            <p style="margin-top:1.2rem; font-size:0.88rem; color:#777;">
+                📌 <strong>派语规箴：</strong>“有子同安睦，勤朝在肃恭。绍伦敷惠润，昭格广登庸。”二十代终了之后，重新循环相生。
+            </p>
         </div>
 
         <h2>⚖️ 周藩历代亲王世系与字辈对照表</h2>
@@ -171,10 +436,10 @@
             <table class="comp-table">
                 <thead>
                     <tr>
-                        <th style="width: 100px;">皇室世次</th>
-                        <th style="width: 130px;">辈分用字</th>
-                        <th style="width: 140px;">末字五行偏旁</th>
-                        <th style="width: 210px;">代表人物与封爵</th>
+                        <th style="width: 80px;">世次</th>
+                        <th style="width: 110px;">辈分用字</th>
+                        <th style="width: 130px;">末字五行偏旁</th>
+                        <th style="width: 220px;">代表人物与封爵</th>
                         <th>历史事迹与传承纪要</th>
                     </tr>
                 </thead>
@@ -182,133 +447,134 @@
                     <tr>
                         <td><strong>一世</strong></td>
                         <td>朱元璋</td>
-                        <td><span style="color:#8c1d1d;">土 / 金</span></td>
+                        <td><span class="badge-wx" style="background:#555;">太祖本源</span></td>
                         <td>明太祖高皇帝</td>
-                        <td>大明开国之君，分封皇子屏藩天下，创制周藩法统与宗室取名祖制。</td>
+                        <td>大明开国之君，定鼎金陵。创制分封宗规，为周藩亲赐二十字派语。</td>
                     </tr>
                     <tr>
                         <td><strong>二世</strong></td>
                         <td>朱橚</td>
-                        <td><span style="color:#2e7d32; font-weight:bold;">木字旁</span> (橚)</td>
+                        <td><span class="badge-wx wx-wood">木 (橚)</span></td>
                         <td>周定王（周藩始祖）</td>
-                        <td>太祖第五子，洪武十一年改封周王，就藩开封。编纂《救荒本草》《普济方》。</td>
+                        <td>太祖第五子，洪武十一年改封周王，十四年就藩汴京。编撰《救荒本草》《普济方》。</td>
                     </tr>
                     <tr>
                         <td><strong>三世</strong></td>
                         <td><strong>有</strong> 字辈</td>
-                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span> (燉、爝、爌)</td>
+                        <td><span class="badge-wx wx-fire">火 (燉/爝/爌)</span></td>
                         <td>周宪王朱有燉、周简王朱有爝</td>
-                        <td>定王诸子，开创十四大分房。宪王为一代曲圣，简王承嗣大宗。</td>
+                        <td>定王诸子，开创十四大郡王分房。宪王为一代散曲巨擘，四房简王承嗣亲王大宗。</td>
                     </tr>
                     <tr>
                         <td><strong>四世</strong></td>
                         <td><strong>子</strong> 字辈</td>
-                        <td><span style="color:#b26a00; font-weight:bold;">土字旁</span> (垕、埅、圿)</td>
-                        <td>周靖王朱子垕、周懿王朱子埅</td>
-                        <td>简王之子，相继袭封周王，开封藩邸文风鼎盛。</td>
+                        <td><span class="badge-wx wx-earth">土 (垕/墧/峹)</span></td>
+                        <td>周靖王朱子垕、周懿王朱子墧</td>
+                        <td>简王诸子，相继嗣封周王。懿王在位三十年，周藩进入极盛繁衍时期。</td>
                     </tr>
                     <tr>
                         <td><strong>五世</strong></td>
                         <td><strong>同</strong> 字辈</td>
-                        <td><span style="color:#1565c0; font-weight:bold;">金字旁</span> (䥝、鎋)</td>
-                        <td>周惠王朱同䥝</td>
-                        <td>懿王庶长子，袭封周王，在位平稳，宗支繁衍迅速。</td>
+                        <td><span class="badge-wx wx-metal">金 (䥸/釪/鎋)</span></td>
+                        <td>周惠王朱同䥸</td>
+                        <td>懿王长子，袭封周王，在位政风温和，宗藩繁衍迅速。</td>
                     </tr>
                     <tr>
                         <td><strong>六世</strong></td>
                         <td><strong>安</strong> 字辈</td>
-                        <td><span style="color:#00838f; font-weight:bold;">水字旁</span> (㶇、河)</td>
-                        <td>周悼王朱安㶇</td>
-                        <td>惠王世子，早卒追封周王；其子朱睦㰂袭爵周王。</td>
+                        <td><span class="badge-wx wx-water">水 (㳡/㶇/潩)</span></td>
+                        <td>周悼王朱安㳡</td>
+                        <td>惠王世子，早卒追封周悼王；其长子朱睦㰂承嗣周王大统。</td>
                     </tr>
                     <tr>
                         <td><strong>七世</strong></td>
                         <td><strong>睦</strong> 字辈</td>
-                        <td><span style="color:#2e7d32; font-weight:bold;">木字旁</span> (㰂、㮮)</td>
+                        <td><span class="badge-wx wx-wood">木 (㰂/㮮/橍)</span></td>
                         <td>周恭王朱睦㰂、宗正朱睦㮮</td>
-                        <td>恭王袭爵；宗室朱睦㮮任周藩宗正，筑“万卷堂”聚书考据，撰《金石图》《篇海类编》。</td>
+                        <td>恭王袭亲王，端谨守礼；宗室朱睦㮮任宗正，筑“万卷堂”聚书金石考据，著述宏富。</td>
                     </tr>
                     <tr>
                         <td><strong>八世</strong></td>
                         <td><strong>勤</strong> 字辈</td>
-                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span> (熄、烲)</td>
+                        <td><span class="badge-wx wx-fire">火 (熄/烲)</span></td>
                         <td>周康王朱勤熄</td>
-                        <td>恭王世子，早逝追封周王。</td>
+                        <td>恭王世子，早卒追封周康王。</td>
                     </tr>
                     <tr>
                         <td><strong>九世</strong></td>
                         <td><strong>朝</strong> 字辈</td>
-                        <td><span style="color:#b26a00; font-weight:bold;">土字旁</span> (堈、垿)</td>
+                        <td><span class="badge-wx wx-earth">土 (堈/垿)</span></td>
                         <td>周庄王朱朝堈</td>
-                        <td>康王长子，袭周王，嘉靖、万历年间重视文教修史。</td>
+                        <td>康王长子，嘉靖十九年袭封周王，嘉靖、隆庆年间开封文风昌盛。</td>
                     </tr>
                     <tr>
                         <td><strong>十世</strong></td>
                         <td><strong>在</strong> 字辈</td>
-                        <td><span style="color:#1565c0; font-weight:bold;">金字旁</span> (铤、鉷)</td>
-                        <td>周敬王朱在铤</td>
-                        <td>庄王长子，袭封周王。</td>
+                        <td><span class="badge-wx wx-metal">金 (鋌/鋟)</span></td>
+                        <td>周敬王朱在鋌</td>
+                        <td>庄王长子，嘉靖三十四年袭封周敬王，万历十一年薨。</td>
                     </tr>
                     <tr>
                         <td><strong>十一世</strong></td>
                         <td><strong>肃</strong> 字辈</td>
-                        <td><span style="color:#00838f; font-weight:bold;">水字旁</span> (溱、湸)</td>
+                        <td><span class="badge-wx wx-water">水 (溱/湸)</span></td>
                         <td>周端王朱肃溱</td>
-                        <td>敬王长子，袭封周王，万历年间主持校勘善本书籍。</td>
+                        <td>敬王嫡长子，万历十四年袭封周端王，崇祯八年薨，主持校订多部珍本古籍。</td>
                     </tr>
                     <tr>
                         <td><strong>十二世</strong></td>
                         <td><strong>恭</strong> 字辈</td>
-                        <td><span style="color:#2e7d32; font-weight:bold;">木字旁</span> (枵、楌)</td>
-                        <td>周孝王朱恭枵</td>
-                        <td>端王长子，袭封周王。崇祯十五年李自成围城，毁家纾难散银犒军守卫汴京。</td>
+                        <td><span class="badge-wx wx-wood">木 (枵/楌)</span></td>
+                        <td>末代周王 朱恭枵</td>
+                        <td>端王长子，袭封周王。崇祯十五年散家财犒军守卫汴京，李自成决河灌城后殉难。</td>
                     </tr>
                     <tr>
                         <td><strong>十三世</strong></td>
                         <td><strong>绍</strong> 字辈</td>
-                        <td><span style="color:#b71c1c; font-weight:bold;">火字旁</span></td>
-                        <td>周藩明末宗室</td>
-                        <td>明末清初宗室，历经甲申之变与黄河灌城之难。</td>
+                        <td><span class="badge-wx wx-fire">火行偏旁</span></td>
+                        <td>周藩明末清初宗室</td>
+                        <td>经崇祯水患与鼎革风云，周藩宗亲散处宛、洛、汴京及豫东、淮上各邑。</td>
                     </tr>
                     <tr>
                         <td><strong>十四世</strong></td>
                         <td><strong>伦</strong> 字辈</td>
-                        <td><span style="color:#b26a00; font-weight:bold;">土字旁</span></td>
+                        <td><span class="badge-wx wx-earth">土行偏旁</span></td>
                         <td>朱伦圣（渡台宗室）</td>
-                        <td>随延平王郑成功渡海东征台湾，使周藩宗火跨海绵延。</td>
+                        <td>明末随延平王郑成功东渡台湾，使周藩薪火跨海绵延于闽台。</td>
                     </tr>
                     <tr>
                         <td><strong>十五世至二十二世</strong></td>
                         <td>敷、惠、润、昭、格、广、登、庸</td>
                         <td>金 ➔ 水 ➔ 木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木</td>
                         <td>周藩清代至当代宗亲后裔</td>
-                        <td>隐居豫、皖、鲁、苏、陕、滇等地，耕读传家，谨遵字辈五行寻根认祖。</td>
+                        <td>隐居豫、皖、苏、鲁、陕、滇各省，耕读传家，谨遵字辈五行寻根认祖。</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <h2>🏛️ 明代宗室命名“五行相生”家法</h2>
+        <h2>🏛️ 明代宗室“五行相生”命名家法考释</h2>
         <div class="feature-card">
             <p>
-                根据朱元璋制定的《皇明祖训》，明代宗室命名有一套极其严格的<strong>“偏旁五行相生轮回制”</strong>。每个亲王支派的名首字按派语（如“有、子、同、安、睦……”），名字末字则必须严格按照五行相生顺序循环：
+                根据朱元璋制定的《皇明祖训》，周藩命名核心在于<strong>“双轨循环”</strong>：中字以御赐派语定辈分长幼，末字以<strong>“木 ➔ 火 ➔ 土 ➔ 金 ➔ 水”</strong>五行相生定字根偏旁：
             </p>
-            <p style="margin-top: 0.6rem; font-weight: bold; color: #8c1d1d;">
-                木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ➔ 木 ➔ 火 ➔ 土 ➔ 金 ➔ 水 ……
+            <p style="margin-top: 0.6rem; font-weight: bold; text-align: center; color: var(--crimson); font-size: 1.05rem;">
+                始祖橚(木) ➔ 有(火) ➔ 子(土) ➔ 同(金) ➔ 安(水) ➔ 睦(木) ➔ 勤(火) ➔ 朝(土) ➔ 在(金) ➔ 肃(水) ➔ 恭(木) ……
             </p>
-            <p style="margin-top: 0.6rem;">
-                例如（以太祖为一世）：始祖周定王朱橚（<strong>二世·木</strong>）；生子<strong>三世“有”字辈</strong>，末字从“<strong>火</strong>”（朱有**燉**、朱有**爝**）；<strong>四世“子”字辈</strong>，末字从“<strong>土</strong>”（朱子**垕**、朱子**埅**）；<strong>五世“同”字辈</strong>，末字从“<strong>金</strong>”（朱同**䥝**）；<strong>六世“安”字辈</strong>，末字从“<strong>水</strong>”（朱安**㶇**）；<strong>七世“睦”字辈</strong>，末字又循环回“<strong>木</strong>”（朱睦**㰂**、朱睦**㮮**）。
+            <p style="margin-top: 0.8rem;">
+                <strong>为什么末字偏旁不可紊乱？</strong><br>
+                在明代宗人府律令中，五行偏旁代表血统相生、皇明长青的宗法象征。父辈属木，其子末字必从火（如定王<strong>朱橚</strong>之子皆为<strong>朱有燉、朱有爝</strong>）；火生土，故孙辈末字必从土（如<strong>朱子垕、朱子墧</strong>）。这一规律贯穿明代周藩全系，成为后世勘破伪谱、校核墓志出土金石最重要的科学防伪标尺。
             </p>
         </div>
 
         <h2>📖 寻根认祖提示</h2>
         <div class="quote-box">
-            <p>如果您或您的家族世传字辈中含有<strong>“有、子、同、安、睦、勤、朝、在、肃、恭、绍、伦、敷、惠、润、昭、格、广、登、庸”</strong>，且先祖源流记述出自河南开封周王府，极有可能是大明周藩后裔。欢迎使用本站的<a href="naming.html" style="color:#8c1d1d; font-weight:bold;">五行命名助手</a>与<a href="migration.html" style="color:#8c1d1d; font-weight:bold;">迁徙寻根台</a>进行宗支对证！</p>
+            <p>宗亲在考辨古旧族谱或先祖碑铭时，若见名讳字辈契合<strong>“有、子、同、安、睦，勤、朝、在、肃、恭，绍、伦、敷、惠、润，昭、格、广、登、庸”</strong>，且末字暗合<strong>“木火土金水”</strong>相生之五行顺序，即为大明开封周定王之后。欢迎使用本站的 <a href="naming.html">五行命名助手</a>、<a href="tree.html">数字家谱树</a> 与 <a href="migration.html">迁徙寻根台</a> 进行全向比对！</p>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
