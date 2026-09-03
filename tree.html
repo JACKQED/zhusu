@@ -5,96 +5,393 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩数字世系家谱树 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 仿古象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            --line-color: #BCAAA4;   /* 谱系树连接线色 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.8; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
-        /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
+        /* 主容器 */
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
         
-        .tree-instructions { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1rem 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .tree-instructions { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 0.9rem 1.2rem; 
+            margin: 1.2rem 0 1.5rem; 
+            font-size: 0.92rem; 
+            color: #614D2A; 
+            line-height: 1.8; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        /* 控制工具条 */
-        .tree-toolbar { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.8rem; background: #faf5ee; padding: 0.8rem 1.2rem; border-radius: 6px; border: 1px solid #ebdcd0; margin: 1.2rem 0; }
+        /* 工具栏 */
+        .tree-toolbar { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 0.8rem; 
+            background: #FCFAF6; 
+            padding: 0.9rem 1.2rem; 
+            border-radius: 6px; 
+            border: 1px solid #EAE2D5; 
+            margin-bottom: 1.5rem; 
+        }
         .toolbar-group { display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap; }
-        .btn-tool { background: #8c1d1d; color: #fff; border: none; padding: 0.45rem 1rem; border-radius: 4px; font-size: 0.88rem; font-weight: bold; cursor: pointer; transition: background 0.2s; }
-        .btn-tool:hover { background: #6f1212; }
-        .btn-tool.secondary { background: #fff; color: #8c1d1d; border: 1px solid #8c1d1d; }
-        .btn-tool.secondary:hover { background: #fbeeed; }
-        .search-input { padding: 0.45rem 0.8rem; border: 1px solid #d4c4b4; border-radius: 4px; font-size: 0.9rem; width: 190px; }
-        .search-input:focus { outline: none; border-color: #8c1d1d; }
+        .btn-tool { 
+            background: var(--crimson); 
+            color: #fff; 
+            border: none; 
+            padding: 0.42rem 0.9rem; 
+            border-radius: 4px; 
+            font-size: 0.86rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background 0.2s; 
+        }
+        .btn-tool:hover { background: var(--dark-crimson); }
+        .btn-tool.secondary { 
+            background: #fff; 
+            color: var(--crimson); 
+            border: 1px solid var(--crimson); 
+        }
+        .btn-tool.secondary:hover { background: #FBF1F1; }
+        .search-input { 
+            padding: 0.42rem 0.8rem; 
+            border: 1px solid #CFC4B4; 
+            border-radius: 4px; 
+            font-size: 0.88rem; 
+            width: 200px; 
+            background: #fff;
+        }
+        .search-input:focus { outline: none; border-color: var(--crimson); }
 
-        /* 家谱树容器 */
-        .tree-viewport { overflow-x: auto; padding: 1.8rem; background: #fcf9f5; border: 1px solid #e8dfd8; border-radius: 8px; margin: 1rem 0; }
-        .tree-tree { position: relative; }
-        .tree-tree ul { padding-left: 20px; list-style: none; position: relative; margin: 0; }
-        .tree-tree li { margin: 10px 0; position: relative; padding-left: 18px; }
-        .tree-tree li::before { content: ''; position: absolute; top: 18px; left: 0; width: 14px; height: 1px; background: #c8b7a6; }
-        .tree-tree li::after { content: ''; position: absolute; top: 0; left: 0; width: 1px; height: 100%; background: #c8b7a6; }
+        /* 家谱树视口 */
+        .tree-viewport { 
+            overflow-x: auto; 
+            padding: 2rem 1.5rem; 
+            background: #FDFCF9; 
+            border: 1px solid #EAE3D5; 
+            border-radius: 8px; 
+            margin-bottom: 2rem; 
+        }
+        .tree-tree { position: relative; min-width: 750px; }
+        .tree-tree ul { 
+            padding-left: 24px; 
+            list-style: none; 
+            position: relative; 
+            margin: 0; 
+        }
+        .tree-tree li { 
+            margin: 12px 0; 
+            position: relative; 
+            padding-left: 20px; 
+        }
+        /* 连接横线 */
+        .tree-tree li::before { 
+            content: ''; 
+            position: absolute; 
+            top: 18px; 
+            left: 0; 
+            width: 18px; 
+            height: 1px; 
+            background: var(--line-color); 
+        }
+        /* 连接纵线 */
+        .tree-tree li::after { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 1px; 
+            height: 100%; 
+            background: var(--line-color); 
+        }
         .tree-tree li:last-child::after { height: 18px; }
 
         /* 节点卡片 */
-        .tree-node { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.45rem 0.85rem; border-radius: 6px; font-size: 0.9rem; font-weight: bold; cursor: pointer; transition: all 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.06); user-select: none; border: 1px solid #dcd3cb; background: #fff; }
-        .tree-node:hover { transform: translateY(-1px); box-shadow: 0 3px 8px rgba(140,29,29,0.18); border-color: #8c1d1d; }
-        .tree-node.highlight { background: #fff3e0; border-color: #ff9800; box-shadow: 0 0 10px rgba(255,152,0,0.4); }
+        .tree-node { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.45rem; 
+            padding: 0.45rem 0.85rem; 
+            border-radius: 6px; 
+            font-size: 0.88rem; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05); 
+            user-select: none; 
+            border: 1px solid #DCD4C7; 
+            background: #fff; 
+        }
+        .tree-node:hover { 
+            transform: translateY(-1px); 
+            box-shadow: 0 4px 10px rgba(140,29,29,0.18); 
+            border-color: var(--crimson); 
+        }
+        .tree-node.active-node {
+            border: 2px solid var(--crimson) !important;
+            background: #FFF5F5 !important;
+            box-shadow: 0 0 10px rgba(140, 29, 29, 0.25);
+        }
+        .tree-node.highlight { 
+            background: #FFF8E7 !important; 
+            border-color: #E6A23C !important; 
+            box-shadow: 0 0 10px rgba(230,162,60,0.45); 
+        }
 
-        .node-emperor { background: #8c1d1d; color: #ffeb3b; border-color: #631212; }
-        .node-king { background: #a82424; color: #fff; border-color: #d4af37; }
-        .node-main-branch { background: #fff5f5; color: #8c1d1d; border: 1.5px solid #8c1d1d; }
-        .node-branch { background: #fff; color: #444; border-left: 4px solid #8c1d1d; }
-        .node-gray { background: #f5f5f5; color: #777; border-left: 4px solid #999; }
+        .node-emperor { background: var(--crimson); color: #FFF8DC; border-color: var(--dark-crimson); font-weight: bold; }
+        .node-king { background: #A02626; color: #fff; border-color: var(--accent-gold); font-weight: bold; }
+        .node-main-branch { background: #FCF7F7; color: var(--crimson); border-left: 4px solid var(--crimson); font-weight: bold; }
+        .node-branch { background: #fff; color: #333; border-left: 4px solid #8C1D1D; }
+        .node-gray { background: #F8F7F5; color: #888; border-left: 4px solid #AAA; }
 
-        .node-tag { font-size: 0.72rem; padding: 1px 5px; border-radius: 3px; background: #ebdcd0; color: #6b4d1b; font-weight: normal; }
-        .node-emperor .node-tag, .node-king .node-tag { background: rgba(255,255,255,0.25); color: #fff; }
-        .toggle-btn { font-size: 0.75rem; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(0,0,0,0.1); margin-right: 0.2rem; }
+        .node-tag { 
+            font-size: 0.72rem; 
+            padding: 1px 6px; 
+            border-radius: 3px; 
+            background: #EFE8DC; 
+            color: #554C3F; 
+            font-weight: normal; 
+        }
+        .node-emperor .node-tag, .node-king .node-tag { 
+            background: rgba(255,255,255,0.22); 
+            color: #fff; 
+        }
+        .toggle-btn { 
+            font-size: 0.8rem; 
+            width: 17px; 
+            height: 17px; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 50%; 
+            background: rgba(0,0,0,0.08); 
+            margin-right: 0.15rem; 
+            font-family: monospace;
+            line-height: 1;
+        }
 
-        /* 底部档案面板 */
-        .detail-panel { margin-top: 1.8rem; background: #fdfbf7; border: 1px solid #e8dfd8; border-top: 3px solid #8c1d1d; padding: 1.5rem; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
-        .detail-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 0.6rem; border-bottom: 1px dashed #ebdcd0; padding-bottom: 0.4rem; }
-        .detail-title { font-size: 1.25rem; color: #8c1d1d; font-weight: bold; }
-        .detail-badge { font-size: 0.78rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 4px; }
-        .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.6rem; background: #fff; padding: 0.9rem; border-radius: 4px; border: 1px solid #f0e6dc; font-size: 0.9rem; margin: 0.6rem 0; }
-        .detail-grid strong { color: #8c1d1d; }
-        .detail-desc { font-size: 0.93rem; color: #444; line-height: 1.8; margin-top: 0.6rem; }
+        /* 底部人物档案面板 */
+        .detail-panel { 
+            background: #FCFAF6; 
+            border: 1px solid #EAE2D5; 
+            border-top: 4px solid var(--crimson); 
+            padding: 1.6rem 1.8rem; 
+            border-radius: 6px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03); 
+        }
+        .detail-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            margin-bottom: 0.8rem; 
+            border-bottom: 1px dashed #E2D7C5; 
+            padding-bottom: 0.6rem; 
+            gap: 0.5rem;
+        }
+        .detail-title { font-size: 1.35rem; color: var(--crimson); font-weight: bold; }
+        .detail-badge { 
+            font-size: 0.8rem; 
+            background: var(--crimson); 
+            color: #fff; 
+            padding: 2px 9px; 
+            border-radius: 4px; 
+        }
+        .detail-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 0.7rem; 
+            background: #fff; 
+            padding: 1rem; 
+            border-radius: 4px; 
+            border: 1px solid #EFE8DA; 
+            font-size: 0.9rem; 
+            margin: 0.8rem 0; 
+        }
+        .detail-grid strong { color: var(--crimson); }
+        .detail-desc { 
+            font-size: 0.93rem; 
+            color: #443D36; 
+            line-height: 1.85; 
+            margin-top: 0.8rem; 
+        }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
             .tree-toolbar { flex-direction: column; align-items: stretch; }
             .search-input { width: 100%; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -105,7 +402,7 @@
                         <a href="figures/index.html">历代人物</a>
                         <a href="hall-of-fame.html">周藩名人堂</a>
                         <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html" style="background:#8c1d1d; color:#fff;">数字家谱树</a>
+                        <a href="tree.html" style="background:var(--crimson); color:#fff;">数字家谱树</a>
                         <a href="ancestors.html">昭穆神位</a>
                         <a href="branches.html">分房支派</a>
                         <a href="history.html">王府传承</a>
@@ -148,7 +445,7 @@
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -156,7 +453,7 @@
     <main class="container">
         <h1>周藩数字世系家谱树</h1>
         <div class="tree-instructions">
-            💡 <strong>交互提示：</strong>点击带 <code>[+] / [−]</code> 标记的节点可展开或收起子分支；点击任意先祖节点，下方档案面板将即时呈现其名讳、封国治所、五行偏旁与后裔聚落考据。
+            💡 <strong>交互指南：</strong>点击带 <code>[+] / [−]</code> 的节点可逐级展开或收起子分支；点击任意先祖节点，下方档案面板将即时同步显示其名讳、封国治所、五行偏旁与后裔聚落考据，并自动定位至档案区。
         </div>
 
         <!-- 工具栏 -->
@@ -167,7 +464,7 @@
                 <button class="btn-tool secondary" onclick="expandMajorOnly()">仅看亲王大宗</button>
             </div>
             <div class="toolbar-group">
-                <input type="text" id="treeSearch" class="search-input" placeholder="输入人名/王号搜索..." onkeyup="searchTree()">
+                <input type="text" id="treeSearch" class="search-input" placeholder="输入人名/王号/地名检索..." onkeyup="handleSearchKey(event)">
             </div>
         </div>
 
@@ -179,7 +476,7 @@
                         <div class="tree-node node-emperor" onclick="toggleNode(this, 'zhu_yuanzhang')">
                             <span class="toggle-btn">−</span>
                             <span>明太祖 朱元璋 (高皇帝)</span>
-                            <span class="node-tag">皇明之祖</span>
+                            <span class="node-tag">皇明大宗之祖</span>
                         </div>
                         <ul id="treeRoot">
                             <li>
@@ -191,7 +488,7 @@
                                 <ul>
                                     <!-- 长房 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youdun')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youdun', this)">
                                             <span>长房：周宪王 朱有燉</span>
                                             <span class="node-tag">火 (燉)</span>
                                             <span style="font-size:0.75rem; color:#888;">(无嗣)</span>
@@ -200,16 +497,16 @@
 
                                     <!-- 二房 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxun')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxun', this)">
                                             <span>二房：汝南王 朱有爋</span>
                                             <span class="node-tag">火 (爋)</span>
-                                            <span style="font-size:0.75rem; color:#6a1b9a;">(滇黔房)</span>
+                                            <span style="font-size:0.75rem; color:#6A1B9A;">(滇黔房)</span>
                                         </div>
                                     </li>
 
                                     <!-- 三房 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkuang1')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkuang1', this)">
                                             <span>三房：顺阳怀庄王 朱有爌</span>
                                             <span class="node-tag">火 (爌)</span>
                                             <span style="font-size:0.75rem; color:#888;">(宛洛房)</span>
@@ -221,11 +518,11 @@
                                         <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_youjue')">
                                             <span class="toggle-btn">−</span>
                                             <span>四房：祥符王 / 周简王 朱有爝</span>
-                                            <span class="node-tag" style="background:#8c1d1d; color:#fff;">火 (爝) · 承袭大宗</span>
+                                            <span class="node-tag" style="background:var(--crimson); color:#fff;">火 (爝) · 承袭大宗</span>
                                         </div>
                                         <ul>
                                             <li>
-                                                <div class="tree-node node-branch" onclick="selectPerson('zhu_zihou')">
+                                                <div class="tree-node node-branch" onclick="selectPerson('zhu_zihou', this)">
                                                     <span>第四代：周靖王 朱子垕</span>
                                                     <span class="node-tag">土 (垕)</span>
                                                     <span style="font-size:0.75rem; color:#888;">(无嗣)</span>
@@ -246,7 +543,7 @@
                                                         </div>
                                                         <ul>
                                                             <li>
-                                                                <div class="tree-node node-branch" onclick="selectPerson('zhu_anguo')">
+                                                                <div class="tree-node node-branch" onclick="selectPerson('zhu_anguo', this)">
                                                                     <span>第七代：周悼王 朱安㳡</span>
                                                                     <span class="node-tag">水 (㳡)</span>
                                                                     <span style="font-size:0.75rem; color:#888;">(追封)</span>
@@ -281,10 +578,10 @@
                                                                                                 </div>
                                                                                                 <ul>
                                                                                                     <li>
-                                                                                                        <div class="tree-node node-main-branch" onclick="selectPerson('zhu_gongxiao')">
+                                                                                                        <div class="tree-node node-main-branch" onclick="selectPerson('zhu_gongxiao', this)">
                                                                                                             <span>末代：周王 朱恭枵</span>
                                                                                                             <span class="node-tag">木 (枵)</span>
-                                                                                                            <span style="font-size:0.75rem; color:#b26a00;">(1642殉难)</span>
+                                                                                                            <span style="font-size:0.75rem; color:#B26A00;">(1642殉难)</span>
                                                                                                         </div>
                                                                                                     </li>
                                                                                                 </ul>
@@ -306,34 +603,34 @@
 
                                     <!-- 五房 新乡王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxin')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxin', this)">
                                             <span>五房：新乡王 朱有𤊟</span>
                                             <span class="node-tag">火 (𤊟)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(卫辉新乡)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(卫辉新乡)</span>
                                         </div>
                                     </li>
 
                                     <!-- 六房 宁陵王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youlan')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youlan', this)">
                                             <span>六房：宁陵王 朱有爤</span>
                                             <span class="node-tag">火 (爤)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(商丘宁陵)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(商丘宁陵)</span>
                                         </div>
                                     </li>
 
                                     <!-- 七房 杞县王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkai')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkai', this)">
                                             <span>七房：杞县王 朱有炌</span>
                                             <span class="node-tag">火 (炌)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(开封杞县)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(开封杞县)</span>
                                         </div>
                                     </li>
 
                                     <!-- 八房 信阳王 -->
                                     <li>
-                                        <div class="tree-node node-gray" onclick="selectPerson('zhu_youxun2')">
+                                        <div class="tree-node node-gray" onclick="selectPerson('zhu_youxun2', this)">
                                             <span>八房：信阳王 朱有燖</span>
                                             <span class="node-tag">火 (燖)</span>
                                             <span style="font-size:0.75rem; color:#999;">(无嗣国除)</span>
@@ -342,43 +639,43 @@
 
                                     <!-- 九房 镇平王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkuang2')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youkuang2', this)">
                                             <span>九房：镇平恭定王 朱有爌(㫤)</span>
                                             <span class="node-tag">火 (爌)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(南阳镇平)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(南阳镇平)</span>
                                         </div>
                                     </li>
 
                                     <!-- 十房 遂平王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youlong')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youlong', this)">
                                             <span>十房：遂平悼恭王 朱有熡</span>
                                             <span class="node-tag">火 (熡)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(汝宁遂平)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(汝宁遂平)</span>
                                         </div>
                                     </li>
 
                                     <!-- 十一房 封丘王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youyun')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youyun', this)">
                                             <span>十一房：封丘康懿王 朱有𤓂</span>
                                             <span class="node-tag">火 (𤓂)</span>
-                                       <span style="font-size:0.75rem; color:#1565c0;">(封丘黄河房)</span>
+                                            <span style="font-size:0.75rem; color:#1565C0;">(封丘黄河房)</span>
                                         </div>
                                     </li>
 
                                     <!-- 十二房 鲁山王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxian')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youxian', this)">
                                             <span>十二房：鲁山悼恭王 朱有灦</span>
                                             <span class="node-tag">火 (灦)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(汝州鲁山)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(汝州鲁山)</span>
                                         </div>
                                     </li>
 
                                     <!-- 十三房 邺王 -->
                                     <li>
-                                        <div class="tree-node node-gray" onclick="selectPerson('zhu_youyue')">
+                                        <div class="tree-node node-gray" onclick="selectPerson('zhu_youyue', this)">
                                             <span>十三房：邺王 朱有爚</span>
                                             <span class="node-tag">火 (爚)</span>
                                             <span style="font-size:0.75rem; color:#999;">(无嗣国除)</span>
@@ -387,10 +684,10 @@
 
                                     <!-- 十四房 胙城王 -->
                                     <li>
-                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youqiao')">
+                                        <div class="tree-node node-branch" onclick="selectPerson('zhu_youqiao', this)">
                                             <span>十四房：胙城庄简王 朱有燆</span>
                                             <span class="node-tag">火 (燆)</span>
-                                            <span style="font-size:0.75rem; color:#2e7d32;">(卫辉胙城)</span>
+                                            <span style="font-size:0.75rem; color:#2E7D32;">(卫辉胙城)</span>
                                         </div>
                                     </li>
                                 </ul>
@@ -414,13 +711,13 @@
                 <div><strong>陵寝吉壤：</strong>河南禹州无梁镇无风山地宫</div>
             </div>
             <div class="detail-desc" id="detailDesc">
-                明太祖高皇帝第五子。天资明达，笃学崇医。就藩开封后辟王府生药圃，广植中原草木，编纂《救荒本草》（414种）与《普济方》（61,739首），为周藩全派之始祖。
+                <strong>文史与宗谱考据：</strong><br>明太祖高皇帝第五子。天资明达，笃学崇医。就藩开封后辟王府生药圃，广植中原草木，编纂《救荒本草》（414种）与《普济方》（61,739首），为周藩全派之始祖。
             </div>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -547,14 +844,14 @@
                 desc: '定王第十子。世袭七代至明末，子孙广泛分布于遂平朱湖、西平及安徽阜阳一带。'
             },
             'zhu_youyun': {
-    title: '十一房：封丘康懿王 朱有𤓂',
-    badge: '豫北黄河房 (封丘房系)',
-    wuxing: '火字旁 (𤓂)',
-    reign: '永乐十年册封 (1412)',
-    place: '开封府封丘县',
-    tomb: '河南封丘 / 新乡',
-    desc: '定王第十一子。开府黄河北岸封丘县。崇祯十五年大水后，部分宗室北渡黄河避乱，依托封丘原有王庄封邑繁衍生息，为豫北黄河沿岸重要传衍支派。'
-},
+                title: '十一房：封丘康懿王 朱有𤓂',
+                badge: '豫北黄河房 (封丘房系)',
+                wuxing: '火字旁 (𤓂)',
+                reign: '永乐十年册封 (1412)',
+                place: '开封府封丘县',
+                tomb: '河南封丘 / 新乡',
+                desc: '定王第十一子。开府黄河北岸封丘县。崇祯十五年大水后，部分宗室北渡黄河避乱，依托封丘原有王庄封邑繁衍生息，为豫北黄河沿岸重要传衍支派。'
+            },
             'zhu_youxian': {
                 title: '十二房：鲁山悼恭王 朱有灦',
                 badge: '伏牛山麓房',
@@ -665,7 +962,7 @@
             }
         };
 
-        // 节点点击交互
+        // 节点点击展开/收起 + 选中档案
         function toggleNode(elem, key) {
             const ul = elem.nextElementSibling;
             const btn = elem.querySelector('.toggle-btn');
@@ -678,13 +975,16 @@
                     if (btn) btn.innerText = '+';
                 }
             }
-            selectPerson(key);
+            selectPerson(key, elem);
         }
 
-        // 显示人物档案
-        function selectPerson(key) {
+        // 显示人物档案并高亮当前节点
+        function selectPerson(key, elem) {
             const data = personData[key];
             if (!data) return;
+
+            document.querySelectorAll('.tree-node').forEach(node => node.classList.remove('active-node'));
+            if (elem) elem.classList.add('active-node');
 
             document.getElementById('detailTitle').innerText = data.title;
             document.getElementById('detailBadge').innerText = data.badge;
@@ -699,7 +999,7 @@
             document.getElementById('detailDesc').innerHTML = `<strong>文史与宗谱考据：</strong><br>${data.desc}`;
         }
 
-        // 展开全部
+        // 全部展开
         function expandAll() {
             const uls = document.querySelectorAll('.tree-tree ul');
             uls.forEach(ul => ul.style.display = 'block');
@@ -707,7 +1007,7 @@
             btns.forEach(b => b.innerText = '−');
         }
 
-        // 折叠全部
+        // 全部折叠
         function collapseAll() {
             const uls = document.querySelectorAll('.tree-tree ul ul');
             uls.forEach(ul => ul.style.display = 'none');
@@ -719,8 +1019,21 @@
         function expandMajorOnly() {
             collapseAll();
             document.getElementById('treeRoot').style.display = 'block';
-            const majorUls = document.querySelectorAll('#treeRoot > li > ul, #treeRoot > li > ul > li:nth-child(4) ul');
+            const majorUls = document.querySelectorAll('#treeRoot, #treeRoot > li > ul, #treeRoot > li > ul > li:nth-child(4) ul');
             majorUls.forEach(ul => ul.style.display = 'block');
+            document.querySelectorAll('#treeRoot > li > .tree-node .toggle-btn, #treeRoot > li > ul > li:nth-child(4) > .tree-node .toggle-btn').forEach(btn => btn.innerText = '−');
+        }
+
+        // 搜索支持回车键
+        function handleSearchKey(event) {
+            searchTree();
+            if (event.key === 'Enter') {
+                const firstMatch = document.querySelector('.tree-node.highlight');
+                if (firstMatch) {
+                    firstMatch.click();
+                    document.getElementById('detailBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
         }
 
         // 搜索定位
@@ -733,8 +1046,15 @@
                 if (kw && text.includes(kw)) {
                     node.classList.add('highlight');
                     let parent = node.parentElement;
-                    while (parent && parent.classList.contains('tree-viewport') === false) {
-                        if (parent.tagName === 'UL') parent.style.display = 'block';
+                    while (parent && !parent.classList.contains('tree-viewport')) {
+                        if (parent.tagName === 'UL') {
+                            parent.style.display = 'block';
+                            const prevNode = parent.previousElementSibling;
+                            if (prevNode && prevNode.classList.contains('tree-node')) {
+                                const btn = prevNode.querySelector('.toggle-btn');
+                                if (btn) btn.innerText = '−';
+                            }
+                        }
                         parent = parent.parentElement;
                     }
                 } else {
