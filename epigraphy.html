@@ -5,81 +5,354 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周藩历代圹志与金石碑刻考 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
-        /* 主体容器 */
-        .container { max-width: 1100px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; font-size: 1.8rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.6rem; margin-top: 2.2rem; margin-bottom: 1rem; font-size: 1.25rem; }
-        h3 { color: #8c1d1d; margin: 1.2rem 0 0.5rem 0; font-size: 1.05rem; }
+        /* 主容器 */
+        .container { 
+            max-width: 1160px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
+        h3 { 
+            color: var(--crimson); 
+            margin: 1.2rem 0 0.5rem 0; 
+            font-size: 1.08rem; 
+        }
 
-        .intro-box { background: #fdf6ec; border-left: 4px solid #e6a23c; padding: 1.2rem; margin: 1.2rem 0; font-size: 0.95rem; color: #6b4d1b; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
 
-        .rubbing-card { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1.8rem; border-radius: 6px; margin: 1.8rem 0; border-top: 3px solid #8c1d1d; transition: transform 0.2s, box-shadow 0.2s; }
-        .rubbing-card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
-        .rubbing-header-box { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
-        .rubbing-title { font-size: 1.3rem; color: #8c1d1d; font-weight: bold; }
-        .rubbing-badge { font-size: 0.78rem; background: #8c1d1d; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: normal; }
-        .badge-green { background: #2e7d32; }
-        .badge-blue { background: #1565c0; }
+        /* 拓本卡片设计 */
+        .rubbing-card { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 2rem; 
+            border-radius: 6px; 
+            margin: 1.8rem 0; 
+            border-top: 4px solid var(--crimson); 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03); 
+            transition: transform 0.2s, box-shadow 0.2s; 
+        }
+        .rubbing-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 18px rgba(0,0,0,0.06); 
+        }
+        .rubbing-header-box { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            flex-wrap: wrap; 
+            gap: 0.5rem; 
+            margin-bottom: 0.4rem; 
+        }
+        .rubbing-title { 
+            font-size: 1.32rem; 
+            color: var(--crimson); 
+            font-weight: bold; 
+            letter-spacing: 1px;
+        }
+        .rubbing-badge { 
+            font-size: 0.78rem; 
+            background: var(--crimson); 
+            color: #fff; 
+            padding: 2px 9px; 
+            border-radius: 4px; 
+            font-weight: normal; 
+        }
+        .badge-blue { background: #1F4E5B; }
+        .badge-green { background: #2E6B38; }
 
-        .rubbing-meta { font-size: 0.88rem; color: #666; margin: 0.4rem 0 0.8rem; border-bottom: 1px dashed #e8dfd8; padding-bottom: 0.4rem; }
+        .rubbing-meta { 
+            font-size: 0.88rem; 
+            color: var(--muted); 
+            margin: 0.4rem 0 0.9rem; 
+            border-bottom: 1px dashed #E2D7C5; 
+            padding-bottom: 0.5rem; 
+        }
         
-        .rubbing-frame { background: #1a1a1a; color: #f0e6d2; border-radius: 6px; padding: 1.5rem; margin: 1.2rem 0; border: 2px solid #555; position: relative; box-shadow: inset 0 0 15px rgba(0,0,0,0.8); }
-        .rubbing-seal { font-size: 1.1rem; color: #d4af37; text-align: center; font-weight: bold; letter-spacing: 3px; margin-bottom: 1rem; border-bottom: 1px solid #444; padding-bottom: 0.5rem; }
-        .rubbing-content { font-family: "KaiTi", "STKaiti", serif; font-size: 1.05rem; line-height: 2.2; text-align: justify; letter-spacing: 0.5px; }
-        .rubbing-footer { font-size: 0.82rem; color: #888; text-align: right; margin-top: 1rem; border-top: 1px dashed #444; padding-top: 0.4rem; }
+        /* 仿黑底金石拓片框 */
+        .rubbing-frame { 
+            background: #181716; 
+            color: #E8E1D3; 
+            border-radius: 6px; 
+            padding: 1.8rem; 
+            margin: 1.4rem 0; 
+            border: 2px solid #443F3A; 
+            position: relative; 
+            box-shadow: inset 0 0 25px rgba(0,0,0,0.85); 
+        }
+        .rubbing-seal { 
+            font-size: 1.15rem; 
+            color: #E5C368; 
+            text-align: center; 
+            font-weight: bold; 
+            letter-spacing: 4px; 
+            margin-bottom: 1.2rem; 
+            border-bottom: 1px solid #383430; 
+            padding-bottom: 0.6rem; 
+            font-family: "KaiTi", "STKaiti", serif;
+        }
+        .rubbing-content { 
+            font-family: "KaiTi", "STKaiti", serif; 
+            font-size: 1.05rem; 
+            line-height: 2.3; 
+            text-align: justify; 
+            letter-spacing: 0.8px; 
+        }
+        .rubbing-toolbar {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 0.8rem;
+        }
+        .btn-punctuate {
+            background: #2E2B27;
+            color: #D6CCA8;
+            border: 1px solid #5C554E;
+            padding: 2px 10px;
+            border-radius: 3px;
+            font-size: 0.78rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-punctuate:hover {
+            background: var(--crimson);
+            color: #fff;
+            border-color: var(--crimson);
+        }
+        .rubbing-footer { 
+            font-size: 0.82rem; 
+            color: #8C8276; 
+            text-align: right; 
+            margin-top: 1.2rem; 
+            border-top: 1px dashed #3A3632; 
+            padding-top: 0.5rem; 
+        }
 
-        .feature-list { margin: 0.8rem 0 0.8rem 1.2rem; font-size: 0.93rem; color: #444; }
-        .feature-list li { margin-bottom: 0.4rem; }
+        .feature-list { 
+            margin: 0.8rem 0 0.8rem 1.4rem; 
+            font-size: 0.93rem; 
+            color: #443D36; 
+        }
+        .feature-list li { margin-bottom: 0.45rem; }
+        .feature-list strong { color: var(--crimson); }
 
-        .quote-box { background: #fffaf2; border-left: 3px solid #d4af37; padding: 1rem 1.2rem; margin: 1.5rem 0; font-family: "KaiTi", "STKaiti", serif; font-size: 0.95rem; color: #554; line-height: 1.8; border-radius: 0 4px 4px 0; }
+        .quote-box { 
+            background: #FAF7F0; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1.1rem 1.4rem; 
+            margin: 1.8rem 0; 
+            font-size: 0.93rem; 
+            color: #554C3F; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+        .quote-box strong { color: var(--crimson); }
+        .quote-box p { margin-bottom: 0.6rem; }
+        .quote-box p:last-child { margin-bottom: 0; }
         
-        .table-wrap { overflow-x: auto; margin-top: 0.8rem; }
-        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-        .comp-table th, .comp-table td { border: 1px solid #e2dcd5; padding: 0.65rem 0.8rem; text-align: left; }
-        .comp-table th { background: #f4efe9; color: #8c1d1d; font-weight: bold; }
-        .comp-table tr:nth-child(even) { background: #faf8f5; }
+        /* 表格排版 */
+        .table-wrap { overflow-x: auto; margin-top: 1.2rem; border-radius: 6px; border: 1px solid #E5DFC5; }
+        .comp-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; min-width: 720px; }
+        .comp-table th, .comp-table td { border: 1px solid #E5DFC5; padding: 0.75rem 0.9rem; text-align: left; }
+        .comp-table th { background: #F4EFE9; color: var(--crimson); font-weight: bold; }
+        .comp-table tr:nth-child(even) { background: #FCFAF6; }
+        .comp-table tr:hover { background: #FFF9F0; }
 
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3.5rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
-            .rubbing-frame { padding: 1rem; }
-            .rubbing-content { font-size: 0.92rem; line-height: 1.8; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            .rubbing-frame { padding: 1.2rem; }
+            .rubbing-content { font-size: 0.94rem; line-height: 2; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -102,7 +375,7 @@
                     <span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
                     <div class="dropdown-menu">
                         <a href="classics.html">典籍著述</a>
-                        <a href="epigraphy.html" style="background:#8c1d1d; color:#fff;">碑刻圹志</a>
+                        <a href="epigraphy.html" style="background:var(--crimson); color:#fff;">碑刻圹志</a>
                         <a href="poetry.html">诗文戏曲</a>
                         <a href="hall.html">堂号楹联</a>
                         <a href="institution.html">宗室典制</a>
@@ -128,12 +401,13 @@
                     <div class="dropdown-menu">
                         <a href="calendar.html">纪年干支换算</a>
                         <a href="naming.html">五行命名助手</a>
+                        <a href="naming-guide.html">起名专栏与宗法</a>
                         <a href="genealogy-guide.html">修谱指南凡例</a>
                         <a href="memorial.html">云端享堂祭奠</a>
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
@@ -153,13 +427,16 @@
             </div>
             <div class="rubbing-meta">志石形制：青石质正方形 · 边长约 95 厘米 · 双钩线刻四神龙纹填金边栏 · 篆额九字</div>
             
-            <p style="font-size:0.95rem; color:#444;">
-                此志出土于河南禹州无梁镇周定王陵主墓室中。志文高度概括了朱橚一生之政治起伏、仁德医勋，并清晰罗列了周藩十五大分房的齿序与受封郡王爵位，是周藩全系最重要的金石元典：
+            <p style="font-size:0.95rem; color:#443D36;">
+                此志出土于河南禹州无梁镇周定王陵主玄室中。志文高度概括了朱橚一生之政治起伏、仁德医勋，并清晰罗列了周藩十四大郡王分房的受封爵位与早卒齿序，是周藩全系最重要的金石元典：
             </p>
 
             <div class="rubbing-frame">
+                <div class="rubbing-toolbar">
+                    <button class="btn-punctuate" onclick="togglePunctuation('dingwangText')">切换断句/原文</button>
+                </div>
                 <div class="rubbing-seal">【 志 盖 篆 额 】<br>大 明 周 定 王 圹 志</div>
-                <div class="rubbing-content">
+                <div class="rubbing-content" id="dingwangText" data-mode="punctuated">
 王讳橚，太祖高皇帝第五子，母孝慈高皇后。生于元至正二十一年九月初九日。<br>
 洪武三年四月初七日，册封为吴王。洪武十一年正月初一日，改封为周王。洪武十四年十月三十日，之国开封府。<br>
 王天资明达，博学能文，雅好医药本草，辑《普济方》《救荒本草》以寿斯民。<br>
@@ -171,7 +448,7 @@
 以宣德元年十月二十八日，葬于河南禹州无风山之原。<br>
 呜呼！王以宗室懿亲，作藩中土，抚绥兆民，德裕流光。奄捐馆舍，曷胜痛悼！爰述大㮣，纳诸幽圹，用垂不朽云。
                 </div>
-                <div class="rubbing-footer">出土吉壤：河南禹州无风山（老龙头山） · 现藏于禹州明周王陵博物馆</div>
+                <div class="rubbing-footer">出土吉壤：河南禹州无梁镇老龙头山玄宫 · 现藏于禹州明周王陵博物馆（国保单位）</div>
             </div>
 
             <h3>🔍 金石考据核心要点：</h3>
@@ -190,12 +467,14 @@
                 <span class="rubbing-badge badge-blue">开封祥符 / 明正统四年</span>
             </div>
             <div class="rubbing-meta">志主：周第二代王 · 诚斋公朱有燉 · 袭爵十四年 · 谥号“宪”</div>
-            <div class="rubbing-content" style="background:#222; color:#eee; padding:1.2rem; border-radius:4px; font-family:'KaiTi',serif; line-height:2;">
+            <div class="rubbing-frame" style="margin: 0.8rem 0;">
+                <div class="rubbing-content" style="font-size: 0.98rem; line-height: 2.1;">
 王讳有燉，周定王之嫡长子也。母妃冯氏。生于洪武十二年正月初一日。<br>
 洪武三十五年（建文四年）封为周世子，永乐二十二年袭封周王。<br>
 王性温仁恭谨，笃学博览，精律吕词曲，善画牡丹。号诚斋，所作乐府杂剧风行天下。<br>
 正统四年正月十七日以疾薨，享年六十有一。无子。<br>
 上闻讣震悼，辍视朝三日，遣官致祭，命有司营葬，谥曰“宪”。弟祥符王有爝承嗣大统。
+                </div>
             </div>
         </div>
 
@@ -205,7 +484,7 @@
                 <span class="rubbing-badge badge-green">明代宗室殉葬礼制实证</span>
             </div>
             <div class="rubbing-meta">立石年代：明正统四年 (1439) · 志石现藏开封</div>
-            <div class="rubbing-desc" style="font-size:0.95rem; color:#444; line-height:1.8;">
+            <div style="font-size:0.95rem; color:#443D36; line-height:1.85;">
                 周宪王生前曾上奏朝廷请求免除姬妾殉葬，但宪王薨逝后，王妃巩氏自缢殉节，侍妾六人随殉。明英宗特赐谕祭，封巩氏为<strong>“贞烈王妃”</strong>，追封夫人李氏、张氏、何氏、杨氏、徐氏、王氏为<strong>“贞顺夫人”</strong>，并立御制碑石以彰其节。此碑是研究明代前期宫廷殉葬与追谥制度不可多得的珍贵实物。
             </div>
         </div>
@@ -214,54 +493,58 @@
 
         <div class="table-wrap">
             <table class="comp-table">
-                <tr>
-                    <th>志石名称</th>
-                    <th>志主与所属分房</th>
-                    <th>时代与纪年</th>
-                    <th>出土地点</th>
-                    <th>核心金石考据价值</th>
-                </tr>
-                <tr>
-                    <td><strong>《大明顺阳怀庄王圹志》</strong></td>
-                    <td>周定王三子 · 顺阳王朱有爌</td>
-                    <td>宣德八年 (1433)</td>
-                    <td>河南南阳 / 禹州</td>
-                    <td>记载顺阳王分封南阳、早薨及子嗣朱子峹袭爵之详，出土有高等级王冠。</td>
-                </tr>
-                <tr>
-                    <td><strong>《大明新乡王圹志》</strong></td>
-                    <td>周定王五子 · 新乡王朱有𤊟</td>
-                    <td>正统四年 (1439)</td>
-                    <td>河南新乡 / 获嘉</td>
-                    <td>记载新乡房支脉迁徙卫辉府之开端，为豫北周藩宗亲寻根之基准。</td>
-                </tr>
-                <tr>
-                    <td><strong>《周藩永宁王府木匾额》</strong></td>
-                    <td>周藩宗室 · 永宁端简王朱肃湷</td>
-                    <td>万历四十年 (1612)</td>
-                    <td>开封永宁王府遗址</td>
-                    <td>出土楷书金字“昭代贤宗”大匾，2018年开封城摞城考古确立周府空间之重器。</td>
-                </tr>
-                <tr>
-                    <td><strong>《大明镇平恭定王圹志》</strong></td>
-                    <td>周定王九子 · 镇平王朱有爌(㫤)</td>
-                    <td>景泰六年 (1455)</td>
-                    <td>河南禹州 / 镇平</td>
-                    <td>订正同名音近宗亲字辈，记载镇平王府分封南阳府之始末。</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>志石名称</th>
+                        <th>志主与所属分房</th>
+                        <th>时代与纪年</th>
+                        <th>出土地点</th>
+                        <th>核心金石考据价值</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>《大明顺阳怀庄王圹志》</strong></td>
+                        <td>周定王三子 · 顺阳王朱有爌</td>
+                        <td>宣德八年 (1433)</td>
+                        <td>河南南阳 / 禹州</td>
+                        <td>记载顺阳王分封南阳、早薨及子嗣朱子峹袭爵之详，出土有高规格金银器与九旒王冠配件。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>《大明新乡王圹志》</strong></td>
+                        <td>周定王五子 · 新乡王朱有𤊟</td>
+                        <td>正统四年 (1439)</td>
+                        <td>河南新乡 / 获嘉</td>
+                        <td>记载新乡房支脉迁徙卫辉府之开端，为豫北周藩宗亲寻根之基准石刻。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>《周藩永宁王府木匾额》</strong></td>
+                        <td>永宁王府掌理府事朱肃湷</td>
+                        <td>万历四十年 (1612)</td>
+                        <td>开封周王府遗址 (新街口)</td>
+                        <td>出土楷书填金“昭代贤宗”大匾，为开封“城摞城”明周王府紫禁城空间界定之关键重器。</td>
+                    </tr>
+                    <tr>
+                        <td><strong>《大明镇平恭定王圹志》</strong></td>
+                        <td>周定王九子 · 镇平王朱有爌(㫤)</td>
+                        <td>景泰六年 (1455)</td>
+                        <td>河南禹州 / 镇平</td>
+                        <td>订正顺阳、镇平二王同音名讳字形，记载镇平王府分封宛南之始末。</td>
+                    </tr>
+                </tbody>
             </table>
         </div>
 
         <h2>🏛️ 金石与修谱互证：周藩后裔辨谱三大原则</h2>
         <div class="quote-box">
-            <p><strong>一、以志辨偏旁五行：</strong>太祖钦定周藩字辈自三世起依“火、土、金、水、木”循环。如遇私家谱书与圹志用字不一，一律以出土金石圹志原字为准勘正；</p>
+            <p><strong>一、以志辨偏旁五行：</strong>太祖钦定周藩字辈自三世起依“火、土、金、水、木”循环。如遇私家谱书与圹志用字不一，一律以出土金石圹志原刻为准勘正；</p>
             <p><strong>二、以志查早夭与漏载：</strong>私谱修撰常因年代久远遗漏无嗣早卒宗亲，定王圹志明确记载“子十五人，十五早卒”，补全了周藩大宗第一代子嗣全貌；</p>
             <p><strong>三、以志证迁徙与聚落：</strong>圹志所载之“封国之国”与“赐葬山原”，与豫皖苏鲁滇各地“朱家楼”、“周王庄”之卫军守陵户、奉祀户聚落分布完全契合。</p>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
@@ -276,6 +559,22 @@
                 }
             });
         });
+
+        // 标点断句 / 原始无标点切换
+        const textPunctuated = `王讳橚，太祖高皇帝第五子，母孝慈高皇后。生于元至正二十一年九月初九日。<br>洪武三年四月初七日，册封为吴王。洪武十一年正月初一日，改封为周王。洪武十四年十月三十日，之国开封府。<br>王天资明达，博学能文，雅好医药本草，辑《普济方》《救荒本草》以寿斯民。<br>洪熙元年八月二十日，以疾薨，享年六十有五。<br>讣闻，上震悼，辍视朝三日，遣官赐祭，命有司治丧如制，谥曰“定”。<br>妃冯氏，宋国公胜之女，先逝。<br>子十五人：长子世子有燉，袭封周王；次汝南王有爋；三顺阳王有爌；四祥符王有爝；五新乡王有𤊟；六宁陵王有爤；七杞县王有炌；八信阳王有燖；九镇平王有爌；十遂平王有熡；十一封丘王有𤓂；十二鲁山王有灦；十三邺王有爚；十四胙城王有燆；十五早卒。<br>女十一人。<br>以宣德元年十月二十八日，葬于河南禹州无风山之原。<br>呜呼！王以宗室懿亲，作藩中土，抚绥兆民，德裕流光。奄捐馆舍，曷胜痛悼！爰述大㮣，纳诸幽圹，用垂不朽云。`;
+
+        const textRaw = `王諱橚太祖高皇帝第五子母孝慈高皇后生於元至正二十一年九月初九日洪武三年四月初七日冊封爲吳王洪武十一年正月初一日改封爲周王洪武十四年十月三十日之國開封府王天資明達博學能文雅好醫藥本草輯普濟方救荒本草以壽斯民洪熙元年八月二十日以疾薨享年六十有五訃聞上震悼輟視朝三日遣官賜祭命有司治喪如制謚曰定妃馮氏宋國公勝之女先逝子十五人長子世子有燉襲封周王次汝南王有爋三順陽王有爌四祥符王有爝五新鄉王有𤊟六寧陵王有爤七杞縣王有炌八信陽王有燖九鎮平王有爌十遂平王有熡十一封丘王有𤓂十二魯山王有灦十三鄴王有爚十四胙城王有燆十五早卒女十一人以宣德元年十月二十八日葬於河南禹州無風山之原嗚呼王以宗室懿親作藩中土撫綏兆民德裕流光奄捐館舍曷勝痛悼爰述大㮣納諸幽圹用垂不朽云`;
+
+        function togglePunctuation(id) {
+            const el = document.getElementById(id);
+            if (el.getAttribute('data-mode') === 'punctuated') {
+                el.innerHTML = textRaw;
+                el.setAttribute('data-mode', 'raw');
+            } else {
+                el.innerHTML = textPunctuated;
+                el.setAttribute('data-mode', 'punctuated');
+            }
+        }
     </script>
 </body>
 </html>
