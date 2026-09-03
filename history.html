@@ -5,65 +5,306 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>周王世系承袭与大事记 - 大明周藩纪事</title>
     <style>
+        :root {
+            --crimson: #8C1D1D;      /* 周府朱砂红 */
+            --dark-crimson: #6E1313; /* 深赫红 */
+            --bg-body: #F7F5F0;      /* 宣纸底色 */
+            --card-bg: #FFFFFF;      /* 白底 */
+            --ink: #2C2926;          /* 墨色文字 */
+            --muted: #7A7269;        /* 辅助灰褐 */
+            --border: #E5DFC5;       /* 象牙浅边 */
+            --accent-gold: #C59B27;  /* 泥金 */
+            
+            --wood-color: #2E7D32;   /* 木绿 */
+            --fire-color: #C62828;   /* 火红 */
+            --earth-color: #A0522D;  /* 土褐 */
+            --metal-color: #B8860B;  /* 金黄 */
+            --water-color: #007791;  /* 水蓝 */
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: "PingFang SC", "Microsoft YaHei", "Noto Serif SC", serif; background: #faf8f5; color: #333; line-height: 1.8; }
+        body { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "STSong", serif; 
+            background: var(--bg-body); 
+            color: var(--ink); 
+            line-height: 1.85; 
+        }
         
         /* 顶部导航 */
-        .site-header { background: #8c1d1d; color: #fff; padding: 0.8rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.15); position: relative; z-index: 100; }
-        .header-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 0 1.2rem; }
-        .site-logo { font-size: 1.3rem; font-weight: bold; letter-spacing: 2px; color: #f9e6d0; text-decoration: none; white-space: nowrap; margin-right: 1.5rem; }
-        .menu-toggle { display: none; background: none; border: 1px solid rgba(249, 230, 208, 0.4); color: #f9e6d0; font-size: 1.3rem; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; }
+        .site-header { 
+            background: var(--crimson); 
+            color: #fff; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-inner { 
+            max-width: 1160px; 
+            margin: 0 auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 0.65rem 1.2rem; 
+        }
+        .site-logo { 
+            font-size: 1.28rem; 
+            font-weight: bold; 
+            letter-spacing: 2px; 
+            color: #FAF2E8; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .site-logo small {
+            font-size: 0.72rem;
+            color: #F5DEB3;
+            border: 1px solid rgba(245, 222, 179, 0.4);
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: normal;
+        }
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: 1px solid rgba(249, 230, 208, 0.5); 
+            color: #f9e6d0; 
+            font-size: 1.25rem; 
+            padding: 0.2rem 0.6rem; 
+            border-radius: 4px; 
+            cursor: pointer; 
+        }
         
-        /* 下拉分类导航系统 */
-        .nav-menu { display: flex; align-items: center; gap: 0.4rem; }
+        /* 下拉导航系统 */
+        .nav-menu { display: flex; align-items: center; gap: 0.3rem; }
         .nav-item { position: relative; }
-        .nav-link { color: #f9e6d0; text-decoration: none; font-size: 0.9rem; padding: 0.45rem 0.65rem; border-radius: 4px; display: inline-block; white-space: nowrap; transition: background 0.2s, color 0.2s; cursor: pointer; }
-        .nav-link:hover, .nav-item:hover .nav-link { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link { 
+            color: #F8EFE4; 
+            text-decoration: none; 
+            font-size: 0.88rem; 
+            padding: 0.45rem 0.65rem; 
+            border-radius: 4px; 
+            display: inline-block; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+            cursor: pointer; 
+        }
+        .nav-link:hover, .nav-item:hover .nav-link { 
+            color: #fff; 
+            background: rgba(255,255,255,0.16); 
+        }
         
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #701414; min-width: 150px; border-radius: 0 0 6px 6px; box-shadow: 0 6px 16px rgba(0,0,0,0.25); z-index: 1000; padding: 0.4rem 0; border: 1px solid rgba(249, 230, 208, 0.2); }
-        .dropdown-menu a { display: block; color: #f9e6d0; padding: 0.45rem 1.1rem; font-size: 0.86rem; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
-        .dropdown-menu a:hover { background: #8c1d1d; color: #fff; padding-left: 1.3rem; }
+        .dropdown-menu { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 0; 
+            background: var(--dark-crimson); 
+            min-width: 155px; 
+            border-radius: 0 0 6px 6px; 
+            box-shadow: 0 6px 16px rgba(0,0,0,0.25); 
+            z-index: 1000; 
+            padding: 0.4rem 0; 
+            border: 1px solid rgba(249, 230, 208, 0.2); 
+        }
+        .dropdown-menu a { 
+            display: block; 
+            color: #f9e6d0; 
+            padding: 0.45rem 1.1rem; 
+            font-size: 0.84rem; 
+            text-decoration: none; 
+            white-space: nowrap; 
+            transition: all 0.2s; 
+        }
+        .dropdown-menu a:hover { 
+            background: var(--crimson); 
+            color: #fff; 
+            padding-left: 1.35rem; 
+        }
         .nav-item:hover .dropdown-menu { display: block; }
 
         /* 主体容器 */
-        .container { max-width: 950px; margin: 2rem auto; background: #fff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        h1 { color: #8c1d1d; border-bottom: 2px solid #8c1d1d; padding-bottom: 0.5rem; }
-        h2 { color: #444; border-left: 4px solid #8c1d1d; padding-left: 0.5rem; margin-top: 2rem; margin-bottom: 1rem; }
-        
+        .container { 
+            max-width: 1040px; 
+            margin: 2rem auto; 
+            background: #fff; 
+            padding: 2.5rem; 
+            border-radius: 8px; 
+            box-shadow: 0 2px 16px rgba(0,0,0,0.04); 
+            border: 1px solid var(--border);
+        }
+        h1 { 
+            color: var(--crimson); 
+            border-bottom: 2px solid var(--crimson); 
+            padding-bottom: 0.6rem; 
+            font-size: 1.85rem; 
+            letter-spacing: 2px;
+        }
+        h2 { 
+            color: var(--crimson); 
+            border-left: 4px solid var(--crimson); 
+            padding-left: 0.7rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1.2rem; 
+            font-size: 1.3rem; 
+            letter-spacing: 1px; 
+        }
+
+        .intro-box { 
+            background: #FAF5EB; 
+            border-left: 4px solid var(--accent-gold); 
+            padding: 1rem 1.3rem; 
+            margin: 1.2rem 0 1.8rem; 
+            font-size: 0.94rem; 
+            color: #614D2A; 
+            line-height: 1.85; 
+            border-radius: 0 6px 6px 0; 
+        }
+
+        /* 世系承袭树状卡片 */
+        .tree-box { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            border-top: 4px solid var(--crimson); 
+            padding: 1.6rem 2rem; 
+            border-radius: 6px; 
+            margin: 1.5rem 0; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+        .tree-line { 
+            font-family: "Noto Serif SC", "Source Han Serif SC", serif; 
+            font-size: 0.98rem; 
+            line-height: 2.3; 
+            color: var(--ink); 
+        }
+        .tree-line strong {
+            color: var(--crimson);
+            font-size: 1.05rem;
+        }
+        .tag-desc { 
+            color: var(--muted); 
+            font-size: 0.88rem; 
+        }
+
+        /* 徽标 */
+        .badge-wx {
+            display: inline-block;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-weight: normal;
+            color: #fff;
+            font-size: 0.74rem;
+            margin: 0 2px;
+        }
+        .wx-wood { background-color: var(--wood-color); }
+        .wx-fire { background-color: var(--fire-color); }
+        .wx-earth { background-color: var(--earth-color); }
+        .wx-metal { background-color: var(--metal-color); }
+        .wx-water { background-color: var(--water-color); }
+
         /* 时间轴样式 */
-        .timeline { position: relative; border-left: 3px solid #8c1d1d; margin: 2rem 0 2rem 1.5rem; padding-left: 1.5rem; }
-        .timeline-item { position: relative; margin-bottom: 2rem; }
-        .timeline-dot { position: absolute; left: -1.95rem; top: 0.3rem; width: 12px; height: 12px; background: #8c1d1d; border-radius: 50%; border: 2px solid #fff; }
-        .timeline-title { font-weight: bold; color: #8c1d1d; font-size: 1.1rem; }
-        .timeline-date { color: #888; font-size: 0.85rem; margin-bottom: 0.3rem; }
-        .timeline-content { background: #fdfbf7; border: 1px solid #e8dfd8; padding: 1rem; border-radius: 6px; margin-top: 0.5rem; }
+        .timeline { 
+            position: relative; 
+            border-left: 3px solid var(--crimson); 
+            margin: 2.2rem 0 2rem 1.2rem; 
+            padding-left: 1.6rem; 
+        }
+        .timeline-item { 
+            position: relative; 
+            margin-bottom: 2.2rem; 
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0.5rem;
+        }
+        .timeline-dot { 
+            position: absolute; 
+            left: -2.12rem; 
+            top: 0.35rem; 
+            width: 14px; 
+            height: 14px; 
+            background: var(--crimson); 
+            border-radius: 50%; 
+            border: 3px solid #FAF5EB; 
+            box-shadow: 0 0 0 2px var(--crimson);
+        }
+        .timeline-title { 
+            font-weight: bold; 
+            color: var(--crimson); 
+            font-size: 1.15rem; 
+            letter-spacing: 0.5px;
+        }
+        .timeline-date { 
+            color: var(--muted); 
+            font-size: 0.86rem; 
+            margin: 0.2rem 0 0.4rem; 
+        }
+        .timeline-content { 
+            background: #FCFAF7; 
+            border: 1px solid #EAE2D5; 
+            padding: 1.1rem 1.3rem; 
+            border-radius: 6px; 
+            margin-top: 0.5rem; 
+            font-size: 0.94rem;
+            color: #443D36;
+            line-height: 1.85;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .timeline-content strong {
+            color: var(--crimson);
+        }
 
-        /* 世系卡片 */
-        .tree-box { background: #fdf6ec; border: 1px solid #faecd8; padding: 1.5rem 1.8rem; border-radius: 6px; margin: 1.5rem 0; }
-        .tree-line { font-family: "Courier New", monospace, "PingFang SC"; font-size: 1rem; line-height: 2.1; color: #6b1b1b; }
-        .tag-desc { color: #666; font-size: 0.88rem; }
-
-        .site-footer { text-align: center; padding: 2rem 0; color: #888; font-size: 0.85rem; border-top: 1px solid #eaeaea; margin-top: 3rem; }
+        .site-footer { 
+            text-align: center; 
+            padding: 2.2rem 0; 
+            color: var(--muted); 
+            font-size: 0.85rem; 
+            border-top: 1px solid var(--border); 
+            margin-top: 4rem; 
+        }
 
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
-            .nav-menu { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #7a1515; padding: 1rem 0; gap: 0; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column; 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: #751414; 
+                padding: 0.8rem 0; 
+                gap: 0; 
+            }
             .nav-menu.show { display: flex; }
             .nav-item { width: 100%; }
-            .nav-link { padding: 0.6rem 1.5rem; width: 100%; }
-            .dropdown-menu { position: static; display: none; background: #601010; box-shadow: none; padding-left: 1.5rem; border: none; }
+            .nav-link { padding: 0.65rem 1.5rem; width: 100%; }
+            .dropdown-menu { 
+                position: static; 
+                display: none; 
+                background: #5E0D0D; 
+                box-shadow: none; 
+                padding-left: 1.5rem; 
+                border: none; 
+            }
             .nav-item.active .dropdown-menu { display: block; }
-            .container { padding: 1.2rem; }
-            .tree-box { padding: 1rem; overflow-x: auto; }
+            .container { padding: 1.2rem; margin: 1rem auto; }
+            .tree-box { padding: 1.2rem; overflow-x: auto; }
             .tree-line { font-size: 0.88rem; white-space: nowrap; }
+            h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
+
     <header class="site-header">
         <div class="header-inner">
-            <a href="index.html" class="site-logo">大明周藩纪事</a>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <a href="index.html" class="site-logo">
+                大明周藩纪事 <small>周定王府</small>
+            </a>
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
             <nav class="nav-menu" id="navMenu">
                 <a href="index.html" class="nav-link">首页</a>
                 
@@ -77,7 +318,7 @@
                         <a href="tree.html">数字家谱树</a>
                         <a href="ancestors.html">昭穆神位</a>
                         <a href="branches.html">分房支派</a>
-                        <a href="history.html" style="background:#8c1d1d; color:#fff;">王府传承</a>
+                        <a href="history.html" style="background:var(--crimson); color:#fff;">王府传承</a>
                     </div>
                 </div>
 
@@ -118,83 +359,97 @@
                     </div>
                 </div>
 
-                <a href="search.html" class="nav-link" style="color:#ffe8a1; font-weight:bold;">🔍 搜索</a>
+                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
             </nav>
         </div>
     </header>
 
     <main class="container">
         <h1>周王世系承袭与大事记</h1>
-        <p style="margin-top: 1rem;">明代周王府自明太祖大封诸子起，共传十二世、十三位亲王（含追封，南明另有嗣封），分封郡王七十五位，宗室繁衍至数万人。其文采风流、科技医学与金石著述冠绝诸藩，为明代首屈一指的大宗名藩。</p>
+        <div class="intro-box">
+            大明开封周王府自洪武筑城始，历传十二世、十四位亲王（含追封世子与大宗承嗣），分封十四大郡王分房，宗室繁衍至数万人。其兼备医农科技、散曲词林、金石考辨之风雅，至明末又有毁家纾难、力拒闯军、坚守孤城之浩然大节，冠绝天潢诸藩。
+        </div>
 
-        <h2>👑 历代周王传袭谱系（太祖大始祖起算）</h2>
+        <h2>👑 历代亲王大宗承袭脉络（太祖大始祖起算）</h2>
         <div class="tree-box">
             <div class="tree-line">
-                【第一世·大始祖】<strong>明太祖高皇帝 朱元璋</strong> <span class="tag-desc">（开创大明，钦定周藩字辈二十字）</span><br>
-                &nbsp;└── 【第二世·周藩始祖】<strong>周定王 朱橚</strong> <span class="tag-desc">（太祖第五子，洪武十四年就藩开封）</span><br>
-                &nbsp; &nbsp; &nbsp;├── 【第三世】<strong>周宪王 朱有燉</strong> <span class="tag-desc">（定王嫡长子，杂剧大家，薨无嗣）</span><br>
-                &nbsp; &nbsp; &nbsp;└── 【第三世】<strong>周简王 朱有爝</strong> <span class="tag-desc">（定王第四子，原封祥符王，嗣封周王接续大宗）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;├── 【第四世】<strong>周靖王 朱子垕</strong> <span class="tag-desc">（简王庶长子，袭周王，在位一年无嗣）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第四世】<strong>周懿王 朱子墝</strong> <span class="tag-desc">（简王庶次子，继袭周王大宗）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第五世】<strong>周惠王 朱同䥝</strong> <span class="tag-desc">（懿王嫡长子，初封睢阳王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第六世】<strong>周悼王 朱安㴦</strong> <span class="tag-desc">（惠王世子，早卒，追封周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第七世】<strong>周恭王 朱睦㮟</strong> <span class="tag-desc">（悼王嫡长子，隔代承袭周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第八世】<strong>周康王 朱勤炽</strong> <span class="tag-desc">（恭王嫡长子，世子早卒，追封周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第九世】<strong>周庄王 朱朝堈</strong> <span class="tag-desc">（康王嫡长子，恭王嫡长孙继袭周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十世】<strong>周敬王 朱在铤</strong> <span class="tag-desc">（庄王庶长子，袭周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十一世】<strong>周端王 朱肃溱</strong> <span class="tag-desc">（敬王庶长子，袭周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十二世】<strong>末代周王 朱恭枵</strong> <span class="tag-desc">（端王庶长子，散财守城殉难）</span>
+                【第一世·大始祖】<strong>明太祖高皇帝 朱元璋</strong> <span class="tag-desc">（开创大明 · 御赐周藩二十字派语）</span><br>
+                &nbsp;└── 【第二世·周藩始祖】<strong>周定王 朱橚</strong> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（皇五子 · 洪武十四年就藩汴京 · 编撰《救荒本草》《普济方》）</span><br>
+                &nbsp; &nbsp; &nbsp;├── 【第三世】<strong>周宪王 朱有燉</strong> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（嫡长子 · 号诚斋 · 一代杂剧曲圣 · 正统四年薨无嗣）</span><br>
+                &nbsp; &nbsp; &nbsp;└── 【第三世】<strong>周简王 朱有爝</strong> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（第四子 · 初封祥符王 · 正统四年继袭大统 · 为大宗源流）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;├── 【第四世】<strong>周靖王 朱子垕</strong> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（简王庶长子 · 袭周王 · 在位一年薨无嗣）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第四世】<strong>周懿王 朱子墧</strong> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（简王庶次子 · 继袭周王 · 在位三十年极盛之世）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第五世】<strong>周惠王 朱同䥸</strong> <span class="badge-wx wx-metal">金</span> <span class="tag-desc">（懿王庶长子 · 初封睢阳王 · 成化末袭亲王）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第六世】<strong>周悼王 朱安㶇</strong> <span class="badge-wx wx-water">水</span> <span class="tag-desc">（惠王世子 · 弘治十三年早卒 · 追封周王）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第七世】<strong>周恭王 朱睦㰂</strong> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（悼王庶长子 · 正德初袭亲王 · 在位三十二年敦睦宗法）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第八世】<strong>周康王 朱勤熄</strong> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（恭王嫡长子 · 周世子早卒 · 追封周王）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第九世】<strong>周庄王 朱朝堈</strong> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（康王长子 · 嘉靖十九年袭亲王 · 嘉隆年间文教昌明）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十世】<strong>周敬王 朱在鋌</strong> <span class="badge-wx wx-metal">金</span> <span class="tag-desc">（庄王庶长子 · 嘉靖三十四年袭周王 · 万历十一年薨）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十一世】<strong>周端王 朱肃溱</strong> <span class="badge-wx wx-water">水</span> <span class="tag-desc">（敬王嫡长子 · 万历十四年袭亲王 · 崇祯八年薨）</span><br>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十二世】<strong>末代周王 朱恭枵</strong> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（端王嫡长子 · 散尽家财守城 · 崇祯十五年殉难 · 谥周孝王）</span>
             </div>
         </div>
 
-        <h2>⏳ 周藩大事记时间线</h2>
+        <h2>⏳ 周藩重大历史事件编年</h2>
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-title">洪武三年（1370年） · 初封吴王</div>
-                <div class="timeline-date">明太祖洪武三年四月</div>
-                <div class="timeline-content">明太祖朱元璋大封诸皇子，皇五子朱橚初封为吴王。</div>
+                <div class="timeline-title">洪武三年（1370年） · 初封吴王，奠定国本</div>
+                <div class="timeline-date">明太祖洪武三年四月初七日</div>
+                <div class="timeline-content">
+                    明太祖朱元璋于金陵紫禁城大封诸子，皇五子朱橚年甫十岁，正式受册为吴王。
+                </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-title">洪武十一年（1378年） · 改封周王，就藩开封</div>
-                <div class="timeline-date">明太祖洪武十一年至十四年</div>
-                <div class="timeline-content">改封周王，以河南开封府为封国。在宋金故宫旧址营建周王府，洪武十四年正式就藩汴京。</div>
+                <div class="timeline-title">洪武十一年（1378年）~ 十四年 · 改封周王，就藩汴京紫禁城</div>
+                <div class="timeline-date">明太祖洪武十一年至十四年十月</div>
+                <div class="timeline-content">
+                    因吴地为京畿重地，太祖诏改封朱橚为周王，赐国中原开封府。择宋金故宫旧址筑周王府紫禁城，规制壮丽。洪武十四年十月三十日，周王朱橚正式之国汴京，开创周藩二百六十载基业。
+                </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-title">永乐四年（1406年） · 《救荒本草》刊刻刊行</div>
-                <div class="timeline-date">明成祖永乐四年</div>
-                <div class="timeline-content">周定王朱橚主持编撰的植物学巨著《救荒本草》正式刻印，记载414种可救荒植物，开创中国实用植物学与济世救荒之先河。</div>
+                <div class="timeline-title">永乐初至永乐四年（1406年） · 《普济方》与《救荒本草》刊行</div>
+                <div class="timeline-date">明成祖永乐初年至四年</div>
+                <div class="timeline-content">
+                    定王于开封府设生药圃与良医所，组织腾硕、刘醇等名医编纂<strong>《普济方》</strong>（收方61,739首，为我国古代最大医学方剂全书）；永乐四年，其亲绘亲注的植物学与农学巨著<strong>《救荒本草》</strong>（收录414种可救荒食用野生植物）正式刊行，开创世界植物学与救荒专科之先河。
+                </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-title">正统四年（1439年） · 周宪王薨逝与大宗转移</div>
-                <div class="timeline-date">明英宗正统四年五月</div>
-                <div class="timeline-content">明代著名杂剧作家、周宪王朱有燉薨逝无嗣，其创作的31种杂剧悉数存世。四弟祥符王朱有爝嗣封为周王（周简王），周藩大宗正式转入简王一脉。</div>
+                <div class="timeline-title">正统四年（1439年） · 宪王薨逝无嗣，大宗统系转归简王</div>
+                <div class="timeline-date">明英宗正统四年正月至五月</div>
+                <div class="timeline-content">
+                    明初词曲大师周宪王朱有燉薨逝，遗作31种杂剧悉数入集刊刻为<strong>《诚斋乐府》</strong>。宪王无子，朝廷特诏祥符王朱有爝承嗣周亲王大位（谥曰简）。自此之后，历代周亲王皆出自简王一脉传承。
+                </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-title">万历五年（1577年） · 宗室学者朱睦㮮任宗正</div>
-                <div class="timeline-date">明神宗万历五年</div>
-                <div class="timeline-content">镇平王支系后裔、镇国中尉朱睦㮮举为周藩宗正。朱睦㮮筑“万卷堂”聚书数万卷，著《金石图》、《五经稽疑》、《中州人物志》等，被誉为有明一代宗室藏书与金石目录学之冠。</div>
+                <div class="timeline-title">万历五年（1577年）~ 十四年 · 金石大家朱睦㮮掌理宗正</div>
+                <div class="timeline-date">明神宗万历年间</div>
+                <div class="timeline-content">
+                    镇平王支系宗室、学者朱睦㮮出任周藩宗正。睦㮮筑“万卷堂”聚书数万卷，精研金石目录之学，著撰《金石图》、《中州人物志》、《篇海类编》等，被后世文献家誉为“有明一代宗室藏书金石之冠”。
+                </div>
             </div>
 
             <div class="timeline-item">
                 <div class="timeline-dot"></div>
-                <div class="timeline-title">崇祯十五年（1642年） · 开封保卫战与周藩忠义</div>
+                <div class="timeline-title">崇祯十五年（1642年） · 汴梁保卫战与周藩殉节</div>
                 <div class="timeline-date">明思宗崇祯十五年五月至九月</div>
-                <div class="timeline-content">李自成三围开封，周王朱恭枵倾尽王府数十万两库银与粮食犒赏守军、赈济饥民。九月黄河决口淹没汴京，朱恭枵登舟脱险撤至彰德府，展现了周藩宗室守土殉节之浩然气概。</div>
+                <div class="timeline-content">
+                    李自成起义军三围开封。末代周王朱恭枵倾尽王府积蓄数百万两银两犒赏将士、施粥救民，率宗室坚守孤城达八月之久。九月黄河决口倒灌汴梁城，周王府没入泥沙，朱恭枵登舟转徙卫辉后殉难。周藩宗亲北渡封丘、延津或南奔宛洛，宗室散迁四方，以字辈与五行家规赓续血脉至今。
+                </div>
             </div>
         </div>
     </main>
 
     <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立</p>
+        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
     <script>
