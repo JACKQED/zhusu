@@ -390,6 +390,26 @@
             .search-input { width: 100%; }
             h1 { font-size: 1.6rem; }
         }
+
+        /* V3: 侧边人物速览、返回顶部 */
+        .person-overlay {position:fixed;inset:0;background:rgba(30,20,18,.42);z-index:2000;display:none;}
+        .person-overlay.open {display:block;}
+        .person-drawer {position:absolute;right:0;top:0;height:100%;width:min(480px,100%);background:#fffdf9;box-shadow:-8px 0 30px rgba(0,0,0,.18);overflow-y:auto;padding:1.5rem 1.5rem 2rem;}
+        .drawer-top {display:flex;align-items:center;justify-content:space-between;gap:1rem;border-bottom:2px solid var(--crimson);padding-bottom:.8rem;margin-bottom:1rem;}
+        .drawer-top h2 {font-size:1.3rem;color:var(--crimson);}
+        .drawer-close {border:1px solid #d7c5b8;background:white;color:var(--crimson);border-radius:6px;padding:.35rem .7rem;font-size:1.2rem;cursor:pointer;}
+        .drawer-badge {display:inline-block;background:var(--crimson);color:#fff;padding:.15rem .6rem;border-radius:4px;margin-bottom:.8rem;font-size:.84rem;}
+        .drawer-fields {display:grid;gap:.6rem;}
+        .drawer-field {background:#faf6ee;border:1px solid #e8dfd0;padding:.65rem .8rem;border-radius:5px;overflow-wrap:anywhere;}
+        .drawer-field strong {color:var(--crimson);}
+        .drawer-desc {margin-top:1rem;line-height:1.9;overflow-wrap:anywhere;}
+        .drawer-note {margin-top:1rem;font-size:.8rem;color:#756d64;border-top:1px solid #e8dfd0;padding-top:.8rem;}
+        .back-to-top {position:fixed;right:20px;bottom:22px;z-index:900;background:var(--crimson);color:white;border:1px solid var(--accent-gold);border-radius:28px;padding:.65rem .9rem;box-shadow:0 3px 14px #0003;cursor:pointer;display:none;}
+        .back-to-top.visible {display:block;}
+        .drawer-close:focus-visible,.back-to-top:focus-visible {outline:3px solid var(--accent-gold);outline-offset:3px;}
+        body.drawer-open {overflow:hidden;}
+        @media(max-width:600px){.person-drawer{padding:1rem}.back-to-top{right:12px;bottom:14px}}
+        @media print {.person-overlay,.back-to-top{display:none!important}}
     </style>
 </head>
 <body>
@@ -731,6 +751,18 @@
         <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
     </footer>
 
+
+    <!-- V3 人物速览：不离开家谱位置 -->
+    <div class="person-overlay" id="personOverlay" role="presentation" onclick="if(event.target===this)closePersonDrawer()">
+      <section class="person-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" id="personDrawer" tabindex="-1">
+        <div class="drawer-top"><h2 id="drawerTitle">人物档案</h2><button type="button" class="drawer-close" id="drawerClose" onclick="closePersonDrawer()" aria-label="关闭人物档案">×</button></div>
+        <span class="drawer-badge" id="drawerBadge"></span>
+        <div class="drawer-fields" id="drawerFields"></div>
+        <div class="drawer-desc" id="drawerDesc"></div>
+        <p class="drawer-note">史料提示：本页人物资料为整理稿，具体史实请结合原始史籍、碑刻及族谱复核。</p>
+      </section>
+    </div>
+    <button type="button" class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="返回页面顶部">↑ 返回顶部</button>
     <script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
@@ -1008,6 +1040,7 @@
             `;
             
             document.getElementById('detailDesc').innerHTML = `<strong>文史与宗谱考据：</strong><br>${data.desc}`;
+            openPersonDrawer(data);
         }
 
         // 全部展开
@@ -1107,6 +1140,44 @@
                 }
             });
         });
+
+        // V3：点击节点后打开右侧速览，关闭后回到原节点
+        let drawerReturnFocus = null;
+        function openPersonDrawer(data) {
+            drawerReturnFocus = document.activeElement;
+            document.getElementById('drawerTitle').textContent = data.title || '人物档案';
+            document.getElementById('drawerBadge').textContent = data.badge || '';
+            const fields = document.getElementById('drawerFields');
+            fields.replaceChildren();
+            [['五行属性',data.wuxing],['在位年号',data.reign],['封国治所',data.place],['陵寝吉壤',data.tomb]].forEach(([label,value]) => {
+                const item=document.createElement('div');item.className='drawer-field';
+                const strong=document.createElement('strong');strong.textContent=label+'：';
+                item.append(strong,document.createTextNode(value || '待考'));fields.appendChild(item);
+            });
+            const desc=document.getElementById('drawerDesc');desc.replaceChildren();
+            const label=document.createElement('strong');label.textContent='文史与宗谱考据：';
+            const paragraph=document.createElement('p');paragraph.textContent=data.desc || '暂无资料';
+            desc.append(label,paragraph);
+            document.getElementById('personOverlay').classList.add('open');
+            document.body.classList.add('drawer-open');
+            document.getElementById('drawerClose').focus();
+        }
+        function closePersonDrawer() {
+            document.getElementById('personOverlay').classList.remove('open');
+            document.body.classList.remove('drawer-open');
+            if(drawerReturnFocus && drawerReturnFocus.isConnected)drawerReturnFocus.focus();
+        }
+        document.addEventListener('keydown',e=>{
+            if(!document.getElementById('personOverlay').classList.contains('open'))return;
+            if(e.key==='Escape'){closePersonDrawer();return;}
+            if(e.key==='Tab'){
+                e.preventDefault();document.getElementById('drawerClose').focus();
+            }
+        });
+        const backToTop=document.getElementById('backToTop');
+        function updateBackToTop(){backToTop.classList.toggle('visible',window.scrollY>420)}
+        window.addEventListener('scroll',updateBackToTop,{passive:true});
+        updateBackToTop();
     </script>
 </body>
 </html>
