@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩数字世系家谱树 - 大明周藩纪事</title>
+    <title>周藩数字世系家谱树 V2 - 大明周藩纪事</title>
+    <meta name="description" content="大明周藩数字家谱树：浏览周定王朱橚、十四房支系、历代周王人物档案，并检索封地、陵寝与世系资料。史料内容待逐项核实。">
     <style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
@@ -201,7 +202,13 @@
             border-radius: 8px; 
             margin-bottom: 2rem; 
         }
-        .tree-tree { position: relative; min-width: 750px; }
+        .tree-tree { position: relative; min-width: 580px; }
+        .sr-only {position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+        .search-status {font-size:.86rem;color:var(--muted);margin:-.7rem 0 1rem;}
+        .historical-note {font-size:.88rem;color:#614D2A;background:#FAF5EB;border-left:3px solid var(--accent-gold);padding:.85rem 1rem;margin:1rem 0 1.5rem;}
+        .tree-node:focus-visible,.btn-tool:focus-visible,.nav-link:focus-visible {outline:3px solid var(--accent-gold);outline-offset:3px;}
+        @media(max-width:600px){.tree-viewport{padding:1rem .5rem}.tree-tree{min-width:490px}.tree-node{font-size:.8rem;padding:.4rem .55rem}.detail-panel{padding:1rem}.container{padding:1rem}.toolbar-group{width:100%}.toolbar-group .btn-tool{flex:1}}
+        @media print{.site-header,.tree-toolbar,.tree-instructions,.search-status{display:none!important}.tree-viewport{overflow:visible}.tree-tree{min-width:0}.container{box-shadow:none;border:none}.detail-panel{break-inside:avoid}}
         .tree-tree ul { 
             padding-left: 24px; 
             list-style: none; 
@@ -453,7 +460,7 @@
     <main class="container">
         <h1>周藩数字世系家谱树</h1>
         <div class="tree-instructions">
-            💡 <strong>交互指南：</strong>点击带 <code>[+] / [−]</code> 的节点可逐级展开或收起子分支；点击任意先祖节点，下方档案面板将即时同步显示其名讳、封国治所、五行偏旁与后裔聚落考据，并自动定位至档案区。
+            💡 <strong>交互指南：</strong>点击带 <code>[+] / [−]</code> 的节点可逐级展开或收起子分支；点击人物节点可在下方查看档案；搜索可匹配姓名、封地、陵寝与简介。点击搜索结果可定位节点。资料为整理稿，具体史实需据原始文献复核。
         </div>
 
         <!-- 工具栏 -->
@@ -464,10 +471,13 @@
                 <button class="btn-tool secondary" onclick="expandMajorOnly()">仅看亲王大宗</button>
             </div>
             <div class="toolbar-group">
-                <input type="text" id="treeSearch" class="search-input" placeholder="输入人名/王号/地名检索..." onkeyup="handleSearchKey(event)">
+                <label for="treeSearch" class="sr-only">搜索家谱人物</label>
+                <input type="search" id="treeSearch" class="search-input" placeholder="搜索人名、封地、陵寝..." oninput="searchTree()" onkeydown="handleSearchKey(event)">
+                <button class="btn-tool secondary" type="button" onclick="clearTreeSearch()">清除</button>
             </div>
         </div>
 
+        <p id="searchStatus" class="search-status" role="status" aria-live="polite">可搜索姓名、王号、封地及人物介绍。</p>
         <!-- 谱系树结构 -->
         <div class="tree-viewport">
             <div class="tree-tree">
@@ -515,7 +525,7 @@
 
                                     <!-- 四房 祥符王/周大宗 -->
                                     <li>
-                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_youjue')">
+                                        <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_youjue')">
                                             <span class="toggle-btn">−</span>
                                             <span>四房：祥符王 / 周简王 朱有爝</span>
                                             <span class="node-tag" style="background:var(--crimson); color:#fff;">火 (爝) · 承袭大宗</span>
@@ -529,14 +539,14 @@
                                                 </div>
                                             </li>
                                             <li>
-                                                <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_ziqiao')">
+                                                <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_ziqiao')">
                                                     <span class="toggle-btn">−</span>
                                                     <span>第五代：周懿王 朱子墧</span>
                                                     <span class="node-tag">土 (墧)</span>
                                                 </div>
                                                 <ul>
                                                     <li>
-                                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_tongguan')">
+                                                        <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_tongguan')">
                                                             <span class="toggle-btn">−</span>
                                                             <span>第六代：周惠王 朱同䥸</span>
                                                             <span class="node-tag">金 (䥸)</span>
@@ -550,35 +560,35 @@
                                                                 </div>
                                                                 <ul>
                                                                     <li>
-                                                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_mujue')">
+                                                                        <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_mujue')">
                                                                             <span class="toggle-btn">−</span>
                                                                             <span>第八代：周恭王 朱睦㰂</span>
                                                                             <span class="node-tag">木 (㰂)</span>
                                                                         </div>
                                                                         <ul>
                                                                             <li>
-                                                                                <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_chaogang')">
+                                                                                <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_chaogang')">
                                                                                     <span class="toggle-btn">−</span>
                                                                                     <span>第九代：周庄王 朱朝堈</span>
-                                                                                    <span class="node-tag">火 (堈)</span>
+                                                                                    <span class="node-tag">土 (堈) · 待核</span>
                                                                                 </div>
                                                                                 <ul>
                                                                                     <li>
-                                                                                        <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_zaizhen')">
+                                                                                        <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_zaizhen')">
                                                                                             <span class="toggle-btn">−</span>
                                                                                             <span>第十代：周敬王 朱在鋟</span>
                                                                                             <span class="node-tag">金 (鋟)</span>
                                                                                         </div>
                                                                                         <ul>
                                                                                             <li>
-                                                                                                <div class="tree-node node-main-branch" onclick="toggleNode(this, 'zhu_suzhao')">
+                                                                                                <div class="tree-node node-main-branch" data-main-line="true" onclick="toggleNode(this, 'zhu_suzhao')">
                                                                                                     <span class="toggle-btn">−</span>
                                                                                                     <span>第十一代：周端王 朱肃溱</span>
                                                                                                     <span class="node-tag">水 (溱)</span>
                                                                                                 </div>
                                                                                                 <ul>
                                                                                                     <li>
-                                                                                                        <div class="tree-node node-main-branch" onclick="selectPerson('zhu_gongxiao', this)">
+                                                                                                        <div class="tree-node node-main-branch" data-main-line="true" onclick="selectPerson('zhu_gongxiao', this)">
                                                                                                             <span>末代：周王 朱恭枵</span>
                                                                                                             <span class="node-tag">木 (枵)</span>
                                                                                                             <span style="font-size:0.75rem; color:#B26A00;">(1642殉难)</span>
@@ -698,6 +708,7 @@
             </div>
         </div>
 
+        <p class="historical-note">史料说明：本树依据现有整理稿呈现，人物世次、封号、异体字、五行标签、迁徙及陵寝信息尚需与原始史籍、墓志、族谱逐项核对。图中“第几代”沿用原稿亲王继承次序，不等同于严格宗族世代。</p>
         <!-- 详细档案展示面板 -->
         <div class="detail-panel" id="detailBox">
             <div class="detail-header">
@@ -927,7 +938,7 @@
             'zhu_chaogang': {
                 title: '第九代：周庄王 朱朝堈',
                 badge: '周第九代亲王',
-                wuxing: '火字旁 (堈)',
+                wuxing: '土字旁 (堈) · 史料待核',
                 reign: '嘉靖十九年 ~ 隆庆六年 (1540-1572)',
                 place: '开封周府',
                 tomb: '开封祥符',
@@ -1015,53 +1026,87 @@
             btns.forEach(b => b.innerText = '+');
         }
 
-        // 仅看亲王大宗
+        // 仅看亲王大宗：用明确标识定位，不依赖第几个子节点
         function expandMajorOnly() {
             collapseAll();
-            document.getElementById('treeRoot').style.display = 'block';
-            const majorUls = document.querySelectorAll('#treeRoot, #treeRoot > li > ul, #treeRoot > li > ul > li:nth-child(4) ul');
-            majorUls.forEach(ul => ul.style.display = 'block');
-            document.querySelectorAll('#treeRoot > li > .tree-node .toggle-btn, #treeRoot > li > ul > li:nth-child(4) > .tree-node .toggle-btn').forEach(btn => btn.innerText = '−');
-        }
-
-        // 搜索支持回车键
-        function handleSearchKey(event) {
-            searchTree();
-            if (event.key === 'Enter') {
-                const firstMatch = document.querySelector('.tree-node.highlight');
-                if (firstMatch) {
-                    firstMatch.click();
-                    document.getElementById('detailBox').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const root = document.getElementById('treeRoot');
+            root.style.display = 'block';
+            const emperor = root.previousElementSibling;
+            if (emperor) { const b=emperor.querySelector('.toggle-btn'); if(b) b.textContent='−'; }
+            document.querySelectorAll('[data-main-line="true"]').forEach(node => {
+                let parent = node.parentElement;
+                while (parent && !parent.classList.contains('tree-viewport')) {
+                    if (parent.tagName === 'UL') {
+                        parent.style.display = 'block';
+                        const owner = parent.previousElementSibling;
+                        if (owner && owner.classList.contains('tree-node')) {
+                            const b = owner.querySelector('.toggle-btn');
+                            if (b) b.textContent = '−';
+                        }
+                    }
+                    parent = parent.parentElement;
                 }
-            }
+            });
         }
 
-        // 搜索定位
+        // 将节点与人物数据库关联，扩展全文搜索范围
+        function getNodeKey(node) {
+            const handler = node.getAttribute('onclick') || '';
+            const match = handler.match(/['"](zhu_[a-z0-9]+)['"]/);
+            return match ? match[1] : null;
+        }
         function searchTree() {
             const kw = document.getElementById('treeSearch').value.trim().toLowerCase();
-            const nodes = document.querySelectorAll('.tree-node');
-            
-            nodes.forEach(node => {
-                const text = node.innerText.toLowerCase();
-                if (kw && text.includes(kw)) {
-                    node.classList.add('highlight');
+            let count = 0;
+            document.querySelectorAll('.tree-node').forEach(node => {
+                const data = personData[getNodeKey(node)] || {};
+                const searchable = [node.textContent, data.title, data.badge, data.wuxing, data.reign, data.place, data.tomb, data.desc].join(' ').toLowerCase();
+                const matched = Boolean(kw) && searchable.includes(kw);
+                node.classList.toggle('highlight', matched);
+                if (matched) {
+                    count++;
                     let parent = node.parentElement;
                     while (parent && !parent.classList.contains('tree-viewport')) {
                         if (parent.tagName === 'UL') {
                             parent.style.display = 'block';
-                            const prevNode = parent.previousElementSibling;
-                            if (prevNode && prevNode.classList.contains('tree-node')) {
-                                const btn = prevNode.querySelector('.toggle-btn');
-                                if (btn) btn.innerText = '−';
+                            const owner = parent.previousElementSibling;
+                            if (owner && owner.classList.contains('tree-node')) {
+                                const btn = owner.querySelector('.toggle-btn');
+                                if (btn) btn.textContent = '−';
                             }
                         }
                         parent = parent.parentElement;
                     }
-                } else {
-                    node.classList.remove('highlight');
                 }
             });
+            document.getElementById('searchStatus').textContent = kw ? `找到 ${count} 个匹配节点。按 Enter 定位第一个结果。` : '可搜索姓名、王号、封地及人物介绍。';
         }
+        function handleSearchKey(event) {
+            if (event.key !== 'Enter') return;
+            const first = document.querySelector('.tree-node.highlight');
+            if (first) {
+                event.preventDefault();
+                const key = getNodeKey(first);
+                if (key) selectPerson(key, first);
+                first.scrollIntoView({behavior:'smooth',block:'center',inline:'nearest'});
+            }
+        }
+        function clearTreeSearch() {
+            document.getElementById('treeSearch').value = '';
+            searchTree();
+            document.getElementById('treeSearch').focus();
+        }
+        // 允许键盘操作人物节点
+        document.querySelectorAll('.tree-node').forEach(node => {
+            node.setAttribute('tabindex','0');
+            node.setAttribute('role','button');
+            node.addEventListener('keydown', event => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    node.click();
+                }
+            });
+        });
     </script>
 </body>
 </html>
