@@ -427,6 +427,42 @@
             .checker-input { width: 100%; }
             .hero h1 { font-size: 1.9rem; }
         }
+
+        /* V3: larger desktop navigation and readable hit targets */
+        @media (min-width: 961px) {
+            .header-inner { max-width: 1200px; padding: .72rem 1rem; gap: 1rem; }
+            .site-logo { font-size: 1.35rem; }
+            .nav-menu { gap: .12rem; }
+            .nav-link { font-size: .98rem; padding: .62rem .66rem; }
+            .dropdown-menu a { font-size: .93rem; padding: .6rem 1rem; }
+        }
+        /* V3: high-contrast generation summary */
+        .generation-summary { display: flex; align-items: stretch; gap: .75rem; flex-wrap: wrap; margin-bottom: 1.1rem; }
+        .generation-stat { background: #fff; border: 1px solid #e3d4bf; border-radius: 7px; padding: .6rem 1rem; min-width: 115px; flex: 1; }
+        .generation-stat .stat-label { display: block; font-size: .8rem; color: #675b50; }
+        .generation-stat .stat-value { display: block; font-size: 1.45rem; line-height: 1.45; font-weight: 800; color: var(--crimson); }
+        .generation-stat.primary { background: #8c1d1d; border-color: #8c1d1d; }
+        .generation-stat.primary .stat-label { color: #fff2dc; }
+        .generation-stat.primary .stat-value { color: #fff; }
+        .generation-summary-note { margin-bottom: .7rem; color: #66594c; font-size: .82rem; }
+        /* V3: historical lineage overview, no speculative intermediate ancestry */
+        .lineage-overview { margin: 0 0 2.6rem; border: 1px solid var(--border); border-top: 3px solid var(--accent-gold); border-radius: 8px; background: #fffcf7; padding: 1.3rem 1.4rem; }
+        .lineage-overview h2 { font-size: 1.2rem; color: var(--crimson); margin-bottom: .3rem; }
+        .lineage-overview > p { font-size: .86rem; color: #66594c; margin-bottom: 1rem; }
+        .lineage-chain { display: flex; align-items: center; justify-content: center; gap: .65rem; flex-wrap: wrap; }
+        .lineage-node { flex: 1; min-width: 175px; max-width: 290px; background: #fff; border: 1px solid #dfcfb8; border-radius: 7px; padding: .9rem 1rem; text-align: center; }
+        .lineage-node strong { display: block; color: var(--crimson); font-size: 1.08rem; }
+        .lineage-node small { display: block; color: #66594c; font-size: .8rem; }
+        .lineage-arrow { font-size: 1.5rem; font-weight: bold; color: var(--crimson); }
+        .lineage-link { display: inline-block; margin-top: 1rem; font-weight: bold; color: var(--crimson); text-decoration: underline; text-underline-offset: 3px; }
+        @media (max-width: 600px) {
+            .generation-stat { min-width: 95px; padding: .55rem .65rem; }
+            .generation-stat .stat-value { font-size: 1.18rem; }
+            .lineage-chain { flex-direction: column; }
+            .lineage-node { width: 100%; max-width: none; }
+            .lineage-arrow { transform: rotate(90deg); line-height: 1; }
+        }
+        @media print { .lineage-overview { break-inside: avoid; } }
     </style>
 </head>
 <body>
@@ -524,6 +560,20 @@
             <div id="quickResult" class="checker-result" role="status" aria-live="polite"></div>
             <p class="checker-notice">史料提示：本页人物示例、五行归类及世系说法应以可靠族谱、实录、方志等原始文献核验；有争议的记载宜注明“待考”。</p>
         </div>
+
+        <!-- V3 宗系概览：仅展示已知基础关系，具体支派以文献考证为准 -->
+        <section class="lineage-overview" aria-labelledby="lineage-overview-title">
+            <h2 id="lineage-overview-title">🌿 周藩宗系简图</h2>
+            <p>从明太祖到周定王的基本关系示意。各房支派、人物年代与具体承继关系，请进入完整谱系页面核对。</p>
+            <div class="lineage-chain" aria-label="明太祖朱元璋第五子为周定王朱橚，后有周藩宗室各支">
+                <div class="lineage-node"><strong>明太祖 · 朱元璋</strong><small>明朝开国皇帝 · 第一世</small></div>
+                <span class="lineage-arrow" aria-hidden="true">→</span>
+                <div class="lineage-node"><strong>周定王 · 朱橚</strong><small>明太祖第五子 · 第二世</small></div>
+                <span class="lineage-arrow" aria-hidden="true">→</span>
+                <div class="lineage-node"><strong>周藩宗室后裔</strong><small>历代亲王与各支宗室 · 具体世系待查</small></div>
+            </div>
+            <a class="lineage-link" href="tree.html">查看完整数字家谱树 →</a>
+        </section>
 
         <!-- 板块一：宗系与世系谱表 -->
         <div class="section-block">
@@ -752,10 +802,12 @@
 
             const res = document.getElementById('quickResult');
             res.innerHTML = `
-                <div>
-                    大明周藩钦定第 <strong>${data.gen}</strong> 世派语：<strong style="font-size: 1.25rem;">【朱${data.char}〇】</strong>
-                    <span style="background:var(--crimson); color:#fff; font-size:0.75rem; padding:2px 7px; border-radius:3px; margin-left:8px;">五行属${data.wuxing}</span>
+                <div class="generation-summary" aria-label="当前字辈查询摘要">
+                    <div class="generation-stat primary"><span class="stat-label">世代（以太祖为一世）</span><span class="stat-value">第 ${data.gen} 世</span></div>
+                    <div class="generation-stat"><span class="stat-label">派语字</span><span class="stat-value">${data.char}</span></div>
+                    <div class="generation-stat"><span class="stat-label">五行归类</span><span class="stat-value">${data.wuxing}</span></div>
                 </div>
+                <p class="generation-summary-note">派语姓名示意：朱${data.char}〇（仅作字辈说明，不代表真实人物）</p>
                 <div class="checker-grid">
                     <div class="checker-item">🧬 <strong>命名偏旁：</strong>${data.radical}</div>
                     <div class="checker-item">⬆️ <strong>上一辈(父辈)：</strong>${prev ? `第${prev.gen}世「${prev.char}」(${prev.wuxing})` : '第二世：始祖周定王朱橚（木）'}</div>
