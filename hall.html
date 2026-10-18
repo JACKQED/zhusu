@@ -560,11 +560,18 @@
           const status = document.getElementById('filterStatus');
           const empty = document.getElementById('emptyState');
           let current = 'all';
+          // V2.1: 将资料类别及常用别称纳入搜索范围。
+          const categoryKeywords = {
+            hall: '堂号 宗祠 祠堂 堂名',
+            couplet: '楹联 对联 宗祠联 祠联 联语',
+            oration: '祭祖 祭祖祝文 祝文 祭文 祭祀 清明 冬至'
+          };
           function update() {
             const q = input.value.trim().toLocaleLowerCase();
             let shown = 0;
             cards.forEach(card => {
-              const matches = (current === 'all' || card.dataset.kind === current) && card.textContent.toLocaleLowerCase().includes(q);
+              const searchable = (card.textContent + ' ' + (categoryKeywords[card.dataset.kind] || '')).toLocaleLowerCase();
+              const matches = (current === 'all' || card.dataset.kind === current) && searchable.includes(q);
               card.classList.toggle('is-hidden', !matches);
               if (matches) shown++;
             });
