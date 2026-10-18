@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩传世典籍与学术著述全考 - 大明周藩纪事</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>周藩典籍著述 V2 - 大明周藩纪事</title>
+<style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
             --dark-crimson: #6E1313; /* 深赫红 */
@@ -357,430 +358,409 @@
             h1 { font-size: 1.6rem; }
         }
     </style>
-</head>
+<style>
+/* V2 interactive library */
+.library-tools{margin:1.4rem 0 2rem;padding:1.1rem;background:#FCFAF7;border:1px solid #e5dfc5;border-radius:6px}
+.library-filters{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:.85rem}
+.library-filters button,.library-search button,.book-action{font-family:inherit;border:1px solid #cda98b;border-radius:5px;padding:.45rem .85rem;background:#fff;color:#8c1d1d;cursor:pointer}
+.library-filters button.active,.library-filters button:hover{background:#8c1d1d;color:white}
+.library-search{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center}
+.library-search input{flex:1;min-width:180px;padding:.65rem;border:1px solid #d9cbbb;border-radius:4px;font:inherit}
+.library-count{font-size:.85rem;color:#756c62}
+.library-note{background:#faf5eb;border-left:3px solid #c59b27;padding:.8rem 1rem;margin:1rem 0;color:#67502e;font-size:.87rem}
+.book-card[hidden],.library-section[hidden]{display:none!important}
+.book-img-box img{cursor:zoom-in;transition:filter .2s}
+.book-img-box img:hover{filter:brightness(.95)}
+.book-img-box button{border:0;background:none;color:#8c1d1d;font:inherit;cursor:pointer;margin-top:.4rem}
+.image-viewer{position:fixed;inset:0;z-index:2000;background:rgba(16,12,10,.91);display:none;align-items:center;justify-content:center;flex-direction:column;padding:1.5rem;gap:.6rem}
+.image-viewer.open{display:flex}.image-viewer img{max-width:95vw;max-height:82vh;object-fit:contain}.image-viewer p{color:white;text-align:center}.image-viewer button{position:absolute;top:1rem;right:1.2rem;color:white;background:#8c1d1d;border:1px solid #e7d6b4;border-radius:4px;padding:.4rem .8rem;cursor:pointer;font-size:1.1rem}
+.library-empty{display:none;padding:1.2rem;text-align:center;background:#faf5eb;color:#765e45}
+.library-links{display:flex;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}.library-links a{border:1px solid #cda98b;color:#8c1d1d;text-decoration:none;padding:.4rem .75rem;border-radius:4px;font-size:.85rem}
+.book-card{scroll-margin-top:85px}
+@media(max-width:650px){.container{padding:1rem}.book-card{padding:1rem}.library-search input{width:100%}.book-title{font-size:1.12rem}.library-filters button{font-size:.84rem}.stats-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){.book-card,.book-img-box img{transition:none}}
+</style></head>
 <body>
-
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="site-logo">
+<header class="site-header">
+<div class="header-inner">
+<a class="site-logo" href="index.html">
                 大明周藩纪事 <small>周定王府</small>
-            </a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">首页</a>
-                
-                <!-- 宗系人物 -->
-                <div class="nav-item">
-                    <span class="nav-link">👑 宗系人物 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="figures/index.html">历代人物</a>
-                        <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html">昭穆神位</a>
-                        <a href="branches.html">分房支派</a>
-                        <a href="history.html">王府传承</a>
-                    </div>
-                </div>
-
-                <!-- 典籍金石 -->
-                <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="classics.html" style="background:var(--crimson); color:#fff;">典籍著述</a>
-                        <a href="epigraphy.html">碑刻圹志</a>
-                        <a href="poetry.html">诗文戏曲</a>
-                        <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html">宗室典制</a>
-                        <a href="rules.html">祖训家规</a>
-                    </div>
-                </div>
-
-                <!-- 封地陵寝 -->
-                <div class="nav-item">
-                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="chronology.html">王府年表</a>
-                        <a href="estates.html">郡王封地</a>
-                        <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html">王陵陵寝</a>
-                        <a href="migration.html">迁徙寻根</a>
-                    </div>
-                </div>
-
-                <!-- 考据工具 -->
-                <div class="nav-item">
-                    <span class="nav-link">🛠️ 考据工具 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html">五行命名助手</a>
-                        <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html">修谱指南凡例</a>
-                        <a href="memorial.html">云端享堂祭奠</a>
-                    </div>
-                </div>
-
-                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <h1>大明周藩传世典籍与学术著述全考</h1>
-        <div class="intro-box">
+</a>
+<button aria-label="打开菜单" class="menu-toggle" onclick="toggleMenu()">☰</button>
+<nav class="nav-menu" id="navMenu">
+<a class="nav-link" href="index.html">首页</a>
+<!-- 宗系人物 -->
+<div class="nav-item">
+<span class="nav-link">👑 宗系人物 ▾</span>
+<div class="dropdown-menu">
+<a href="figures/index.html">历代人物</a>
+<a href="hall-of-fame.html">周藩名人堂</a>
+<a href="lineage.html">世系字辈</a>
+<a href="tree.html">数字家谱树</a>
+<a href="ancestors.html">昭穆神位</a>
+<a href="branches.html">分房支派</a>
+<a href="history.html">王府传承</a>
+</div>
+</div>
+<!-- 典籍金石 -->
+<div class="nav-item">
+<span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
+<div class="dropdown-menu">
+<a href="classics.html" style="background:var(--crimson); color:#fff;">典籍著述</a>
+<a href="epigraphy.html">碑刻圹志</a>
+<a href="poetry.html">诗文戏曲</a>
+<a href="hall.html">堂号楹联</a>
+<a href="institution.html">宗室典制</a>
+<a href="rules.html">祖训家规</a>
+</div>
+</div>
+<!-- 封地陵寝 -->
+<div class="nav-item">
+<span class="nav-link">🗺️ 封地陵寝 ▾</span>
+<div class="dropdown-menu">
+<a href="chronology.html">王府年表</a>
+<a href="estates.html">郡王封地</a>
+<a href="villages.html">聚落地名</a>
+<a href="tombs.html">王陵陵寝</a>
+<a href="migration.html">迁徙寻根</a>
+</div>
+</div>
+<!-- 考据工具 -->
+<div class="nav-item">
+<span class="nav-link">🛠️ 考据工具 ▾</span>
+<div class="dropdown-menu">
+<a href="calendar.html">纪年干支换算</a>
+<a href="naming.html">五行命名助手</a>
+<a href="naming-guide.html">起名专栏与宗法</a>
+<a href="genealogy-guide.html">修谱指南凡例</a>
+<a href="memorial.html">云端享堂祭奠</a>
+</div>
+</div>
+<a class="nav-link" href="search.html" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<h1>大明周藩传世典籍与学术著述全考</h1>
+<div class="intro-box">
             明代周藩以“仁孝好学、崇文尚医、精通艺律”冠绝诸藩。始祖周定王朱橚在开封王府辟“生药圃”、建“良医所”，躬行植物培育与医方考辨，开创救荒本草学与巨部方剂集成之先河；其世子周宪王朱有燉兼善词曲、风物考证；镇平王支宗室朱睦㮮筑“万卷堂”聚书考据，形成了明代宗室中体量最宏大、科学与人文兼备的“周藩文献宝库”。
-        </div>
-
-        <h2>🌿 始祖朱橚农医科学巨著</h2>
-
-        <!-- 1. 《救荒本草》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《救荒本草》（全二卷 · 四百一十四种）</span>
-                <span class="book-tag tag-med">世界食用植物学奠基作</span>
-            </div>
-            
-            <div class="book-meta">编纂：周定王朱橚 · 绘图校核：周王府群儒与画工 · 刊行：明永乐四年 (1406)</div>
-
-            <div class="book-img-row">
-                <div class="book-img-box">
-                    <img src="jiuhuang.JPG" alt="救荒本草明代木刻插图" onerror="this.style.display='none'">
-                    <div class="book-img-caption">📖 明周王府原刻《救荒本草》木刻植物图谱书影</div>
-                </div>
-            </div>
-
-            <div class="book-desc">
+        </div><section aria-label="典籍查询工具" class="library-tools"><div aria-label="典籍分类" class="library-filters" role="group"><button aria-pressed="true" class="active" data-filter="all" type="button">全部典籍</button><button aria-pressed="false" data-filter="medical" type="button">🌿 农医科学</button><button aria-pressed="false" data-filter="literature" type="button">🎭 文学戏曲</button><button aria-pressed="false" data-filter="research" type="button">📚 字书金石</button><button aria-pressed="false" data-filter="edition" type="button">📖 王府校刻</button></div><div class="library-search"><label for="bookSearch">查找典籍</label><input autocomplete="off" id="bookSearch" placeholder="搜索书名、作者、年代、关键词……" type="search"/><button id="clearBooks" type="button">清除</button><span aria-live="polite" class="library-count" id="bookCount">显示 9 / 9 部</span></div><div class="library-links"><a href="tree.html">查看数字家谱树 →</a><a href="figures/index.html">查看历代人物 →</a><a href="history.html">查看王府传承 →</a></div></section><p class="library-note">📜 史料说明：本页保留原页面所载著作、数量、刊刻年代、图片说明与评价；其中部分归属、版本、具体数字及引文仍待结合馆藏书目、原刻本和可靠研究逐项核实。书影是否属于所标注的原刻版本，也应另行核验。</p><p class="library-empty" id="bookEmpty">没有找到符合条件的典籍，请尝试其他关键词或分类。</p>
+<h2 class="library-section-heading">🌿 始祖朱橚农医科学巨著</h2>
+<!-- 1. 《救荒本草》 -->
+<div class="book-card" data-category="medical" id="book-1">
+<div class="book-header">
+<span class="book-title">《救荒本草》（全二卷 · 四百一十四种）</span>
+<span class="book-tag tag-med">世界食用植物学奠基作</span>
+</div>
+<div class="book-meta">编纂：周定王朱橚 · 绘图校核：周王府群儒与画工 · 刊行：明永乐四年 (1406)</div>
+<div class="book-img-row">
+<div class="book-img-box">
+<img alt="救荒本草明代木刻插图" aria-label="点击放大书影：救荒本草明代木刻插图" loading="lazy" onerror="this.style.display='none'" role="button" src="jiuhuang.JPG" tabindex="0"/>
+<div class="book-img-caption">📖 明周王府原刻《救荒本草》木刻植物图谱书影</div>
+<button class="zoom-trigger" type="button">🔍 点击放大书影</button></div>
+</div>
+<div class="book-desc">
                 朱橚因见中原连年饥馑，乃设生药圃于开封周王府，引种嵩山、太行山及中原原野之野生草木，亲验其萌芽花实，辨识可食部位与去毒加工之法。每种植物皆附<strong>实物写生木刻插图</strong>，首创以“救荒备饥”为目的之植物学分类与利用体系，被明代李时珍《本草纲目》大量采录，徐光启《农政全书》全文收录，更被英国科学史家李约瑟誉为中国植物学史上的划时代专著。
             </div>
-
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-num">414 种</div>
-                    <div class="stat-label">收录植物总数</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">276 种</div>
-                    <div class="stat-label">周藩新录首载植物</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">414 幅</div>
-                    <div class="stat-label">精准木刻写生图</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-num">5 大部</div>
-                    <div class="stat-label">草 / 木 / 米谷 / 果 / 菜</div>
-                </div>
-            </div>
-
-            <h3>📋 《救荒本草》分类与代表性植物考</h3>
-            <div class="table-wrap">
-                <table class="comp-table">
-                    <thead>
-                        <tr>
-                            <th>部类</th>
-                            <th>卷帙</th>
-                            <th>收录数量</th>
-                            <th>周藩首载</th>
-                            <th>代表性食用植物与加工要点</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>草部</strong></td>
-                            <td>上、下卷</td>
-                            <td>245 种</td>
-                            <td>178 种</td>
-                            <td>苦荬菜、马齿苋、灰菜、荠菜、漏芦（采嫩叶煠熟，水淘去苦味，油盐调食）</td>
-                        </tr>
-                        <tr>
-                            <td><strong>木部</strong></td>
-                            <td>上、下卷</td>
-                            <td>80 种</td>
-                            <td>47 种</td>
-                            <td>杜梨、榆树（榆钱、榆皮取粉）、枸杞、桑椹（采嫩芽焯熟或晒干磨面）</td>
-                        </tr>
-                        <tr>
-                            <td><strong>米谷部</strong></td>
-                            <td>上卷</td>
-                            <td>20 种</td>
-                            <td>11 种</td>
-                            <td>稗子、野秫、野粟、荞麦（采实磨面作饼饵或煮粥）</td>
-                        </tr>
-                        <tr>
-                            <td><strong>果部</strong></td>
-                            <td>下卷</td>
-                            <td>23 种</td>
-                            <td>14 种</td>
-                            <td>野葡萄、君迁子、山楂、酸枣、郁李仁（生食、渍蜜或风干充饥）</td>
-                        </tr>
-                        <tr>
-                            <td><strong>菜部</strong></td>
-                            <td>下卷</td>
-                            <td>46 种</td>
-                            <td>26 种</td>
-                            <td>蔓菁、水芹、苜蓿、野油菜（采苗叶洗净，盐渍或沸水焯食）</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="quote-box">
+<div class="stats-grid">
+<div class="stat-item">
+<div class="stat-num">414 种</div>
+<div class="stat-label">收录植物总数</div>
+</div>
+<div class="stat-item">
+<div class="stat-num">276 种</div>
+<div class="stat-label">周藩新录首载植物</div>
+</div>
+<div class="stat-item">
+<div class="stat-num">414 幅</div>
+<div class="stat-label">精准木刻写生图</div>
+</div>
+<div class="stat-item">
+<div class="stat-num">5 大部</div>
+<div class="stat-label">草 / 木 / 米谷 / 果 / 菜</div>
+</div>
+</div>
+<h3>📋 《救荒本草》分类与代表性植物考</h3>
+<div class="table-wrap">
+<table class="comp-table">
+<thead>
+<tr>
+<th>部类</th>
+<th>卷帙</th>
+<th>收录数量</th>
+<th>周藩首载</th>
+<th>代表性食用植物与加工要点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>草部</strong></td>
+<td>上、下卷</td>
+<td>245 种</td>
+<td>178 种</td>
+<td>苦荬菜、马齿苋、灰菜、荠菜、漏芦（采嫩叶煠熟，水淘去苦味，油盐调食）</td>
+</tr>
+<tr>
+<td><strong>木部</strong></td>
+<td>上、下卷</td>
+<td>80 种</td>
+<td>47 种</td>
+<td>杜梨、榆树（榆钱、榆皮取粉）、枸杞、桑椹（采嫩芽焯熟或晒干磨面）</td>
+</tr>
+<tr>
+<td><strong>米谷部</strong></td>
+<td>上卷</td>
+<td>20 种</td>
+<td>11 种</td>
+<td>稗子、野秫、野粟、荞麦（采实磨面作饼饵或煮粥）</td>
+</tr>
+<tr>
+<td><strong>果部</strong></td>
+<td>下卷</td>
+<td>23 种</td>
+<td>14 种</td>
+<td>野葡萄、君迁子、山楂、酸枣、郁李仁（生食、渍蜜或风干充饥）</td>
+</tr>
+<tr>
+<td><strong>菜部</strong></td>
+<td>下卷</td>
+<td>46 种</td>
+<td>26 种</td>
+<td>蔓菁、水芹、苜蓿、野油菜（采苗叶洗净，盐渍或沸水焯食）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quote-box">
                 “先王目击其艰，虑夫凶年饥岁，民不聊生，乃采野草之可食者，播种于圃，躬自品尝，绘图列说，命工梓行，以贻后世。” ——周宪王朱有燉《救荒本草 · 后序》
             </div>
-        </div>
-
-        <!-- 2. 《普济方》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《普济方》（全一百六十八卷 / 四库本四百二十六卷 · 六万一千七百三十九方）</span>
-                <span class="book-tag tag-med">中医古籍收方之冠</span>
-            </div>
-            <div class="book-meta">主编：周定王朱橚、教授滕硕、李恒、刘醇 · 成书：明洪武三十一年 (1398)</div>
-
-            <div class="book-img-row">
-                <div class="book-img-box">
-                    <img src="pujifang.JPG" alt="普济方明代原刻书影" onerror="this.style.display='none'">
-                    <div class="book-img-caption">📖 明代第一大方书《普济方》书影</div>
-                </div>
-            </div>
-
-            <div class="book-desc">
+</div>
+<!-- 2. 《普济方》 -->
+<div class="book-card" data-category="medical" id="book-2">
+<div class="book-header">
+<span class="book-title">《普济方》（全一百六十八卷 / 四库本四百二十六卷 · 六万一千七百三十九方）</span>
+<span class="book-tag tag-med">中医古籍收方之冠</span>
+</div>
+<div class="book-meta">主编：周定王朱橚、教授滕硕、李恒、刘醇 · 成书：明洪武三十一年 (1398)</div>
+<div class="book-img-row">
+<div class="book-img-box">
+<img alt="普济方明代原刻书影" aria-label="点击放大书影：普济方明代原刻书影" loading="lazy" onerror="this.style.display='none'" role="button" src="pujifang.JPG" tabindex="0"/>
+<div class="book-img-caption">📖 明代第一大方书《普济方》书影</div>
+<button class="zoom-trigger" type="button">🔍 点击放大书影</button></div>
+</div>
+<div class="book-desc">
                 周王府广罗海内医书秘籍，上溯《黄帝内经》《难经》《伤寒杂病论》，下逮金元四大家，历时十余年编纂而成。全书收录医方 <strong>61,739 首</strong>，插图 239 幅，涵盖脏腑、伤寒、杂病、妇人、小儿、外科、针灸诸科，完整保存了大量宋元以前已佚失的医方典籍，被誉为“中国古代第一大医学百科全书”。
             </div>
-
-            <h3>📊 中国古代大型官私修方书规模对照</h3>
-            <div class="table-wrap">
-                <table class="comp-table">
-                    <thead>
-                        <tr>
-                            <th>著作名称</th>
-                            <th>主编时代与编者</th>
-                            <th>收录医方数</th>
-                            <th>卷帙规模</th>
-                            <th>历史地位与文献价值</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>《太平圣惠方》</strong></td>
-                            <td>北宋 (992) · 王怀隐等</td>
-                            <td>16,834 首</td>
-                            <td>100 卷</td>
-                            <td>宋初官修医学巨著</td>
-                        </tr>
-                        <tr>
-                            <td><strong>《圣济总录》</strong></td>
-                            <td>北宋 (1117) · 宋徽宗敕修</td>
-                            <td>近 20,000 首</td>
-                            <td>200 卷</td>
-                            <td>北宋后期官修医学全书</td>
-                        </tr>
-                        <tr>
-                            <td><strong>周藩《普济方》</strong></td>
-                            <td><strong>明初 (1398) · 周王朱橚</strong></td>
-                            <td><strong>61,739 首</strong></td>
-                            <td><strong>426 卷</strong></td>
-                            <td><strong>中国古代体量最大之方剂渊海，存世古方集大成者</strong></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="quote-box">
+<h3>📊 中国古代大型官私修方书规模对照</h3>
+<div class="table-wrap">
+<table class="comp-table">
+<thead>
+<tr>
+<th>著作名称</th>
+<th>主编时代与编者</th>
+<th>收录医方数</th>
+<th>卷帙规模</th>
+<th>历史地位与文献价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>《太平圣惠方》</strong></td>
+<td>北宋 (992) · 王怀隐等</td>
+<td>16,834 首</td>
+<td>100 卷</td>
+<td>宋初官修医学巨著</td>
+</tr>
+<tr>
+<td><strong>《圣济总录》</strong></td>
+<td>北宋 (1117) · 宋徽宗敕修</td>
+<td>近 20,000 首</td>
+<td>200 卷</td>
+<td>北宋后期官修医学全书</td>
+</tr>
+<tr>
+<td><strong>周藩《普济方》</strong></td>
+<td><strong>明初 (1398) · 周王朱橚</strong></td>
+<td><strong>61,739 首</strong></td>
+<td><strong>426 卷</strong></td>
+<td><strong>中国古代体量最大之方剂渊海，存世古方集大成者</strong></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="quote-box">
                 “自轩岐以下迄于元明，巨细毕备，古今医方之渊海也。虽其间多杂采各家之说，未能尽加考订，然诸书多已散佚，得此而藉以考见源流，亦博考者之所必资矣。” ——《四库全书总目提要》
             </div>
-        </div>
-
-        <!-- 3. 《袖珍方》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《袖珍方》（全四卷 · 三千余方）</span>
-                <span class="book-tag tag-med">战地民生急救指南</span>
-            </div>
-            <div class="book-meta">编撰：周定王朱橚 · 刊刻：明洪武三十年 (1397)</div>
-
-            <div class="book-img-row">
-                <div class="book-img-box">
-                    <img src="xiuzhenfang.JPG" alt="明代袖珍方小字精刻本书影" onerror="this.style.display='none'">
-                    <div class="book-img-caption">📖 便携临证急救手册《袖珍方》</div>
-                </div>
-            </div>
-
-            <div class="book-desc">
+</div>
+<!-- 3. 《袖珍方》 -->
+<div class="book-card" data-category="medical" id="book-3">
+<div class="book-header">
+<span class="book-title">《袖珍方》（全四卷 · 三千余方）</span>
+<span class="book-tag tag-med">战地民生急救指南</span>
+</div>
+<div class="book-meta">编撰：周定王朱橚 · 刊刻：明洪武三十年 (1397)</div>
+<div class="book-img-row">
+<div class="book-img-box">
+<img alt="明代袖珍方小字精刻本书影" aria-label="点击放大书影：明代袖珍方小字精刻本书影" loading="lazy" onerror="this.style.display='none'" role="button" src="xiuzhenfang.JPG" tabindex="0"/>
+<div class="book-img-caption">📖 便携临证急救手册《袖珍方》</div>
+<button class="zoom-trigger" type="button">🔍 点击放大书影</button></div>
+</div>
+<div class="book-desc">
                 系定王从《普济方》浩繁方海中提炼而出的便携式临证急救手册。专门选取<strong>药材易得、炮制简便、见效迅捷</strong>之良方，供随军行伍、偏远乡村及无医之地应急治病之用。此书简明实用，明清两代屡经翻刻，流传甚广。
             </div>
-            <ul class="feature-list">
-                <li><strong>辨证精简：</strong>分列伤寒、中风、痈疽、金疮、妇儿急症等常见病门；</li>
-                <li><strong>用药平易：</strong>多选用中原寻常易得草药与家常调料（生姜、葱白、盐、醋等）；</li>
-                <li><strong>便于携带：</strong>采用袖珍小字本印行，利于医士随军随身翻阅。</li>
-            </ul>
-        </div>
-
-        <!-- 4. 《保生余录》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《保生余录》（全三卷）</span>
-                <span class="book-tag tag-med">道家养生与食疗名著</span>
-            </div>
-            <div class="book-meta">辑录：周定王朱橚 · 刊刻：明初王府刻本</div>
-            <div class="book-desc">
+<ul class="feature-list">
+<li><strong>辨证精简：</strong>分列伤寒、中风、痈疽、金疮、妇儿急症等常见病门；</li>
+<li><strong>用药平易：</strong>多选用中原寻常易得草药与家常调料（生姜、葱白、盐、醋等）；</li>
+<li><strong>便于携带：</strong>采用袖珍小字本印行，利于医士随军随身翻阅。</li>
+</ul>
+</div>
+<!-- 4. 《保生余录》 -->
+<div class="book-card" data-category="medical" id="book-4">
+<div class="book-header">
+<span class="book-title">《保生余录》（全三卷）</span>
+<span class="book-tag tag-med">道家养生与食疗名著</span>
+</div>
+<div class="book-meta">辑录：周定王朱橚 · 刊刻：明初王府刻本</div>
+<div class="book-desc">
                 定王总结先秦至宋元道家养生理论与民间寿世验方汇编而成。书中详述四时调摄、起居禁忌、食疗药膳、老人保元与导引吐纳之术，倡导“治未病”与顺应自然的摄生思想，为明代宗室养生学的代表之作。
             </div>
-        </div>
-
-        <h2>🎭 宪王朱有燉戏曲与文学名著</h2>
-
-        <!-- 5. 《诚斋乐府》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《诚斋乐府》（杂剧三十一种 · 散曲八卷）</span>
-                <span class="book-tag tag-art">大明戏曲鼎峰</span>
-            </div>
-            <div class="book-meta">著者：周宪王朱有燉（号诚斋） · 刊刻：明正统至天顺年间周藩刻本</div>
-
-            <div class="book-img-row">
-                <div class="book-img-box">
-                    <img src="chengzai.JPG" alt="诚斋乐府杂剧明周藩朱墨套印本书影" onerror="this.style.display='none'">
-                    <div class="book-img-caption">📖 明宪王《诚斋乐府》原刻剧本</div>
-                </div>
-            </div>
-
-            <div class="book-desc">
+</div>
+<h2 class="library-section-heading">🎭 宪王朱有燉戏曲与文学名著</h2>
+<!-- 5. 《诚斋乐府》 -->
+<div class="book-card" data-category="literature" id="book-5">
+<div class="book-header">
+<span class="book-title">《诚斋乐府》（杂剧三十一种 · 散曲八卷）</span>
+<span class="book-tag tag-art">大明戏曲鼎峰</span>
+</div>
+<div class="book-meta">著者：周宪王朱有燉（号诚斋） · 刊刻：明正统至天顺年间周藩刻本</div>
+<div class="book-img-row">
+<div class="book-img-box">
+<img alt="诚斋乐府杂剧明周藩朱墨套印本书影" aria-label="点击放大书影：诚斋乐府杂剧明周藩朱墨套印本书影" loading="lazy" onerror="this.style.display='none'" role="button" src="chengzai.JPG" tabindex="0"/>
+<div class="book-img-caption">📖 明宪王《诚斋乐府》原刻剧本</div>
+<button class="zoom-trigger" type="button">🔍 点击放大书影</button></div>
+</div>
+<div class="book-desc">
                 朱有燉为明代杂剧名家，存世杂剧数量居明代诸曲家之首。宪王精通音律，作品兼具北曲之豪劲与南曲之婉丽，开创了王府演剧与市民市井曲艺交融的新范式，在日本及海外汉学界亦享有极高评价。
             </div>
-            
-            <h3>🎭 代表性杂剧分类名录</h3>
-            <ul class="feature-list">
-                <li><strong>水浒英雄剧：</strong>《黑旋风仗义疏财》《黑旋风乔断案》——传承元杂剧水浒余韵，生动刻画李逵等市井豪侠；</li>
-                <li><strong>三国历史剧：</strong>《义勇辞金》《关云长千里独行》——赞颂忠义风骨，对明代演义小说戏曲化影响深远；</li>
-                <li><strong>神仙道化剧：</strong>《牡丹仙》《八仙庆寿》《刘晨阮肇误入桃源》——王府节庆承应之作，辞藻富丽，音律精工；</li>
-                <li><strong>世情婚恋剧：</strong>《香囊记》《赵元遇上皇》——描摹宋元市井生活与男女情爱，极具烟火气息。</li>
-            </ul>
-        </div>
-
-        <!-- 6. 《元宫词》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《元宫词》（全一百首）</span>
-                <span class="book-tag tag-art">元大都风物诗史</span>
-            </div>
-            <div class="book-meta">著者：周宪王朱有燉 · 著成年：明永乐年间</div>
-
-            <div class="book-img-row">
-                <div class="book-img-box">
-                    <img src="yuangongci.JPG" alt="元宫词明代刻本书影" onerror="this.style.display='none'">
-                    <div class="book-img-caption">📖 记述元大都宫廷风物之《元宫词》</div>
-                </div>
-            </div>
-
-            <div class="book-desc">
+<h3>🎭 代表性杂剧分类名录</h3>
+<ul class="feature-list">
+<li><strong>水浒英雄剧：</strong>《黑旋风仗义疏财》《黑旋风乔断案》——传承元杂剧水浒余韵，生动刻画李逵等市井豪侠；</li>
+<li><strong>三国历史剧：</strong>《义勇辞金》《关云长千里独行》——赞颂忠义风骨，对明代演义小说戏曲化影响深远；</li>
+<li><strong>神仙道化剧：</strong>《牡丹仙》《八仙庆寿》《刘晨阮肇误入桃源》——王府节庆承应之作，辞藻富丽，音律精工；</li>
+<li><strong>世情婚恋剧：</strong>《香囊记》《赵元遇上皇》——描摹宋元市井生活与男女情爱，极具烟火气息。</li>
+</ul>
+</div>
+<!-- 6. 《元宫词》 -->
+<div class="book-card" data-category="literature" id="book-6">
+<div class="book-header">
+<span class="book-title">《元宫词》（全一百首）</span>
+<span class="book-tag tag-art">元大都风物诗史</span>
+</div>
+<div class="book-meta">著者：周宪王朱有燉 · 著成年：明永乐年间</div>
+<div class="book-img-row">
+<div class="book-img-box">
+<img alt="元宫词明代刻本书影" aria-label="点击放大书影：元宫词明代刻本书影" loading="lazy" onerror="this.style.display='none'" role="button" src="yuangongci.JPG" tabindex="0"/>
+<div class="book-img-caption">📖 记述元大都宫廷风物之《元宫词》</div>
+<button class="zoom-trigger" type="button">🔍 点击放大书影</button></div>
+</div>
+<div class="book-desc">
                 宪王以百首七言绝句，详尽描摹元大都大内宫殿格局、岁时庆典、宫廷饮食（如马奶酒、诈马宴）、服饰仪仗及北方风俗。此组诗既具极高的文学艺术价值，亦是研究蒙元宫廷制度与北方民俗的珍贵第一手诗史资料。
             </div>
-            <div class="quote-box">
+<div class="quote-box">
                 “诈马筵开玉殿春，千官同拜紫微宸。银盆盛肉葡萄酒，敕赐金牌第一人。” ——朱有燉《元宫词 · 节选》
             </div>
-        </div>
-
-        <h2>📚 宗室学者朱睦㮮目录与金石学巨作</h2>
-
-        <!-- 7. 《篇海类编》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《篇海类编》（全二十卷）与《金石碑帖考》</span>
-                <span class="book-tag tag-doc">明代字书与金石巅峰</span>
-            </div>
-            <div class="book-meta">著者：周藩镇平王支宗室 朱睦㮮（万卷堂主人） · 刊刻：明嘉靖至万历年间</div>
-
-            <div class="book-img-row">
-                <div class="book-img-box">
-                    <img src="pianhai.JPG" alt="周藩万卷堂明刻本篇海类编书影" onerror="this.style.display='none'">
-                    <div class="book-img-caption">📖 周藩万卷堂刻本大型字书《篇海类编》</div>
-                </div>
-            </div>
-
-            <div class="book-desc">
+</div>
+<h2 class="library-section-heading">📚 宗室学者朱睦㮮目录与金石学巨作</h2>
+<!-- 7. 《篇海类编》 -->
+<div class="book-card" data-category="research" id="book-7">
+<div class="book-header">
+<span class="book-title">《篇海类编》（全二十卷）与《金石碑帖考》</span>
+<span class="book-tag tag-doc">明代字书与金石巅峰</span>
+</div>
+<div class="book-meta">著者：周藩镇平王支宗室 朱睦㮮（万卷堂主人） · 刊刻：明嘉靖至万历年间</div>
+<div class="book-img-row">
+<div class="book-img-box">
+<img alt="周藩万卷堂明刻本篇海类编书影" aria-label="点击放大书影：周藩万卷堂明刻本篇海类编书影" loading="lazy" onerror="this.style.display='none'" role="button" src="pianhai.JPG" tabindex="0"/>
+<div class="book-img-caption">📖 周藩万卷堂刻本大型字书《篇海类编》</div>
+<button class="zoom-trigger" type="button">🔍 点击放大书影</button></div>
+</div>
+<div class="book-desc">
                 朱睦㮮博通经史，筑“万卷堂”聚书数万卷。所著《篇海类编》广搜古今奇字、俗字与正字，考辨形音义，为明代体量宏大之字典巨著；所撰《金石碑帖考》系统考订中原先秦至唐宋石刻碑版源流，奠定明代藩邸学者在金石文献考据学上的崇高地位。
             </div>
-        </div>
-
-        <h2>📖 周王府重刻与校勘珍本善本</h2>
-
-        <!-- 《幼幼新书》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《幼幼新书》（全四十卷）</span>
-                <span class="book-tag tag-print">周藩校勘古籍</span>
-            </div>
-            <div class="book-meta">主持校刻：周定王府良医所 · 刊刻：明洪武年间</div>
-            <div class="book-desc">
+</div>
+<h2 class="library-section-heading">📖 周王府重刻与校勘珍本善本</h2>
+<!-- 《幼幼新书》 -->
+<div class="book-card" data-category="edition" id="book-8">
+<div class="book-header">
+<span class="book-title">《幼幼新书》（全四十卷）</span>
+<span class="book-tag tag-print">周藩校勘古籍</span>
+</div>
+<div class="book-meta">主持校刻：周定王府良医所 · 刊刻：明洪武年间</div>
+<div class="book-desc">
                 重刊宋代庄绰儿科经典。开封周王府以宋代善本为底本，广校诸家传本，纠正讹误，使这部收罗千首儿科古方、图谱的医学巨典得以完整流传后世，对明代儿科学的发展起到了承前启后的关键作用。
             </div>
-        </div>
-
-        <!-- 《本草发挥》 -->
-        <div class="book-card">
-            <div class="book-header">
-                <span class="book-title">《本草发挥》（全四卷）</span>
-                <span class="book-tag tag-print">金元医理名著</span>
-            </div>
-            <div class="book-meta">校勘：周王府良医所 · 刊行：明代周藩刻本</div>
-            <div class="book-desc">
+</div>
+<!-- 《本草发挥》 -->
+<div class="book-card" data-category="edition" id="book-9">
+<div class="book-header">
+<span class="book-title">《本草发挥》（全四卷）</span>
+<span class="book-tag tag-print">金元医理名著</span>
+</div>
+<div class="book-meta">校勘：周王府良医所 · 刊行：明代周藩刻本</div>
+<div class="book-desc">
                 元代徐彦纯辑录张元素、李杲、朱震亨等金元诸家本草药性理论。周藩精刻本字画精整、校勘精准，成为明代中原医家研习脏腑辨证与药物归经理论的案头必读书目。
             </div>
-        </div>
-
-        <h2>⏳ 周王府修书与刊刻文献大事简表</h2>
-        <div class="table-wrap">
-            <table class="comp-table">
-                <thead>
-                    <tr>
-                        <th>年代</th>
-                        <th>主持者</th>
-                        <th>典籍 / 事件</th>
-                        <th>文献贡献与地位</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>洪武三十年 (1397)</strong></td>
-                        <td>周定王 朱橚</td>
-                        <td>刊刻《袖珍方》四卷</td>
-                        <td>提炼急救便携医方三千余首，布施中原军民。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>洪武三十一年 (1398)</strong></td>
-                        <td>周定王 朱橚</td>
-                        <td>《普济方》编纂成帙</td>
-                        <td>收方 61,739 首，成中国古代收方最多的方剂全书。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>永乐四年 (1406)</strong></td>
-                        <td>周定王 / 周宪王</td>
-                        <td>《救荒本草》二卷刊行</td>
-                        <td>图文精刻 414 种植物，开创中国写生植物学之先河。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>正统至景泰年间</strong></td>
-                        <td>周宪王 朱有燉</td>
-                        <td>《诚斋乐府》杂剧散曲刊刻</td>
-                        <td>刊行杂剧 31 种、散曲数百套，奠定大明戏曲鼎峰地位。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>嘉靖至万历年间</strong></td>
-                        <td>宗室 朱睦㮮</td>
-                        <td>编著《篇海类编》《金石碑帖考》</td>
-                        <td>收录字书音义、考辨天下碑版，名动中原学界。</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
-    </footer>
-
-    <script>
+</div>
+<h2>⏳ 周王府修书与刊刻文献大事简表</h2>
+<div class="table-wrap">
+<table class="comp-table">
+<thead>
+<tr>
+<th>年代</th>
+<th>主持者</th>
+<th>典籍 / 事件</th>
+<th>文献贡献与地位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>洪武三十年 (1397)</strong></td>
+<td>周定王 朱橚</td>
+<td>刊刻《袖珍方》四卷</td>
+<td>提炼急救便携医方三千余首，布施中原军民。</td>
+</tr>
+<tr>
+<td><strong>洪武三十一年 (1398)</strong></td>
+<td>周定王 朱橚</td>
+<td>《普济方》编纂成帙</td>
+<td>收方 61,739 首，成中国古代收方最多的方剂全书。</td>
+</tr>
+<tr>
+<td><strong>永乐四年 (1406)</strong></td>
+<td>周定王 / 周宪王</td>
+<td>《救荒本草》二卷刊行</td>
+<td>图文精刻 414 种植物，开创中国写生植物学之先河。</td>
+</tr>
+<tr>
+<td><strong>正统至景泰年间</strong></td>
+<td>周宪王 朱有燉</td>
+<td>《诚斋乐府》杂剧散曲刊刻</td>
+<td>刊行杂剧 31 种、散曲数百套，奠定大明戏曲鼎峰地位。</td>
+</tr>
+<tr>
+<td><strong>嘉靖至万历年间</strong></td>
+<td>宗室 朱睦㮮</td>
+<td>编著《篇海类编》《金石碑帖考》</td>
+<td>收录字书音义、考辨天下碑版，名动中原学界。</td>
+</tr>
+</tbody>
+</table>
+</div>
+</main>
+<footer class="site-footer">
+<p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
+</footer>
+<script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
@@ -794,5 +774,29 @@
             });
         });
     </script>
-</body>
+<div aria-hidden="true" aria-label="古籍书影放大查看" aria-modal="true" class="image-viewer" id="imageViewer" role="dialog"><button aria-label="关闭图片" id="closeViewer" type="button">✕ 关闭</button><img alt="" id="viewerImage"/><p id="viewerCaption"></p></div><script>
+(function(){
+const cards=Array.from(document.querySelectorAll('.book-card'));
+const filters=Array.from(document.querySelectorAll('[data-filter]'));
+const search=document.getElementById('bookSearch');
+const count=document.getElementById('bookCount');
+const empty=document.getElementById('bookEmpty');
+let category='all';
+function update(){
+ const q=search.value.trim().toLocaleLowerCase();let shown=0;
+ cards.forEach(card=>{const matches=(category==='all'||card.dataset.category===category)&&(!q||card.textContent.toLocaleLowerCase().includes(q));card.hidden=!matches;if(matches)shown++});
+ count.textContent=`显示 ${shown} / ${cards.length} 部`;empty.style.display=shown?'none':'block';
+ document.querySelectorAll('.library-section-heading').forEach(h=>{let next=h.nextElementSibling;let has=false;while(next&&next.tagName!=='H2'){if(next.classList.contains('book-card')&&!next.hidden)has=true;next=next.nextElementSibling}h.hidden=!has;});
+}
+filters.forEach(b=>b.addEventListener('click',()=>{category=b.dataset.filter;filters.forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});update()}));
+search.addEventListener('input',update);
+document.getElementById('clearBooks').addEventListener('click',()=>{search.value='';category='all';filters.forEach(x=>{const active=x.dataset.filter==='all';x.classList.toggle('active',active);x.setAttribute('aria-pressed',String(active))});update();search.focus()});
+update();
+const viewer=document.getElementById('imageViewer'),vi=document.getElementById('viewerImage'),vc=document.getElementById('viewerCaption');let previous=null;
+function openImage(img){if(!img||!img.getAttribute('src'))return;previous=document.activeElement;vi.src=img.getAttribute('src');vi.alt=img.alt||'古籍书影';vc.textContent=img.closest('.book-img-box')?.querySelector('.book-img-caption')?.textContent||vi.alt;viewer.classList.add('open');viewer.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';document.getElementById('closeViewer').focus()}
+function closeImage(){viewer.classList.remove('open');viewer.setAttribute('aria-hidden','true');document.body.style.overflow='';vi.removeAttribute('src');if(previous&&previous.focus)previous.focus()}
+document.querySelectorAll('.book-img-box').forEach(box=>{const img=box.querySelector('img');if(!img)return;img.addEventListener('click',()=>openImage(img));img.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();openImage(img)}});box.querySelector('.zoom-trigger')?.addEventListener('click',()=>openImage(img))});
+document.getElementById('closeViewer').addEventListener('click',closeImage);viewer.addEventListener('click',e=>{if(e.target===viewer)closeImage()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&viewer.classList.contains('open'))closeImage();if(e.key==='Tab'&&viewer.classList.contains('open')){e.preventDefault();document.getElementById('closeViewer').focus()}});
+})();
+</script></body>
 </html>
