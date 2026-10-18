@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>明代宗室爵位与典制考 - 大明周藩纪事</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>明代宗室爵位与典制考 - 大明周藩纪事</title>
+<style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
             --dark-crimson: #6E1313; /* 深赫红 */
@@ -241,222 +242,229 @@
             h1 { font-size: 1.6rem; }
         }
     </style>
-</head>
+<style>
+/* V2 检索、筛选与移动端补充样式 */
+.audit-box{background:#faf5eb;border-left:4px solid #c59b27;padding:1rem 1.3rem;margin:1rem 0 1.5rem;color:#614d2a;font-size:.91rem}
+.finder{background:#fcfaf7;border:1px solid #e5dfc5;border-radius:6px;padding:1rem 1.1rem;margin:1.4rem 0 1.8rem}
+.filter-row,.finder-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.filter-btn,.finder-links a,.clear-btn{background:white;border:1px solid #cda58c;border-radius:4px;padding:.45rem .75rem;color:#8c1d1d;cursor:pointer;font:inherit;font-size:.88rem;text-decoration:none}
+.filter-btn.active,.filter-btn[aria-pressed=true]{background:#8c1d1d;color:white;border-color:#8c1d1d}
+.search-row{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;margin-bottom:.7rem}
+.search-row label{white-space:nowrap}
+#instSearch{flex:1;min-width:170px;border:1px solid #d8bca9;border-radius:4px;padding:.6rem;font:inherit;font-size:.9rem}
+#instCount{font-size:.82rem;color:#7a7269}
+.finder-links{margin-bottom:0}
+.inst-empty{background:#faf5eb;padding:1.3rem;text-align:center;color:#7a7269;margin:1rem 0}
+[data-entry][hidden],.inst-section[hidden],.inst-empty[hidden]{display:none!important}
+.inst-section{scroll-margin-top:90px}
+.inst-section .table-wrap{scrollbar-color:#c59b27 #f7f5f0}
+.inst-section .table-wrap:focus{outline:2px solid #c59b27}
+.table-hint{font-size:.78rem;color:#7a7269;margin:.25rem 0 .4rem}
+@media(max-width:640px){.container{padding:1rem;margin:.75rem}.finder{padding:.8rem}.filter-btn{flex:1 1 auto}.search-row label{width:100%}.finder-links a{flex:1 1 auto;text-align:center}h1{font-size:1.42rem}h2{font-size:1.12rem}}
+</style></head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="site-logo">
+<header class="site-header">
+<div class="header-inner">
+<a class="site-logo" href="index.html">
                 大明周藩纪事 <small>周定王府</small>
-            </a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">首页</a>
-                
-                <!-- 宗系人物 -->
-                <div class="nav-item">
-                    <span class="nav-link">👑 宗系人物 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="figures/index.html">历代人物</a>
-                        <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html">昭穆神位</a>
-                        <a href="branches.html">分房支派</a>
-                        <a href="history.html">王府传承</a>
-                    </div>
-                </div>
-
-                <!-- 典籍金石 -->
-                <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="classics.html">典籍著述</a>
-                        <a href="epigraphy.html">碑刻圹志</a>
-                        <a href="poetry.html">诗文戏曲</a>
-                        <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html" style="background:var(--crimson); color:#fff;">宗室典制</a>
-                        <a href="rules.html">祖训家规</a>
-                    </div>
-                </div>
-
-                <!-- 封地陵寝 -->
-                <div class="nav-item">
-                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="chronology.html">王府年表</a>
-                        <a href="estates.html">郡王封地</a>
-                        <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html">王陵陵寝</a>
-                        <a href="migration.html">迁徙寻根</a>
-                    </div>
-                </div>
-
-                <!-- 考据工具 -->
-                <div class="nav-item">
-                    <span class="nav-link">🛠️ 考据工具 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html">五行命名助手</a>
-                        <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html">修谱指南凡例</a>
-                        <a href="memorial.html">云端享堂祭奠</a>
-                    </div>
-                </div>
-
-                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <h1>明代宗室封爵与礼制考</h1>
-        <div class="intro-box">
+</a>
+<button aria-label="打开菜单" class="menu-toggle" onclick="toggleMenu()">☰</button>
+<nav class="nav-menu" id="navMenu">
+<a class="nav-link" href="index.html">首页</a>
+<!-- 宗系人物 -->
+<div class="nav-item">
+<span class="nav-link">👑 宗系人物 ▾</span>
+<div class="dropdown-menu">
+<a href="figures/index.html">历代人物</a>
+<a href="hall-of-fame.html">周藩名人堂</a>
+<a href="lineage.html">世系字辈</a>
+<a href="tree.html">数字家谱树</a>
+<a href="ancestors.html">昭穆神位</a>
+<a href="branches.html">分房支派</a>
+<a href="history.html">王府传承</a>
+</div>
+</div>
+<!-- 典籍金石 -->
+<div class="nav-item">
+<span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
+<div class="dropdown-menu">
+<a href="classics.html">典籍著述</a>
+<a href="epigraphy.html">碑刻圹志</a>
+<a href="poetry.html">诗文戏曲</a>
+<a href="hall.html">堂号楹联</a>
+<a href="institution.html" style="background:var(--crimson); color:#fff;">宗室典制</a>
+<a href="rules.html">祖训家规</a>
+</div>
+</div>
+<!-- 封地陵寝 -->
+<div class="nav-item">
+<span class="nav-link">🗺️ 封地陵寝 ▾</span>
+<div class="dropdown-menu">
+<a href="chronology.html">王府年表</a>
+<a href="estates.html">郡王封地</a>
+<a href="villages.html">聚落地名</a>
+<a href="tombs.html">王陵陵寝</a>
+<a href="migration.html">迁徙寻根</a>
+</div>
+</div>
+<!-- 考据工具 -->
+<div class="nav-item">
+<span class="nav-link">🛠️ 考据工具 ▾</span>
+<div class="dropdown-menu">
+<a href="calendar.html">纪年干支换算</a>
+<a href="naming.html">五行命名助手</a>
+<a href="naming-guide.html">起名专栏与宗法</a>
+<a href="genealogy-guide.html">修谱指南凡例</a>
+<a href="memorial.html">云端享堂祭奠</a>
+</div>
+</div>
+<a class="nav-link" href="search.html" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<h1>明代宗室封爵与礼制考</h1>
+<div class="intro-box">
             明代宗室制度严格依据《皇明祖训》定制，确立了<strong>“世袭递降、分等授爵、亲疏有别”</strong>的根本法度。除亲王、郡王嫡长子袭爵外，其余诸子皆按辈分降等受封将军或中尉，宗女亦有严格封阶与仪宾之制，构成了大明周王府二百六十余年繁衍生息的宗法基石。
-        </div>
-
-        <h2>👑 宗室男嗣八等封爵与禄米体系</h2>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 130px;">封爵名称</th>
-                        <th>承封资格与世系对应</th>
-                        <th style="width: 100px;">品阶</th>
-                        <th style="width: 190px;">岁禄标准（米）</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>亲王</strong></td>
-                        <td>皇帝诸子（除皇太子外）或袭爵嫡长子（周王大宗）</td>
-                        <td><span class="badge badge-rank">超品</span></td>
-                        <td>岁禄一万石（周定王初封规制）</td>
-                    </tr>
-                    <tr>
-                        <td><strong>郡王</strong></td>
-                        <td>亲王诸子（除世子外）或袭爵嫡长子（周藩十四郡王）</td>
-                        <td><span class="badge badge-rank">超品 / 正一品</span></td>
-                        <td>岁禄二千石</td>
-                    </tr>
-                    <tr>
-                        <td><strong>镇国将军</strong></td>
-                        <td>郡王诸子（除长子外）</td>
-                        <td>从一品</td>
-                        <td>岁禄一千石</td>
-                    </tr>
-                    <tr>
-                        <td><strong>辅国将军</strong></td>
-                        <td>镇国将军诸子</td>
-                        <td>从二品</td>
-                        <td>岁禄八百石</td>
-                    </tr>
-                    <tr>
-                        <td><strong>奉国将军</strong></td>
-                        <td>辅国将军诸子</td>
-                        <td>从三品</td>
-                        <td>岁禄六百石</td>
-                    </tr>
-                    <tr>
-                        <td><strong>镇国中尉</strong></td>
-                        <td>奉国将军诸子（如周藩宗正朱睦㮮）</td>
-                        <td>从四品</td>
-                        <td>岁禄四百石</td>
-                    </tr>
-                    <tr>
-                        <td><strong>辅国中尉</strong></td>
-                        <td>镇国中尉诸子</td>
-                        <td>从五品</td>
-                        <td>岁禄三百石</td>
-                    </tr>
-                    <tr>
-                        <td><strong>奉国中尉</strong></td>
-                        <td>辅国中尉以下诸子（至宗族末代不复降等）</td>
-                        <td>从六品</td>
-                        <td>岁禄二百石（世袭不替）</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>🌸 宗女封阶与宗人府仪宾品级（依《大明会典》考）</h2>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 120px;">宗女封阶</th>
-                        <th>受封资格对应</th>
-                        <th style="width: 140px;">配偶封号与官阶</th>
-                        <th>仪服与岁禄礼制</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><span class="badge badge-female">郡主</span></td>
-                        <td>亲王之女（除公主外首尊）</td>
-                        <td>郡主仪宾 · <strong>从二品</strong></td>
-                        <td>禄米八百石，冠服饰以金翟，胸背狮子，鈒花金带</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-female">县主</span></td>
-                        <td>郡王之女</td>
-                        <td>县主仪宾 · <strong>从三品</strong></td>
-                        <td>禄米六百石，金绣孔雀胸背</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-female">郡君</span></td>
-                        <td>镇国将军之女</td>
-                        <td>郡君仪宾 · <strong>从四品</strong></td>
-                        <td>禄米四百石，白泽胸背</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-female">县君</span></td>
-                        <td>辅国将军之女</td>
-                        <td>县君仪宾 · <strong>从五品</strong></td>
-                        <td>禄米三百石</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-female">乡君</span></td>
-                        <td>奉国将军之女</td>
-                        <td>乡君仪宾 · <strong>从六品</strong></td>
-                        <td>禄米二百石</td>
-                    </tr>
-                    <tr>
-                        <td><span class="badge badge-female">宗女</span></td>
-                        <td>中尉以下之女（无封号）</td>
-                        <td>仪宾无品阶（免除杂徭）</td>
-                        <td>由宗人府与布政司给发脂粉银与布帛</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>🏛️ 周王府长史司与属官机构考</h2>
-        <div class="feature-card">
-            <p>
+        </div><div class="audit-box"><strong>📜 史料核验提示：</strong>本页保留原站所录宗室封爵、品阶、禄米及属官制度资料，作为检索与研究线索。明初、明中后期的制度规定及实际支给可能不同；“超品／正一品”等品阶比附、宗女仪宾待遇、具体机构员额与人物事例，均应对照《皇明祖训》《明史·职官志》《大明会典》及相关地方文献逐项核实。下列数字不宜直接理解为整个明代统一不变的标准。</div><section aria-label="宗室典制检索" class="finder"><div aria-label="资料分类" class="filter-row" role="group"><button aria-pressed="true" class="filter-btn active" data-filter="all" type="button">全部资料</button><button aria-pressed="false" class="filter-btn" data-filter="male" type="button">👑 男嗣封爵</button><button aria-pressed="false" class="filter-btn" data-filter="female" type="button">🌸 宗女仪宾</button><button aria-pressed="false" class="filter-btn" data-filter="office" type="button">🏛️ 王府属官</button><button aria-pressed="false" class="filter-btn" data-filter="rules" type="button">📖 宗藩典制</button></div><div class="search-row"><label for="instSearch">查找典制</label><input autocomplete="off" id="instSearch" placeholder="搜索爵位、禄米、仪宾、机构、制度……" type="search"/><button class="clear-btn" id="instClear" type="button">清除</button><span aria-live="polite" id="instCount" role="status"></span></div><div class="finder-links"><a href="tree.html">查看数字家谱树 →</a><a href="branches.html">查看十四大分房 →</a><a href="lineage.html">查看世系字辈 →</a></div></section><p class="inst-empty" hidden="" id="instEmpty">没有找到符合条件的资料，请尝试其他关键词或分类。</p>
+<section class="inst-section" data-category="male"><h2>👑 宗室男嗣八等封爵与禄米体系</h2>
+<p class="table-hint">提示：手机端可在表格区域左右滑动查看全部列。</p><div aria-label="可横向滚动的宗室典制对照表" class="table-wrap" tabindex="0">
+<table>
+<thead>
+<tr>
+<th style="width: 130px;">封爵名称</th>
+<th>承封资格与世系对应</th>
+<th style="width: 100px;">品阶</th>
+<th style="width: 190px;">岁禄标准（米）</th>
+</tr>
+</thead>
+<tbody>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>亲王</strong></td>
+<td>皇帝诸子（除皇太子外）或袭爵嫡长子（周王大宗）</td>
+<td><span class="badge badge-rank">超品</span></td>
+<td>岁禄一万石（周定王初封规制）</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>郡王</strong></td>
+<td>亲王诸子（除世子外）或袭爵嫡长子（周藩十四郡王）</td>
+<td><span class="badge badge-rank">超品 / 正一品</span></td>
+<td>岁禄二千石</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>镇国将军</strong></td>
+<td>郡王诸子（除长子外）</td>
+<td>从一品</td>
+<td>岁禄一千石</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>辅国将军</strong></td>
+<td>镇国将军诸子</td>
+<td>从二品</td>
+<td>岁禄八百石</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>奉国将军</strong></td>
+<td>辅国将军诸子</td>
+<td>从三品</td>
+<td>岁禄六百石</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>镇国中尉</strong></td>
+<td>奉国将军诸子（如周藩宗正朱睦㮮）</td>
+<td>从四品</td>
+<td>岁禄四百石</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>辅国中尉</strong></td>
+<td>镇国中尉诸子</td>
+<td>从五品</td>
+<td>岁禄三百石</td>
+</tr>
+<tr data-entry="" data-keywords="封爵 爵位 男嗣 禄米 品阶">
+<td><strong>奉国中尉</strong></td>
+<td>辅国中尉以下诸子（至宗族末代不复降等）</td>
+<td>从六品</td>
+<td>岁禄二百石（世袭不替）</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section class="inst-section" data-category="female"><h2>🌸 宗女封阶与宗人府仪宾品级（依《大明会典》考）</h2>
+<p class="table-hint">提示：手机端可在表格区域左右滑动查看全部列。</p><div aria-label="可横向滚动的宗室典制对照表" class="table-wrap" tabindex="0">
+<table>
+<thead>
+<tr>
+<th style="width: 120px;">宗女封阶</th>
+<th>受封资格对应</th>
+<th style="width: 140px;">配偶封号与官阶</th>
+<th>仪服与岁禄礼制</th>
+</tr>
+</thead>
+<tbody>
+<tr data-entry="" data-keywords="宗女 女眷 仪宾 封阶 婚姻 禄米 冠服">
+<td><span class="badge badge-female">郡主</span></td>
+<td>亲王之女（除公主外首尊）</td>
+<td>郡主仪宾 · <strong>从二品</strong></td>
+<td>禄米八百石，冠服饰以金翟，胸背狮子，鈒花金带</td>
+</tr>
+<tr data-entry="" data-keywords="宗女 女眷 仪宾 封阶 婚姻 禄米 冠服">
+<td><span class="badge badge-female">县主</span></td>
+<td>郡王之女</td>
+<td>县主仪宾 · <strong>从三品</strong></td>
+<td>禄米六百石，金绣孔雀胸背</td>
+</tr>
+<tr data-entry="" data-keywords="宗女 女眷 仪宾 封阶 婚姻 禄米 冠服">
+<td><span class="badge badge-female">郡君</span></td>
+<td>镇国将军之女</td>
+<td>郡君仪宾 · <strong>从四品</strong></td>
+<td>禄米四百石，白泽胸背</td>
+</tr>
+<tr data-entry="" data-keywords="宗女 女眷 仪宾 封阶 婚姻 禄米 冠服">
+<td><span class="badge badge-female">县君</span></td>
+<td>辅国将军之女</td>
+<td>县君仪宾 · <strong>从五品</strong></td>
+<td>禄米三百石</td>
+</tr>
+<tr data-entry="" data-keywords="宗女 女眷 仪宾 封阶 婚姻 禄米 冠服">
+<td><span class="badge badge-female">乡君</span></td>
+<td>奉国将军之女</td>
+<td>乡君仪宾 · <strong>从六品</strong></td>
+<td>禄米二百石</td>
+</tr>
+<tr data-entry="" data-keywords="宗女 女眷 仪宾 封阶 婚姻 禄米 冠服">
+<td><span class="badge badge-female">宗女</span></td>
+<td>中尉以下之女（无封号）</td>
+<td>仪宾无品阶（免除杂徭）</td>
+<td>由宗人府与布政司给发脂粉银与布帛</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section><section class="inst-section" data-category="office"><h2>🏛️ 周王府长史司与属官机构考</h2>
+<div class="feature-card">
+<p data-entry="" data-keywords="王府属官 长史司 王府机构 官制">
                 依据《大明会典》，周王府作为亲王国，设有朝廷委派的<strong>周王府长史司</strong>（设正三品长史一人、从四品副长史一人），总揽王府文书案牍、礼制迎送与规诫之责。下设完备之“七所八局”：
             </p>
-            <ul>
-                <li><strong>良医所：</strong>设正八品正科一人、从九品副科一人。周定王以此为基地，延揽滕硕、李恒、刘醇等名医，主持编撰《救荒本草》与《普济方》，为明代王府科学著述之先锋；</li>
-                <li><strong>审理所：</strong>掌王府宗室词讼与内部纪律，惩戒宗室不法；</li>
-                <li><strong>典膳所、奉祠所、典宝所：</strong>分别掌管亲王宴飨玉馔、四时宗庙祭祀（享堂神主）及金宝印玺；</li>
-                <li><strong>纪善所、典仪所：</strong>掌宗室子弟经史教导，督导言行礼义，导引朝见封拜典礼；</li>
-                <li><strong>开封宗正司：</strong>设于周王府东华门外，由德高望重之宗室（如朱睦㮮）掌理，专司十四房郡王宗室名籍造册、婚配请名与宗牒考勘。</li>
-            </ul>
-        </div>
-
-        <h2>📖 皇明宗藩典制三大铁律</h2>
-        <div class="quote-box">
-            <p><strong>• 爵位不跨房转移：</strong>亲王、郡王绝嗣者，由宗人府遣官会同礼部勘核玉牒，按血缘昭穆由本宗近支弟侄承继（如周宪王无嗣，由同母弟祥符王朱有爝承袭亲王大统）；</p>
-            <p><strong>• 赐名与请封程序：</strong>宗子年满十岁由王府长史司具呈宗人府请名，末字严格按“木火土金水”相生定偏旁；婚配须请旨封授仪宾，严禁私自结姻；</p>
-            <p><strong>• 宗法与国法兼严：</strong>《皇明祖训》严禁宗室私置兵马、擅离封地，违者削爵软禁凤阳高墙；周藩二百六十载以恭顺守礼、好学著述为中原诸藩表率。</p>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
-    </footer>
-
-    <script>
+<ul>
+<li data-entry="" data-keywords="王府属官 长史司 官署 机构"><strong>良医所：</strong>设正八品正科一人、从九品副科一人。周定王以此为基地，延揽滕硕、李恒、刘醇等名医，主持编撰《救荒本草》与《普济方》，为明代王府科学著述之先锋；</li>
+<li data-entry="" data-keywords="王府属官 长史司 官署 机构"><strong>审理所：</strong>掌王府宗室词讼与内部纪律，惩戒宗室不法；</li>
+<li data-entry="" data-keywords="王府属官 长史司 官署 机构"><strong>典膳所、奉祠所、典宝所：</strong>分别掌管亲王宴飨玉馔、四时宗庙祭祀（享堂神主）及金宝印玺；</li>
+<li data-entry="" data-keywords="王府属官 长史司 官署 机构"><strong>纪善所、典仪所：</strong>掌宗室子弟经史教导，督导言行礼义，导引朝见封拜典礼；</li>
+<li data-entry="" data-keywords="王府属官 长史司 官署 机构"><strong>开封宗正司：</strong>设于周王府东华门外，由德高望重之宗室（如朱睦㮮）掌理，专司十四房郡王宗室名籍造册、婚配请名与宗牒考勘。</li>
+</ul>
+</div>
+</section><section class="inst-section" data-category="rules"><h2>📖 皇明宗藩典制三大铁律</h2>
+<div class="quote-box">
+<p data-entry="" data-keywords="宗藩典制 宗法 祖训 规制 礼制"><strong>• 爵位不跨房转移：</strong>亲王、郡王绝嗣者，由宗人府遣官会同礼部勘核玉牒，按血缘昭穆由本宗近支弟侄承继（如周宪王无嗣，由同母弟祥符王朱有爝承袭亲王大统）；</p>
+<p data-entry="" data-keywords="宗藩典制 宗法 祖训 规制 礼制"><strong>• 赐名与请封程序：</strong>宗子年满十岁由王府长史司具呈宗人府请名，末字严格按“木火土金水”相生定偏旁；婚配须请旨封授仪宾，严禁私自结姻；</p>
+<p data-entry="" data-keywords="宗藩典制 宗法 祖训 规制 礼制"><strong>• 宗法与国法兼严：</strong>《皇明祖训》严禁宗室私置兵马、擅离封地，违者削爵软禁凤阳高墙；周藩二百六十载以恭顺守礼、好学著述为中原诸藩表率。</p>
+</div>
+</section><div class="audit-box"><strong>参考核验方向：</strong>《皇明祖训》《大明会典》《明史》有关宗藩、职官及食货条目。当前网页未逐条列出卷次、版本及页码，所录制度细节和周藩人物关联仍待史料校勘；检索与分类不代表已完成历史真实性认证。</div></main>
+<footer class="site-footer">
+<p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
+</footer>
+<script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
@@ -470,5 +478,45 @@
             });
         });
     </script>
-</body>
+<script>
+(function(){
+  const sections=Array.from(document.querySelectorAll('.inst-section'));
+  const entries=Array.from(document.querySelectorAll('[data-entry]'));
+  const input=document.getElementById('instSearch');
+  const count=document.getElementById('instCount');
+  const empty=document.getElementById('instEmpty');
+  const buttons=Array.from(document.querySelectorAll('[data-filter]'));
+  const aliases={
+    male:'男嗣 封爵 爵位 禄米 品阶',
+    female:'宗女 仪宾 女眷 封阶 婚姻 禄米',
+    office:'王府属官 官署 机构',
+    rules:'宗藩典制 祖训 宗法 赐名 请封 礼制 婚配 继承'
+  };
+  let current='all';
+  function normalize(s){return String(s||'').toLocaleLowerCase('zh-CN').replace(/\s+/g,'');}
+  function update(){
+    const q=normalize(input.value.trim());let shown=0;
+    entries.forEach(el=>{
+      const section=el.closest('.inst-section');const cat=section.dataset.category;
+      const corpus=normalize(el.textContent+' '+(el.dataset.keywords||'')+' '+aliases[cat]);
+      const match=(current==='all'||current===cat)&&(!q||corpus.includes(q));
+      el.hidden=!match;if(match)shown++;
+    });
+    sections.forEach(section=>{
+      const hasVisible=Array.from(section.querySelectorAll('[data-entry]')).some(el=>!el.hidden);
+      section.hidden=!hasVisible;
+    });
+    count.textContent='显示 '+shown+' / '+entries.length+' 项资料';
+    empty.hidden=shown!==0;
+  }
+  buttons.forEach(btn=>btn.addEventListener('click',()=>{
+    current=btn.dataset.filter;
+    buttons.forEach(b=>{const selected=b===btn;b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});
+    update();
+  }));
+  input.addEventListener('input',update);
+  document.getElementById('instClear').addEventListener('click',()=>{input.value='';current='all';buttons.forEach(b=>{const selected=b.dataset.filter==='all';b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected));});update();input.focus();});
+  update();
+})();
+</script></body>
 </html>
