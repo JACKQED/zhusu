@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩后裔全国聚落与村庄考 - 大明周藩纪事</title>
+    <title>周藩后裔全国聚落与村庄考 V2 - 大明周藩纪事</title>
     <style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
@@ -287,6 +287,25 @@
             margin-top: 4rem; 
         }
 
+        /* V2：检索结果、史料提示与移动端适配 */
+        .source-note { background:#FAF5EB; border-left:4px solid var(--accent-gold); padding:1rem 1.3rem; margin:0 0 1.3rem; font-size:.9rem; color:#614D2A; }
+        .search-box { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+        .clear-btn { border:1px solid #CFAE96; color:var(--crimson); background:#fff; padding:.38rem .7rem; border-radius:4px; cursor:pointer; }
+        .clear-btn:hover { background:#FAF5EB; }
+        .result-line { margin:-.8rem 0 1.2rem; font-size:.9rem; color:var(--muted); }
+        .empty-state { display:none; text-align:center; padding:2rem 1rem; background:#FAF5EB; color:#614D2A; border-radius:5px; }
+        .village-card[hidden] { display:none !important; }
+        .filter-btn:focus-visible, .clear-btn:focus-visible, .search-box input:focus-visible { outline:2px solid var(--accent-gold); outline-offset:2px; }
+        @media (max-width: 700px) {
+            .container { padding:1rem; }
+            .village-grid { grid-template-columns:1fr; gap:1rem; }
+            .village-card { padding:1.1rem; }
+            .village-header { flex-direction:column; }
+            .village-badge-wrap { flex-wrap:wrap; }
+            .search-box { width:100%; }
+            .search-box input { flex:1; min-width:0; }
+            h1 { font-size:1.45rem; }
+        }
         @media (max-width: 960px) {
             .menu-toggle { display: block; }
             .nav-menu { 
@@ -391,6 +410,8 @@
             明末崇祯十五年（1642年）黄河决口水没开封及清初鼎革，周王府宗室子孙自汴梁王城散迁中原与四方。为保全宗脉，多数宗亲隐居乡野，聚族而居，形成了带有<strong>“朱家楼”、“朱王庄”、“王府营”、“朱寨”</strong>等显著宗族标记的传统村落，成为今日周藩后裔按图索骥、认祖寻根的重要田野凭证。
         </div>
 
+        <div class="source-note">📜 <strong>史料核验提示：</strong>本页保留原稿中的聚落名称、迁徙线索及房派归属，供寻根调查使用。村名含“朱”、地方传说、字辈相似或位于旧封地，均不能单独证明为周藩后裔；具体归属须结合族谱原件、墓志碑刻、地方志及可核实的世系记录逐项考证。部分叙述目前尚未附可核对的出处，不宜作为定论引用。</div>
+
         <!-- 区域筛选与检索 -->
         <div class="toolbar">
             <div class="filter-bar">
@@ -402,10 +423,13 @@
                 <button class="filter-btn" onclick="filterProvince('西南', this)">西南滇黔</button>
             </div>
             <div class="search-box">
-                <input type="text" id="villageSearch" placeholder="搜索村名、房派、县名..." oninput="searchVillages(this.value)">
+                <input type="search" id="villageSearch" aria-label="搜索聚落" placeholder="搜索村名、房派、县名..." oninput="searchVillages(this.value)">
+                <button type="button" class="clear-btn" onclick="resetVillageFilters()">清除</button>
             </div>
         </div>
 
+        <p class="result-line" id="resultCount" role="status" aria-live="polite"></p>
+        <div class="empty-state" id="emptyState">没有找到符合条件的聚落。请尝试其他关键词或选择“全部区域”。</div>
         <div class="village-grid" id="villageGrid">
             <!-- 河南·封丘 -->
             <div class="village-card" data-prov="河南">
@@ -615,44 +639,53 @@
 
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function(e) {
-                if (window.innerWidth <= 960) {
+                if (window.innerWidth <= 960 && !e.target.closest('.dropdown-menu')) {
                     this.classList.toggle('active');
                 }
             });
         });
 
-        // 省份/区域筛选
+        // V2：地区与关键词共用一套筛选状态，不再通过按钮文字反推省份
+        let selectedProvince = '全部';
+        const villageCards = Array.from(document.querySelectorAll('.village-card'));
+
         function filterProvince(prov, btn) {
-            const btns = document.querySelectorAll('.filter-btn');
-            btns.forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-
-            const kw = document.getElementById('villageSearch').value.trim().toLowerCase();
-            applyFilterAndSearch(prov, kw);
-        }
-
-        // 实时检索
-        function searchVillages(kw) {
-            const activeBtn = document.querySelector('.filter-btn.active');
-            const prov = activeBtn ? activeBtn.innerText.replace('大本营','').replace('皖北','').replace('徐淮','').replace('鲁西南','').replace('滇黔','').replace('全部区域','全部') : '全部';
-            applyFilterAndSearch(prov, kw.trim().toLowerCase());
-        }
-
-        function applyFilterAndSearch(prov, kw) {
-            const cards = document.querySelectorAll('.village-card');
-            cards.forEach(card => {
-                const cardProv = card.getAttribute('data-prov') || '';
-                const text = card.innerText.toLowerCase();
-                const matchProv = (prov === '全部' || cardProv.includes(prov));
-                const matchKw = (!kw || text.includes(kw));
-
-                if (matchProv && matchKw) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+            selectedProvince = prov;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                const active = b === btn;
+                b.classList.toggle('active', active);
+                b.setAttribute('aria-pressed', String(active));
             });
+            applyFilterAndSearch();
         }
+
+        function searchVillages() {
+            applyFilterAndSearch();
+        }
+
+        function applyFilterAndSearch() {
+            const kw = document.getElementById('villageSearch').value.trim().toLocaleLowerCase('zh-CN');
+            let visible = 0;
+            villageCards.forEach(card => {
+                const province = card.dataset.prov || '';
+                const matchesProvince = selectedProvince === '全部' || province === selectedProvince;
+                const matchesText = !kw || card.textContent.toLocaleLowerCase('zh-CN').includes(kw);
+                const show = matchesProvince && matchesText;
+                card.hidden = !show;
+                if (show) visible++;
+            });
+            document.getElementById('resultCount').textContent = `显示 ${visible} / ${villageCards.length} 条聚落资料`;
+            document.getElementById('emptyState').style.display = visible ? 'none' : 'block';
+        }
+
+        function resetVillageFilters() {
+            document.getElementById('villageSearch').value = '';
+            filterProvince('全部', document.querySelector('.filter-btn'));
+        }
+
+        // 初次加载显示总数及筛选状态
+        document.querySelectorAll('.filter-btn').forEach((btn, i) => btn.setAttribute('aria-pressed', String(i === 0)));
+        applyFilterAndSearch();
     </script>
 </body>
 </html>
