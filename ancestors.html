@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩历代昭穆神位谱 - 大明周藩纪事</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>周藩历代昭穆神位谱 V2 - 大明周藩纪事</title>
+<style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
             --dark-crimson: #6E1313; /* 深赫红 */
@@ -291,189 +291,180 @@
             .altar-container { grid-template-columns: 1fr; }
             h1 { font-size: 1.6rem; }
         }
-    </style>
+    
+/* V2: search, detail expansion and responsive improvements */
+.tools-panel{background:#fcfaf7;border:1px solid #e5dfc5;border-radius:7px;padding:1rem 1.2rem;margin:1.4rem 0}
+.tools-panel label{font-weight:bold;color:var(--crimson);display:block;margin-bottom:.45rem}
+.tool-row{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.tool-row input{flex:1;min-width:190px;padding:.65rem .8rem;border:1px solid #d8cbb9;border-radius:4px;font:inherit;background:white}
+.tool-row button,.detail-button{font:inherit;color:var(--crimson);background:#fff;border:1px solid #a92b2b;border-radius:4px;padding:.35rem .8rem;cursor:pointer}
+.tool-row button:hover,.detail-button:hover{background:#fff0e9}
+#searchCount{color:var(--muted);font-size:.85rem}
+.quick-links{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.8rem}
+.quick-links a,.tablet-actions a{color:var(--crimson);text-decoration:none;border:1px solid #e3cbbb;border-radius:4px;padding:.28rem .65rem;font-size:.85rem;background:#fff}
+.quick-links a:hover,.tablet-actions a:hover{text-decoration:underline}
+.tablet-actions{display:flex;justify-content:center;align-items:center;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.tablet-extra{margin-top:.85rem;padding:.75rem;background:#fff9ef;border-left:3px solid var(--accent-gold);font-size:.85rem;text-align:left;color:#5c4a38}
+.tablet-card[hidden]{display:none!important}
+.tablet-card:focus-within{outline:2px solid var(--accent-gold);outline-offset:2px}
+.empty-col{color:#82766d;font-size:.9rem;text-align:center;padding:1rem}
+@media(max-width:960px){.altar-container{grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}.tablet-card{padding:1rem .7rem}.tablet-name{font-size:1.05rem}}
+@media(max-width:620px){.header-inner{flex-wrap:wrap}.container{padding:1rem;margin:.65rem}.altar-container{grid-template-columns:1fr}.altar-column-header{margin-bottom:.5rem}.tablet-card{margin-bottom:.7rem}h1{font-size:1.35rem}.quick-links a{flex:1;text-align:center}.tool-row input{width:100%;flex-basis:100%}}
+</style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="site-logo">
+<header class="site-header">
+<div class="header-inner">
+<a class="site-logo" href="index.html">
                 大明周藩纪事 <small>周定王府</small>
-            </a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">首页</a>
-                
-                <!-- 宗系人物 -->
-                <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">👑 宗系人物 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="figures/index.html">历代人物</a>
-                        <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html" style="background:var(--crimson); color:#fff;">昭穆神位</a>
-                        <a href="branches.html">分房支派</a>
-                        <a href="history.html">王府传承</a>
-                    </div>
-                </div>
-
-                <!-- 典籍金石 -->
-                <div class="nav-item">
-                    <span class="nav-link">📚 典籍金石 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="classics.html">典籍著述</a>
-                        <a href="epigraphy.html">碑刻圹志</a>
-                        <a href="poetry.html">诗文戏曲</a>
-                        <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html">宗室典制</a>
-                        <a href="rules.html">祖训家规</a>
-                    </div>
-                </div>
-
-                <!-- 封地陵寝 -->
-                <div class="nav-item">
-                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="chronology.html">王府年表</a>
-                        <a href="estates.html">郡王封地</a>
-                        <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html">王陵陵寝</a>
-                        <a href="migration.html">迁徙寻根</a>
-                    </div>
-                </div>
-
-                <!-- 考据工具 -->
-                <div class="nav-item">
-                    <span class="nav-link">🛠️ 考据工具 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html">五行命名助手</a>
-                        <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html">修谱指南凡例</a>
-                        <a href="memorial.html">云端享堂祭奠</a>
-                    </div>
-                </div>
-
-                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <h1>周藩历代昭穆神位谱</h1>
-        <div class="intro-box">
-            古礼宗庙之制：<strong>“始祖居中，父为昭（左）、子为穆（右）”</strong>，代代交错相承。本神位谱以大明太祖高皇帝为第一世总始祖居正尊大位，始祖周定王朱橚为第二世居左昭大位，历代嗣统亲王依世系字辈正尊卑昭穆之序，垂范后昆，慎终追远。
-        </div>
-
-        <!-- 始祖正尊大位（朱元璋为第一世） -->
-        <div class="altar-center">
-            <div class="tablet-card" style="max-width: 540px; margin: 0 auto; background: var(--crimson); color: #fff; border: 2px solid var(--accent-gold); box-shadow: 0 4px 18px rgba(140,29,29,0.25);">
-                <span class="tablet-tag tag-main">👑 百代不迁之宗 · 第一世大始祖</span>
-                <div class="tablet-name" style="color: #fff; font-size: 1.48rem; line-height: 1.6; margin-top: 0.3rem;">
+</a>
+<button aria-label="打开菜单" class="menu-toggle" onclick="toggleMenu()">☰</button>
+<nav class="nav-menu" id="navMenu">
+<a class="nav-link" href="index.html">首页</a>
+<!-- 宗系人物 -->
+<div class="nav-item">
+<span class="nav-link" style="color:#fff; font-weight:bold;">👑 宗系人物 ▾</span>
+<div class="dropdown-menu">
+<a href="figures/index.html">历代人物</a>
+<a href="hall-of-fame.html">周藩名人堂</a>
+<a href="lineage.html">世系字辈</a>
+<a href="tree.html">数字家谱树</a>
+<a href="ancestors.html" style="background:var(--crimson); color:#fff;">昭穆神位</a>
+<a href="branches.html">分房支派</a>
+<a href="history.html">王府传承</a>
+</div>
+</div>
+<!-- 典籍金石 -->
+<div class="nav-item">
+<span class="nav-link">📚 典籍金石 ▾</span>
+<div class="dropdown-menu">
+<a href="classics.html">典籍著述</a>
+<a href="epigraphy.html">碑刻圹志</a>
+<a href="poetry.html">诗文戏曲</a>
+<a href="hall.html">堂号楹联</a>
+<a href="institution.html">宗室典制</a>
+<a href="rules.html">祖训家规</a>
+</div>
+</div>
+<!-- 封地陵寝 -->
+<div class="nav-item">
+<span class="nav-link">🗺️ 封地陵寝 ▾</span>
+<div class="dropdown-menu">
+<a href="chronology.html">王府年表</a>
+<a href="estates.html">郡王封地</a>
+<a href="villages.html">聚落地名</a>
+<a href="tombs.html">王陵陵寝</a>
+<a href="migration.html">迁徙寻根</a>
+</div>
+</div>
+<!-- 考据工具 -->
+<div class="nav-item">
+<span class="nav-link">🛠️ 考据工具 ▾</span>
+<div class="dropdown-menu">
+<a href="calendar.html">纪年干支换算</a>
+<a href="naming.html">五行命名助手</a>
+<a href="naming-guide.html">起名专栏与宗法</a>
+<a href="genealogy-guide.html">修谱指南凡例</a>
+<a href="memorial.html">云端享堂祭奠</a>
+</div>
+</div>
+<a class="nav-link" href="search.html" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<h1>周藩历代昭穆神位谱</h1>
+<div class="intro-box">昭穆是传统宗庙礼制中区分世代次序的概念。本页以朱元璋为第一世、周定王朱橚为第二世，按本站世系字辈表制作左昭右穆的数字示意图。此图用于世代对照与文化介绍，不等同于已经考证的明代周王府实际祭祀神位陈设。</div>
+<!-- 始祖正尊大位（朱元璋为第一世） -->
+<div class="altar-center">
+<div class="tablet-card" style="max-width: 540px; margin: 0 auto; background: var(--crimson); color: #fff; border: 2px solid var(--accent-gold); box-shadow: 0 4px 18px rgba(140,29,29,0.25);">
+<span class="tablet-tag tag-main">👑 百代不迁之宗 · 第一世大始祖</span>
+<div class="tablet-name" style="color: #fff; font-size: 1.48rem; line-height: 1.6; margin-top: 0.3rem;">
                     大明太祖高皇帝 朱元璋 圣祖神位
                 </div>
-                <div class="tablet-meta" style="color: #F8E6B8; margin-top: 0.5rem;">
+<div class="tablet-meta" style="color: #F8E6B8; margin-top: 0.5rem;">
                     配 孝慈高皇后马氏 · 开创大明天下 亲赐周藩二十字派语
                 </div>
-            </div>
-        </div>
+</div>
+</div>
+<section aria-label="神位查询" class="tools-panel"><label for="ancestorSearch">查找人物或世代</label><div class="tool-row"><input autocomplete="off" id="ancestorSearch" placeholder="例如：朱橚、周庄王、九世……" type="search"/><button id="clearSearch" type="button">清除</button><span aria-live="polite" id="searchCount"></span></div><div class="quick-links"><a href="tree.html">查看数字家谱树 →</a><a href="lineage.html">查看世系字辈 →</a><a href="history.html">查看王府传承 →</a></div></section><h2>⚖️ 周藩世代左昭右穆示意（按世次分列）</h2>
+<div class="altar-container">
+<!-- 左昭列（双数世次：二、四、六、八、十、十二） -->
+<div class="altar-column">
+<div class="altar-column-header">🏛️ 左 昭 列（左列正位）</div>
+<!-- 二世：左昭（朱橚） -->
+<div class="tablet-card" data-search="左 昭 · 第二世 周定王 朱橚 神位 太祖高皇帝第五子 · 周藩始封祖 · 配元妃冯氏、继妃倪氏 · 葬禹州无风山">
+<span class="tablet-tag tag-zhao">左 昭 · 第二世</span>
+<div class="tablet-name">周定王 朱橚 神位</div>
+<div class="tablet-meta">太祖高皇帝第五子 · 周藩始封祖 · 配元妃冯氏、继妃倪氏 · 葬禹州无风山</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周定王 朱橚 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 四世：左昭（子字辈） -->
+<div class="tablet-card" data-search="左 昭 · 第四世 周靖王 朱子垕 / 周懿王 朱子墧 神位 简王庶长子（袭王 在位一年薨无嗣）· 简王庶次子（继袭大统 在位三十年 配妃杨氏）">
+<span class="tablet-tag tag-zhao">左 昭 · 第四世</span>
+<div class="tablet-name">周靖王 朱子垕 / 周懿王 朱子墧 神位</div>
+<div class="tablet-meta">简王庶长子（袭王 在位一年薨无嗣）· 简王庶次子（继袭大统 在位三十年 配妃杨氏）</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周靖王 朱子垕 / 周懿王 朱子墧 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 六世：左昭（安字辈） -->
+<div class="tablet-card" data-search="左 昭 · 第六世 周悼王 朱安㶇 神位 惠王庶次子 · 册封周世子 · 早卒追封周王 · 配妃李氏 （注意：本站其他页面亦见“朱安㳡”写法，须核实异体字与人物对应。）">
+<span class="tablet-tag tag-zhao">左 昭 · 第六世</span>
+<div class="tablet-name">周悼王 朱安㶇 神位</div>
+<div class="tablet-meta">惠王庶次子 · 册封周世子 · 早卒追封周王 · 配妃李氏（注意：本站其他页面亦见“朱安㳡”写法，须核实异体字与人物对应。）</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周悼王 朱安㶇 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 八世：左昭（朝字辈） -->
+<div class="tablet-card" data-search="左 昭 · 第八世 周康王 朱勤熄 神位 恭王嫡长子，早卒后追封周康王。原页面所载配妃及封爵细节待据史料复核。">
+<span class="tablet-tag tag-zhao">左 昭 · 第八世</span>
+<div class="tablet-name">周康王 朱勤熄 神位</div>
+<div class="tablet-meta">恭王嫡长子，早卒后追封周康王。原页面所载配妃及封爵细节待据史料复核。</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周康王 朱勤熄 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 十世：左昭（肃字辈） -->
+<div class="tablet-card" data-search="左 昭 · 第十世 周敬王 朱在鋌 神位 庄王庶长子；原页面记载嘉靖三十四年袭封、万历十一年薨，配妃袁氏；待据史料复核。">
+<span class="tablet-tag tag-zhao">左 昭 · 第十世</span>
+<div class="tablet-name">周敬王 朱在鋌 神位</div>
+<div class="tablet-meta">庄王庶长子；原页面记载嘉靖三十四年袭封、万历十一年薨，配妃袁氏；待据史料复核。</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周敬王 朱在鋌 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<div class="tablet-card" data-search="左 昭 · 第十二世 末代周王 朱恭枵 神位 端王嫡长子；崇祯十五年开封城破前后事迹、卒年与谥号有待进一步核对。">
+<span class="tablet-tag tag-zhao">左 昭 · 第十二世</span>
+<div class="tablet-name">末代周王 朱恭枵 神位</div>
+<div class="tablet-meta">端王嫡长子；崇祯十五年开封城破前后事迹、卒年与谥号有待进一步核对。</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：末代周王 朱恭枵 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div></div>
+<!-- 右穆列（单数世次：三、五、七、九、十一） -->
+<div class="altar-column">
+<div class="altar-column-header">🏛️ 右 穆 列（右列正位）</div>
+<!-- 三世：右穆（有字辈） -->
+<div class="tablet-card" data-search="右 穆 · 第三世 周宪王 朱有燉 / 周简王 朱有爝 神位 定王嫡长子（袭封周王 号诚斋 无嗣）· 定王第四子（正统四年继袭亲王大统 配妃张氏）">
+<span class="tablet-tag tag-mu">右 穆 · 第三世</span>
+<div class="tablet-name">周宪王 朱有燉 / 周简王 朱有爝 神位</div>
+<div class="tablet-meta">定王嫡长子（袭封周王 号诚斋 无嗣）· 定王第四子（正统四年继袭亲王大统 配妃张氏）</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周宪王 朱有燉 / 周简王 朱有爝 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 五世：右穆（同字辈） -->
+<div class="tablet-card" data-search="右 穆 · 第五世 周惠王 朱同䥸 神位 懿王庶长子 · 初封睢阳王 · 成化二十三年袭封周王 · 配妃谭氏、次妃高氏">
+<span class="tablet-tag tag-mu">右 穆 · 第五世</span>
+<div class="tablet-name">周惠王 朱同䥸 神位</div>
+<div class="tablet-meta">懿王庶长子 · 初封睢阳王 · 成化二十三年袭封周王 · 配妃谭氏、次妃高氏</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周惠王 朱同䥸 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 七世：右穆（睦字辈） -->
+<div class="tablet-card" data-search="右 穆 · 第七世 周恭王 朱睦㰂 神位 悼王庶长子 · 弘治十四年袭封周王 · 在位三十二年恪守礼法 · 配妃金氏">
+<span class="tablet-tag tag-mu">右 穆 · 第七世</span>
+<div class="tablet-name">周恭王 朱睦㰂 神位</div>
+<div class="tablet-meta">悼王庶长子 · 弘治十四年袭封周王 · 在位三十二年恪守礼法 · 配妃金氏</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周恭王 朱睦㰂 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 九世：右穆（在字辈） -->
+<div class="tablet-card" data-search="右 穆 · 第九世 周庄王 朱朝堈 神位 康王嫡长子，原页面记载嘉靖十九年袭爵周王，配妃王氏；具体年代待核。"><span class="tablet-tag tag-mu">右 穆 · 第九世</span><div class="tablet-name">周庄王 朱朝堈 神位</div><div class="tablet-meta">康王嫡长子，原页面记载嘉靖十九年袭爵周王，配妃王氏；具体年代待核。</div><div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周庄王 朱朝堈 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div><div class="tablet-card" data-search="右 穆 · 第十一世 周端王 朱肃溱 神位 敬王嫡长子；原页面记载万历十四年袭封、崇祯八年薨，配妃袁氏；待据史料复核。">
+<span class="tablet-tag tag-mu">右 穆 · 第十一世</span>
+<div class="tablet-name">周端王 朱肃溱 神位</div>
+<div class="tablet-meta">敬王嫡长子；原页面记载万历十四年袭封、崇祯八年薨，配妃袁氏；待据史料复核。</div>
+<div class="tablet-actions"><button aria-expanded="false" class="detail-button" type="button">查看人物摘要</button><a href="tree.html">数字家谱树 ↗</a></div><div class="tablet-extra" hidden="">人物：周端王 朱肃溱 神位。本页资料来自原始页面，具体袭封、配偶、谥号及世系细节尚待逐项考证。可通过“数字家谱树”进一步查阅本站相关资料。</div></div>
+<!-- 十一世：右穆（恭字辈） -->
 
-        <h2>⚖️ 享堂历代亲王左昭右穆位次</h2>
-        
-        <div class="altar-container">
-            <!-- 左昭列（双数世次：二、四、六、八、十、十二） -->
-            <div class="altar-column">
-                <div class="altar-column-header">🏛️ 左 昭 列（左列正位）</div>
-
-                <!-- 二世：左昭（朱橚） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-zhao">左 昭 · 第二世</span>
-                    <div class="tablet-name">周定王 朱橚 神位</div>
-                    <div class="tablet-meta">太祖高皇帝第五子 · 周藩始封祖 · 配元妃冯氏、继妃倪氏 · 葬禹州无风山</div>
-                </div>
-
-                <!-- 四世：左昭（子字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-zhao">左 昭 · 第四世</span>
-                    <div class="tablet-name">周靖王 朱子垕 / 周懿王 朱子墧 神位</div>
-                    <div class="tablet-meta">简王庶长子（袭王 在位一年薨无嗣）· 简王庶次子（继袭大统 在位三十年 配妃杨氏）</div>
-                </div>
-
-                <!-- 六世：左昭（安字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-zhao">左 昭 · 第六世</span>
-                    <div class="tablet-name">周悼王 朱安㶇 神位</div>
-                    <div class="tablet-meta">惠王庶次子 · 册封周世子 · 早卒追封周王 · 配妃李氏</div>
-                </div>
-
-                <!-- 八世：左昭（朝字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-zhao">左 昭 · 第八世</span>
-                    <div class="tablet-name">周康王 朱勤熄 / 周庄王 朱朝堈 神位</div>
-                    <div class="tablet-meta">恭王嫡长子（早卒追封周康王）· 康王嫡长子（嘉靖十九年袭爵周王 配妃王氏）</div>
-                </div>
-
-                <!-- 十世：左昭（肃字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-zhao">左 昭 · 第十世</span>
-                    <div class="tablet-name">周端王 朱肃溱 神位</div>
-                    <div class="tablet-meta">敬王嫡长子 · 万历十四年袭封周王 · 崇祯八年薨 · 配妃袁氏</div>
-                </div>
-            </div>
-
-            <!-- 右穆列（单数世次：三、五、七、九、十一） -->
-            <div class="altar-column">
-                <div class="altar-column-header">🏛️ 右 穆 列（右列正位）</div>
-
-                <!-- 三世：右穆（有字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-mu">右 穆 · 第三世</span>
-                    <div class="tablet-name">周宪王 朱有燉 / 周简王 朱有爝 神位</div>
-                    <div class="tablet-meta">定王嫡长子（袭封周王 号诚斋 无嗣）· 定王第四子（正统四年继袭亲王大统 配妃张氏）</div>
-                </div>
-
-                <!-- 五世：右穆（同字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-mu">右 穆 · 第五世</span>
-                    <div class="tablet-name">周惠王 朱同䥸 神位</div>
-                    <div class="tablet-meta">懿王庶长子 · 初封睢阳王 · 成化二十三年袭封周王 · 配妃谭氏、次妃高氏</div>
-                </div>
-
-                <!-- 七世：右穆（睦字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-mu">右 穆 · 第七世</span>
-                    <div class="tablet-name">周恭王 朱睦㰂 神位</div>
-                    <div class="tablet-meta">悼王庶长子 · 弘治十四年袭封周王 · 在位三十二年恪守礼法 · 配妃金氏</div>
-                </div>
-
-                <!-- 九世：右穆（在字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-mu">右 穆 · 第九世</span>
-                    <div class="tablet-name">周敬王 朱在鋌 神位</div>
-                    <div class="tablet-meta">庄王庶长子 · 嘉靖三十四年袭封周王 · 万历十一年薨 · 配妃袁氏</div>
-                </div>
-
-                <!-- 十一世：右穆（恭字辈） -->
-                <div class="tablet-card">
-                    <span class="tablet-tag tag-mu">右 穆 · 第十一世</span>
-                    <div class="tablet-name">末代周王 朱恭枵 神位</div>
-                    <div class="tablet-meta">端王嫡长子 · 崇祯十五年毁家纾难坚守汴梁 · 黄河灌城殉节 · 谥周孝王</div>
-                </div>
-            </div>
-        </div>
-
-        <h2>📖 昭穆制度宗法解说</h2>
-        <div class="quote-box">
-            <p><strong>• 宗庙位次法则：</strong>以大明太祖高皇帝为第一世总始祖居正中太庙之位；自第二代起，二世定王朱橚居左昭，三世有字辈居右穆，四世子字辈居左昭，五世同字辈居右穆……左昭右穆，隔代同位，世系秩然。</p>
-            <p><strong>• 亲王大宗与郡王宗支：</strong>同代兄弟（如宪王与简王、靖王与懿王）共列同世之位，尊大宗继统之序。十四大郡王宗支（如封丘、新乡、顺阳等房）亦皆同奉太祖与定王，谨遵五行生克之派序。</p>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
-    </footer>
-
-    <script>
+</div>
+</div>
+<h2>📖 昭穆制度宗法解说</h2>
+<div class="quote-box"><p><strong>昭穆与世次：</strong>本站采用第一世朱元璋、第二世朱橚的计数方法，偶数世暂列左昭，奇数世暂列右穆；这是便于阅读的现代展示规则，不能据此断言历史祭祀现场的实际座次。</p><p><strong>袭封与追封：</strong>亲王袭封、早卒追封及同世兄弟继统应分别考证；同一世代可出现不止一位王爵人物。</p><p><strong>史料核验：</strong>原稿中朱安㶇与其他页面朱安㳡写法不一；部分人物的卒年、封爵、谥号及“殉节”等说法尚待核对。页面暂保留线索并加提示，不应作为确定的宗庙礼制复原图。</p></div>
+</main>
+<footer class="site-footer">
+<p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
+</footer>
+<script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
@@ -485,6 +476,23 @@
                 }
             });
         });
-    </script>
+    
+(function(){
+ const search=document.getElementById('ancestorSearch');
+ const count=document.getElementById('searchCount');
+ const cards=[...document.querySelectorAll('.altar-container .tablet-card')];
+ const columns=[...document.querySelectorAll('.altar-column')];
+ function update(){
+  const query=search.value.trim().toLocaleLowerCase(); let shown=0;
+  cards.forEach(card=>{const ok=card.dataset.search.toLocaleLowerCase().includes(query);card.hidden=!ok;if(ok)shown++;});
+  columns.forEach(col=>{let empty=col.querySelector('.empty-col');if(!empty){empty=document.createElement('p');empty.className='empty-col';empty.textContent='此列没有匹配的人物';col.append(empty);}empty.hidden=[...col.querySelectorAll('.tablet-card')].some(card=>!card.hidden);});
+  count.textContent='显示 '+shown+' / '+cards.length+' 组神位';
+ }
+ search.addEventListener('input',update);
+ document.getElementById('clearSearch').addEventListener('click',()=>{search.value='';update();search.focus();});
+ cards.forEach(card=>{const btn=card.querySelector('.detail-button'),extra=card.querySelector('.tablet-extra');btn.addEventListener('click',()=>{const show=extra.hidden;extra.hidden=!show;btn.setAttribute('aria-expanded',String(show));btn.textContent=show?'收起人物摘要':'查看人物摘要';});});
+ update();
+})();
+</script>
 </body>
 </html>
