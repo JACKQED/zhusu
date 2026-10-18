@@ -325,6 +325,24 @@
             .oration-content { font-size: 0.98rem; line-height: 2.1; padding: 1.2rem; }
             h1 { font-size: 1.6rem; }
         }
+
+        /* V2: 检索、分类及史料说明 */
+        .source-note { background:#faf5eb; border-left:4px solid var(--accent-gold); padding:1rem 1.2rem; margin:1rem 0 1.3rem; color:#614d2a; font-size:.9rem; }
+        .filter-panel { border:1px solid var(--border); border-radius:6px; background:#fcfaf7; padding:1rem; margin:1.4rem 0; }
+        .filter-buttons { display:flex; flex-wrap:wrap; gap:.5rem; margin-bottom:.8rem; }
+        .filter-buttons button, .clear-search, .action-link { background:white; border:1px solid #d6a88a; border-radius:4px; padding:.45rem .8rem; color:var(--crimson); cursor:pointer; font:inherit; font-size:.88rem; }
+        .filter-buttons button.active { background:var(--crimson); color:white; border-color:var(--crimson); }
+        .filter-search { display:flex; align-items:center; gap:.5rem; flex-wrap:wrap; }
+        .filter-search input { flex:1; min-width:180px; padding:.65rem; border:1px solid #d6c9b5; border-radius:4px; font:inherit; }
+        .filter-status { color:var(--muted); font-size:.85rem; }
+        .related-links { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.8rem; }
+        .related-links a { text-decoration:none; }
+        .item-note { color:#766453; font-size:.82rem; border-top:1px dashed #e2d7c5; padding-top:.45rem; margin-top:.65rem; }
+        .is-hidden { display:none !important; }
+        .empty-state { display:none; text-align:center; padding:1.5rem; background:#faf5eb; color:#715b46; }
+        .empty-state.visible { display:block; }
+        .hall-title { gap:.5rem; flex-wrap:wrap; }
+        @media(max-width:600px) { .hall-grid {grid-template-columns:1fr;} .container {padding:1rem;} .hall-card {padding:1.1rem;} .oration-card {padding:1rem;} .filter-search input {width:100%;} .couplet-box {padding:1rem .5rem;} }
     </style>
 </head>
 <body>
@@ -399,9 +417,23 @@
             宗祠堂号乃宗脉支派血缘凝聚之旗帜，宗祠楹联铭刻皇祖定王千秋功业，岁时祝文寄托后裔子孙慎终追远之赤忱。本篇系统辑录周藩历代宗祠代表堂号、传家名联及清明、冬至四时祭祖标准祝文范本。
         </div>
 
-        <h2>🏛️ 周藩宗祠传世堂号考</h2>
+
+        <div class="source-note">📜 <strong>史料核验提示：</strong>本页保留原稿中的堂号、楹联及祝文。堂号与特定周藩支系的实际使用关系，仍需以宗谱、祠堂碑记等材料核实；下列楹联暂按文化展示及拟作范例处理，不标称明清原联。祭祖祝文属于参考范本，并非统一的历史礼制或强制仪轨。</div>
+        <section class="filter-panel" aria-label="资料分类与搜索">
+          <div class="filter-buttons">
+            <button type="button" class="active" data-filter="all" aria-pressed="true">全部资料</button>
+            <button type="button" data-filter="hall" aria-pressed="false">🏛️ 堂号</button>
+            <button type="button" data-filter="couplet" aria-pressed="false">📜 楹联</button>
+            <button type="button" data-filter="oration" aria-pressed="false">🕯️ 祭祖祝文</button>
+          </div>
+          <div class="filter-search"><label for="hallSearch">查找资料</label><input id="hallSearch" type="search" placeholder="搜索堂号、人物、楹联、祭文关键词……"><button class="clear-search" type="button" id="clearHallSearch">清除</button><span class="filter-status" id="filterStatus" aria-live="polite"></span></div>
+          <div class="related-links"><a class="action-link" href="tree.html">查看数字家谱树 →</a><a class="action-link" href="lineage.html">查看世系字辈 →</a><a class="action-link" href="ancestors.html">查看昭穆神位 →</a></div>
+        </section>
+        <div class="empty-state" id="emptyState">没有找到符合条件的资料，请尝试其他关键词或分类。</div>
+
+        <h2 data-section="hall">🏛️ 周藩宗祠传世堂号考</h2>
         <div class="hall-grid">
-            <div class="hall-card">
+            <div class="hall-card" data-kind="hall">
                 <div class="hall-title">
                     <span>救荒堂 / 济生堂</span>
                     <span class="hall-tag">医道仁勋</span>
@@ -409,9 +441,10 @@
                 <div class="hall-desc">
                     纪念始祖周定王朱橚在开封王府编纂《救荒本草》《普济方》、济世活人之崇高仁德。中原及皖北周藩宗亲多以此立堂，彰显<strong>“仁医济世、耕读保生”</strong>之家风。
                 </div>
+                <p class="item-note">史料状态：堂号使用范围及传承关系待宗谱、碑刻核实。</p>
             </div>
 
-            <div class="hall-card">
+            <div class="hall-card" data-kind="hall">
                 <div class="hall-title">
                     <span>有本堂 / 敦睦堂</span>
                     <span class="hall-tag">寻根追远</span>
@@ -419,9 +452,10 @@
                 <div class="hall-desc">
                     “有本”取自《孟子》“源泉混混，放乎四海，有本者如是”之圣训，警勉后裔虽历遭明季水患播迁，依然不忘太祖派语根本；“敦睦”则承太祖敦睦九族、敦宗睦族之圣训。
                 </div>
+                <p class="item-note">史料状态：堂号使用范围及传承关系待宗谱、碑刻核实。</p>
             </div>
 
-            <div class="hall-card">
+            <div class="hall-card" data-kind="hall">
                 <div class="hall-title">
                     <span>汴梁堂 / 紫禁堂</span>
                     <span class="hall-tag">封国祖源</span>
@@ -429,9 +463,10 @@
                 <div class="hall-desc">
                     标明周王府开府汴京（开封宋金故宫紫禁城旧址）之根本发源地。散居豫北（封丘、长垣）、豫东、皖苏鲁及西南各省周藩后裔，多以<strong>“汴梁”</strong>为郡望与祖籍堂号。
                 </div>
+                <p class="item-note">史料状态：堂号使用范围及传承关系待宗谱、碑刻核实。</p>
             </div>
 
-            <div class="hall-card">
+            <div class="hall-card" data-kind="hall">
                 <div class="hall-title">
                     <span>万卷堂 / 诚斋堂</span>
                     <span class="hall-tag">崇文著述</span>
@@ -439,38 +474,42 @@
                 <div class="hall-desc">
                     纪念二世曲圣周宪王朱有燉（号诚斋）与镇平恭定王支派宗室学者朱睦㮮（筑“万卷堂”聚书数万卷，著《篇海类编》《金石碑帖考》），激励宗族子弟崇文重教、博学笃志。
                 </div>
+                <p class="item-note">史料状态：堂号使用范围及传承关系待宗谱、碑刻核实。</p>
             </div>
         </div>
 
-        <h2>📜 周藩宗祠传家经典楹联</h2>
+        <h2 data-section="couplet">📜 周藩宗祠传家经典楹联（文化展示范例）</h2>
         
-        <div class="couplet-box">
+        <div class="couplet-box" data-kind="couplet">
             上联：太祖分封，汴梁开府垂百代<br>
             下联：定王博古，救荒本草泽千秋
             <div class="couplet-meta">—— 宗祠大门通用联 · 颂太祖分封与定王农医千秋功勋</div>
+            <div class="item-note">文献性质：文化展示用联，原作年代及实际悬挂记录待考。</div>
         </div>
 
-        <div class="couplet-box">
+        <div class="couplet-box" data-kind="couplet">
             上联：二十字辈昭穆序，五行相生木火土金水<br>
             下联：十四房派枝叶茂，千秋同奉祖训礼义仁
             <div class="couplet-meta">—— 宗祠正厅享堂联 · 阐明正统字派世系与五行命名家法</div>
+            <div class="item-note">文献性质：文化展示用联，原作年代及实际悬挂记录待考。</div>
         </div>
 
-        <div class="couplet-box">
+        <div class="couplet-box" data-kind="couplet">
             上联：源自凤阳，就藩汴水，六百载宗风不坠<br>
             下联：忠贞报国，隐德乡闾，亿万年世泽长流
             <div class="couplet-meta">—— 宗祠过厅联 · 记述宗族明清大迁徙与忠孝持家品格</div>
+            <div class="item-note">文献性质：文化展示用联，原作年代及实际悬挂记录待考。</div>
         </div>
 
-        <div class="couplet-box">
+        <div class="couplet-box" data-kind="couplet">
             上联：万卷图书聚西亭，篇海金石名中外<br>
             下联：一部乐府播汴京，元宫词韵冠古今
             <div class="couplet-meta">—— 崇文纪念联 · 赞颂周宪王朱有燉与宗正朱睦㮮之文学金石成就</div>
         </div>
 
-        <h2>🕯️ 岁时四时祭祖标准祝文（范本）</h2>
-        <div class="oration-card">
-            <div class="oration-title">📜 大明周藩四时（清明 · 冬至 · 岁首）祭祖告文</div>
+        <h2 data-section="oration">🕯️ 岁时祭祖祝文（参考范本）</h2>
+        <div class="oration-card" data-kind="oration">
+            <div class="oration-title">📜 大明周藩岁时（清明 · 冬至 · 岁首）祭祖告文示例</div>
             <p style="font-size:0.9rem; color:var(--muted); margin-bottom: 0.8rem;">（清明祭扫、冬至祭祖或春节宗祠祭拜时恭读，主祭人可根据本房支派微调分支先祖称谓）</p>
             
             <div class="oration-content">
@@ -488,9 +527,9 @@
             </div>
         </div>
 
-        <h2>📖 祭祖礼仪与祝文恭读规制</h2>
+        <h2 data-section="oration">📖 祭祖礼仪与祝文恭读参考</h2>
         <div class="quote-box">
-            <p><strong>• 主祭程序：</strong>主祭人肃立盥洗 ➔ 敬香献爵（三上香、三奠酒） ➔ 恭读祝文 ➔ 全体行三跪九叩大礼 ➔ 焚祝文与冥帛。</p>
+            <p><strong>• 参考程序：</strong>主祭人肃立盥洗 ➔ 敬香献爵（三上香、三奠酒） ➔ 恭读祝文 ➔ 依本地习俗行礼 ➔ 妥善收存或依当地规定处理祭文。</p>
             <p><strong>• 家族精神：</strong>祝文重在弘扬周藩<strong>“仁德救荒、崇文尚礼、忠贞气节、耕读传家”</strong>之核心家规，凝聚海内外宗亲认同。</p>
         </div>
     </main>
@@ -512,6 +551,45 @@
                 }
             });
         });
+
+        // V2 分类筛选与即时搜索：只检索用户可见资料卡片
+        (function () {
+          const buttons = [...document.querySelectorAll('[data-filter]')];
+          const cards = [...document.querySelectorAll('[data-kind]')];
+          const input = document.getElementById('hallSearch');
+          const status = document.getElementById('filterStatus');
+          const empty = document.getElementById('emptyState');
+          let current = 'all';
+          function update() {
+            const q = input.value.trim().toLocaleLowerCase();
+            let shown = 0;
+            cards.forEach(card => {
+              const matches = (current === 'all' || card.dataset.kind === current) && card.textContent.toLocaleLowerCase().includes(q);
+              card.classList.toggle('is-hidden', !matches);
+              if (matches) shown++;
+            });
+            document.querySelectorAll('[data-section]').forEach(heading => {
+              const kind = heading.dataset.section;
+              heading.classList.toggle('is-hidden', !cards.some(c => c.dataset.kind === kind && !c.classList.contains('is-hidden')));
+            });
+            // 隐藏没有匹配堂号的空网格
+            const grid = document.querySelector('.hall-grid');
+            if (grid) grid.classList.toggle('is-hidden', !cards.some(c => c.dataset.kind === 'hall' && !c.classList.contains('is-hidden')));
+            // 祝文相关说明仅在祝文分类且没有检索词时展示
+            const quote = document.querySelector('.quote-box');
+            if (quote) quote.classList.toggle('is-hidden', (current !== 'all' && current !== 'oration') || !!q);
+            status.textContent = `显示 ${shown} / ${cards.length} 项资料`;
+            empty.classList.toggle('visible', shown === 0);
+          }
+          buttons.forEach(button => button.addEventListener('click', () => {
+            current = button.dataset.filter;
+            buttons.forEach(b => { b.classList.toggle('active', b === button); b.setAttribute('aria-pressed', String(b === button)); });
+            update();
+          }));
+          input.addEventListener('input', update);
+          document.getElementById('clearHallSearch').addEventListener('click', () => { input.value=''; update(); input.focus(); });
+          update();
+        })();
     </script>
 </body>
 </html>
