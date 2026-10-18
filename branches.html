@@ -353,6 +353,22 @@
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
             h1 { font-size: 1.6rem; }
         }
+
+        /* V2: interactive directory */
+        .branch-tools{background:#FCFAF6;border:1px solid #EAE2D5;border-radius:6px;padding:1rem;margin:1rem 0 1.5rem}
+        .tool-row{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+        .branch-search{flex:1;min-width:200px;padding:.7rem .8rem;border:1px solid #D6C8B8;border-radius:4px;font:inherit;font-size:.9rem;background:white}
+        .tool-btn,.branch-action{border:1px solid #B98A75;color:var(--crimson);background:white;border-radius:4px;padding:.5rem .8rem;text-decoration:none;cursor:pointer;font:inherit;font-size:.83rem;display:inline-block}
+        .tool-btn:hover,.branch-action:hover{background:#FAF0E8}
+        .result-count{color:var(--muted);font-size:.85rem;margin-left:auto}
+        .branch-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+        .branch-extra{border-top:1px dashed #DCCFBE;margin-top:.8rem;padding-top:.8rem;font-size:.87rem;color:#554C3F}
+        .branch-extra[hidden],.branch-card[hidden],#emptyResult[hidden]{display:none!important}
+        .branch-card:focus-within{outline:2px solid #C59B27;outline-offset:2px}
+        .source-note{background:#FAF5EB;border-left:3px solid #C59B27;padding:.85rem 1rem;margin:1.3rem 0;font-size:.88rem;color:#654C2D}
+        #emptyResult{text-align:center;padding:2rem;color:var(--muted);border:1px dashed #D6C8B8;border-radius:6px;grid-column:1/-1}
+        @media(max-width:720px){.branch-grid{grid-template-columns:1fr}.container{padding:1rem}.branch-card{padding:1.1rem}.result-count{margin-left:0;width:100%}.branch-search{min-width:0;width:100%}.tool-row{align-items:stretch}.filter-bar{gap:.35rem}.filter-btn{font-size:.8rem;padding:.35rem .65rem}}
+        @media(prefers-reduced-motion:reduce){.branch-card,.filter-btn{transition:none}}
     </style>
 </head>
 <body>
@@ -457,6 +473,20 @@
             <button class="filter-btn" onclick="filterBranch('southwest', this)">西南滇黔支派</button>
         </div>
 
+        <div class="source-note">📜 资料说明：本页沿用原稿的十四房编排与地区归纳。封爵、字形、迁徙地点及“十五子／十四房”等统计口径尚待结合《明实录》、墓志、地方志及族谱逐项核对；地名分布不等于已证实的连续血缘世系。</div>
+        <div class="branch-tools" role="search" aria-label="查找分房">
+          <div class="tool-row">
+            <label for="branchSearch" style="font-weight:bold;color:var(--crimson)">查找分房</label>
+            <input class="branch-search" id="branchSearch" type="search" placeholder="搜索姓名、王号、封地、迁徙地点……" autocomplete="off">
+            <button class="tool-btn" type="button" id="clearSearch">清除</button>
+            <span class="result-count" id="branchCount" aria-live="polite">显示 14 / 14 房</span>
+          </div>
+          <div class="tool-row" style="margin-top:.75rem">
+            <a class="tool-btn" href="tree.html">查看数字家谱树 →</a>
+            <a class="tool-btn" href="lineage.html">查看世系字辈 →</a>
+            <a class="tool-btn" href="history.html">查看王府传承 →</a>
+          </div>
+        </div>
         <h2>🌿 始祖诸子十四大分房全考</h2>
         
         <div class="branch-grid" id="branchGrid">
@@ -467,8 +497,10 @@
                     <span class="badge badge-main">亲王 / 无嗣</span>
                 </div>
                 <div class="branch-meta">封爵：周世子 ➔ 周宪王 (1425袭) · 居开封大内</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail1" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail1" hidden>
                 <div class="branch-desc">周定王嫡长子。博学能文，精通音律词曲，号诚斋，为大明一代曲圣。正统四年薨，无子，弟祥符王朱有爝奉旨承嗣大统。</div>
-                <div class="branch-loc"><strong>📍 归葬地：</strong>开封祥符故里 / 禹州三峰山</div>
+                <div class="branch-loc"><strong>📍 归葬地：</strong>开封祥符故里 / 禹州三峰山</div></div>
             </div>
 
             <!-- 二房 -->
@@ -478,8 +510,10 @@
                     <span class="badge badge-west">西南滇黔房</span>
                 </div>
                 <div class="branch-meta">封爵：汝南王 (1402封) · 谪居云南大理府</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail2" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail2" hidden>
                 <div class="branch-desc">周定王嫡次子。建文四年封汝南王。永乐中谪居云南大理，后代数百年繁衍，广泛分布于云南大理、保山、楚雄及豫南故里。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>云南大理喜洲、保山、楚雄及河南汝南</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>云南大理喜洲、保山、楚雄及河南汝南</div></div>
             </div>
 
             <!-- 三房 -->
@@ -489,8 +523,10 @@
                     <span class="badge badge-sub">宛洛豫西房</span>
                 </div>
                 <div class="branch-meta">封爵：顺阳王 (1404封) · 开府南阳顺阳县</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail3" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail3" hidden>
                 <div class="branch-desc">周定王第三子。永乐二年受封南阳府顺阳县（今淅川），宣德八年薨。子朱子峹袭爵为顺阳恭简王，世系传衍于豫西南各邑。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南淅川、邓州、南阳及开封各县</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南淅川、邓州、南阳及开封各县</div></div>
             </div>
 
             <!-- 四房 -->
@@ -500,8 +536,10 @@
                     <span class="badge badge-main">大宗直系亲王</span>
                 </div>
                 <div class="branch-meta">封爵：祥符王 (1403) ➔ 周简王 (1439袭)</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail4" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail4" hidden>
                 <div class="branch-desc">周定王第四子。正统四年承袭周亲王爵，谥曰简。自此之后，历代周王（靖王、懿王、惠王、恭王等）皆出自简王直系后裔。</div>
-                <div class="branch-loc"><strong>📍 统领：</strong>开封周王府历代宗枝与豫东诸县派系</div>
+                <div class="branch-loc"><strong>📍 统领：</strong>开封周王府历代宗枝与豫东诸县派系</div></div>
             </div>
 
             <!-- 五房 -->
@@ -511,8 +549,10 @@
                     <span class="badge badge-sub">豫北黄河房</span>
                 </div>
                 <div class="branch-meta">封爵：新乡王 (1403封) · 治所卫辉府新乡</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail5" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail5" hidden>
                 <div class="branch-desc">周定王第五子。永乐元年册封新乡王，府邸设于卫辉新乡。支派繁茂，明清以降宗亲广泛聚居于新乡、获嘉、卫辉及焦作。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南新乡、获嘉朱厂、卫辉、辉县</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南新乡、获嘉朱厂、卫辉、辉县</div></div>
             </div>
 
             <!-- 六房 -->
@@ -522,8 +562,10 @@
                     <span class="badge badge-sub">豫东淮上房</span>
                 </div>
                 <div class="branch-meta">封爵：宁陵王 (1403封) · 治所归德府宁陵</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail6" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail6" hidden>
                 <div class="branch-desc">周定王第六子。开府商丘宁陵，传袭多代。明末清初后裔分迁于商丘、宁陵、民权、睢县及安徽宿州萧县大朱村一带。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南宁陵、商丘、民权与皖北宿州</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南宁陵、商丘、民权与皖北宿州</div></div>
             </div>
 
             <!-- 七房 -->
@@ -533,8 +575,10 @@
                     <span class="badge badge-sub">开封近畿房</span>
                 </div>
                 <div class="branch-meta">封爵：杞县王 (1403封) · 治所开封府杞县</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail7" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail7" hidden>
                 <div class="branch-desc">周定王第七子。府邸紧邻开封大宗，枝叶稠密。后裔世居杞县、通许、兰考及开封近郊，多筑有朱庄、朱家楼聚落。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南杞县高阳、通许、兰考、开封近郊</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南杞县高阳、通许、兰考、开封近郊</div></div>
             </div>
 
             <!-- 八房 -->
@@ -544,8 +588,10 @@
                     <span class="badge badge-gray">无嗣国除</span>
                 </div>
                 <div class="branch-meta">封爵：信阳王 (1404封) · 治所汝宁府信阳州</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail8" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail8" hidden>
                 <div class="branch-desc">周定王第八子。永乐二年封信阳王，永乐十八年薨，无嗣国除。随侍官军与部分宗室余荫入籍豫南信阳州。</div>
-                <div class="branch-loc"><strong>📍 原籍：</strong>河南信阳州故地</div>
+                <div class="branch-loc"><strong>📍 原籍：</strong>河南信阳州故地</div></div>
             </div>
 
             <!-- 九房 -->
@@ -555,8 +601,10 @@
                     <span class="badge badge-sub">宛洛豫西房</span>
                 </div>
                 <div class="branch-meta">封爵：镇平王 (1404封) · 治所南阳府镇平</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail9" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail9" hidden>
                 <div class="branch-desc">周定王第九子。开府宛南镇平县，世袭多代，景泰六年薨。后嗣传衍于南阳、镇平、邓州、内乡以及皖北亳州涡阳。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南镇平朱家营、南阳、邓州及安徽亳州</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南镇平朱家营、南阳、邓州及安徽亳州</div></div>
             </div>
 
             <!-- 十房 -->
@@ -566,8 +614,10 @@
                     <span class="badge badge-sub">豫南淮上房</span>
                 </div>
                 <div class="branch-meta">封爵：遂平王 (1412封) · 治所汝宁府遂平</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail10" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail10" hidden>
                 <div class="branch-desc">周定王第十子。永乐十年封遂平王，世袭七代至明末。后裔广泛播迁于驻马店、遂平朱湖、西平、汝南及安徽阜阳一带。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南遂平朱湖、西平、驻马店及安徽阜阳</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南遂平朱湖、西平、驻马店及安徽阜阳</div></div>
             </div>
 
             <!-- 十一房 -->
@@ -577,8 +627,10 @@
                     <span class="badge badge-sub">豫北黄河房</span>
                 </div>
                 <div class="branch-meta">封爵：封丘王 (1412封) · 治所开封府封丘</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail11" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail11" hidden>
                 <div class="branch-desc">周定王第十一子。开府黄河北岸封丘县，宗支盛大。崇祯大水后宗室北渡，依托封丘原有王庄封邑与同宗地缘繁衍生息。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南封丘、长垣、延津及山东菏泽曹县</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南封丘、长垣、延津及山东菏泽曹县</div></div>
             </div>
 
             <!-- 十二房 -->
@@ -588,8 +640,10 @@
                     <span class="badge badge-sub">宛洛豫西房</span>
                 </div>
                 <div class="branch-meta">封爵：鲁山王 (1412封) · 治所汝州鲁山县</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail12" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail12" hidden>
                 <div class="branch-desc">周定王第十二子。封国位于伏牛山东麓鲁山县。后裔主要分布于平顶山、鲁山朱洼、郏县、宝丰及许昌禹州各邑。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南鲁山朱洼、平顶山、宝丰、郏县</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南鲁山朱洼、平顶山、宝丰、郏县</div></div>
             </div>
 
             <!-- 十三房 -->
@@ -599,8 +653,10 @@
                     <span class="badge badge-gray">无嗣国除</span>
                 </div>
                 <div class="branch-meta">封爵：邺王 (1412封) · 治所彰德府安阳</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail13" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail13" hidden>
                 <div class="branch-desc">周定王第十三子。以古邺城（安阳）为封号，宣德初年早薨无嗣国除，随行部分宗亲余裔留居相州故地。</div>
-                <div class="branch-loc"><strong>📍 原籍：</strong>河南安阳（彰德府）故地</div>
+                <div class="branch-loc"><strong>📍 原籍：</strong>河南安阳（彰德府）故地</div></div>
             </div>
 
             <!-- 十四房 -->
@@ -610,9 +666,12 @@
                     <span class="badge badge-sub">豫北黄河房</span>
                 </div>
                 <div class="branch-meta">封爵：胙城王 (1412封) · 治所卫辉府胙城</div>
+                <div class="branch-actions"><button class="branch-action" type="button" aria-expanded="false" aria-controls="branchDetail14" onclick="toggleBranchDetail(this)">展开分房资料 ▾</button><a class="branch-action" href="tree.html" title="进入家谱树后可搜索该房人物">家谱树查询 →</a></div>
+                <div class="branch-extra" id="branchDetail14" hidden>
                 <div class="branch-desc">周定王第十四子。开府胙城县（今延津胙城），临近古黄河渡口。后代繁衍定居于延津、原阳、滑县及鲁西聊城各县。</div>
-                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南延津胙城朱营、原阳、滑县及山东聊城</div>
+                <div class="branch-loc"><strong>📍 后裔分布：</strong>河南延津胙城朱营、原阳、滑县及山东聊城</div></div>
             </div>
+        <p id="emptyResult" hidden>没有找到符合条件的分房。请尝试其他姓名、王号或地名。</p>
         </div>
 
         <h2>🗺️ 周藩五大地域支脉归纳</h2>
@@ -686,22 +745,54 @@
             });
         });
 
-        // 区域筛选
-        function filterBranch(region, btn) {
-            const btns = document.querySelectorAll('.filter-btn');
-            btns.forEach(b => b.classList.remove('active'));
-            if (btn) btn.classList.add('active');
-
-            const cards = document.querySelectorAll('.branch-card');
-            cards.forEach(card => {
-                const reg = card.getAttribute('data-region') || '';
-                if (region === 'all' || reg === region) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
+        // V2: filter + search work together
+        let activeRegion = 'all';
+        const searchInput = document.getElementById('branchSearch');
+        const allCards = Array.from(document.querySelectorAll('.branch-card'));
+        function refreshBranches(){
+            const term = searchInput.value.trim().toLocaleLowerCase();
+            let shown = 0;
+            allCards.forEach(card => {
+                const regionOK = activeRegion === 'all' || card.dataset.region === activeRegion;
+                const textOK = !term || card.textContent.toLocaleLowerCase().includes(term);
+                const visible = regionOK && textOK;
+                card.hidden = !visible;
+                card.style.display = visible ? 'flex' : 'none';
+                if (visible) shown++;
             });
+            document.getElementById('branchCount').textContent = `显示 ${shown} / ${allCards.length} 房`;
+            document.getElementById('emptyResult').hidden = shown !== 0;
         }
+        function filterBranch(region, btn){
+            activeRegion = region;
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                const selected = b === btn;
+                b.classList.toggle('active', selected);
+                b.setAttribute('aria-pressed', String(selected));
+            });
+            refreshBranches();
+        }
+        function toggleBranchDetail(btn){
+            const panel = document.getElementById(btn.getAttribute('aria-controls'));
+            const open = btn.getAttribute('aria-expanded') !== 'true';
+            btn.setAttribute('aria-expanded', String(open));
+            panel.hidden = !open;
+            btn.textContent = open ? '收起分房资料 ▴' : '展开分房资料 ▾';
+        }
+        searchInput.addEventListener('input', refreshBranches);
+        document.getElementById('clearSearch').addEventListener('click', () => {
+            searchInput.value = '';
+            activeRegion = 'all';
+            const allButton = document.querySelector('.filter-btn');
+            document.querySelectorAll('.filter-btn').forEach(b => {
+                b.classList.toggle('active', b === allButton);
+                b.setAttribute('aria-pressed', String(b === allButton));
+            });
+            refreshBranches();
+            searchInput.focus();
+        });
+        document.querySelectorAll('.filter-btn').forEach(b => b.setAttribute('aria-pressed', String(b.classList.contains('active'))));
+        refreshBranches();
     </script>
 </body>
 </html>
