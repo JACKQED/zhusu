@@ -297,6 +297,22 @@
             .prohibition-grid { grid-template-columns: 1fr; }
             h1 { font-size: 1.6rem; }
         }
+
+        /* V2 检索与史料说明 */
+        .source-note{background:#faf5eb;border-left:4px solid var(--accent-gold);padding:1rem 1.25rem;margin:1.25rem 0;color:#614d2a;font-size:.91rem}
+        .research-tools{border:1px solid var(--border);background:#fcfaf7;padding:1.15rem;border-radius:6px;margin:1.4rem 0 1.8rem}
+        .filter-bar,.quick-links{display:flex;gap:.55rem;flex-wrap:wrap;align-items:center}
+        .filter-btn,.quick-links a,.clear-btn{border:1px solid #d7ad94;background:white;color:var(--crimson);border-radius:4px;padding:.45rem .8rem;font:inherit;font-size:.87rem;cursor:pointer;text-decoration:none}
+        .filter-btn.active{background:var(--crimson);color:#fff;border-color:var(--crimson)}
+        .search-row{display:flex;gap:.55rem;align-items:center;margin:.8rem 0;flex-wrap:wrap}
+        .search-row label{white-space:nowrap}.search-row input{flex:1;min-width:180px;padding:.7rem;border:1px solid #d8c7b9;border-radius:4px;font:inherit;font-size:.92rem}
+        .search-row input:focus{outline:2px solid #b88a1e;outline-offset:1px}
+        .result-count{color:var(--muted);font-size:.84rem}
+        .no-results{padding:1.2rem;text-align:center;background:#faf5eb;color:#745d44;margin:1rem 0}
+        .section-hidden{display:none!important}
+        .rule-section{scroll-margin-top:85px}
+        .source-label{display:inline-block;color:#795326;font-size:.81rem;margin-top:.55rem}
+        @media(max-width:600px){.research-tools{padding:.85rem}.search-row{align-items:stretch}.search-row label{width:100%}.search-row input{width:100%}.container{margin:1rem .5rem}.rule-card{padding:1rem}}
     </style>
 </head>
 <body>
@@ -372,6 +388,22 @@
             古语云：“国之本在家，家之本在身。”大明周藩历经六百余载风雨沧桑，后裔子孙之所以能代有名德、诗礼相承、薪火绵延，端赖明太祖高皇帝《皇明祖训》之立基与始祖周定王朱橚《救荒本草》仁德济世家风之陶铸。
         </div>
 
+
+        <div class="source-note">📜 <strong>史料核验说明：</strong>本页保存原站所录家训文字，并作主题整理。下列部分引语、所谓“八训四戒”及《宗室治家规箴》出处尚未附可核查的古籍版本、卷次与页码；在核实前应视为<strong>整理性文字或待核引文</strong>，不能直接作为明代周王府正式家规的原文引用。</div>
+        <div class="research-tools" role="search" aria-label="家训资料筛选">
+          <div class="filter-bar" id="ruleFilters">
+            <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">全部资料</button>
+            <button type="button" class="filter-btn" data-filter="ancestor" aria-pressed="false">👑 皇祖遗规</button>
+            <button type="button" class="filter-btn" data-filter="eight" aria-pressed="false">📖 传家八训</button>
+            <button type="button" class="filter-btn" data-filter="four" aria-pressed="false">⚖️ 宗门四戒</button>
+            <button type="button" class="filter-btn" data-filter="motto" aria-pressed="false">🖋️ 治家箴言</button>
+          </div>
+          <div class="search-row"><label for="ruleSearch">查找家训</label><input id="ruleSearch" type="search" placeholder="搜索孝悌、农桑、宗亲、勤俭、家训……" autocomplete="off"><button type="button" class="clear-btn" id="clearRuleSearch">清除</button><span class="result-count" id="ruleCount" aria-live="polite"></span></div>
+          <div class="quick-links"><a href="tree.html">查看数字家谱树 →</a><a href="lineage.html">查看世系字辈 →</a><a href="institution.html">查看宗室典制 →</a></div>
+        </div>
+        <div id="noRuleResults" class="no-results" hidden>没有找到符合条件的资料，请尝试其他关键词或分类。</div>
+
+        <section class="rule-section" data-category="ancestor">
         <h2>👑 皇祖遗规 · 敦睦宗族</h2>
         <div class="rule-card">
             <div class="rule-title">
@@ -382,16 +414,19 @@
                 “凡我子孙，虽富贵不可忘农桑之勤，虽居高不可废诗书之教。宗族之内，长幼有序，内外有别，敦睦和逊，以保永年。”<br>
                 “自古国家建立，宗室亲藩必资辅翼。若子孙自相凌逼，何以示天下？务须亲睦宗支，各全骨肉。”
             </div>
+            <p class="source-label">※ 上述引句待核对《皇明祖训》具体版本与卷页，暂不视为逐字原文。</p>
             <p style="font-size:0.94rem; color:#443D36; line-height:1.85;">
                 明太祖训示宗室诸王：子孙后裔须深知创业守成之不易，切戒奢靡怠惰。周藩自洪武十四年开藩汴梁凡二百六十载，历代宗室以好学博古、精通医药农学、恪守宗法著称，名冠皇明诸藩。
             </p>
         </div>
 
+        </section>
+        <section class="rule-section" data-category="eight">
         <h2>📖 周藩传家规箴八条</h2>
         <div class="rule-card">
             <div class="rule-title">
                 <span>周藩后裔立身处世八训</span>
-                <span class="rule-tag">家规根本</span>
+                <span class="rule-tag">后世整理 · 待考</span>
             </div>
             <ul class="rule-list">
                 <li>
@@ -429,11 +464,13 @@
             </ul>
         </div>
 
+        </section>
+        <section class="rule-section" data-category="four">
         <h2>⚖️ 宗门四戒（防微杜渐规约）</h2>
         <div class="rule-card">
             <div class="rule-title">
                 <span>宗门四戒条律</span>
-                <span class="rule-tag">警诫防微</span>
+                <span class="rule-tag">整理性规约 · 待考</span>
             </div>
             <div class="prohibition-grid">
                 <div class="prohibition-item">
@@ -455,11 +492,14 @@
             </div>
         </div>
 
+        </section>
+        <section class="rule-section" data-category="motto">
         <h2>📖 治家修德传世箴言</h2>
         <div class="quote-box">
             <p><strong>• 修德自省：</strong>“积善之家，必有余庆；积不善之家，必有余殃。吾周藩受封中原，不以阀阅骄人，独以医药救饥施德于世。后世子孙苟能身体力行，恪守八训四戒，虽穷巷蓬门，亦不失大藩圣德之遗风也。”</p>
-            <p style="text-align: right; font-size: 0.88rem; margin-top: 0.5rem; color: var(--crimson);">—— 辑录自明周王府《宗室治家规箴》</p>
+            <p style="text-align: right; font-size: 0.88rem; margin-top: 0.5rem; color: var(--crimson);">—— 原站所署《宗室治家规箴》，出处待核</p>
         </div>
+        </section>
     </main>
 
     <footer class="site-footer">
@@ -479,6 +519,41 @@
                 }
             });
         });
+
+        // V2 分类与全文搜索：检索原有四组资料的所有文字
+        (() => {
+          const sections=[...document.querySelectorAll('.rule-section')];
+          const buttons=[...document.querySelectorAll('#ruleFilters .filter-btn')];
+          const input=document.getElementById('ruleSearch');
+          const count=document.getElementById('ruleCount');
+          const empty=document.getElementById('noRuleResults');
+          let active='all';
+          function update(){
+            const query=input.value.trim().toLocaleLowerCase();
+            let visible=0;
+            sections.forEach(section=>{
+              const categoryMatch=active==='all'||section.dataset.category===active;
+              const queryMatch=!query||section.textContent.toLocaleLowerCase().includes(query);
+              const show=categoryMatch&&queryMatch;
+              section.classList.toggle('section-hidden',!show);
+              if(show) visible++;
+            });
+            count.textContent=`显示 ${visible} / ${sections.length} 组资料`;
+            empty.hidden=visible!==0;
+          }
+          buttons.forEach(button=>button.addEventListener('click',()=>{
+            active=button.dataset.filter;
+            buttons.forEach(b=>{
+              const selected=b===button;
+              b.classList.toggle('active',selected);
+              b.setAttribute('aria-pressed',String(selected));
+            });
+            update();
+          }));
+          input.addEventListener('input',update);
+          document.getElementById('clearRuleSearch').addEventListener('click',()=>{input.value='';active='all';buttons.forEach(b=>{const selected=b.dataset.filter==='all';b.classList.toggle('active',selected);b.setAttribute('aria-pressed',String(selected))});update();input.focus()});
+          update();
+        })();
     </script>
 </body>
 </html>
