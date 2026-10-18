@@ -1,10 +1,12 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周王世系承袭与大事记 - 大明周藩纪事</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>周王世系承袭与大事记 - 大明周藩纪事</title>
+<style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
             --dark-crimson: #6E1313; /* 深赫红 */
@@ -295,175 +297,185 @@
             .tree-line { font-size: 0.88rem; white-space: nowrap; }
             h1 { font-size: 1.6rem; }
         }
-    </style>
+    
+/* History V2: reading hierarchy, accessible links and responsive chronology */
+:root { scroll-behavior:smooth; }
+.nav-link:focus-visible,.dropdown-menu a:focus-visible,.person-link:focus-visible,.jump-link:focus-visible,.menu-toggle:focus-visible {outline:3px solid var(--accent-gold);outline-offset:3px;}
+.nav-item:focus-within .dropdown-menu {display:block;}
+.history-shortcuts {display:flex;flex-wrap:wrap;gap:.65rem;margin:1.2rem 0 1.5rem;}
+.jump-link {display:inline-flex;align-items:center;padding:.45rem .85rem;border:1px solid #d7c7a9;border-radius:6px;background:#faf5eb;color:var(--crimson);text-decoration:none;font-size:.94rem;font-weight:bold;}
+.jump-link:hover {background:#f2e5d1;}
+.section-subtitle {color:var(--muted);font-size:.91rem;margin:-.6rem 0 1.1rem;}
+.succession-list {list-style:none;display:flex;flex-direction:column;gap:.6rem;position:relative;padding-left:1rem;}
+.succession-list:before {content:'';position:absolute;left:1.34rem;top:.9rem;bottom:1rem;border-left:2px solid #d6bba9;}
+.succession-item {position:relative;margin-left:calc(var(--depth) * 1.15rem);display:flex;gap:.75rem;align-items:flex-start;}
+.succession-item:before {content:'';position:absolute;left:-.76rem;top:1.15rem;width:.75rem;border-top:2px solid #d6bba9;}
+.succession-card {flex:1;min-width:0;padding:.7rem .9rem;background:white;border:1px solid #e6d9c8;border-left:4px solid #a87a63;border-radius:6px;}
+.succession-item.is-ruler .succession-card {border-left-color:var(--crimson);}
+.succession-item.is-founder .succession-card {background:#fff7ed;border-left-color:var(--accent-gold);}
+.generation-label {display:inline-block;color:#76695e;font-size:.81rem;margin-right:.5rem;}
+.person-link {font-size:1.03rem;font-weight:700;color:var(--crimson);text-decoration:none;border-bottom:1px dotted #b77c7c;}
+.person-link:hover {color:#5b1010;border-bottom-style:solid;}
+.person-meta {font-size:.86rem;color:#625a52;margin-top:.2rem;line-height:1.65;}
+.link-note {font-size:.83rem;color:var(--muted);margin-top:.75rem;}
+.timeline {border-left:3px solid #c7a160;}
+.timeline-dot {background:var(--crimson);box-shadow:0 0 0 2px #a97536;}
+.timeline-heading {display:flex;align-items:center;gap:.65rem;flex-wrap:wrap;}
+.timeline-year {display:inline-block;background:var(--crimson);color:white;padding:.16rem .6rem;border-radius:4px;font-size:.9rem;font-weight:bold;line-height:1.6;white-space:nowrap;}
+.timeline-category {display:inline-block;border:1px solid #d9c5a7;border-radius:12px;padding:0 .6rem;color:#6e4b2e;font-size:.79rem;background:#fffaf2;}
+.timeline-title {font-size:1.04rem;flex:1;min-width:190px;}
+.timeline-content {overflow-wrap:anywhere;}
+.history-note {background:#fff9ee;border:1px solid #e5d3b1;border-radius:6px;padding:.9rem 1rem;margin:1.6rem 0;font-size:.9rem;color:#6b543d;}
+@media (max-width:960px) {.nav-item:focus-within .dropdown-menu {display:block;} .nav-item:not(.active) .dropdown-menu {display:none;} }
+@media (max-width:640px) { .container {padding:1rem;margin:.65rem;} .tree-box {padding:.85rem;overflow:visible;} .succession-list {padding-left:.25rem;} .succession-list:before {left:.55rem;} .succession-item {margin-left:0!important;padding-left:.6rem;} .succession-item:before {left:-.1rem;width:.6rem;} .succession-card {padding:.65rem;} .timeline {margin-left:.65rem;padding-left:1.05rem;} .timeline-dot {left:-1.54rem;} .timeline-title {min-width:0;} .header-inner {flex-wrap:wrap;} }
+@media print { .site-header,.history-shortcuts,.site-footer {display:none!important;} .container {box-shadow:none;border:0;margin:0;max-width:none;} .succession-item,.timeline-item {break-inside:avoid;} .timeline-content,.succession-card {background:white!important;} }
+</style>
 </head>
 <body>
-
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="site-logo">
+<header class="site-header">
+<div class="header-inner">
+<a class="site-logo" href="index.html">
                 大明周藩纪事 <small>周定王府</small>
-            </a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">首页</a>
-                
-                <!-- 宗系人物 -->
-                <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">👑 宗系人物 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="figures/index.html">历代人物</a>
-                        <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html">昭穆神位</a>
-                        <a href="branches.html">分房支派</a>
-                        <a href="history.html" style="background:var(--crimson); color:#fff;">王府传承</a>
-                    </div>
-                </div>
-
-                <!-- 典籍金石 -->
-                <div class="nav-item">
-                    <span class="nav-link">📚 典籍金石 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="classics.html">典籍著述</a>
-                        <a href="epigraphy.html">碑刻圹志</a>
-                        <a href="poetry.html">诗文戏曲</a>
-                        <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html">宗室典制</a>
-                        <a href="rules.html">祖训家规</a>
-                    </div>
-                </div>
-
-                <!-- 封地陵寝 -->
-                <div class="nav-item">
-                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="chronology.html">王府年表</a>
-                        <a href="estates.html">郡王封地</a>
-                        <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html">王陵陵寝</a>
-                        <a href="migration.html">迁徙寻根</a>
-                    </div>
-                </div>
-
-                <!-- 考据工具 -->
-                <div class="nav-item">
-                    <span class="nav-link">🛠️ 考据工具 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html">五行命名助手</a>
-                        <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html">修谱指南凡例</a>
-                        <a href="memorial.html">云端享堂祭奠</a>
-                    </div>
-                </div>
-
-                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <h1>周王世系承袭与大事记</h1>
-        <div class="intro-box">
+</a>
+<button aria-label="打开菜单" class="menu-toggle" onclick="toggleMenu()">☰</button>
+<nav class="nav-menu" id="navMenu">
+<a class="nav-link" href="index.html">首页</a>
+<!-- 宗系人物 -->
+<div class="nav-item">
+<button aria-expanded="false" class="nav-link" style="color:#fff; font-weight:bold;;background:transparent;border:0;font-family:inherit;text-align:left;" type="button">👑 宗系人物 ▾</button>
+<div class="dropdown-menu">
+<a href="figures/index.html">历代人物</a>
+<a href="hall-of-fame.html">周藩名人堂</a>
+<a href="lineage.html">世系字辈</a>
+<a href="tree.html">数字家谱树</a>
+<a href="ancestors.html">昭穆神位</a>
+<a href="branches.html">分房支派</a>
+<a href="history.html" style="background:var(--crimson); color:#fff;">王府传承</a>
+</div>
+</div>
+<!-- 典籍金石 -->
+<div class="nav-item">
+<button aria-expanded="false" class="nav-link" style=";background:transparent;border:0;font-family:inherit;text-align:left;" type="button">📚 典籍金石 ▾</button>
+<div class="dropdown-menu">
+<a href="classics.html">典籍著述</a>
+<a href="epigraphy.html">碑刻圹志</a>
+<a href="poetry.html">诗文戏曲</a>
+<a href="hall.html">堂号楹联</a>
+<a href="institution.html">宗室典制</a>
+<a href="rules.html">祖训家规</a>
+</div>
+</div>
+<!-- 封地陵寝 -->
+<div class="nav-item">
+<button aria-expanded="false" class="nav-link" style=";background:transparent;border:0;font-family:inherit;text-align:left;" type="button">🗺️ 封地陵寝 ▾</button>
+<div class="dropdown-menu">
+<a href="chronology.html">王府年表</a>
+<a href="estates.html">郡王封地</a>
+<a href="villages.html">聚落地名</a>
+<a href="tombs.html">王陵陵寝</a>
+<a href="migration.html">迁徙寻根</a>
+</div>
+</div>
+<!-- 考据工具 -->
+<div class="nav-item">
+<button aria-expanded="false" class="nav-link" style=";background:transparent;border:0;font-family:inherit;text-align:left;" type="button">🛠️ 考据工具 ▾</button>
+<div class="dropdown-menu">
+<a href="calendar.html">纪年干支换算</a>
+<a href="naming.html">五行命名助手</a>
+<a href="naming-guide.html">起名专栏与宗法</a>
+<a href="genealogy-guide.html">修谱指南凡例</a>
+<a href="memorial.html">云端享堂祭奠</a>
+</div>
+</div>
+<a class="nav-link" href="search.html" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<h1>周王世系承袭与大事记</h1>
+<div class="intro-box">
             大明开封周王府自洪武筑城始，历传十二世、十四位亲王（含追封世子与大宗承嗣），分封十四大郡王分房，宗室繁衍至数万人。其兼备医农科技、散曲词林、金石考辨之风雅，至明末又有毁家纾难、力拒闯军、坚守孤城之浩然大节，冠绝天潢诸藩。
-        </div>
-
-        <h2>👑 历代亲王大宗承袭脉络（太祖大始祖起算）</h2>
-        <div class="tree-box">
-            <div class="tree-line">
-                【第一世·大始祖】<strong>明太祖高皇帝 朱元璋</strong> <span class="tag-desc">（开创大明 · 御赐周藩二十字派语）</span><br>
-                &nbsp;└── 【第二世·周藩始祖】<strong>周定王 朱橚</strong> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（皇五子 · 洪武十四年就藩汴京 · 编撰《救荒本草》《普济方》）</span><br>
-                &nbsp; &nbsp; &nbsp;├── 【第三世】<strong>周宪王 朱有燉</strong> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（嫡长子 · 号诚斋 · 一代杂剧曲圣 · 正统四年薨无嗣）</span><br>
-                &nbsp; &nbsp; &nbsp;└── 【第三世】<strong>周简王 朱有爝</strong> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（第四子 · 初封祥符王 · 正统四年继袭大统 · 为大宗源流）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;├── 【第四世】<strong>周靖王 朱子垕</strong> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（简王庶长子 · 袭周王 · 在位一年薨无嗣）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第四世】<strong>周懿王 朱子墧</strong> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（简王庶次子 · 继袭周王 · 在位三十年极盛之世）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第五世】<strong>周惠王 朱同䥸</strong> <span class="badge-wx wx-metal">金</span> <span class="tag-desc">（懿王庶长子 · 初封睢阳王 · 成化末袭亲王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第六世】<strong>周悼王 朱安㶇</strong> <span class="badge-wx wx-water">水</span> <span class="tag-desc">（惠王世子 · 弘治十三年早卒 · 追封周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第七世】<strong>周恭王 朱睦㰂</strong> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（悼王庶长子 · 正德初袭亲王 · 在位三十二年敦睦宗法）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第八世】<strong>周康王 朱勤熄</strong> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（恭王嫡长子 · 周世子早卒 · 追封周王）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第九世】<strong>周庄王 朱朝堈</strong> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（康王长子 · 嘉靖十九年袭亲王 · 嘉隆年间文教昌明）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十世】<strong>周敬王 朱在鋌</strong> <span class="badge-wx wx-metal">金</span> <span class="tag-desc">（庄王庶长子 · 嘉靖三十四年袭周王 · 万历十一年薨）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十一世】<strong>周端王 朱肃溱</strong> <span class="badge-wx wx-water">水</span> <span class="tag-desc">（敬王嫡长子 · 万历十四年袭亲王 · 崇祯八年薨）</span><br>
-                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;└── 【第十二世】<strong>末代周王 朱恭枵</strong> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（端王嫡长子 · 散尽家财守城 · 崇祯十五年殉难 · 谥周孝王）</span>
-            </div>
-        </div>
-
-        <h2>⏳ 周藩重大历史事件编年</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">洪武三年（1370年） · 初封吴王，奠定国本</div>
-                <div class="timeline-date">明太祖洪武三年四月初七日</div>
-                <div class="timeline-content">
+        </div><div class="history-shortcuts"><a class="jump-link" href="#succession">查看承袭世系</a><a class="jump-link" href="#events">查看历史大事记</a><a class="jump-link" href="tree.html">打开数字家谱树</a></div>
+<h2 id="succession">👑 历代亲王大宗承袭脉络（太祖大始祖起算）</h2><p class="section-subtitle">按宗族世代呈现人物关系；追封、实际袭封与承嗣关系须结合史料分别考证。</p>
+<div class="tree-box"><ol class="succession-list"><li class="succession-item is-founder" style="--depth:0"><div class="succession-card"><span class="generation-label">第一世·大始祖</span><a class="person-link" href="tree.html" title="打开数字家谱树查找明太祖高皇帝 朱元璋">明太祖高皇帝 朱元璋</a><div class="person-meta"> <span class="tag-desc">（开创大明 · 御赐周藩二十字派语）</span></div></div></li><li class="succession-item is-founder" style="--depth:1"><div class="succession-card"><span class="generation-label">第二世·周藩始祖</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周定王 朱橚">周定王 朱橚</a><div class="person-meta"> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（皇五子 · 洪武十四年就藩汴京 · 编撰《救荒本草》《普济方》）</span></div></div></li><li class="succession-item is-ruler" style="--depth:2"><div class="succession-card"><span class="generation-label">第三世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周宪王 朱有燉">周宪王 朱有燉</a><div class="person-meta"> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（嫡长子 · 号诚斋 · 一代杂剧曲圣 · 正统四年薨无嗣）</span></div></div></li><li class="succession-item is-ruler" style="--depth:2"><div class="succession-card"><span class="generation-label">第三世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周简王 朱有爝">周简王 朱有爝</a><div class="person-meta"> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（第四子 · 初封祥符王 · 正统四年继袭大统 · 为大宗源流）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第四世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周靖王 朱子垕">周靖王 朱子垕</a><div class="person-meta"> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（简王庶长子 · 袭周王 · 在位一年薨无嗣）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第四世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周懿王 朱子墧">周懿王 朱子墧</a><div class="person-meta"> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（简王庶次子 · 继袭周王 · 在位三十年极盛之世）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第五世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周惠王 朱同䥸">周惠王 朱同䥸</a><div class="person-meta"> <span class="badge-wx wx-metal">金</span> <span class="tag-desc">（懿王庶长子 · 初封睢阳王 · 成化末袭亲王）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第六世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周悼王 朱安㶇">周悼王 朱安㶇</a><div class="person-meta"> <span class="badge-wx wx-water">水</span> <span class="tag-desc">（惠王世子 · 弘治十三年早卒 · 追封周王）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第七世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周恭王 朱睦㰂">周恭王 朱睦㰂</a><div class="person-meta"> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（悼王庶长子 · 正德初袭亲王 · 在位三十二年敦睦宗法）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第八世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周康王 朱勤熄">周康王 朱勤熄</a><div class="person-meta"> <span class="badge-wx wx-fire">火</span> <span class="tag-desc">（恭王嫡长子 · 周世子早卒 · 追封周王）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第九世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周庄王 朱朝堈">周庄王 朱朝堈</a><div class="person-meta"> <span class="badge-wx wx-earth">土</span> <span class="tag-desc">（康王长子 · 嘉靖十九年袭亲王 · 嘉隆年间文教昌明）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第十世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周敬王 朱在鋌">周敬王 朱在鋌</a><div class="person-meta"> <span class="badge-wx wx-metal">金</span> <span class="tag-desc">（庄王庶长子 · 嘉靖三十四年袭周王 · 万历十一年薨）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第十一世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找周端王 朱肃溱">周端王 朱肃溱</a><div class="person-meta"> <span class="badge-wx wx-water">水</span> <span class="tag-desc">（敬王嫡长子 · 万历十四年袭亲王 · 崇祯八年薨）</span></div></div></li><li class="succession-item is-ruler" style="--depth:3"><div class="succession-card"><span class="generation-label">第十二世</span><a class="person-link" href="tree.html" title="打开数字家谱树查找末代周王 朱恭枵">末代周王 朱恭枵</a><div class="person-meta"> <span class="badge-wx wx-wood">木</span> <span class="tag-desc">（端王嫡长子 · 散尽家财守城 · 崇祯十五年殉难 · 谥周孝王）</span>
+</div></div></li></ol><p class="link-note">点击人物姓名可进入数字家谱树查找对应人物；目前链接进入家谱树页面，不保证自动定位到该人物。</p></div>
+<h2 id="events">⏳ 周藩重大历史事件编年</h2>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-heading"><span class="timeline-year">1370</span><span class="timeline-category">封爵</span><div class="timeline-title">洪武三年（1370年） · 初封吴王，奠定国本</div></div>
+<div class="timeline-date">明太祖洪武三年四月初七日</div>
+<div class="timeline-content">
                     明太祖朱元璋于金陵紫禁城大封诸子，皇五子朱橚年甫十岁，正式受册为吴王。
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">洪武十一年（1378年）~ 十四年 · 改封周王，就藩汴京紫禁城</div>
-                <div class="timeline-date">明太祖洪武十一年至十四年十月</div>
-                <div class="timeline-content">
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-heading"><span class="timeline-year">1378</span><span class="timeline-category">建府</span><div class="timeline-title">洪武十一年（1378年）~ 十四年 · 改封周王，就藩汴京紫禁城</div></div>
+<div class="timeline-date">明太祖洪武十一年至十四年十月</div>
+<div class="timeline-content">
                     因吴地为京畿重地，太祖诏改封朱橚为周王，赐国中原开封府。择宋金故宫旧址筑周王府紫禁城，规制壮丽。洪武十四年十月三十日，周王朱橚正式之国汴京，开创周藩二百六十载基业。
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">永乐初至永乐四年（1406年） · 《普济方》与《救荒本草》刊行</div>
-                <div class="timeline-date">明成祖永乐初年至四年</div>
-                <div class="timeline-content">
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-heading"><span class="timeline-year">1406</span><span class="timeline-category">典籍</span><div class="timeline-title">永乐初至永乐四年（1406年） · 《普济方》与《救荒本草》刊行</div></div>
+<div class="timeline-date">明成祖永乐初年至四年</div>
+<div class="timeline-content">
                     定王于开封府设生药圃与良医所，组织腾硕、刘醇等名医编纂<strong>《普济方》</strong>（收方61,739首，为我国古代最大医学方剂全书）；永乐四年，其亲绘亲注的植物学与农学巨著<strong>《救荒本草》</strong>（收录414种可救荒食用野生植物）正式刊行，开创世界植物学与救荒专科之先河。
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">正统四年（1439年） · 宪王薨逝无嗣，大宗统系转归简王</div>
-                <div class="timeline-date">明英宗正统四年正月至五月</div>
-                <div class="timeline-content">
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-heading"><span class="timeline-year">1439</span><span class="timeline-category">承袭</span><div class="timeline-title">正统四年（1439年） · 宪王薨逝无嗣，大宗统系转归简王</div></div>
+<div class="timeline-date">明英宗正统四年正月至五月</div>
+<div class="timeline-content">
                     明初词曲大师周宪王朱有燉薨逝，遗作31种杂剧悉数入集刊刻为<strong>《诚斋乐府》</strong>。宪王无子，朝廷特诏祥符王朱有爝承嗣周亲王大位（谥曰简）。自此之后，历代周亲王皆出自简王一脉传承。
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">万历五年（1577年）~ 十四年 · 金石大家朱睦㮮掌理宗正</div>
-                <div class="timeline-date">明神宗万历年间</div>
-                <div class="timeline-content">
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-heading"><span class="timeline-year">1577</span><span class="timeline-category">学术</span><div class="timeline-title">万历五年（1577年）~ 十四年 · 金石大家朱睦㮮掌理宗正</div></div>
+<div class="timeline-date">明神宗万历年间</div>
+<div class="timeline-content">
                     镇平王支系宗室、学者朱睦㮮出任周藩宗正。睦㮮筑“万卷堂”聚书数万卷，精研金石目录之学，著撰《金石图》、《中州人物志》、《篇海类编》等，被后世文献家誉为“有明一代宗室藏书金石之冠”。
                 </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-title">崇祯十五年（1642年） · 汴梁保卫战与周藩殉节</div>
-                <div class="timeline-date">明思宗崇祯十五年五月至九月</div>
-                <div class="timeline-content">
+</div>
+<div class="timeline-item">
+<div class="timeline-dot"></div>
+<div class="timeline-heading"><span class="timeline-year">1642</span><span class="timeline-category">战乱</span><div class="timeline-title">崇祯十五年（1642年） · 汴梁保卫战与周藩殉节</div></div>
+<div class="timeline-date">明思宗崇祯十五年五月至九月</div>
+<div class="timeline-content">
                     李自成起义军三围开封。末代周王朱恭枵倾尽王府积蓄数百万两银两犒赏将士、施粥救民，率宗室坚守孤城达八月之久。九月黄河决口倒灌汴梁城，周王府没入泥沙，朱恭枵登舟转徙卫辉后殉难。周藩宗亲北渡封丘、延津或南奔宛洛，宗室散迁四方，以字辈与五行家规赓续血脉至今。
                 </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
-    </footer>
-
-    <script>
-        function toggleMenu() {
-            document.getElementById('navMenu').classList.toggle('show');
-        }
-
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                if (window.innerWidth <= 960) {
-                    this.classList.toggle('active');
-                }
-            });
-        });
-    </script>
+</div>
+</div><div class="history-note">史料说明：本页沿用原稿人物、年代与事件叙述，尚未逐项核验。尤其涉及亲王实封与追封、洪武年间改封就藩日期、明末开封城破及周王结局等记载，请以《明史》《明实录》及可靠地方志、谱牒互证；存疑处不应视为定论。</div>
+</main>
+<footer class="site-footer">
+<p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
+</footer>
+<script>
+const menuToggle=document.querySelector('.menu-toggle');
+const navMenu=document.getElementById('navMenu');
+function toggleMenu(){
+ const open=navMenu.classList.toggle('show');
+ menuToggle.setAttribute('aria-expanded',String(open));
+}
+menuToggle.setAttribute('aria-expanded','false');
+menuToggle.setAttribute('aria-controls','navMenu');
+document.querySelectorAll('.nav-item > button.nav-link').forEach(btn=>{
+ btn.addEventListener('click',()=>{
+  const item=btn.closest('.nav-item');
+  const opening=!item.classList.contains('active');
+  document.querySelectorAll('.nav-item.active').forEach(other=>{other.classList.remove('active');other.querySelector('button.nav-link')?.setAttribute('aria-expanded','false');});
+  item.classList.toggle('active',opening);
+  btn.setAttribute('aria-expanded',String(opening));
+ });
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){
+ navMenu.classList.remove('show');menuToggle.setAttribute('aria-expanded','false');
+ document.querySelectorAll('.nav-item.active').forEach(item=>{item.classList.remove('active');item.querySelector('button.nav-link')?.setAttribute('aria-expanded','false');});
+}});
+</script>
 </body>
 </html>
