@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩历代圹志与金石碑刻考 - 大明周藩纪事</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>周藩历代圹志与金石碑刻考 - 大明周藩纪事</title>
+<style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
             --dark-crimson: #6E1313; /* 深赫红 */
@@ -344,210 +344,206 @@
             .rubbing-content { font-size: 0.94rem; line-height: 2; }
             h1 { font-size: 1.6rem; }
         }
-    </style>
+    
+/* V2 additions */
+.epi-tools{background:#fcfaf7;border:1px solid var(--border);border-radius:6px;padding:1rem;margin:1.3rem 0 1.5rem}
+.epi-filters,.epi-links{display:flex;flex-wrap:wrap;gap:.55rem;margin-bottom:.8rem}
+.epi-btn,.epi-link{font:inherit;font-size:.86rem;border:1px solid #cba58e;border-radius:4px;padding:.35rem .7rem;background:#fff;color:var(--crimson);cursor:pointer;text-decoration:none}
+.epi-btn.active{background:var(--crimson);color:white;border-color:var(--crimson)}
+.epi-search{display:flex;align-items:center;flex-wrap:wrap;gap:.6rem;margin:.8rem 0}
+.epi-search input{flex:1;min-width:180px;padding:.65rem;border:1px solid #d7c8b5;border-radius:4px;font:inherit}
+.epi-count{font-size:.85rem;color:var(--muted)}
+.epi-notice{background:#faf5eb;border-left:3px solid var(--accent-gold);padding:.85rem 1rem;font-size:.88rem;color:#614d2a;margin:1rem 0}
+.epi-empty{display:none;text-align:center;background:#faf5eb;padding:1rem;margin:1rem 0}
+.epi-section-title{margin-top:2rem}
+.epi-hidden{display:none!important}
+.rubbing-content{overflow-wrap:anywhere}
+@media(max-width:650px){.container{padding:1rem}.rubbing-card{padding:1rem}.rubbing-frame{padding:1rem}.rubbing-seal{letter-spacing:1px}.rubbing-title{font-size:1.12rem}.epi-search input{width:100%}.epi-filters{gap:.35rem}.epi-btn{padding:.3rem .5rem}}
+</style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="site-logo">
+<header class="site-header">
+<div class="header-inner">
+<a class="site-logo" href="index.html">
                 大明周藩纪事 <small>周定王府</small>
-            </a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">首页</a>
-                
-                <!-- 宗系人物 -->
-                <div class="nav-item">
-                    <span class="nav-link">👑 宗系人物 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="figures/index.html">历代人物</a>
-                        <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html">昭穆神位</a>
-                        <a href="branches.html">分房支派</a>
-                        <a href="history.html">王府传承</a>
-                    </div>
-                </div>
-
-                <!-- 典籍金石 -->
-                <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="classics.html">典籍著述</a>
-                        <a href="epigraphy.html" style="background:var(--crimson); color:#fff;">碑刻圹志</a>
-                        <a href="poetry.html">诗文戏曲</a>
-                        <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html">宗室典制</a>
-                        <a href="rules.html">祖训家规</a>
-                    </div>
-                </div>
-
-                <!-- 封地陵寝 -->
-                <div class="nav-item">
-                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="chronology.html">王府年表</a>
-                        <a href="estates.html">郡王封地</a>
-                        <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html">王陵陵寝</a>
-                        <a href="migration.html">迁徙寻根</a>
-                    </div>
-                </div>
-
-                <!-- 考据工具 -->
-                <div class="nav-item">
-                    <span class="nav-link">🛠️ 考据工具 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html">五行命名助手</a>
-                        <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html">修谱指南凡例</a>
-                        <a href="memorial.html">云端享堂祭奠</a>
-                    </div>
-                </div>
-
-                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <h1>周藩历代圹志与金石碑刻考</h1>
-        <div class="intro-box">
+</a>
+<button aria-label="打开菜单" class="menu-toggle" onclick="toggleMenu()">☰</button>
+<nav class="nav-menu" id="navMenu">
+<a class="nav-link" href="index.html">首页</a>
+<!-- 宗系人物 -->
+<div class="nav-item">
+<span class="nav-link">👑 宗系人物 ▾</span>
+<div class="dropdown-menu">
+<a href="figures/index.html">历代人物</a>
+<a href="hall-of-fame.html">周藩名人堂</a>
+<a href="lineage.html">世系字辈</a>
+<a href="tree.html">数字家谱树</a>
+<a href="ancestors.html">昭穆神位</a>
+<a href="branches.html">分房支派</a>
+<a href="history.html">王府传承</a>
+</div>
+</div>
+<!-- 典籍金石 -->
+<div class="nav-item">
+<span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
+<div class="dropdown-menu">
+<a href="classics.html">典籍著述</a>
+<a href="epigraphy.html" style="background:var(--crimson); color:#fff;">碑刻圹志</a>
+<a href="poetry.html">诗文戏曲</a>
+<a href="hall.html">堂号楹联</a>
+<a href="institution.html">宗室典制</a>
+<a href="rules.html">祖训家规</a>
+</div>
+</div>
+<!-- 封地陵寝 -->
+<div class="nav-item">
+<span class="nav-link">🗺️ 封地陵寝 ▾</span>
+<div class="dropdown-menu">
+<a href="chronology.html">王府年表</a>
+<a href="estates.html">郡王封地</a>
+<a href="villages.html">聚落地名</a>
+<a href="tombs.html">王陵陵寝</a>
+<a href="migration.html">迁徙寻根</a>
+</div>
+</div>
+<!-- 考据工具 -->
+<div class="nav-item">
+<span class="nav-link">🛠️ 考据工具 ▾</span>
+<div class="dropdown-menu">
+<a href="calendar.html">纪年干支换算</a>
+<a href="naming.html">五行命名助手</a>
+<a href="naming-guide.html">起名专栏与宗法</a>
+<a href="genealogy-guide.html">修谱指南凡例</a>
+<a href="memorial.html">云端享堂祭奠</a>
+</div>
+</div>
+<a class="nav-link" href="search.html" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<h1>周藩历代圹志与金石碑刻考</h1>
+<div class="intro-box">
             金石圹志（墓志铭）乃明代朝廷按国礼钦赐之第一手宗藩档案。其刊刻于精磨青石之上、随梓宫深锢于地下玄宫，字句确凿。所载名讳、生卒年月日、婚配妃嫔、封爵分房及归葬吉壤，是证史补阙、核实家谱传序的最权威原始凭据。
-        </div>
-
-        <h2>🪦 始祖周定王朱橚圹志考（宣德元年）</h2>
-        
-        <div class="rubbing-card">
-            <div class="rubbing-header-box">
-                <span class="rubbing-title">《大明周定王圹志》原刻铭文全录</span>
-                <span class="rubbing-badge">禹州明周定王陵地宫出土</span>
-            </div>
-            <div class="rubbing-meta">志石形制：青石质正方形 · 边长约 95 厘米 · 双钩线刻四神龙纹填金边栏 · 篆额九字</div>
-            
-            <p style="font-size:0.95rem; color:#443D36;">
+        </div><div class="epi-notice">史料核验提示：本页保留原站所录文字、年代与出土地资料，尚未逐条对照原刻拓片、考古报告及权威著录。所列“原刻铭文全录”等称谓系原页面标题，不能据此认定网页文字为已校定的逐字释文；断句版与无标点版也不等同于拓片影像。</div><section aria-label="碑刻检索工具" class="epi-tools"><div class="epi-filters"><button class="epi-btn active" data-filter="all" type="button">全部资料</button><button class="epi-btn" data-filter="royal" type="button">王室圹志</button><button class="epi-btn" data-filter="consort" type="button">妃妾墓志</button><button class="epi-btn" data-filter="other" type="button">其他碑刻与匾额</button></div><div class="epi-search"><label for="epiQuery">查找金石</label><input autocomplete="off" id="epiQuery" placeholder="搜索人物、碑名、年代、出土地……" type="search"/><button class="epi-btn" id="epiClear" type="button">清除</button><span aria-live="polite" class="epi-count" id="epiCount"></span></div><div class="epi-links"><a class="epi-link" href="tree.html">查看数字家谱树 →</a><a class="epi-link" href="figures/index.html">查看历代人物 →</a><a class="epi-link" href="ancestors.html">查看昭穆神位 →</a></div></section><div class="epi-empty" id="epiEmpty">没有找到符合条件的金石资料，请尝试其他关键词或分类。</div>
+<h2 data-epi-heading="0">🪦 始祖周定王朱橚圹志考（宣德元年）</h2>
+<div class="rubbing-card epi-entry" data-category="royal">
+<div class="rubbing-header-box">
+<span class="rubbing-title">《大明周定王圹志》原刻铭文全录</span>
+<span class="rubbing-badge">禹州明周定王陵地宫出土</span>
+</div>
+<div class="rubbing-meta">志石形制：青石质正方形 · 边长约 95 厘米 · 双钩线刻四神龙纹填金边栏 · 篆额九字</div>
+<p style="font-size:0.95rem; color:#443D36;">
                 此志出土于河南禹州无梁镇周定王陵主玄室中。志文高度概括了朱橚一生之政治起伏、仁德医勋，并清晰罗列了周藩十四大郡王分房的受封爵位与早卒齿序，是周藩全系最重要的金石元典：
             </p>
-
-            <div class="rubbing-frame">
-                <div class="rubbing-toolbar">
-                    <button class="btn-punctuate" onclick="togglePunctuation('dingwangText')">切换断句/原文</button>
-                </div>
-                <div class="rubbing-seal">【 志 盖 篆 额 】<br>大 明 周 定 王 圹 志</div>
-                <div class="rubbing-content" id="dingwangText" data-mode="punctuated">
-王讳橚，太祖高皇帝第五子，母孝慈高皇后。生于元至正二十一年九月初九日。<br>
-洪武三年四月初七日，册封为吴王。洪武十一年正月初一日，改封为周王。洪武十四年十月三十日，之国开封府。<br>
-王天资明达，博学能文，雅好医药本草，辑《普济方》《救荒本草》以寿斯民。<br>
-洪熙元年八月二十日，以疾薨，享年六十有五。<br>
-讣闻，上震悼，辍视朝三日，遣官赐祭，命有司治丧如制，谥曰“定”。<br>
-妃冯氏，宋国公胜之女，先逝。<br>
-子十五人：长子世子有燉，袭封周王；次汝南王有爋；三顺阳王有爌；四祥符王有爝；五新乡王有𤊟；六宁陵王有爤；七杞县王有炌；八信阳王有燖；九镇平王有爌；十遂平王有熡；十一封丘王有𤓂；十二鲁山王有灦；十三邺王有爚；十四胙城王有燆；十五早卒。<br>
-女十一人。<br>
-以宣德元年十月二十八日，葬于河南禹州无风山之原。<br>
+<div class="rubbing-frame">
+<div class="rubbing-toolbar">
+<button class="btn-punctuate" onclick="togglePunctuation('dingwangText')">切换断句/原文</button>
+</div>
+<div class="rubbing-seal">【 志 盖 篆 额 】<br/>大 明 周 定 王 圹 志</div>
+<div class="rubbing-content" data-mode="punctuated" id="dingwangText">
+王讳橚，太祖高皇帝第五子，母孝慈高皇后。生于元至正二十一年九月初九日。<br/>
+洪武三年四月初七日，册封为吴王。洪武十一年正月初一日，改封为周王。洪武十四年十月三十日，之国开封府。<br/>
+王天资明达，博学能文，雅好医药本草，辑《普济方》《救荒本草》以寿斯民。<br/>
+洪熙元年八月二十日，以疾薨，享年六十有五。<br/>
+讣闻，上震悼，辍视朝三日，遣官赐祭，命有司治丧如制，谥曰“定”。<br/>
+妃冯氏，宋国公胜之女，先逝。<br/>
+子十五人：长子世子有燉，袭封周王；次汝南王有爋；三顺阳王有爌；四祥符王有爝；五新乡王有𤊟；六宁陵王有爤；七杞县王有炌；八信阳王有燖；九镇平王有爌；十遂平王有熡；十一封丘王有𤓂；十二鲁山王有灦；十三邺王有爚；十四胙城王有燆；十五早卒。<br/>
+女十一人。<br/>
+以宣德元年十月二十八日，葬于河南禹州无风山之原。<br/>
 呜呼！王以宗室懿亲，作藩中土，抚绥兆民，德裕流光。奄捐馆舍，曷胜痛悼！爰述大㮣，纳诸幽圹，用垂不朽云。
                 </div>
-                <div class="rubbing-footer">出土吉壤：河南禹州无梁镇老龙头山玄宫 · 现藏于禹州明周王陵博物馆（国保单位）</div>
-            </div>
-
-            <h3>🔍 金石考据核心要点：</h3>
-            <ul class="feature-list">
-                <li><strong>平息生年异说：</strong>志文确载生于“元至正二十一年（1361年）九月初九日”，薨于“洪熙元年（1425年）八月二十日”，享年六十五，纠正了后世部分私家史乘的生卒笔误；</li>
-                <li><strong>钦定十四房郡王宗脉：</strong>明确载入定王诸子十四位封王名字与偏旁，以及“十五早卒”之记录，为后世家谱核定支派房头提供了第一手铁证；</li>
-                <li><strong>著述功绩入官志：</strong>将编纂《救荒本草》《普济方》作为定王生平核心功德载入朝廷正式圹志，确立了其科学宗王的崇高历史地位。</li>
-            </ul>
-        </div>
-
-        <h2>🪦 周宪王朱有燉圹志与贞烈贞顺碑</h2>
-
-        <div class="rubbing-card">
-            <div class="rubbing-header-box">
-                <span class="rubbing-title">《大明周宪王圹志》</span>
-                <span class="rubbing-badge badge-blue">开封祥符 / 明正统四年</span>
-            </div>
-            <div class="rubbing-meta">志主：周第二代王 · 诚斋公朱有燉 · 袭爵十四年 · 谥号“宪”</div>
-            <div class="rubbing-frame" style="margin: 0.8rem 0;">
-                <div class="rubbing-content" style="font-size: 0.98rem; line-height: 2.1;">
-王讳有燉，周定王之嫡长子也。母妃冯氏。生于洪武十二年正月初一日。<br>
-洪武三十五年（建文四年）封为周世子，永乐二十二年袭封周王。<br>
-王性温仁恭谨，笃学博览，精律吕词曲，善画牡丹。号诚斋，所作乐府杂剧风行天下。<br>
-正统四年正月十七日以疾薨，享年六十有一。无子。<br>
+<div class="rubbing-footer">出土吉壤：河南禹州无梁镇老龙头山玄宫 · 现藏于禹州明周王陵博物馆（国保单位）</div>
+</div>
+<h3>🔍 金石考据核心要点：</h3>
+<ul class="feature-list">
+<li><strong>平息生年异说：</strong>志文确载生于“元至正二十一年（1361年）九月初九日”，薨于“洪熙元年（1425年）八月二十日”，享年六十五，纠正了后世部分私家史乘的生卒笔误；</li>
+<li><strong>钦定十四房郡王宗脉：</strong>明确载入定王诸子十四位封王名字与偏旁，以及“十五早卒”之记录，为后世家谱核定支派房头提供了第一手铁证；</li>
+<li><strong>著述功绩入官志：</strong>将编纂《救荒本草》《普济方》作为定王生平核心功德载入朝廷正式圹志，确立了其科学宗王的崇高历史地位。</li>
+</ul>
+</div>
+<h2 data-epi-heading="1">🪦 周宪王朱有燉圹志与贞烈贞顺碑</h2>
+<div class="rubbing-card epi-entry" data-category="royal">
+<div class="rubbing-header-box">
+<span class="rubbing-title">《大明周宪王圹志》</span>
+<span class="rubbing-badge badge-blue">开封祥符 / 明正统四年</span>
+</div>
+<div class="rubbing-meta">志主：周第二代王 · 诚斋公朱有燉 · 袭爵十四年 · 谥号“宪”</div>
+<div class="rubbing-frame" style="margin: 0.8rem 0;">
+<div class="rubbing-content" style="font-size: 0.98rem; line-height: 2.1;">
+王讳有燉，周定王之嫡长子也。母妃冯氏。生于洪武十二年正月初一日。<br/>
+洪武三十五年（建文四年）封为周世子，永乐二十二年袭封周王。<br/>
+王性温仁恭谨，笃学博览，精律吕词曲，善画牡丹。号诚斋，所作乐府杂剧风行天下。<br/>
+正统四年正月十七日以疾薨，享年六十有一。无子。<br/>
 上闻讣震悼，辍视朝三日，遣官致祭，命有司营葬，谥曰“宪”。弟祥符王有爝承嗣大统。
                 </div>
-            </div>
-        </div>
-
-        <div class="rubbing-card">
-            <div class="rubbing-header-box">
-                <span class="rubbing-title">《御制贞烈贞顺墓志铭》（周宪王妃妾随葬碑）</span>
-                <span class="rubbing-badge badge-green">明代宗室殉葬礼制实证</span>
-            </div>
-            <div class="rubbing-meta">立石年代：明正统四年 (1439) · 志石现藏开封</div>
-            <div style="font-size:0.95rem; color:#443D36; line-height:1.85;">
+</div>
+</div>
+<div class="rubbing-card epi-entry" data-category="consort">
+<div class="rubbing-header-box">
+<span class="rubbing-title">《御制贞烈贞顺墓志铭》（周宪王妃妾随葬碑）</span>
+<span class="rubbing-badge badge-green">明代宗室殉葬礼制实证</span>
+</div>
+<div class="rubbing-meta">立石年代：明正统四年 (1439) · 志石现藏开封</div>
+<div style="font-size:0.95rem; color:#443D36; line-height:1.85;">
                 周宪王生前曾上奏朝廷请求免除姬妾殉葬，但宪王薨逝后，王妃巩氏自缢殉节，侍妾六人随殉。明英宗特赐谕祭，封巩氏为<strong>“贞烈王妃”</strong>，追封夫人李氏、张氏、何氏、杨氏、徐氏、王氏为<strong>“贞顺夫人”</strong>，并立御制碑石以彰其节。此碑是研究明代前期宫廷殉葬与追谥制度不可多得的珍贵实物。
             </div>
-        </div>
-
-        <h2>📜 周藩宗室与分房历代出土碑石名录库</h2>
-
-        <div class="table-wrap">
-            <table class="comp-table">
-                <thead>
-                    <tr>
-                        <th>志石名称</th>
-                        <th>志主与所属分房</th>
-                        <th>时代与纪年</th>
-                        <th>出土地点</th>
-                        <th>核心金石考据价值</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>《大明顺阳怀庄王圹志》</strong></td>
-                        <td>周定王三子 · 顺阳王朱有爌</td>
-                        <td>宣德八年 (1433)</td>
-                        <td>河南南阳 / 禹州</td>
-                        <td>记载顺阳王分封南阳、早薨及子嗣朱子峹袭爵之详，出土有高规格金银器与九旒王冠配件。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>《大明新乡王圹志》</strong></td>
-                        <td>周定王五子 · 新乡王朱有𤊟</td>
-                        <td>正统四年 (1439)</td>
-                        <td>河南新乡 / 获嘉</td>
-                        <td>记载新乡房支脉迁徙卫辉府之开端，为豫北周藩宗亲寻根之基准石刻。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>《周藩永宁王府木匾额》</strong></td>
-                        <td>永宁王府掌理府事朱肃湷</td>
-                        <td>万历四十年 (1612)</td>
-                        <td>开封周王府遗址 (新街口)</td>
-                        <td>出土楷书填金“昭代贤宗”大匾，为开封“城摞城”明周王府紫禁城空间界定之关键重器。</td>
-                    </tr>
-                    <tr>
-                        <td><strong>《大明镇平恭定王圹志》</strong></td>
-                        <td>周定王九子 · 镇平王朱有爌(㫤)</td>
-                        <td>景泰六年 (1455)</td>
-                        <td>河南禹州 / 镇平</td>
-                        <td>订正顺阳、镇平二王同音名讳字形，记载镇平王府分封宛南之始末。</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h2>🏛️ 金石与修谱互证：周藩后裔辨谱三大原则</h2>
-        <div class="quote-box">
-            <p><strong>一、以志辨偏旁五行：</strong>太祖钦定周藩字辈自三世起依“火、土、金、水、木”循环。如遇私家谱书与圹志用字不一，一律以出土金石圹志原刻为准勘正；</p>
-            <p><strong>二、以志查早夭与漏载：</strong>私谱修撰常因年代久远遗漏无嗣早卒宗亲，定王圹志明确记载“子十五人，十五早卒”，补全了周藩大宗第一代子嗣全貌；</p>
-            <p><strong>三、以志证迁徙与聚落：</strong>圹志所载之“封国之国”与“赐葬山原”，与豫皖苏鲁滇各地“朱家楼”、“周王庄”之卫军守陵户、奉祀户聚落分布完全契合。</p>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
-    </footer>
-
-    <script>
+</div>
+<h2 data-epi-heading="table">📜 周藩宗室与分房历代出土碑石名录库</h2>
+<div class="table-wrap">
+<table class="comp-table">
+<thead>
+<tr>
+<th>志石名称</th>
+<th>志主与所属分房</th>
+<th>时代与纪年</th>
+<th>出土地点</th>
+<th>核心金石考据价值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="epi-entry" data-category="royal">
+<td><strong>《大明顺阳怀庄王圹志》</strong></td>
+<td>周定王三子 · 顺阳王朱有爌</td>
+<td>宣德八年 (1433)</td>
+<td>河南南阳 / 禹州</td>
+<td>记载顺阳王分封南阳、早薨及子嗣朱子峹袭爵之详，出土有高规格金银器与九旒王冠配件。</td>
+</tr>
+<tr class="epi-entry" data-category="royal">
+<td><strong>《大明新乡王圹志》</strong></td>
+<td>周定王五子 · 新乡王朱有𤊟</td>
+<td>正统四年 (1439)</td>
+<td>河南新乡 / 获嘉</td>
+<td>记载新乡房支脉迁徙卫辉府之开端，为豫北周藩宗亲寻根之基准石刻。</td>
+</tr>
+<tr class="epi-entry" data-category="other">
+<td><strong>《周藩永宁王府木匾额》</strong></td>
+<td>永宁王府掌理府事朱肃湷</td>
+<td>万历四十年 (1612)</td>
+<td>开封周王府遗址 (新街口)</td>
+<td>出土楷书填金“昭代贤宗”大匾，为开封“城摞城”明周王府紫禁城空间界定之关键重器。</td>
+</tr>
+<tr class="epi-entry" data-category="royal">
+<td><strong>《大明镇平恭定王圹志》</strong></td>
+<td>周定王九子 · 镇平王朱有爌(㫤)</td>
+<td>景泰六年 (1455)</td>
+<td>河南禹州 / 镇平</td>
+<td>订正顺阳、镇平二王同音名讳字形，记载镇平王府分封宛南之始末。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2>🏛️ 金石与修谱互证：周藩后裔辨谱三大原则</h2>
+<div class="quote-box">
+<p><strong>一、以志辨偏旁五行：</strong>太祖钦定周藩字辈自三世起依“火、土、金、水、木”循环。如遇私家谱书与圹志用字不一，一律以出土金石圹志原刻为准勘正；</p>
+<p><strong>二、以志查早夭与漏载：</strong>私谱修撰常因年代久远遗漏无嗣早卒宗亲，定王圹志明确记载“子十五人，十五早卒”，补全了周藩大宗第一代子嗣全貌；</p>
+<p><strong>三、以志证迁徙与聚落：</strong>圹志所载之“封国之国”与“赐葬山原”，与豫皖苏鲁滇各地“朱家楼”、“周王庄”之卫军守陵户、奉祀户聚落分布完全契合。</p>
+</div>
+</main>
+<footer class="site-footer">
+<p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
+</footer>
+<script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
@@ -576,5 +572,34 @@
             }
         }
     </script>
-</body>
+<script>
+// V2: combined keyword and category filtering, including table records.
+(function(){
+ const buttons=[...document.querySelectorAll('.epi-btn[data-filter]')];
+ const entries=[...document.querySelectorAll('.epi-entry')];
+ const input=document.getElementById('epiQuery');
+ let category='all';
+ function refresh(){
+  const q=input.value.trim().toLocaleLowerCase();let visible=0;
+  entries.forEach(el=>{
+   const matches=(category==='all'||el.dataset.category===category)&&el.textContent.toLocaleLowerCase().includes(q);
+   el.classList.toggle('epi-hidden',!matches);if(matches)visible++;
+  });
+  const table=document.querySelector('.table-wrap');
+  const rows=[...document.querySelectorAll('.comp-table tbody tr')];
+  const tableVisible=rows.some(r=>!r.classList.contains('epi-hidden'));
+  table?.classList.toggle('epi-hidden',!tableVisible);
+  document.querySelector('[data-epi-heading="table"]')?.classList.toggle('epi-hidden',!tableVisible);
+  const cards=[...document.querySelectorAll('.rubbing-card')];
+  document.querySelector('[data-epi-heading="0"]')?.classList.toggle('epi-hidden',cards[0]?.classList.contains('epi-hidden')??true);
+  document.querySelector('[data-epi-heading="1"]')?.classList.toggle('epi-hidden',cards.slice(1).every(c=>c.classList.contains('epi-hidden')));
+  document.getElementById('epiCount').textContent=`显示 ${visible} / ${entries.length} 条资料`;
+  document.getElementById('epiEmpty').style.display=visible?'none':'block';
+ }
+ buttons.forEach(b=>b.addEventListener('click',()=>{category=b.dataset.filter;buttons.forEach(x=>x.classList.toggle('active',x===b));refresh()}));
+ input.addEventListener('input',refresh);
+ document.getElementById('epiClear').addEventListener('click',()=>{input.value='';refresh();input.focus()});
+ refresh();
+})();
+</script></body>
 </html>
