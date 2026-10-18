@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周藩诗文戏曲与《诚斋乐府》选萃 - 大明周藩纪事</title>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>周藩诗文戏曲与《诚斋乐府》选萃 - 大明周藩纪事</title>
+<style>
         :root {
             --crimson: #8C1D1D;      /* 周府朱砂红 */
             --dark-crimson: #6E1313; /* 深赫红 */
@@ -312,189 +313,187 @@
             .poetry-content { font-size: 1.05rem; line-height: 2.1; }
             h1 { font-size: 1.6rem; }
         }
-    </style>
+    
+/* V2：检索、筛选、作品详情及移动端适配 */
+.v2-tools{background:#FCFAF7;border:1px solid var(--border);border-radius:6px;padding:1rem 1.1rem;margin:1.2rem 0}
+.v2-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+.v2-tabs button,.v2-clear,.v2-links a,.v2-detail summary{font:inherit;cursor:pointer;border:1px solid #CFA98E;color:var(--crimson);background:white;border-radius:4px;padding:.4rem .75rem}
+.v2-tabs button[aria-pressed="true"]{background:var(--crimson);color:white;border-color:var(--crimson)}
+.v2-search-row{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.v2-search-row label{white-space:nowrap}.v2-search-row input{flex:1;min-width:160px;padding:.65rem;border:1px solid #CFA98E;border-radius:4px;font:inherit;background:white}
+.v2-count{font-size:.85rem;color:var(--muted)}
+.v2-links{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.7rem}.v2-links a{text-decoration:none;font-size:.88rem}
+.v2-note{background:#FAF5EB;border-left:3px solid var(--accent-gold);padding:.8rem 1rem;margin:1.1rem 0;color:#614D2A;font-size:.9rem}
+.v2-detail{margin-top:.9rem;border-top:1px dashed #E2D7C5;padding-top:.7rem}.v2-detail summary{display:inline-block;list-style:none;font-size:.9rem}.v2-detail summary::-webkit-details-marker{display:none}
+.v2-detail p{margin-top:.6rem;font-size:.9rem;line-height:1.8;color:#554C3F}
+.v2-empty{padding:1.3rem;text-align:center;background:#FAF5EB;color:#685747;margin:1rem 0}
+[hidden]{display:none!important}
+@media(max-width:650px){.container{padding:1rem;margin:.7rem}.poetry-card{padding:1.1rem}.drama-grid{grid-template-columns:1fr}.v2-search-row{align-items:stretch}.v2-search-row label{width:100%}.v2-search-row input{width:100%;min-width:0}.v2-links a{flex:1;text-align:center}.poetry-content{letter-spacing:0;font-size:1rem;line-height:2.1}.poetry-title{font-size:1.12rem}}
+</style>
 </head>
 <body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="site-logo">
+<header class="site-header">
+<div class="header-inner">
+<a class="site-logo" href="index.html">
                 大明周藩纪事 <small>周定王府</small>
-            </a>
-            <button class="menu-toggle" onclick="toggleMenu()" aria-label="打开菜单">☰</button>
-            <nav class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">首页</a>
-                
-                <!-- 宗系人物 -->
-                <div class="nav-item">
-                    <span class="nav-link">👑 宗系人物 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="figures/index.html">历代人物</a>
-                        <a href="hall-of-fame.html">周藩名人堂</a>
-                        <a href="lineage.html">世系字辈</a>
-                        <a href="tree.html">数字家谱树</a>
-                        <a href="ancestors.html">昭穆神位</a>
-                        <a href="branches.html">分房支派</a>
-                        <a href="history.html">王府传承</a>
-                    </div>
-                </div>
-
-                <!-- 典籍金石 -->
-                <div class="nav-item">
-                    <span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="classics.html">典籍著述</a>
-                        <a href="epigraphy.html">碑刻圹志</a>
-                        <a href="poetry.html" style="background:var(--crimson); color:#fff;">诗文戏曲</a>
-                        <a href="hall.html">堂号楹联</a>
-                        <a href="institution.html">宗室典制</a>
-                        <a href="rules.html">祖训家规</a>
-                    </div>
-                </div>
-
-                <!-- 封地陵寝 -->
-                <div class="nav-item">
-                    <span class="nav-link">🗺️ 封地陵寝 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="chronology.html">王府年表</a>
-                        <a href="estates.html">郡王封地</a>
-                        <a href="villages.html">聚落地名</a>
-                        <a href="tombs.html">王陵陵寝</a>
-                        <a href="migration.html">迁徙寻根</a>
-                    </div>
-                </div>
-
-                <!-- 考据工具 -->
-                <div class="nav-item">
-                    <span class="nav-link">🛠️ 考据工具 ▾</span>
-                    <div class="dropdown-menu">
-                        <a href="calendar.html">纪年干支换算</a>
-                        <a href="naming.html">五行命名助手</a>
-                        <a href="naming-guide.html">起名专栏与宗法</a>
-                        <a href="genealogy-guide.html">修谱指南凡例</a>
-                        <a href="memorial.html">云端享堂祭奠</a>
-                    </div>
-                </div>
-
-                <a href="search.html" class="nav-link" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="container">
-        <h1>周藩诗文戏曲与《诚斋乐府》选萃</h1>
-        <div class="intro-box">
+</a>
+<button aria-label="打开菜单" class="menu-toggle" onclick="toggleMenu()">☰</button>
+<nav class="nav-menu" id="navMenu">
+<a class="nav-link" href="index.html">首页</a>
+<!-- 宗系人物 -->
+<div class="nav-item">
+<span class="nav-link">👑 宗系人物 ▾</span>
+<div class="dropdown-menu">
+<a href="figures/index.html">历代人物</a>
+<a href="hall-of-fame.html">周藩名人堂</a>
+<a href="lineage.html">世系字辈</a>
+<a href="tree.html">数字家谱树</a>
+<a href="ancestors.html">昭穆神位</a>
+<a href="branches.html">分房支派</a>
+<a href="history.html">王府传承</a>
+</div>
+</div>
+<!-- 典籍金石 -->
+<div class="nav-item">
+<span class="nav-link" style="color:#fff; font-weight:bold;">📚 典籍金石 ▾</span>
+<div class="dropdown-menu">
+<a href="classics.html">典籍著述</a>
+<a href="epigraphy.html">碑刻圹志</a>
+<a href="poetry.html" style="background:var(--crimson); color:#fff;">诗文戏曲</a>
+<a href="hall.html">堂号楹联</a>
+<a href="institution.html">宗室典制</a>
+<a href="rules.html">祖训家规</a>
+</div>
+</div>
+<!-- 封地陵寝 -->
+<div class="nav-item">
+<span class="nav-link">🗺️ 封地陵寝 ▾</span>
+<div class="dropdown-menu">
+<a href="chronology.html">王府年表</a>
+<a href="estates.html">郡王封地</a>
+<a href="villages.html">聚落地名</a>
+<a href="tombs.html">王陵陵寝</a>
+<a href="migration.html">迁徙寻根</a>
+</div>
+</div>
+<!-- 考据工具 -->
+<div class="nav-item">
+<span class="nav-link">🛠️ 考据工具 ▾</span>
+<div class="dropdown-menu">
+<a href="calendar.html">纪年干支换算</a>
+<a href="naming.html">五行命名助手</a>
+<a href="naming-guide.html">起名专栏与宗法</a>
+<a href="genealogy-guide.html">修谱指南凡例</a>
+<a href="memorial.html">云端享堂祭奠</a>
+</div>
+</div>
+<a class="nav-link" href="search.html" style="color:#FFE699; font-weight:bold;">🔍 搜索</a>
+</nav>
+</div>
+</header>
+<main class="container">
+<h1>周藩诗文戏曲与《诚斋乐府》选萃</h1>
+<div class="intro-box">
             周藩不仅宗法严明、农医昌盛，在明代文学戏曲史上更占有崇高地位。第二代周王<strong>朱有燉</strong>（号诚斋）精通音律、工于度曲，所撰《诚斋乐府》杂剧三十一种与《元宫词》百章，承元曲之纯正，开明剧之新风，被誉为“明初曲圣”；始祖周定王朱橚亦有深厚儒医诗文与济世悯农名篇传世。
         </div>
-
-        <h2>🎭 周宪王朱有燉《诚斋乐府》杂剧名作考</h2>
-
-        <div class="poetry-card">
-            <div class="poetry-title">
-                <span>周宪王杂剧创作概貌与艺术地位</span>
-                <span class="poetry-badge badge-art">一代曲圣</span>
-            </div>
-            <p style="font-size:0.95rem; color:#443D36; line-height:1.85;">
+<div class="v2-empty" hidden="" id="poetryEmpty">没有找到符合条件的资料，请更换关键词或分类。</div><aside class="v2-note">📜 史料说明：本页保留原站所录作品及评论。诗作文字、作者归属、剧目题名及引述评价仍须结合可靠版本、目录和学术研究逐条核实；页面整理文字不等于经校勘的古籍原文。</aside><section aria-label="作品检索" class="v2-tools"><div aria-label="作品分类" class="v2-tabs" role="group"><button aria-pressed="true" data-category="all" type="button">全部作品</button><button aria-pressed="false" data-category="drama" type="button">🎭 杂剧戏曲</button><button aria-pressed="false" data-category="poem" type="button">📜 诗词作品</button><button aria-pressed="false" data-category="medicine" type="button">🌿 儒医诗文</button></div><div class="v2-search-row"><label for="poetrySearch">查找作品</label><input autocomplete="off" id="poetrySearch" placeholder="搜索作者、作品名称、题材、关键词……" type="search"/><button class="v2-clear" id="poetryClear" type="button">清除</button><span aria-live="polite" class="v2-count" id="poetryCount" role="status">显示 4 / 4 组资料</span></div><div class="v2-links"><a href="tree.html">查看数字家谱树 →</a><a href="figures/index.html">查看历代人物 →</a><a href="classics.html">查看典籍著述 →</a></div></section><h2>🎭 周宪王朱有燉《诚斋乐府》杂剧名作考</h2>
+<div class="poetry-card" data-category="drama" data-search="周宪王杂剧创作概貌与艺术地位 一代曲圣 周宪王朱有燉（1379—1439）为明代存世剧作数量最多、刊刻体系最完整的戏剧家。其杂剧作品既继承了元杂剧本色豪劲之气，又巧妙吸收江南新声，首创了明代宫廷王府演剧与民间勾栏交融的雅俗共赏体系。其作分为五大类： ⚔️ 水浒英雄类 《黑旋风仗义疏财》《搊搜判官乔断鬼》——承续元代水浒戏传统，生动刻画李逵等梁山好汉仗义除暴之市井豪气。 🛡️ 三国忠义类 《关云长义勇辞金》《关云长千里独行》——赞颂关羽忠贯白日、大义凛然之名将气节，对后世关公戏影响深远。 🌸 世情市井类 《刘盼春守志香囊怨》《李亚仙花酒曲江池》——描摹宋元以来中原市井生民之悲欢离合、节烈坚守与人伦风尚。 🌿 牡丹与胜景类 《洛阳风月牡丹仙》《十美人庆赏牡丹园》——展现中原汴洛名卉芳华，辞藻清丽温婉，音律纯正考究。">
+<div class="poetry-title">
+<span>周宪王杂剧创作概貌与艺术地位</span>
+<span class="poetry-badge badge-art">一代曲圣</span>
+</div>
+<p style="font-size:0.95rem; color:#443D36; line-height:1.85;">
                 周宪王朱有燉（1379—1439）为明代存世剧作数量最多、刊刻体系最完整的戏剧家。其杂剧作品既继承了元杂剧本色豪劲之气，又巧妙吸收江南新声，首创了明代宫廷王府演剧与民间勾栏交融的雅俗共赏体系。其作分为五大类：
             </p>
-            
-            <div class="drama-grid">
-                <div class="drama-item">
-                    <strong>⚔️ 水浒英雄类</strong>
-                    <span>《黑旋风仗义疏财》《搊搜判官乔断鬼》——承续元代水浒戏传统，生动刻画李逵等梁山好汉仗义除暴之市井豪气。</span>
-                </div>
-                <div class="drama-item">
-                    <strong>🛡️ 三国忠义类</strong>
-                    <span>《关云长义勇辞金》《关云长千里独行》——赞颂关羽忠贯白日、大义凛然之名将气节，对后世关公戏影响深远。</span>
-                </div>
-                <div class="drama-item">
-                    <strong>🌸 世情市井类</strong>
-                    <span>《刘盼春守志香囊怨》《李亚仙花酒曲江池》——描摹宋元以来中原市井生民之悲欢离合、节烈坚守与人伦风尚。</span>
-                </div>
-                <div class="drama-item">
-                    <strong>🌿 牡丹与胜景类</strong>
-                    <span>《洛阳风月牡丹仙》《十美人庆赏牡丹园》——展现中原汴洛名卉芳华，辞藻清丽温婉，音律纯正考究。</span>
-                </div>
-            </div>
-        </div>
-
-        <h2>📜 周宪王传世诗词名篇精选</h2>
-
-        <!-- 《秋怀》 -->
-        <div class="poetry-card">
-            <div class="poetry-title">
-                <span>周宪王朱有燉 ·《秋怀》（怀二弟汝南王朱有爋）</span>
-                <span class="poetry-badge">手足至情 · 传世名篇</span>
-            </div>
-            <div class="poetry-content-box">
-                <div class="poetry-content">
-                    楼阁凉生夜雨余，碧天如水雁来初。<br>
-                    青山落日两行泪，锦树西风万里书。<br>
-                    滇海相思情愈切，梁园行乐兴全疏。<br>
+<div class="drama-grid">
+<div class="drama-item">
+<strong>⚔️ 水浒英雄类</strong>
+<span>《黑旋风仗义疏财》《搊搜判官乔断鬼》——承续元代水浒戏传统，生动刻画李逵等梁山好汉仗义除暴之市井豪气。</span>
+<details class="v2-detail"><summary>展开题材说明</summary><p>本组所列剧目和内容提要据本站原资料整理，具体题名、版本及剧情仍待与《诚斋乐府》相关目录和文本核对。</p></details></div>
+<div class="drama-item">
+<strong>🛡️ 三国忠义类</strong>
+<span>《关云长义勇辞金》《关云长千里独行》——赞颂关羽忠贯白日、大义凛然之名将气节，对后世关公戏影响深远。</span>
+<details class="v2-detail"><summary>展开题材说明</summary><p>本组所列剧目和内容提要据本站原资料整理，具体题名、版本及剧情仍待与《诚斋乐府》相关目录和文本核对。</p></details></div>
+<div class="drama-item">
+<strong>🌸 世情市井类</strong>
+<span>《刘盼春守志香囊怨》《李亚仙花酒曲江池》——描摹宋元以来中原市井生民之悲欢离合、节烈坚守与人伦风尚。</span>
+<details class="v2-detail"><summary>展开题材说明</summary><p>本组所列剧目和内容提要据本站原资料整理，具体题名、版本及剧情仍待与《诚斋乐府》相关目录和文本核对。</p></details></div>
+<div class="drama-item">
+<strong>🌿 牡丹与胜景类</strong>
+<span>《洛阳风月牡丹仙》《十美人庆赏牡丹园》——展现中原汴洛名卉芳华，辞藻清丽温婉，音律纯正考究。</span>
+<details class="v2-detail"><summary>展开题材说明</summary><p>本组所列剧目和内容提要据本站原资料整理，具体题名、版本及剧情仍待与《诚斋乐府》相关目录和文本核对。</p></details></div>
+</div>
+</div>
+<h2>📜 周宪王传世诗词名篇精选</h2>
+<!-- 《秋怀》 -->
+<div class="poetry-card" data-category="poem" data-search="周宪王朱有燉 ·《秋怀》（怀二弟汝南王朱有爋） 手足至情 · 传世名篇 楼阁凉生夜雨余，碧天如水雁来初。 青山落日两行泪，锦树西风万里书。 滇海相思情愈切，梁园行乐兴全疏。 人还定把平安报，惟有霜华白满梳。 文史考释： 永乐中，二弟汝南王朱有爋谪居云南大理府。宪王身处汴梁周王府（梁园），每逢秋夜遥望西南边陲，作此七律抒发深沉的手足思念之情。通篇意境苍茫真挚、风骨端凝，是周藩昆仲血脉相依的诗史印证。">
+<div class="poetry-title">
+<span>周宪王朱有燉 ·《秋怀》（怀二弟汝南王朱有爋）</span>
+<span class="poetry-badge">手足至情 · 传世名篇</span>
+</div>
+<div class="poetry-content-box">
+<div class="poetry-content">
+                    楼阁凉生夜雨余，碧天如水雁来初。<br/>
+                    青山落日两行泪，锦树西风万里书。<br/>
+                    滇海相思情愈切，梁园行乐兴全疏。<br/>
                     人还定把平安报，惟有霜华白满梳。
                 </div>
+</div>
+<div class="poetry-note">
+<strong>文史考释：</strong>永乐中，二弟汝南王朱有爋谪居云南大理府。宪王身处汴梁周王府（梁园），每逢秋夜遥望西南边陲，作此七律抒发深沉的手足思念之情。通篇意境苍茫真挚、风骨端凝，是周藩昆仲血脉相依的诗史印证。
             </div>
-            <div class="poetry-note">
-                <strong>文史考释：</strong>永乐中，二弟汝南王朱有爋谪居云南大理府。宪王身处汴梁周王府（梁园），每逢秋夜遥望西南边陲，作此七律抒发深沉的手足思念之情。通篇意境苍茫真挚、风骨端凝，是周藩昆仲血脉相依的诗史印证。
-            </div>
-        </div>
-
-        <!-- 《元宫词》 -->
-        <div class="poetry-card">
-            <div class="poetry-title">
-                <span>周宪王朱有燉 ·《元宫词》（选录三首）</span>
-                <span class="poetry-badge badge-art">元大都风物诗史</span>
-            </div>
-            
-            <div class="poetry-content-box">
-                <div class="poetry-content">
-                    【 其 一 】<br>
-                    棕殿巍巍西内中，御筵箫鼓奏薰风。<br>
-                    诸王驸马咸称寿，满酌葡萄饮玉钟。<br><br>
-                    【 其 二 】<br>
-                    诈马筵开玉殿春，千官同拜紫微宸。<br>
-                    银盆盛肉葡萄酒，敕赐金牌第一人。<br><br>
-                    【 其 三 】<br>
-                    大都三月柳初黄，内苑群花渐有香。<br>
+<details class="v2-detail"><summary>查看作品考据说明</summary><p>本篇作品原文、作者归属及写作背景暂依原页面保留，尚未提供可逐字核对的底本和页码，引用前请核对可靠文献。</p></details></div>
+<!-- 《元宫词》 -->
+<div class="poetry-card" data-category="poem" data-search="周宪王朱有燉 ·《元宫词》（选录三首） 元大都风物诗史 【 其 一 】 棕殿巍巍西内中，御筵箫鼓奏薰风。 诸王驸马咸称寿，满酌葡萄饮玉钟。 【 其 二 】 诈马筵开玉殿春，千官同拜紫微宸。 银盆盛肉葡萄酒，敕赐金牌第一人。 【 其 三 】 大都三月柳初黄，内苑群花渐有香。 小阁日长人倦绣，隔帘呼伴去寻芳。 文史考释： 宪王永乐年间访求蒙元故宫宿老乳姆，悉心考求元大都内廷掌故与北方岁时风貌，作七绝百首。作品全景式再现了诈马宴、马奶酒、胡服仪仗、塞北节俗及宫闱陈设，被现代史学界誉为极具第一手史料价值的“元代诗史”。">
+<div class="poetry-title">
+<span>周宪王朱有燉 ·《元宫词》（选录三首）</span>
+<span class="poetry-badge badge-art">元大都风物诗史</span>
+</div>
+<div class="poetry-content-box">
+<div class="poetry-content">
+                    【 其 一 】<br/>
+                    棕殿巍巍西内中，御筵箫鼓奏薰风。<br/>
+                    诸王驸马咸称寿，满酌葡萄饮玉钟。<br/><br/>
+                    【 其 二 】<br/>
+                    诈马筵开玉殿春，千官同拜紫微宸。<br/>
+                    银盆盛肉葡萄酒，敕赐金牌第一人。<br/><br/>
+                    【 其 三 】<br/>
+                    大都三月柳初黄，内苑群花渐有香。<br/>
                     小阁日长人倦绣，隔帘呼伴去寻芳。
                 </div>
+</div>
+<div class="poetry-note">
+<strong>文史考释：</strong>宪王永乐年间访求蒙元故宫宿老乳姆，悉心考求元大都内廷掌故与北方岁时风貌，作七绝百首。作品全景式再现了诈马宴、马奶酒、胡服仪仗、塞北节俗及宫闱陈设，被现代史学界誉为极具第一手史料价值的“元代诗史”。
             </div>
-            <div class="poetry-note">
-                <strong>文史考释：</strong>宪王永乐年间访求蒙元故宫宿老乳姆，悉心考求元大都内廷掌故与北方岁时风貌，作七绝百首。作品全景式再现了诈马宴、马奶酒、胡服仪仗、塞北节俗及宫闱陈设，被现代史学界誉为极具第一手史料价值的“元代诗史”。
-            </div>
-        </div>
-
-        <h2>🌿 始祖周定王朱橚传世儒医诗文</h2>
-
-        <div class="poetry-card">
-            <div class="poetry-title">
-                <span>始祖周定王朱橚 ·《汴京草圃感赋》</span>
-                <span class="poetry-badge badge-med">仁医济世 · 救荒心迹</span>
-            </div>
-            <div class="poetry-content-box">
-                <div class="poetry-content">
-                    中原宿草带春烟，目击流民倍悯然。<br>
-                    设圃躬耕亲品验，图经手著广开传。<br>
-                    万方生聚归仁术，一瓣心香奉圣天。<br>
+<details class="v2-detail"><summary>查看作品考据说明</summary><p>本篇作品原文、作者归属及写作背景暂依原页面保留，尚未提供可逐字核对的底本和页码，引用前请核对可靠文献。</p></details></div>
+<h2>🌿 始祖周定王朱橚传世儒医诗文</h2>
+<div class="poetry-card" data-category="medicine" data-search="始祖周定王朱橚 ·《汴京草圃感赋》 仁医济世 · 救荒心迹 中原宿草带春烟，目击流民倍悯然。 设圃躬耕亲品验，图经手著广开传。 万方生聚归仁术，一瓣心香奉圣天。 安得苍生皆饱暖，不辞霜露染华颠。 文史考释： 真实展现了始祖周定王朱橚就藩开封后，目睹中原兵燹灾荒、饥民相枕之苦，于王府辟建生药圃躬亲尝验野草、手辑《救荒本草》与《普济方》以济苍生的儒王襟怀与菩萨仁心。">
+<div class="poetry-title">
+<span>始祖周定王朱橚 ·《汴京草圃感赋》</span>
+<span class="poetry-badge badge-med">仁医济世 · 救荒心迹</span>
+</div>
+<div class="poetry-content-box">
+<div class="poetry-content">
+                    中原宿草带春烟，目击流民倍悯然。<br/>
+                    设圃躬耕亲品验，图经手著广开传。<br/>
+                    万方生聚归仁术，一瓣心香奉圣天。<br/>
                     安得苍生皆饱暖，不辞霜露染华颠。
                 </div>
+</div>
+<div class="poetry-note">
+<strong>文史考释：</strong>真实展现了始祖周定王朱橚就藩开封后，目睹中原兵燹灾荒、饥民相枕之苦，于王府辟建生药圃躬亲尝验野草、手辑《救荒本草》与《普济方》以济苍生的儒王襟怀与菩萨仁心。
             </div>
-            <div class="poetry-note">
-                <strong>文史考释：</strong>真实展现了始祖周定王朱橚就藩开封后，目睹中原兵燹灾荒、饥民相枕之苦，于王府辟建生药圃躬亲尝验野草、手辑《救荒本草》与《普济方》以济苍生的儒王襟怀与菩萨仁心。
-            </div>
-        </div>
-
-        <h2>📖 周藩文学艺术特色</h2>
-        <div class="quote-box">
-            <p><strong>• 乐府之宗：</strong>明代文学巨擘王世贞、李贽等皆高度评价朱有燉杂剧“度曲严整、体物入微”，开创了明初中原词坛之极峰；清人焦循《剧说》亦推重其为“明曲第一家”；</p>
-            <p><strong>• 仁民风范：</strong>周藩宗亲诗作不仅抒发大梁风物、手足深情，更贯穿着<strong>“忧国爱民、博济群生”</strong>的崇高儒家风骨，历六百载而弥新。</p>
-        </div>
-    </main>
-
-    <footer class="site-footer">
-        <p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
-    </footer>
-
-    <script>
+<details class="v2-detail"><summary>查看作品考据说明</summary><p>《汴京草圃感赋》原页面未提供古籍出处、版本及页码，暂列待考文本，不宜直接作为朱橚传世诗作引用。</p></details></div>
+<h2>📖 周藩文学艺术特色</h2>
+<div class="quote-box">
+<p><strong>• 乐府之宗：</strong>明代文学巨擘王世贞、李贽等皆高度评价朱有燉杂剧“度曲严整、体物入微”，开创了明初中原词坛之极峰；清人焦循《剧说》亦推重其为“明曲第一家”；</p>
+<p><strong>• 仁民风范：</strong>周藩宗亲诗作不仅抒发大梁风物、手足深情，更贯穿着<strong>“忧国爱民、博济群生”</strong>的崇高儒家风骨，历六百载而弥新。</p>
+</div>
+</main>
+<footer class="site-footer">
+<p>大明周藩朱氏宗族文化记录 · 岁在丙午 谨立 · 线上修明 线下存念</p>
+</footer>
+<script>
         function toggleMenu() {
             document.getElementById('navMenu').classList.toggle('show');
         }
@@ -508,5 +507,48 @@
             });
         });
     </script>
-</body>
+<script>
+// V2：分类与搜索共同生效；只筛选资料卡片，不隐藏原有文学评论。
+(function(){
+ const cards=[...document.querySelectorAll('.poetry-card[data-category]')];
+ const buttons=[...document.querySelectorAll('.v2-tabs button')];
+ const search=document.getElementById('poetrySearch');
+ const count=document.getElementById('poetryCount');
+ const empty=document.getElementById('poetryEmpty');
+ let category='all';
+ function update(){
+  const query=search.value.trim().toLocaleLowerCase();
+  let shown=0;
+  cards.forEach(card=>{
+   const matchCategory=category==='all'||card.dataset.category===category;
+   const matchText=card.dataset.search.toLocaleLowerCase().includes(query);
+   card.hidden=!(matchCategory&&matchText);
+   if(!card.hidden)shown++;
+  });
+  count.textContent=`显示 ${shown} / ${cards.length} 组资料`;
+  empty.hidden=shown!==0;
+  // 没有该类可见卡片时，隐藏对应章节标题。
+  document.querySelectorAll('main.container > h2').forEach(heading=>{
+   let next=heading.nextElementSibling, visible=false;
+   while(next && next.tagName!=='H2'){
+    if(next.matches('.poetry-card') && !next.hidden)visible=true;
+    next=next.nextElementSibling;
+   }
+   heading.hidden=!visible && heading.nextElementSibling?.matches('.poetry-card');
+  });
+ }
+ buttons.forEach(button=>button.addEventListener('click',()=>{
+  category=button.dataset.category;
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+  update();
+ }));
+ search.addEventListener('input',update);
+ document.getElementById('poetryClear').addEventListener('click',()=>{
+  search.value='';category='all';
+  buttons.forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.category==='all')));
+  update();search.focus();
+ });
+ update();
+})();
+</script></body>
 </html>
